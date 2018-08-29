@@ -8,25 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		21EA13A2213622C800C5CB34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EA13A1213622C800C5CB34 /* AppDelegate.swift */; };
-		21EA13A4213622C800C5CB34 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EA13A3213622C800C5CB34 /* ViewController.swift */; };
 		21EA13A7213622C800C5CB34 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21EA13A5213622C800C5CB34 /* Main.storyboard */; };
 		21EA13AA213622C800C5CB34 /* TaskTrackr.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 21EA13A8213622C800C5CB34 /* TaskTrackr.xcdatamodeld */; };
 		21EA13AC213622C900C5CB34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21EA13AB213622C900C5CB34 /* Assets.xcassets */; };
 		21EA13AF213622C900C5CB34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21EA13AD213622C900C5CB34 /* LaunchScreen.storyboard */; };
-		21EA13B72136236100C5CB34 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21EA13B62136236100C5CB34 /* GoogleService-Info.plist */; };
+		21EA13B921362DBE00C5CB34 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21EA13B821362DBE00C5CB34 /* GoogleService-Info.plist */; };
+		21EA13C121364FF200C5CB34 /* ActivatedTasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EA13C021364FF200C5CB34 /* ActivatedTasksTableViewController.swift */; };
+		21EA13C32136505200C5CB34 /* AllTasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EA13C22136505200C5CB34 /* AllTasksTableViewController.swift */; };
 		B7F2E06E71D2CEECD93433CC /* Pods_TaskTrackr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A6487C605C9341862DA23B1 /* Pods_TaskTrackr.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		21EA139E213622C800C5CB34 /* TaskTrackr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskTrackr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21EA13A1213622C800C5CB34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		21EA13A3213622C800C5CB34 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		21EA13A6213622C800C5CB34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		21EA13A9213622C800C5CB34 /* TaskTrackr.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskTrackr.xcdatamodel; sourceTree = "<group>"; };
 		21EA13AB213622C900C5CB34 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		21EA13AE213622C900C5CB34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		21EA13B0213622C900C5CB34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		21EA13B62136236100C5CB34 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		21EA13B821362DBE00C5CB34 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		21EA13C021364FF200C5CB34 /* ActivatedTasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivatedTasksTableViewController.swift; sourceTree = "<group>"; };
+		21EA13C22136505200C5CB34 /* AllTasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTasksTableViewController.swift; sourceTree = "<group>"; };
 		9A6487C605C9341862DA23B1 /* Pods_TaskTrackr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaskTrackr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7D12C04F2B5A29FEE2D4BD5 /* Pods-TaskTrackr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskTrackr.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaskTrackr/Pods-TaskTrackr.release.xcconfig"; sourceTree = "<group>"; };
 		D66AE966DB494017D1AA2BB8 /* Pods-TaskTrackr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskTrackr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaskTrackr/Pods-TaskTrackr.debug.xcconfig"; sourceTree = "<group>"; };
@@ -66,13 +68,14 @@
 			isa = PBXGroup;
 			children = (
 				21EA13A1213622C800C5CB34 /* AppDelegate.swift */,
-				21EA13A3213622C800C5CB34 /* ViewController.swift */,
 				21EA13A5213622C800C5CB34 /* Main.storyboard */,
 				21EA13AB213622C900C5CB34 /* Assets.xcassets */,
 				21EA13AD213622C900C5CB34 /* LaunchScreen.storyboard */,
 				21EA13B0213622C900C5CB34 /* Info.plist */,
-				21EA13B62136236100C5CB34 /* GoogleService-Info.plist */,
+				21EA13B821362DBE00C5CB34 /* GoogleService-Info.plist */,
 				21EA13A8213622C800C5CB34 /* TaskTrackr.xcdatamodeld */,
+				21EA13C021364FF200C5CB34 /* ActivatedTasksTableViewController.swift */,
+				21EA13C22136505200C5CB34 /* AllTasksTableViewController.swift */,
 			);
 			path = TaskTrackr;
 			sourceTree = "<group>";
@@ -155,7 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21EA13AF213622C900C5CB34 /* LaunchScreen.storyboard in Resources */,
-				21EA13B72136236100C5CB34 /* GoogleService-Info.plist in Resources */,
+				21EA13B921362DBE00C5CB34 /* GoogleService-Info.plist in Resources */,
 				21EA13AC213622C900C5CB34 /* Assets.xcassets in Resources */,
 				21EA13A7213622C800C5CB34 /* Main.storyboard in Resources */,
 			);
@@ -209,8 +212,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21EA13A4213622C800C5CB34 /* ViewController.swift in Sources */,
+				21EA13C121364FF200C5CB34 /* ActivatedTasksTableViewController.swift in Sources */,
 				21EA13A2213622C800C5CB34 /* AppDelegate.swift in Sources */,
+				21EA13C32136505200C5CB34 /* AllTasksTableViewController.swift in Sources */,
 				21EA13AA213622C800C5CB34 /* TaskTrackr.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
