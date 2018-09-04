@@ -77,17 +77,22 @@
             </objects>
             <point key="canvasLocation" x="748" y="-66.11694152923539"/>
         </scene>
-        <!--All Tasks\-->
+        <!--All Tasks-->
         <scene sceneID="b8v-4j-6cS">
             <objects>
-                <tableViewController title="All Tasks\" id="1fb-KE-5Za" customClass="AllTasksTableViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="All Tasks" id="1fb-KE-5Za" customClass="AllTasksTableViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ozu-YX-LmI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="z3l-Mr-dHH">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="AllTaskCell" id="Tgu-yf-Smn">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="84" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Tgu-yf-Smn" id="1NH-IM-zK6">
                                     <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
@@ -101,12 +106,19 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="All Tasks" id="i1H-8y-WLx">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="X3u-rn-yaC"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="X3u-rn-yaC">
+                            <connections>
+                                <action selector="addPressed:" destination="1fb-KE-5Za" id="CXF-gp-f3t"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="addButton" destination="X3u-rn-yaC" id="g0d-GY-f73"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cez-KW-Oe6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1687" y="767"/>
+            <point key="canvasLocation" x="1641" y="767"/>
         </scene>
         <!--All Tasks-->
         <scene sceneID="eva-Tf-BUJ">
