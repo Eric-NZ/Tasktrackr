@@ -284,17 +284,17 @@
             </objects>
             <point key="canvasLocation" x="5216.8000000000002" y="2611.8440779610196"/>
         </scene>
-        <!--Management-->
+        <!--Manage Actions-->
         <scene sceneID="662-e2-6co">
             <objects>
-                <viewController id="36P-5s-JAF" customClass="BasisRootViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="36P-5s-JAF" customClass="RootPagingViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DE9-pw-Q1h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="2r3-3F-aaF"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Management" id="hWn-Qz-gyc">
+                    <navigationItem key="navigationItem" title="Manage Actions" id="hWn-Qz-gyc">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="nsn-JV-aYu">
                             <connections>
                                 <action selector="addPressed:" destination="36P-5s-JAF" id="Jv7-py-1vn"/>

@@ -20,7 +20,7 @@
 		21BBC790213E6BB00006B5B4 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBC78F213E6BB00006B5B4 /* Action.swift */; };
 		21D8D656213F96E00092AEBB /* ActionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D8D655213F96E00092AEBB /* ActionsTableViewController.swift */; };
 		21D8D658213F97170092AEBB /* WorkersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D8D657213F97170092AEBB /* WorkersTableViewController.swift */; };
-		21D8D65B213FE30D0092AEBB /* BasisRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D8D65A213FE30D0092AEBB /* BasisRootViewController.swift */; };
+		21D8D65B213FE30D0092AEBB /* RootPagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D8D65A213FE30D0092AEBB /* RootPagingViewController.swift */; };
 		21EA13A2213622C800C5CB34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EA13A1213622C800C5CB34 /* AppDelegate.swift */; };
 		21EA13A7213622C800C5CB34 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21EA13A5213622C800C5CB34 /* Main.storyboard */; };
 		21EA13AA213622C800C5CB34 /* TaskTrackr.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 21EA13A8213622C800C5CB34 /* TaskTrackr.xcdatamodeld */; };
@@ -45,7 +45,7 @@
 		21BBC78F213E6BB00006B5B4 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		21D8D655213F96E00092AEBB /* ActionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsTableViewController.swift; sourceTree = "<group>"; };
 		21D8D657213F97170092AEBB /* WorkersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkersTableViewController.swift; sourceTree = "<group>"; };
-		21D8D65A213FE30D0092AEBB /* BasisRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasisRootViewController.swift; sourceTree = "<group>"; };
+		21D8D65A213FE30D0092AEBB /* RootPagingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootPagingViewController.swift; sourceTree = "<group>"; };
 		21EA139E213622C800C5CB34 /* TaskTrackr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskTrackr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21EA13A1213622C800C5CB34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21EA13A6213622C800C5CB34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 		21D8D654213F969D0092AEBB /* Basis */ = {
 			isa = PBXGroup;
 			children = (
-				21D8D65A213FE30D0092AEBB /* BasisRootViewController.swift */,
+				21D8D65A213FE30D0092AEBB /* RootPagingViewController.swift */,
 				21D8D655213F96E00092AEBB /* ActionsTableViewController.swift */,
 				21D8D657213F97170092AEBB /* WorkersTableViewController.swift */,
 				21A265E82140781200671F6C /* ProductsTableViewController.swift */,
@@ -280,7 +280,7 @@
 				21A265EB2140782E00671F6C /* ToolsTableViewController.swift in Sources */,
 				21BBC790213E6BB00006B5B4 /* Action.swift in Sources */,
 				21EA13C121364FF200C5CB34 /* ActivatedTasksTableViewController.swift in Sources */,
-				21D8D65B213FE30D0092AEBB /* BasisRootViewController.swift in Sources */,
+				21D8D65B213FE30D0092AEBB /* RootPagingViewController.swift in Sources */,
 				21A265E92140781200671F6C /* ProductsTableViewController.swift in Sources */,
 				21BBC78A213E65890006B5B4 /* Product.swift in Sources */,
 				21062025214131CB00BA2050 /* UIView+constraints.swift in Sources */,
