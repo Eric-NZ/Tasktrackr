@@ -11,6 +11,8 @@ import Parchment
 
 class BasisRootViewController: UIViewController, PagingViewControllerDelegate, PagingViewControllerDataSource {
     
+    /*  PagingViewControllerDataSourceDataSource
+     */
     func pagingViewController<T>(_ pagingViewController: PagingViewController<T>, pagingItemForIndex index: Int) -> T where T : PagingItem, T : Comparable, T : Hashable {
         return PagingIndexItem(index: index, title: viewControllers![index].title!) as! T
     }
@@ -25,8 +27,19 @@ class BasisRootViewController: UIViewController, PagingViewControllerDelegate, P
         return self.viewControllers!.count
     }
     
+    /* PagingViewControllerDelegate
+     */
+    func pagingViewController<T>(_ pagingViewController: PagingViewController<T>, didScrollToItem pagingItem: T, startingViewController: UIViewController?, destinationViewController: UIViewController, transitionSuccessful: Bool) where T : PagingItem, T : Comparable, T : Hashable {
+        // update title to navigation bar
+        updateNavigationBarTitle(to: destinationViewController.title!)
+    }
     
-    var pagingViewController: FixedPagingViewController? = nil
+    func updateNavigationBarTitle(to newTitle: String) {
+        let newTitle = String(format: "Manage %@", newTitle)
+        self.navigationController?.navigationBar.topItem?.title = newTitle
+    }
+    
+    var pagingViewController = PagingViewController<PagingIndexItem>()
     
     var viewControllers:[UIViewController]? = nil
     
@@ -44,24 +57,23 @@ class BasisRootViewController: UIViewController, PagingViewControllerDelegate, P
         guard viewControllers != nil else {return}
         
         initPagingViewController()
-        pagingViewController!.delegate = self
-        pagingViewController!.dataSource = self
+        pagingViewController.delegate = self
+        pagingViewController.dataSource = self
+        
         setLeftBarItem()
+        
     }
-
         
     @IBAction func addPressed(_ sender: UIBarButtonItem) {
-//        pagingViewController?.select(index: 3)
 
     }
     
     func initPagingViewController() {
-        pagingViewController = FixedPagingViewController(viewControllers: getViewControllers())
-        
-        addChild(pagingViewController!)
-        view.addSubview(pagingViewController!.view)
-        view.constrainToEdges(pagingViewController!.view)
-        pagingViewController!.didMove(toParent: self)
+//        pagingViewController = FixedPagingViewController(viewControllers: getViewControllers())
+        addChild(pagingViewController)
+        view.addSubview(pagingViewController.view)
+        view.constrainToEdges(pagingViewController.view)
+        pagingViewController.didMove(toParent: self)
     }
         
     func getViewControllers() -> [UIViewController] {
