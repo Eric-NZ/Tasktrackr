@@ -13,7 +13,9 @@ class BasisRootViewController: DTPagerController {
     
     override func viewDidLoad() {
         
+        setLeftBarItem()
         
+        super.viewDidLoad()
         // Do any additional setup after loading the view.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController1 = storyboard.instantiateViewController(withIdentifier: "ActionViewController") as! ActionsTableViewController
@@ -32,7 +34,20 @@ class BasisRootViewController: DTPagerController {
                            viewController3,
                            viewController4,
                            viewController5,]
-
-        super.viewDidLoad()
     }
+    
+    func setLeftBarItem() {
+        navigationItem.leftBarButtonItem = editButtonItem
+    }
+    
+    /* get instance of selected viewController index
+     */
+    func selectedControllerIndex() -> Int {
+        
+        return selectedPageIndex
+    }
+    
+    /*
+     */
+    
 }
