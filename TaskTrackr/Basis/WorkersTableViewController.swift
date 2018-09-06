@@ -11,16 +11,10 @@ import UIKit
 class WorkersTableViewController: UITableViewController {
     
     let workers: [String] = ["John ZW", "Engua ADs", "GeeGEE HDDD"]
-    
-    func getInstance() -> UIViewController {
-        return self
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "WorkerCell")
-
     }
 
     // MARK: - Table view data source
