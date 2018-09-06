@@ -289,18 +289,18 @@
             <objects>
                 <viewController id="36P-5s-JAF" customClass="BasisRootViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DE9-pw-Q1h">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="2r3-3F-aaF"/>
                     </view>
                     <navigationItem key="navigationItem" title="Management" id="hWn-Qz-gyc">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="qgl-e3-CHc"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="nsn-JV-aYu"/>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oiJ-mG-bY6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1686" y="1827"/>
+            <point key="canvasLocation" x="1644" y="1827"/>
         </scene>
         <!--Management-->
         <scene sceneID="46G-cA-bbe">
@@ -308,13 +308,14 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RFi-js-DX8" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Management" id="X4z-Q4-pZD"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2ge-jo-NjU">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="2ge-jo-NjU">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="36P-5s-JAF" kind="relationship" relationship="rootViewController" id="iW9-EY-lI1"/>
+                        <segue destination="36P-5s-JAF" kind="relationship" relationship="rootViewController" id="Sgd-pH-JAp"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fSH-tJ-hZW" userLabel="First Responder" sceneMemberID="firstResponder"/>

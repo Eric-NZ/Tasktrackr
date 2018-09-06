@@ -22,6 +22,7 @@ class BasisRootViewController: UIViewController {
     
     func initPagingViewController() {
         let pagingViewController = FixedPagingViewController(viewControllers: viewControllers())
+        
         addChild(pagingViewController)
         view.addSubview(pagingViewController.view)
         view.constrainToEdges(pagingViewController.view)
