@@ -12,23 +12,21 @@ import DTPagerController
 class BasisRootViewController: DTPagerController {
     
     override func viewDidLoad() {
-        
-        setLeftBarItem()
-        
+
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        let viewController1 = getInstance(with: Constants.ACTION_PAGE)
-        let viewController2 = getInstance(with: Constants.WORKER_PAGE)
-        let viewController3 = getInstance(with: Constants.PRODUCT_PAGE)
-        let viewController4 = getInstance(with: Constants.TOOL_PAGE)
-        let viewController5 = getInstance(with: Constants.SITE_PAGE)
-//        viewController5.title = "Sites"
         
-        viewControllers = [viewController1,
-                           viewController2,
-                           viewController3,
-                           viewController4,
-                           viewController5,]
+        loadSegmemtedPages()
+        setLeftBarItem()
+    }
+    
+    func loadSegmemtedPages() {
+
+        viewControllers = [getInstance(with: Constants.ACTION_PAGE),
+                           getInstance(with: Constants.WORKER_PAGE),
+                           getInstance(with: Constants.PRODUCT_PAGE),
+                           getInstance(with: Constants.TOOL_PAGE),
+                           getInstance(with: Constants.SITE_PAGE)]
     }
     
     func setLeftBarItem() {
