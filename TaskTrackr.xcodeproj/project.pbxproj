@@ -93,7 +93,7 @@
 			path = Modal;
 			sourceTree = "<group>";
 		};
-		21D8D654213F969D0092AEBB /* Basis */ = {
+		21D8D654213F969D0092AEBB /* Paging */ = {
 			isa = PBXGroup;
 			children = (
 				21D8D65A213FE30D0092AEBB /* RootPagingViewController.swift */,
@@ -103,7 +103,7 @@
 				21A265EA2140782E00671F6C /* ToolsTableViewController.swift */,
 				21A265EC2140787100671F6C /* SitesTableViewController.swift */,
 			);
-			path = Basis;
+			path = Paging;
 			sourceTree = "<group>";
 		};
 		21EA1395213622C800C5CB34 = {
@@ -137,7 +137,7 @@
 				21EA13C021364FF200C5CB34 /* ActivatedTasksTableViewController.swift */,
 				21EA13C22136505200C5CB34 /* AllTasksTableViewController.swift */,
 				210620212141239B00BA2050 /* Extensions */,
-				21D8D654213F969D0092AEBB /* Basis */,
+				21D8D654213F969D0092AEBB /* Paging */,
 				210C04D3213CAF9C00576564 /* Modal */,
 			);
 			path = TaskTrackr;
