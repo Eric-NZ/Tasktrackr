@@ -51,7 +51,6 @@ class AllTasksTableViewController: UITableViewController {
     }
     
     func popoverOptionMenu() {
-        
-    }
 
+    }
 }
