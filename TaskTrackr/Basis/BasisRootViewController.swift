@@ -9,33 +9,64 @@
 import UIKit
 import Parchment
 
-class BasisRootViewController: UIViewController {
+class BasisRootViewController: UIViewController, PagingViewControllerDelegate, PagingViewControllerDataSource {
+    
+    func pagingViewController<T>(_ pagingViewController: PagingViewController<T>, pagingItemForIndex index: Int) -> T where T : PagingItem, T : Comparable, T : Hashable {
+        return PagingIndexItem(index: index, title: viewControllers![index].title!) as! T
+    }
+    
+    
+    func pagingViewController<T>(_ pagingViewController: PagingViewController<T>, viewControllerForIndex index: Int) -> UIViewController where T : PagingItem, T : Comparable, T : Hashable {
+        return viewControllers![index]
+    }
+    
+    
+    func numberOfViewControllers<T>(in pagingViewController: PagingViewController<T>) -> Int where T : PagingItem, T : Comparable, T : Hashable {
+        return self.viewControllers!.count
+    }
+    
+    
+    var pagingViewController: FixedPagingViewController? = nil
+    
+    var viewControllers:[UIViewController]? = nil
     
     override func viewDidLoad() {
 
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        initPagingViewController()
         
+        viewControllers = [getInstance(with: Constants.ACTION_PAGE),
+                           getInstance(with: Constants.WORKER_PAGE),
+                           getInstance(with: Constants.PRODUCT_PAGE),
+                           getInstance(with: Constants.TOOL_PAGE),
+                           getInstance(with: Constants.SITE_PAGE)]
+        
+        guard viewControllers != nil else {return}
+        
+        initPagingViewController()
+        pagingViewController!.delegate = self
+        pagingViewController!.dataSource = self
         setLeftBarItem()
+    }
+
+        
+    @IBAction func addPressed(_ sender: UIBarButtonItem) {
+//        pagingViewController?.select(index: 3)
+
     }
     
     func initPagingViewController() {
-        let pagingViewController = FixedPagingViewController(viewControllers: viewControllers())
+        pagingViewController = FixedPagingViewController(viewControllers: getViewControllers())
         
-        addChild(pagingViewController)
-        view.addSubview(pagingViewController.view)
-        view.constrainToEdges(pagingViewController.view)
-        pagingViewController.didMove(toParent: self)
+        addChild(pagingViewController!)
+        view.addSubview(pagingViewController!.view)
+        view.constrainToEdges(pagingViewController!.view)
+        pagingViewController!.didMove(toParent: self)
     }
         
-    func viewControllers() -> [UIViewController] {
+    func getViewControllers() -> [UIViewController] {
         
-        return [getInstance(with: Constants.ACTION_PAGE),
-                getInstance(with: Constants.WORKER_PAGE),
-                getInstance(with: Constants.PRODUCT_PAGE),
-                getInstance(with: Constants.TOOL_PAGE),
-                getInstance(with: Constants.SITE_PAGE)]
+        return viewControllers!
     }
     
     func setLeftBarItem() {

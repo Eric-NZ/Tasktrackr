@@ -295,7 +295,11 @@
                         <viewLayoutGuide key="safeArea" id="2r3-3F-aaF"/>
                     </view>
                     <navigationItem key="navigationItem" title="Management" id="hWn-Qz-gyc">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="nsn-JV-aYu"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="nsn-JV-aYu">
+                            <connections>
+                                <action selector="addPressed:" destination="36P-5s-JAF" id="Jv7-py-1vn"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oiJ-mG-bY6" userLabel="First Responder" sceneMemberID="firstResponder"/>
