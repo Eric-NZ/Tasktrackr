@@ -22,4 +22,11 @@ struct Constants {
     
     static let AUTH_URL  = URL(string: "https://\(MY_INSTANCE_ADDRESS)")!
     static let REALM_URL = URL(string: "realms://\(MY_INSTANCE_ADDRESS)/TaskTrackr")!
+    
+    
+    static let ACTION_PAGE = "ActionViewController"
+    static let WORKER_PAGE = "WorkerViewController"
+    static let PRODUCT_PAGE = "ProductViewController"
+    static let TOOL_PAGE = "ToolViewController"
+    static let SITE_PAGE = "SiteViewController"
 }

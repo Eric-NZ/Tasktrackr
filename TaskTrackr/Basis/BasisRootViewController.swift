@@ -17,16 +17,11 @@ class BasisRootViewController: DTPagerController {
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController1 = storyboard.instantiateViewController(withIdentifier: "ActionViewController") as! ActionsTableViewController
-//        viewController1.title = "Actions"
-        let viewController2 = storyboard.instantiateViewController(withIdentifier: "WorkerViewController") as! WorkersTableViewController
-//        viewController2.title = "Workers"
-        let viewController3 = storyboard.instantiateViewController(withIdentifier: "ProductViewController") as! ProductsTableViewController
-//        viewController3.title = "Products"
-        let viewController4 = storyboard.instantiateViewController(withIdentifier: "ToolViewController") as! ToolsTableViewController
-//        viewController4.title = "Tools"
-        let viewController5 = storyboard.instantiateViewController(withIdentifier: "SiteViewController") as! SitesTableViewController
+        let viewController1 = getInstance(with: Constants.ACTION_PAGE)
+        let viewController2 = getInstance(with: Constants.WORKER_PAGE)
+        let viewController3 = getInstance(with: Constants.PRODUCT_PAGE)
+        let viewController4 = getInstance(with: Constants.TOOL_PAGE)
+        let viewController5 = getInstance(with: Constants.SITE_PAGE)
 //        viewController5.title = "Sites"
         
         viewControllers = [viewController1,
@@ -42,12 +37,29 @@ class BasisRootViewController: DTPagerController {
     
     /* get instance of selected viewController index
      */
-    func selectedControllerIndex() -> Int {
+    func selectedViewController() -> UIViewController? {
         
-        return selectedPageIndex
+        switch selectedPageIndex {
+        case 0: // Action
+            return getInstance(with: Constants.ACTION_PAGE)
+        case 1: // Worker
+            return getInstance(with: Constants.WORKER_PAGE)
+        case 2: // Product
+            return getInstance(with: Constants.PRODUCT_PAGE)
+        case 3: // Tool
+            return getInstance(with: Constants.TOOL_PAGE)
+        case 4: // Site
+            return getInstance(with: Constants.SITE_PAGE)
+        default:
+            return nil
+        }
     }
     
-    /*
+    /* Get Instance of UIViewController
      */
+    func getInstance(with indentifier: String) -> UIViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: indentifier)
+    }
     
 }
