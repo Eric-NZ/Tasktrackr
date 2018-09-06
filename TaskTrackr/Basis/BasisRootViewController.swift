@@ -7,35 +7,43 @@
 //
 
 import UIKit
-import DTPagerController
+import Parchment
 
-class BasisRootViewController: DTPagerController {
+class BasisRootViewController: UIViewController {
     
     override func viewDidLoad() {
 
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        initPagingViewController()
         
-        loadSegmemtedPages()
         setLeftBarItem()
     }
     
-    func loadSegmemtedPages() {
-
-        viewControllers = [getInstance(with: Constants.ACTION_PAGE),
-                           getInstance(with: Constants.WORKER_PAGE),
-                           getInstance(with: Constants.PRODUCT_PAGE),
-                           getInstance(with: Constants.TOOL_PAGE),
-                           getInstance(with: Constants.SITE_PAGE)]
+    func initPagingViewController() {
+        let pagingViewController = FixedPagingViewController(viewControllers: viewControllers())
+        addChild(pagingViewController)
+        view.addSubview(pagingViewController.view)
+        view.constrainToEdges(pagingViewController.view)
+        pagingViewController.didMove(toParent: self)
+    }
+        
+    func viewControllers() -> [UIViewController] {
+        
+        return [getInstance(with: Constants.ACTION_PAGE),
+                getInstance(with: Constants.WORKER_PAGE),
+                getInstance(with: Constants.PRODUCT_PAGE),
+                getInstance(with: Constants.TOOL_PAGE),
+                getInstance(with: Constants.SITE_PAGE)]
     }
     
     func setLeftBarItem() {
         navigationItem.leftBarButtonItem = editButtonItem
     }
     
-    /* get instance of selected viewController index
+    /* get instance of selected viewController
      */
-    func selectedViewController() -> UIViewController? {
+    func selectedViewController(selectedPageIndex: Int) -> UIViewController? {
         
         switch selectedPageIndex {
         case 0: // Action
