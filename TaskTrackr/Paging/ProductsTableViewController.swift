@@ -8,8 +8,13 @@
 
 import UIKit
 
-class ProductsTableViewController: UITableViewController {
-
+class ProductsTableViewController: UITableViewController, ManageItemDelegate {
+    
+    // MARK: - ManageItemDelegate
+    func addItem() {
+        print("Will add a product!")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

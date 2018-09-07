@@ -9,11 +9,18 @@
 import UIKit
 import Parchment
 
+protocol ManageItemDelegate {
+    func addItem()
+    func beginEditing()
+}
+
 class RootPagingViewController: UIViewController, PagingViewControllerDelegate, PagingViewControllerDataSource {
     
     var pagingViewController = PagingViewController<PagingIndexItem>()
     var viewControllers:[UIViewController] = []
     var currentViewController: UIViewController?
+    
+    var delegate: ManageItemDelegate?
     
     /*  PagingViewControllerDataSourceDataSource
      */
@@ -37,10 +44,12 @@ class RootPagingViewController: UIViewController, PagingViewControllerDelegate, 
         guard transitionSuccessful else {
             return
         }
-        // update title to navigation bar
+        // update title for navigation bar
         updateNavigationBarTitle(to: destinationViewController.title!)
         // update value of currentViewController
         currentViewController = destinationViewController
+        // set currentViewController as ManageItemDelegate
+        delegate = currentViewController as? ManageItemDelegate
     }
     
     func updateNavigationBarTitle(to newTitle: String) {
@@ -62,14 +71,18 @@ class RootPagingViewController: UIViewController, PagingViewControllerDelegate, 
         initPagingViewController()
         pagingViewController.delegate = self
         pagingViewController.dataSource = self
+        
+        // initially set the first view controller to be the default page
         currentViewController = viewControllers[0]
+        delegate = currentViewController as? ManageItemDelegate
+        
         
         setLeftBarItem()
         
     }
         
     @IBAction func addPressed(_ sender: UIBarButtonItem) {
-
+        delegate?.addItem()
     }
     
     func initPagingViewController() {

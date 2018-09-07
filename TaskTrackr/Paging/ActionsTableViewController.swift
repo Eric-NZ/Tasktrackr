@@ -8,8 +8,8 @@
 
 import UIKit
 
-class ActionsTableViewController: UITableViewController {
-
+class ActionsTableViewController: UITableViewController, ManageItemDelegate {
+    
     let actions: [String] = ["ssssssss", "dddddddddd", "ddf", "fffff", "fffffff"]
     
     func getInstance() -> UIViewController {
@@ -19,6 +19,11 @@ class ActionsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+    }
+    
+    // MARK: - MangeItemDelegate
+    func addItem() {
+        print("Will add an action!")
     }
 
     // MARK: - Table view data source

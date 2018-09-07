@@ -29,4 +29,5 @@ struct Constants {
     static let PRODUCT_PAGE = "ProductViewController"
     static let TOOL_PAGE = "ToolViewController"
     static let SITE_PAGE = "SiteViewController"
+    static let ROOT_PAGE = "RootPagingViewController"
 }
