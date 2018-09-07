@@ -7,8 +7,15 @@
 //
 
 import UIKit
+import SwiftForms
 
-class WorkersTableViewController: UITableViewController, ManageItemDelegate {
+class WorkersTableViewController: UITableViewController, ManageItemDelegate, ItemFormControllerDelegate {
+ 
+    /** ItemFormControllerDelegate
+     */
+    func loadFormData(for controller: FormViewController) {
+        print("I will load some data for \(String(describing: controller))")
+    }
     
     let workers: [String] = ["John ZW", "Engua ADs", "GeeGEE HDDD"]
 
@@ -18,16 +25,21 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate {
     
     // MARK: - AddItemDelegate
     func addItem() {
-        print("will add a worker!")
+        performSegue(withIdentifier: "AddWorkerItem", sender: self)
+
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let itemFormController = segue.destination as! ItemFormController
+        itemFormController.delegate = self
+        
+        // send info: 1. new item: true/false; 2. controller instance
+        itemFormController.isNewForm = true
+        itemFormController.senderController = self
     }
 
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return workers.count

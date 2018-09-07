@@ -11,7 +11,6 @@ import Parchment
 
 protocol ManageItemDelegate {
     func addItem()
-    func beginEditing()
 }
 
 class RootPagingViewController: UIViewController, PagingViewControllerDelegate, PagingViewControllerDataSource {
@@ -128,5 +127,4 @@ class RootPagingViewController: UIViewController, PagingViewControllerDelegate, 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: indentifier)
     }
-    
 }

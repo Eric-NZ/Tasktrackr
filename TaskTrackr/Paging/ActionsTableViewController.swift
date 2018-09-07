@@ -9,7 +9,7 @@
 import UIKit
 
 class ActionsTableViewController: UITableViewController, ManageItemDelegate {
-    
+ 
     let actions: [String] = ["ssssssss", "dddddddddd", "ddf", "fffff", "fffffff"]
     
     func getInstance() -> UIViewController {
