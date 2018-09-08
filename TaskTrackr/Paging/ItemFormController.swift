@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftForms
+import RealmSwift
 
 /* ItemFormControllerDeletgate
  */
@@ -21,8 +22,22 @@ class ItemFormController: FormViewController {
     
     var delegate: ItemFormControllerDelegate?
     var senderController: UIViewController?
-    var isNewForm: Bool = true
-
+    var isNewForm: Bool = false
+    
+    let realm: Realm
+    
+    required init(coder aDecoder: NSCoder) {
+        
+        // Create the configuration
+        let syncServerURL = Constants.REALM_URL
+        let config = Realm.Configuration(syncConfiguration: SyncConfiguration(user: SyncUser.current!, realmURL: syncServerURL))
+        
+        // Open the remote Realm
+        realm = try! Realm(configuration: config)
+        
+        super.init(coder: aDecoder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,8 +48,26 @@ class ItemFormController: FormViewController {
             if !isNewForm {
                 delegate?.loadFormData(for: self)
             }
+            
+            // set right bar button
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
         }
 
+    }
+    
+    @objc func donePressed() {
+        
+        let worker = Worker()
+        worker.firstName = form.sections[0].rows[0].value as? String
+        worker.lastName = form.sections[0].rows[1].value as? String
+        worker.role = form.sections[1].rows[0].value as? String
+        worker.timestamp = Date()
+
+        try! realm.write {
+            realm.add(worker)
+        }
+        // if chose present modally call "dismiss", otherwise, call this:
+        navigationController?.popViewController(animated: true)
     }
     
     func buildForm(for page: String) {
@@ -100,26 +133,6 @@ class ItemFormController: FormViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return form.sections.count
-    }
-    
-    struct Static {
-        static let nameTag = "name"
-        static let passwordTag = "password"
-        static let lastNameTag = "lastName"
-        static let jobTag = "job"
-        static let emailTag = "email"
-        static let URLTag = "url"
-        static let phoneTag = "phone"
-        static let enabled = "enabled"
-        static let check = "check"
-        static let segmented = "segmented"
-        static let picker = "picker"
-        static let birthday = "birthday"
-        static let categories = "categories"
-        static let button = "button"
-        static let stepper = "stepper"
-        static let slider = "slider"
-        static let textView = "textview"
     }
 
 }

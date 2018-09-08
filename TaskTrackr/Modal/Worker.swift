@@ -12,11 +12,12 @@ class Worker: Object {
     // Auto Id
     @objc dynamic var workerId: String = UUID().uuidString
     // Full Name
-    @objc dynamic var workerName: String?
+    @objc dynamic var firstName: String?
+    @objc dynamic var lastName: String?
     // Job Title
-    @objc dynamic var workerPosition: String?
-    // What Actions this worker can do?
-    @objc dynamic var actionsApplied: [String]?
+    @objc dynamic var role: String?
+//    // What Actions this worker can do?
+//    @objc dynamic var actionsApplied: [String]?
     // Join Date
     @objc dynamic var timestamp: Date = Date()
     

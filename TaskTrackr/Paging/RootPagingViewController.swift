@@ -57,10 +57,10 @@ class RootPagingViewController: UIViewController, PagingViewControllerDelegate, 
     }
     
     override func viewDidLoad() {
-
+        
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+
         viewControllers = [getInstance(with: Constants.ACTION_PAGE),
                            getInstance(with: Constants.WORKER_PAGE),
                            getInstance(with: Constants.PRODUCT_PAGE),
@@ -77,9 +77,8 @@ class RootPagingViewController: UIViewController, PagingViewControllerDelegate, 
         
         
         setLeftBarItem()
-        
     }
-        
+    
     @IBAction func addPressed(_ sender: UIBarButtonItem) {
         delegate?.addItem()
     }

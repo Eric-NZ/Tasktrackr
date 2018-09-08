@@ -15,10 +15,10 @@ class Action: Object {
     @objc dynamic var actionTitle: String?
     // Action Description
     @objc dynamic var actionDesc: String?
-    // Applied Tools
-    @objc dynamic var appliedTools: [String]?
+//    // Applied Tools
+//    @objc dynamic var appliedTools: [String]?
     // Applied Products
-    @objc dynamic var appliedProducts: [String]?
+//    @objc dynamic var appliedProducts: [String]?
     // Created Date
     @objc dynamic var timestamp: Date = Date()
     

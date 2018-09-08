@@ -17,7 +17,7 @@ class Product: Object {
     // Product Description
     @objc dynamic var productDesc: String?
     // Actions that can use this product: a list of actionIds
-    @objc dynamic var actionsApplied: [String]?
+//    @objc dynamic var actionsApplied: [String]?
     // Created Date
     @objc dynamic var timestamp: Date = Date()
     

@@ -8,19 +8,28 @@
 
 import UIKit
 import SwiftForms
+//import RealmSwift
 
 class WorkersTableViewController: UITableViewController, ManageItemDelegate, ItemFormControllerDelegate {
  
+//    let realm: Realm
+//    let workers: Results<Worker>
+    
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//
+//        //
+//    }
+    
     /** ItemFormControllerDelegate
      */
     func loadFormData(for controller: FormViewController) {
         print("I will load some data for \(String(describing: controller))")
     }
     
-    let workers: [String] = ["John ZW", "Engua ADs", "GeeGEE HDDD"]
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     // MARK: - AddItemDelegate
@@ -42,13 +51,14 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate, Ite
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return workers.count
+//        return workers.count
+        return 0
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WorkerCell", for: indexPath)
-        cell.textLabel?.text = workers[indexPath.row]
+//        cell.textLabel?.text = workers[indexPath.row]
 
         return cell
     }
