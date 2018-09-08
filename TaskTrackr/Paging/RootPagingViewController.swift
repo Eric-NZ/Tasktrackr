@@ -11,6 +11,7 @@ import Parchment
 
 protocol ManageItemDelegate {
     func addItem()
+    func editingMode(editing: Bool, animate: Bool)
 }
 
 class RootPagingViewController: UIViewController, PagingViewControllerDelegate, PagingViewControllerDataSource {
@@ -26,7 +27,6 @@ class RootPagingViewController: UIViewController, PagingViewControllerDelegate, 
     func pagingViewController<T>(_ pagingViewController: PagingViewController<T>, pagingItemForIndex index: Int) -> T where T : PagingItem, T : Comparable, T : Hashable {
         return PagingIndexItem(index: index, title: viewControllers[index].title!) as! T
     }
-    
     
     func pagingViewController<T>(_ pagingViewController: PagingViewController<T>, viewControllerForIndex index: Int) -> UIViewController where T : PagingItem, T : Comparable, T : Hashable {
         return viewControllers[index]
@@ -120,10 +120,20 @@ class RootPagingViewController: UIViewController, PagingViewControllerDelegate, 
         }
     }
     
-    /* Get Instance of UIViewController
+    /*
+        Get Instance of UIViewController
      */
     func getInstance(with indentifier: String) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: indentifier)
+    }
+    
+    /**
+        Whenever Edit/Done button clicked, this method is called.
+     */
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        delegate?.editingMode(editing: editing, animate: animated)
     }
 }

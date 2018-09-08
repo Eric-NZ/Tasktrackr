@@ -186,7 +186,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Hkg-iH-WJ1"/>
                     </navigationItem>
                     <connections>
-                        <segue destination="AOq-hz-yXo" kind="show" identifier="AddActionItem" id="dPb-hb-Znr"/>
+                        <segue destination="AOq-hz-yXo" kind="show" identifier="OpenActionForm" id="dPb-hb-Znr"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4vZ-iX-VHU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -202,11 +202,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WorkerCell" id="U7a-hz-ueO">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="WorkerCell" id="U7a-hz-ueO">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="U7a-hz-ueO" id="vQO-rb-6ci">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -217,7 +217,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <segue destination="AOq-hz-yXo" kind="show" identifier="AddWorkerItem" id="r9T-Tp-9x6"/>
+                        <segue destination="AOq-hz-yXo" kind="show" identifier="OpenWorkerForm" id="r9T-Tp-9x6"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="80h-DB-fee" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -266,7 +266,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <segue destination="AOq-hz-yXo" kind="show" identifier="AddProductItem" id="qZb-9n-eDb"/>
+                        <segue destination="AOq-hz-yXo" kind="show" identifier="OpenProductForm" id="qZb-9n-eDb"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nY9-a3-FgF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -297,7 +297,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <segue destination="AOq-hz-yXo" kind="show" identifier="AddToolItem" id="Reu-6u-SC9"/>
+                        <segue destination="AOq-hz-yXo" kind="show" identifier="OpenToolForm" id="Reu-6u-SC9"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="din-fC-9I1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -328,7 +328,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <segue destination="AOq-hz-yXo" kind="show" identifier="AddSiteItem" id="Qz6-hY-TS4"/>
+                        <segue destination="AOq-hz-yXo" kind="show" identifier="OpenSiteForm" id="Qz6-hY-TS4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bJq-6M-DXi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -379,6 +379,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="dPb-hb-Znr"/>
+        <segue reference="Qz6-hY-TS4"/>
     </inferredMetricsTieBreakers>
 </document>

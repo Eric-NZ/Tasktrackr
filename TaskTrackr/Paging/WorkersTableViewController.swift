@@ -11,7 +11,7 @@ import SwiftForms
 import RealmSwift
 
 class WorkersTableViewController: UITableViewController, ManageItemDelegate, ItemFormControllerDelegate {
- 
+    
     let workers: Results<Worker>
     let realm = DatabaseService.shared.getRealm()
     var notificationToken: NotificationToken?
@@ -19,7 +19,7 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate, Ite
     required init?(coder aDecoder: NSCoder) {
 
         // initialize self.realm
-        workers = realm.objects(Worker.self)
+        workers = realm.objects(Worker.self).sorted(byKeyPath: "timestamp", ascending: false)
         
         super.init(coder: aDecoder)
     }
@@ -62,10 +62,13 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate, Ite
         }
     }
     
-    // MARK: - AddItemDelegate
+    // MARK: - ManageItemDelegate
     func addItem() {
-        performSegue(withIdentifier: "AddWorkerItem", sender: self)
-
+        openWorkerForm()
+    }
+    
+    func editingMode(editing: Bool, animate: Bool) {
+        setEditing(editing, animated: animate)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -84,7 +87,6 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate, Ite
         return workers.count
     }
 
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WorkerCell", for: indexPath)
         cell.textLabel?.text = workers[indexPath.row].firstName
@@ -92,8 +94,47 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate, Ite
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            removeWorker(worker: workers[indexPath.row])
+            break
+        case .insert:
+            break
+        default:
+            return
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        // open item detail form controller
+        openWorkerForm()
+    }
+    
+    /**
+        Get Instance of Specific Page
+     */
     func rootViewController() -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: Constants.ROOT_PAGE)
     }
+    
+    /**
+        Remove Worker Item
+     */
+    func removeWorker(worker: Worker) {
+        try! realm.write {
+            realm.delete(worker)
+        }
+    }
+    
+    /**
+        Open Worker Form Controller
+     */
+    func openWorkerForm() {
+        performSegue(withIdentifier: "OpenWorkerForm", sender: self)
+    }
+    
 }

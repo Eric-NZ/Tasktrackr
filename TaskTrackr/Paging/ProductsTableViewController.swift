@@ -15,6 +15,10 @@ class ProductsTableViewController: UITableViewController, ManageItemDelegate {
         print("Will add a product!")
     }
     
+    func editingMode(editing: Bool, animate: Bool) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

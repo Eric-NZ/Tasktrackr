@@ -101,11 +101,25 @@ class ItemFormController: FormViewController {
         //      section2
         let section2 = FormSectionDescriptor(headerTitle: nil, footerTitle: nil)
         //          rowRole
-        let rowRole = FormRowDescriptor(tag: "Role", type: .name, title: "Role")
-        rowRole.configuration.cell.appearance = ["textField.placeholder" : "e.g. Installer" as AnyObject, "textField.textAlignment" : NSTextAlignment.right.rawValue as AnyObject]
+        let rowRole = FormRowDescriptor(tag: "Role", type: .picker, title: "Role")
+        rowRole.configuration.cell.showsInputToolbar = true
+        rowRole.configuration.selection.options = (["A", "B", "C", "D"] as [String]) as [AnyObject]
+        rowRole.configuration.selection.optionTitleClosure = { value in
+            guard let option = value as? String else { return "" }
+            switch option {
+            case "A":
+                return "Worker"
+            case "B":
+                return "Senior Worker"
+            case "C":
+                return "Lead Worker"
+            case "D":
+                return "Expert"
+            default:
+                return ""
+            }
+        }
         section2.rows.append(rowRole)
-        form.sections = [section1, section2]
-        
         form.sections = [section1, section2]
         
         self.form = form

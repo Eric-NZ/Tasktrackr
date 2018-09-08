@@ -25,6 +25,10 @@ class ActionsTableViewController: UITableViewController, ManageItemDelegate {
     func addItem() {
         print("Will add an action!")
     }
+    
+    func editingMode(editing: Bool, animate: Bool) {
+        
+    }
 
     // MARK: - Table view data source
 
