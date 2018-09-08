@@ -24,20 +24,7 @@ class ItemFormController: FormViewController {
     var senderController: UIViewController?
     var isNewForm: Bool = false
     
-    let realm: Realm
-    
     required init(coder aDecoder: NSCoder) {
-        
-        // Create the configuration
-        let syncServerURL = Constants.REALM_URL
-//        for user in SyncUser.all {
-//            debugPrint("user: \(user.key) - \(user.value)")
-//            user.value.logOut()
-//        }
-        let config = Realm.Configuration(syncConfiguration: SyncConfiguration(user: SyncUser.current!, realmURL: syncServerURL))
-        
-        // Open the remote Realm
-        realm = try! Realm(configuration: config)
         
         super.init(coder: aDecoder)
     }
@@ -67,6 +54,7 @@ class ItemFormController: FormViewController {
         worker.role = form.sections[1].rows[0].value as? String
         worker.timestamp = Date()
 
+        let realm = DatabaseService.shared.getRealm()
         try! realm.write {
             realm.add(worker)
         }
