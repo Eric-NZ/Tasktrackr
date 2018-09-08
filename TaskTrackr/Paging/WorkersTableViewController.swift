@@ -36,6 +36,8 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate, Ite
         addNotificationHandle()
     }
     
+    /** Once data changed, controller will be notified.
+     */
     func addNotificationHandle() {
         notificationToken = workers.observe { [weak self] (changes) in
             guard let tableView = self?.tableView else { return }
