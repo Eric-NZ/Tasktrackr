@@ -30,6 +30,10 @@ class ItemFormController: FormViewController {
         
         // Create the configuration
         let syncServerURL = Constants.REALM_URL
+//        for user in SyncUser.all {
+//            debugPrint("user: \(user.key) - \(user.value)")
+//            user.value.logOut()
+//        }
         let config = Realm.Configuration(syncConfiguration: SyncConfiguration(user: SyncUser.current!, realmURL: syncServerURL))
         
         // Open the remote Realm
