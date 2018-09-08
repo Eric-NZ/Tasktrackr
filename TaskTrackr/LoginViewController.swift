@@ -9,6 +9,7 @@
 import UIKit
 import LFLoginController
 import RealmSwift
+import Toaster
 
 class LoginViewController: UIViewController, LFLoginControllerDelegate {
     
@@ -42,6 +43,9 @@ class LoginViewController: UIViewController, LFLoginControllerDelegate {
             if let _ = user {
                 // User is logged in
                 LoginViewController.currentUser = user
+                // display a Toast
+                let toast = Toast(text: "Login successful!", delay: 0, duration: Delay.long)
+                toast.show()
                 // forward to home controller
                 self.presentHomeController()
                 
