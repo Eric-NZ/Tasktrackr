@@ -13,27 +13,49 @@ import RealmSwift
 class LoginViewController: UIViewController, LFLoginControllerDelegate {
     
     // user status: has signed in?
+    static var currentUser: SyncUser?
+    
     var loginViewController: LFLoginController? = nil
+
     
     func loginDidFinish(email: String, password: String, type: LFLoginController.SendType) {
+        if type == .Login {     // user is logging in
+            login(userName: email, password: password)
+        } else {                // user is signing up
+            let creds = SyncCredentials.usernamePassword(username: email, password: password, register: true)
+            SyncUser.logIn(with: creds, server: Constants.AUTH_URL) { (user, err) in
+                // sign up successfully!
+            }
+            
+        }
     }
     
     func forgotPasswordTapped(email: String) {
-        
+        // No! I've never forgot my password!
     }
     
-    func login(userName: String, password: String) -> Bool {
+    func login(userName: String, password: String) {
         
-        guard SyncUser.current != nil else {return false}
+        let creds = SyncCredentials.usernamePassword(username: userName, password: password, register: false)
         
-        let creds = SyncCredentials.nickname(userName, isAdmin: true)
         SyncUser.logIn(with: creds, server: Constants.AUTH_URL) { (user, err) in
-            
+            if let _ = user {
+                // User is logged in
+                LoginViewController.currentUser = user
+                // forward to home controller
+                self.presentHomeController()
+                
+            } else if let _ = err {
+                self.loginViewController?.wrongInfoShake()
+//                fatalError(error.localizedDescription)
+            }
         }
         
-        return true
     }
     
+    func presentHomeController() {
+        performSegue(withIdentifier: "PresentHomeController", sender: self)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +67,7 @@ class LoginViewController: UIViewController, LFLoginControllerDelegate {
         self.view.addSubview(loginViewController!.view)
         
         loginViewController!.delegate = self
+        
     }
 
 }

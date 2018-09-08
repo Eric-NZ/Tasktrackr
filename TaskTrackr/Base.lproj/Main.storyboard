@@ -50,6 +50,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="TUa-yO-4bh"/>
                     </view>
+                    <connections>
+                        <segue destination="NQo-rF-B5h" kind="show" identifier="PresentHomeController" id="mf2-vb-oPY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AAd-p9-XDG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
