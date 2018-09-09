@@ -20,9 +20,11 @@ protocol ItemFormControllerDelegate {
  */
 class ItemFormController: FormViewController {
     
+    let realm: Realm = DatabaseService.shared.getRealm()
     var delegate: ItemFormControllerDelegate?
     var isNewItem: Bool = true
     var clientPageIdentifer: String = ""
+    var selectedWorker: Worker?
     
     required init(coder aDecoder: NSCoder) {
         
@@ -52,13 +54,16 @@ class ItemFormController: FormViewController {
             worker.lastName = form.sections[0].rows[1].value as? String
             worker.role = form.sections[1].rows[0].value as? String
             worker.timestamp = Date()
-            
-            let realm = DatabaseService.shared.getRealm()
+
             try! realm.write {
                 realm.add(worker)
             }
         } else {            // is editing an existing item
-            
+            try! realm.write {
+                selectedWorker?.firstName = form.sections[0].rows[0].value as? String
+                selectedWorker?.lastName = form.sections[0].rows[1].value as? String
+                selectedWorker?.role = form.sections[1].rows[0].value as? String
+            }
         }
             // if chose present modally call "dismiss", otherwise, call this:
             navigationController?.popViewController(animated: true)

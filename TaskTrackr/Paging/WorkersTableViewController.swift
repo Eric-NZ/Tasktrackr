@@ -81,6 +81,11 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate, Ite
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
+        // tell the destination View controller 2 things:
+        // 1. is a new form? - isNewForm: Bool
+        // 2. who will use the form? -  paingIdentifier: String
+        // 3. which item is selected
+        
         let itemFormController = segue.destination as! ItemFormController
         itemFormController.delegate = self
         
@@ -88,11 +93,8 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate, Ite
         itemFormController.isNewItem = isNewForm
         // let ItemFormController know client page it will build a form for
         itemFormController.clientPageIdentifer = Constants.WORKER_PAGE
-        
-        // tell the destination View controller 2 things:
-        // 1. is a new form? - isNewForm: Bool
-        // 2. who will use the form? -  paingIdentifier: String
-        
+        // which item is selected
+        itemFormController.selectedWorker = selectedWorker
     }
 
     // MARK: - Table view data source
