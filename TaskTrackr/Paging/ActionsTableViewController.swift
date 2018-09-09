@@ -22,7 +22,7 @@ class ActionsTableViewController: UITableViewController, ManageItemDelegate {
     }
     
     // MARK: - MangeItemDelegate
-    func addItem() {
+    func addItem(sender: Any?) {
         print("Will add an action!")
     }
     

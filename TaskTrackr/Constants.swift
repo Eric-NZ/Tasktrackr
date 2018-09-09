@@ -30,4 +30,10 @@ struct Constants {
     static let TOOL_PAGE = "ToolViewController"
     static let SITE_PAGE = "SiteViewController"
     static let ROOT_PAGE = "RootPagingViewController"
+    
+    static let ACTION_SEGUE = "OpenActionForm"
+    static let WORKER_SEGUE = "OpenWorkerForm"
+    static let PRODUCT_SEGUE = "OpenProductForm"
+    static let TOOL_SEGUE = "OpenToolForm"
+    static let SITE_SEGUE = "OpenSiteForm"
 }

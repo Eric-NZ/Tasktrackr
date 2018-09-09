@@ -15,6 +15,9 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate, Ite
     let workers: Results<Worker>
     let realm = DatabaseService.shared.getRealm()
     var notificationToken: NotificationToken?
+    var selectedWorker: Worker?
+    
+    var isNewForm: Bool = true
     
     required init?(coder aDecoder: NSCoder) {
 
@@ -26,8 +29,12 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate, Ite
     
     /** ItemFormControllerDelegate
      */
-    func loadFormData(for controller: FormViewController) {
-        print("I will load some data for \(String(describing: controller))")
+    func loadFormData(for controller: UIViewController) {
+        let formController: ItemFormController = controller as! ItemFormController
+        
+        formController.form.sections[0].rows[0].value = selectedWorker?.firstName as AnyObject
+        formController.form.sections[0].rows[1].value = selectedWorker?.lastName as AnyObject
+        formController.form.sections[1].rows[0].value = selectedWorker?.role as AnyObject
     }
     
     override func viewDidLoad() {
@@ -63,8 +70,8 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate, Ite
     }
     
     // MARK: - ManageItemDelegate
-    func addItem() {
-        openWorkerForm()
+    func addItem(sender: Any?) {        // sender: RootPaingViewController, create a new form
+        openWorkerForm(isNewForm: true, sender: sender)
     }
     
     func editingMode(editing: Bool, animate: Bool) {
@@ -72,12 +79,20 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate, Ite
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
         let itemFormController = segue.destination as! ItemFormController
         itemFormController.delegate = self
         
-        // send info: 1. new item: true/false; 2. controller instance
-        itemFormController.isNewForm = true
-        itemFormController.senderController = self
+        // will build a new form without filling data
+        itemFormController.isNewItem = isNewForm
+        // let ItemFormController know client page it will build a form for
+        itemFormController.clientPageIdentifer = Constants.WORKER_PAGE
+        
+        // tell the destination View controller 2 things:
+        // 1. is a new form? - isNewForm: Bool
+        // 2. who will use the form? -  paingIdentifier: String
+        
     }
 
     // MARK: - Table view data source
@@ -110,7 +125,8 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate, Ite
         tableView.deselectRow(at: indexPath, animated: true)
         
         // open item detail form controller
-        openWorkerForm()
+        selectedWorker = workers[indexPath.row]
+        openWorkerForm(isNewForm: false, sender: self)
     }
     
     /**
@@ -130,11 +146,11 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate, Ite
         }
     }
     
-    /**
-        Open Worker Form Controller
-     */
-    func openWorkerForm() {
-        performSegue(withIdentifier: "OpenWorkerForm", sender: self)
+
+    func openWorkerForm(isNewForm: Bool, sender: Any?) {
+        self.isNewForm = isNewForm
+        
+        performSegue(withIdentifier: Constants.WORKER_SEGUE, sender: sender)
     }
     
 }

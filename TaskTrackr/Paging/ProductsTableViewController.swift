@@ -11,7 +11,7 @@ import UIKit
 class ProductsTableViewController: UITableViewController, ManageItemDelegate {
     
     // MARK: - ManageItemDelegate
-    func addItem() {
+    func addItem(sender: Any?) {
         print("Will add a product!")
     }
     

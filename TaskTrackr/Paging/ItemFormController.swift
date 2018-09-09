@@ -13,7 +13,7 @@ import RealmSwift
 /* ItemFormControllerDeletgate
  */
 protocol ItemFormControllerDelegate {
-    func loadFormData(for controller: FormViewController)
+    func loadFormData(for controller: UIViewController)
 }
 
 /* UITableViewController
@@ -21,8 +21,8 @@ protocol ItemFormControllerDelegate {
 class ItemFormController: FormViewController {
     
     var delegate: ItemFormControllerDelegate?
-    var senderController: UIViewController?
-    var isNewForm: Bool = false
+    var isNewItem: Bool = true
+    var clientPageIdentifer: String = ""
     
     required init(coder aDecoder: NSCoder) {
         
@@ -32,34 +32,36 @@ class ItemFormController: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // build Form
-        if senderController != nil {
-            buildForm(for: (senderController!.restorationIdentifier!))
-            // load data
-            if !isNewForm {
-                delegate?.loadFormData(for: self)
-            }
-            
-            // set right bar button
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
+        // set right bar button
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
+        
+        // build form
+        buildForm(for: clientPageIdentifer)
+        
+        // If it is not a new item, load data to the form.
+        if !isNewItem {
+            delegate?.loadFormData(for: self)
         }
-
     }
     
     @objc func donePressed() {
         
-        let worker = Worker()
-        worker.firstName = form.sections[0].rows[0].value as? String
-        worker.lastName = form.sections[0].rows[1].value as? String
-        worker.role = form.sections[1].rows[0].value as? String
-        worker.timestamp = Date()
-
-        let realm = DatabaseService.shared.getRealm()
-        try! realm.write {
-            realm.add(worker)
+        if isNewItem {      // is creating a new item
+            let worker = Worker()
+            worker.firstName = form.sections[0].rows[0].value as? String
+            worker.lastName = form.sections[0].rows[1].value as? String
+            worker.role = form.sections[1].rows[0].value as? String
+            worker.timestamp = Date()
+            
+            let realm = DatabaseService.shared.getRealm()
+            try! realm.write {
+                realm.add(worker)
+            }
+        } else {            // is editing an existing item
+            
         }
-        // if chose present modally call "dismiss", otherwise, call this:
-        navigationController?.popViewController(animated: true)
+            // if chose present modally call "dismiss", otherwise, call this:
+            navigationController?.popViewController(animated: true)
     }
     
     func buildForm(for page: String) {
@@ -74,7 +76,6 @@ class ItemFormController: FormViewController {
             buildToolForm()
         case Constants.SITE_PAGE:
             buildSiteForm()
-            break
         default:
             return
         }

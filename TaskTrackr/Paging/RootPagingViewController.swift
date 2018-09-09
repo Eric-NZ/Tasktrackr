@@ -10,7 +10,7 @@ import UIKit
 import Parchment
 
 protocol ManageItemDelegate {
-    func addItem()
+    func addItem(sender: Any?)      // if sender is RootPagingViewController, create a new item
     func editingMode(editing: Bool, animate: Bool)
 }
 
@@ -61,11 +61,11 @@ class RootPagingViewController: UIViewController, PagingViewControllerDelegate, 
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
-        viewControllers = [getInstance(with: Constants.ACTION_PAGE),
-                           getInstance(with: Constants.WORKER_PAGE),
-                           getInstance(with: Constants.PRODUCT_PAGE),
-                           getInstance(with: Constants.TOOL_PAGE),
-                           getInstance(with: Constants.SITE_PAGE)]
+        viewControllers = [RootPagingViewController.getInstance(with: Constants.ACTION_PAGE),
+                           RootPagingViewController.getInstance(with: Constants.WORKER_PAGE),
+                           RootPagingViewController.getInstance(with: Constants.PRODUCT_PAGE),
+                           RootPagingViewController.getInstance(with: Constants.TOOL_PAGE),
+                           RootPagingViewController.getInstance(with: Constants.SITE_PAGE)]
         
         initPagingViewController()
         pagingViewController.delegate = self
@@ -80,7 +80,7 @@ class RootPagingViewController: UIViewController, PagingViewControllerDelegate, 
     }
     
     @IBAction func addPressed(_ sender: UIBarButtonItem) {
-        delegate?.addItem()
+        delegate?.addItem(sender: self)
     }
     
     func initPagingViewController() {
@@ -106,26 +106,18 @@ class RootPagingViewController: UIViewController, PagingViewControllerDelegate, 
         
         switch selectedPageIndex {
         case 0: // Action
-            return getInstance(with: Constants.ACTION_PAGE)
+            return RootPagingViewController.getInstance(with: Constants.ACTION_PAGE)
         case 1: // Worker
-            return getInstance(with: Constants.WORKER_PAGE)
+            return RootPagingViewController.getInstance(with: Constants.WORKER_PAGE)
         case 2: // Product
-            return getInstance(with: Constants.PRODUCT_PAGE)
+            return RootPagingViewController.getInstance(with: Constants.PRODUCT_PAGE)
         case 3: // Tool
-            return getInstance(with: Constants.TOOL_PAGE)
+            return RootPagingViewController.getInstance(with: Constants.TOOL_PAGE)
         case 4: // Site
-            return getInstance(with: Constants.SITE_PAGE)
+            return RootPagingViewController.getInstance(with: Constants.SITE_PAGE)
         default:
             return nil
         }
-    }
-    
-    /*
-        Get Instance of UIViewController
-     */
-    func getInstance(with indentifier: String) -> UIViewController {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: indentifier)
     }
     
     /**
@@ -135,5 +127,13 @@ class RootPagingViewController: UIViewController, PagingViewControllerDelegate, 
         super.setEditing(editing, animated: animated)
         
         delegate?.editingMode(editing: editing, animate: animated)
+    }
+    
+    /*
+     static: Get Instance of UIViewController
+     */
+    static func getInstance(with indentifier: String) -> UIViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: indentifier)
     }
 }

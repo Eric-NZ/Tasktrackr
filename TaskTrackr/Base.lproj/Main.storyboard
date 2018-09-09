@@ -227,7 +227,7 @@
         <!--Item Form Controller-->
         <scene sceneID="3dA-BN-x8z">
             <objects>
-                <tableViewController storyboardIdentifier="AddItemForm" id="AOq-hz-yXo" customClass="ItemFormController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ItemFormController" id="AOq-hz-yXo" customClass="ItemFormController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="oOp-E1-3gt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -338,7 +338,7 @@
         <!--Manage Actions-->
         <scene sceneID="662-e2-6co">
             <objects>
-                <viewController storyboardIdentifier="RootPagingViewController" id="36P-5s-JAF" customClass="RootPagingViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RootPagingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="36P-5s-JAF" customClass="RootPagingViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DE9-pw-Q1h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -379,6 +379,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Qz6-hY-TS4"/>
+        <segue reference="r9T-Tp-9x6"/>
     </inferredMetricsTieBreakers>
 </document>
