@@ -26,6 +26,7 @@ class ItemFormController: FormViewController {
     var clientPageIdentifer: String = ""
     var selectedWorker: Worker?
     var selectedProduct: Product?
+    var selectedTool: Tool?
     
     /**
      Outlet Control Variable List:
@@ -42,6 +43,8 @@ class ItemFormController: FormViewController {
     var productDescField: TextViewFormItem?
     
     // For Tool Form
+    var toolNameField: TextFieldFormItem?
+    var toolDescField: TextViewFormItem?
     
     // For Site Form
     
@@ -160,7 +163,21 @@ class ItemFormController: FormViewController {
     }
     
     // save tool item to data server
-    func saveToolForm() {}
+    func saveToolForm() {
+        if isNewItem {
+            try! realm.write {
+                let tool = Tool()
+                tool.toolName = toolNameField?.value
+                tool.toolDesc = toolDescField?.value
+                realm.add(tool)
+            }
+        } else {
+            try! realm.write {
+                selectedTool?.toolName = toolNameField?.value
+                selectedTool?.toolDesc = toolDescField?.value
+            }
+        }
+    }
     
     // save Site item to data server
     func saveSiteForm() {}
@@ -199,13 +216,19 @@ class ItemFormController: FormViewController {
         productModelField = TextFieldFormItem().title("Model").placeholder("e.g. D1000a").keyboardType(.default)
         builder += productModelField!
         builder += SectionHeaderViewFormItem()
-        productDescField = TextViewFormItem().title("Description: ").placeholder("It can be a brief introduction.")
+        productDescField = TextViewFormItem().title("Description    ").placeholder("It can be a brief introduction.")
         builder += productDescField!
     }
     
     // Build Tool Form
     func buildToolForm(_ builder: FormBuilder) {
         self.title = "Tool"
+        
+        builder += SectionHeaderViewFormItem()
+        toolNameField = TextFieldFormItem().title("Name").placeholder("e.g. hammer").keyboardType(.default)
+        builder += toolNameField!
+        toolDescField = TextViewFormItem().title("Description   ").placeholder("It can be a brief introduction.")
+        builder += toolDescField!
     }
     
     // Build Site Form

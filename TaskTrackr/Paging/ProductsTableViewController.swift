@@ -72,6 +72,12 @@ class ProductsTableViewController: UITableViewController, ManageItemDelegate, It
         formController.selectedProduct = self.selectedProduct!
     }
     
+    func removeProduct(product: Product) {
+        try! realm.write {
+            realm.delete(product)
+        }
+    }
+    
     func openProductForm(isNewItem: Bool, sender: Any?) {
         // set property isNewItem
         self.isNewForm = isNewItem
@@ -119,6 +125,17 @@ class ProductsTableViewController: UITableViewController, ManageItemDelegate, It
         selectedProduct = products[indexPath.row]
         // let destination controller know it's not a new item
         openProductForm(isNewItem: false, sender: self)
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            removeProduct(product: products[indexPath.row])
+        case .insert:
+            break
+        default:
+            return
+        }
     }
     
 }
