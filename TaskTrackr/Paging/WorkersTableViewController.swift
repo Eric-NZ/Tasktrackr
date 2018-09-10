@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SwiftForms
+import SwiftyFORM
 import RealmSwift
 
 class WorkersTableViewController: UITableViewController, ManageItemDelegate, ItemFormControllerDelegate {
@@ -29,12 +29,11 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate, Ite
     
     /** ItemFormControllerDelegate
      */
-    func loadFormData(for controller: UIViewController) {
-        let formController: ItemFormController = controller as! ItemFormController
-        
-        formController.form.sections[0].rows[0].value = selectedWorker?.firstName as AnyObject
-        formController.form.sections[0].rows[1].value = selectedWorker?.lastName as AnyObject
-        formController.form.sections[1].rows[0].value = selectedWorker?.role as AnyObject
+    func loadFormData(for form: UIViewController) {
+        let formController = form as! ItemFormController
+        formController.firstNameField?.value = (selectedWorker?.firstName)!
+        formController.lastNameField!.value = (selectedWorker?.lastName)!
+        formController.roleField?.selectOptionWithTitle((selectedWorker?.role)!)
     }
     
     override func viewDidLoad() {
@@ -94,6 +93,7 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate, Ite
         // let ItemFormController know client page it will build a form for
         itemFormController.clientPageIdentifer = Constants.WORKER_PAGE
         // which item is selected
+        guard selectedWorker != nil else {return}
         itemFormController.selectedWorker = selectedWorker
     }
 
@@ -107,6 +107,7 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate, Ite
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WorkerCell", for: indexPath)
         cell.textLabel?.text = workers[indexPath.row].firstName
+        cell.detailTextLabel?.text = workers[indexPath.row].role
 
         return cell
     }
@@ -115,7 +116,6 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate, Ite
         switch editingStyle {
         case .delete:
             removeWorker(worker: workers[indexPath.row])
-            break
         case .insert:
             break
         default:

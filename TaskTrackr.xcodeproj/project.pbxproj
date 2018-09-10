@@ -84,7 +84,7 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		210C04D3213CAF9C00576564 /* Modal */ = {
+		210C04D3213CAF9C00576564 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				210C04D1213CAF7E00576564 /* DatabaseService.swift */,
@@ -94,7 +94,7 @@
 				21BBC78D213E69440006B5B4 /* Site.swift */,
 				21BBC78F213E6BB00006B5B4 /* Action.swift */,
 			);
-			path = Modal;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		21D8D654213F969D0092AEBB /* Paging */ = {
@@ -144,7 +144,7 @@
 				21EA13C22136505200C5CB34 /* AllTasksTableViewController.swift */,
 				210620212141239B00BA2050 /* Extensions */,
 				21D8D654213F969D0092AEBB /* Paging */,
-				210C04D3213CAF9C00576564 /* Modal */,
+				210C04D3213CAF9C00576564 /* Model */,
 			);
 			path = TaskTrackr;
 			sourceTree = "<group>";
@@ -246,7 +246,7 @@
 				"${BUILT_PRODUCTS_DIR}/Parchment/Parchment.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftForms/SwiftForms.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyFORM/SwiftyFORM.framework",
 				"${BUILT_PRODUCTS_DIR}/Toaster/Toaster.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -255,7 +255,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parchment.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftForms.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyFORM.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toaster.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

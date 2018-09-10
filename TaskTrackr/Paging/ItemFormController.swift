@@ -7,13 +7,13 @@
 //
 
 import UIKit
-import SwiftForms
 import RealmSwift
+import SwiftyFORM
 
 /* ItemFormControllerDeletgate
  */
 protocol ItemFormControllerDelegate {
-    func loadFormData(for controller: UIViewController)
+    func loadFormData(for form: UIViewController)
 }
 
 /* UITableViewController
@@ -25,8 +25,28 @@ class ItemFormController: FormViewController {
     var isNewItem: Bool = true
     var clientPageIdentifer: String = ""
     var selectedWorker: Worker?
+    var selectedProduct: Product?
     
-    required init(coder aDecoder: NSCoder) {
+    /**
+     Outlet Control Variable List:
+     */
+    // For Action Form
+    
+    // For Worker Form
+    var firstNameField: TextFieldFormItem?
+    var lastNameField: TextFieldFormItem?
+    var roleField: OptionPickerFormItem?
+    // For Product Form
+    var productNameField: TextFieldFormItem?
+    var productModelField: TextFieldFormItem?
+    var productDescField: TextViewFormItem?
+    
+    // For Tool Form
+    
+    // For Site Form
+    
+    
+    required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
     }
@@ -37,114 +57,160 @@ class ItemFormController: FormViewController {
         // set right bar button
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
         
-        // build form
-        buildForm(for: clientPageIdentifer)
-        
         // If it is not a new item, load data to the form.
         if !isNewItem {
             delegate?.loadFormData(for: self)
         }
     }
     
-    @objc func donePressed() {
-        
-        if isNewItem {      // is creating a new item
-            let worker = Worker()
-            worker.firstName = form.sections[0].rows[0].value as? String
-            worker.lastName = form.sections[0].rows[1].value as? String
-            worker.role = form.sections[1].rows[0].value as? String
-            worker.timestamp = Date()
-
-            try! realm.write {
-                realm.add(worker)
-            }
-        } else {            // is editing an existing item
-            try! realm.write {
-                selectedWorker?.firstName = form.sections[0].rows[0].value as? String
-                selectedWorker?.lastName = form.sections[0].rows[1].value as? String
-                selectedWorker?.role = form.sections[1].rows[0].value as? String
-            }
-        }
-            // if chose present modally call "dismiss", otherwise, call this:
-            navigationController?.popViewController(animated: true)
+    override func populate(_ builder: FormBuilder) {
+        // build form
+        buildForm(for: clientPageIdentifer, builder)
     }
     
-    func buildForm(for page: String) {
-        switch (page) {     // restoration id: was set same to Storyboard ID
+    @objc func donePressed() {
+        // save form data to data server
+        saveFormData(for: clientPageIdentifer)
+        
+        // if chose present modally call "dismiss", otherwise, call this:
+        navigationController?.popViewController(animated: true)
+    }
+    
+    // save item as per different page
+    func saveFormData(for page: String) {
+        switch(page) {
         case Constants.ACTION_PAGE:
-            buildActionForm()
+            saveActionForm()
         case Constants.WORKER_PAGE:
-            buildWorkerForm()
+            saveWorkerForm()
         case Constants.PRODUCT_PAGE:
-            buildProductForm()
+            saveProductForm()
         case Constants.TOOL_PAGE:
-            buildToolForm()
+            saveToolForm()
         case Constants.SITE_PAGE:
-            buildSiteForm()
+            saveSiteForm()
         default:
             return
         }
     }
     
-    func buildActionForm() {
+    // Build forms as per different pages
+    func buildForm(for page: String, _ builder: FormBuilder) {
+        switch (page) {     // restoration id: was set same to Storyboard ID
+        case Constants.ACTION_PAGE:
+            buildActionForm(builder)
+        case Constants.WORKER_PAGE:
+            buildWorkerForm(builder)
+        case Constants.PRODUCT_PAGE:
+            buildProductForm(builder)
+        case Constants.TOOL_PAGE:
+            buildToolForm(builder)
+        case Constants.SITE_PAGE:
+            buildSiteForm(builder)
+        default:
+            return
+        }
+    }
+    
+    // Save Action Item to Data Server
+    func saveActionForm() {
+        
+    }
+    
+    // Save worker item to data server
+    func saveWorkerForm() {
+        if isNewItem {
+            let worker = Worker()
+            worker.firstName = firstNameField?.value
+            worker.lastName = lastNameField?.value
+            worker.role = roleField?.selected?.title
+            worker.timestamp = Date()
+            
+            try! realm.write {
+                realm.add(worker)
+            }
+        } else {
+            try! realm.write {
+                selectedWorker?.firstName = firstNameField?.value
+                selectedWorker?.lastName = lastNameField?.value
+                selectedWorker?.role = roleField?.selected?.title
+            }
+        }
+    }
+    
+    // save product item to data server
+    func saveProductForm() {
+        if isNewItem {
+            let product = Product()
+            product.productName = productNameField?.value
+            product.productModel = productModelField?.value
+            product.productDesc = productDescField?.value
+            product.timestamp = Date()
+            
+            try! realm.write {
+                realm.add(product)
+            }
+        } else {
+            try! realm.write {
+                selectedProduct!.productName = productNameField?.value
+                selectedProduct!.productModel = productModelField?.value
+                selectedProduct!.productDesc = productDescField?.value
+            }
+        }
+    }
+    
+    // save tool item to data server
+    func saveToolForm() {}
+    
+    // save Site item to data server
+    func saveSiteForm() {}
+    
+    // Build Action Form
+    func buildActionForm(_ builder: FormBuilder) {
         self.title = "Action"
     }
     
-    func buildWorkerForm() {
-        self.title = "Register New Worker"
-        // form
-        let form = FormDescriptor(title: "Worker")
-        //      section1
-        let section1 = FormSectionDescriptor(headerTitle: nil, footerTitle: nil)
-        //          rowFirstName
-        let rowFirstName = FormRowDescriptor(tag: "First Name", type: .name, title: "First Name")
-        rowFirstName.configuration.cell.appearance = ["textField.placeholder" : "John" as AnyObject, "textField.textAlignment" : NSTextAlignment.right.rawValue as AnyObject]
-        section1.rows.append(rowFirstName)
-        //          rowLastName
-        let rowLastName = FormRowDescriptor(tag: "Last Name", type: .name, title: "Last Name")
-        rowLastName.configuration.cell.appearance = ["textField.placeholder" : "Wang" as AnyObject, "textField.textAlignment" : NSTextAlignment.right.rawValue as AnyObject]
-        section1.rows.append(rowLastName)
-        //      section2
-        let section2 = FormSectionDescriptor(headerTitle: nil, footerTitle: nil)
-        //          rowRole
-        let rowRole = FormRowDescriptor(tag: "Role", type: .picker, title: "Role")
-        rowRole.configuration.cell.showsInputToolbar = true
-        rowRole.configuration.selection.options = (["A", "B", "C", "D"] as [String]) as [AnyObject]
-        rowRole.configuration.selection.optionTitleClosure = { value in
-            guard let option = value as? String else { return "" }
-            switch option {
-            case "A":
-                return "Worker"
-            case "B":
-                return "Senior Worker"
-            case "C":
-                return "Lead Worker"
-            case "D":
-                return "Expert"
-            default:
-                return ""
-            }
-        }
-        section2.rows.append(rowRole)
-        form.sections = [section1, section2]
+    // Build Worker Form
+    func buildWorkerForm(_ builder: FormBuilder) {
+        roleField = {
+            let instance = OptionPickerFormItem()
+            instance.title("Role").placeholder("Required")
+            instance.append("Worker").append("Senior Worker").append("Lead Worker").append("Expert")
+            
+            return instance
+        }()
         
-        self.form = form
+        builder += SectionHeaderViewFormItem()
+        firstNameField = TextFieldFormItem().title("First Name").placeholder("e.g. John").keyboardType(.default)
+        builder += firstNameField!
+        lastNameField = TextFieldFormItem().title("Last Name").placeholder("e.g. Meltzer").keyboardType(.default)
+        builder += lastNameField!
+        
+        builder += SectionHeaderViewFormItem()
+        builder += roleField!
+
     }
     
-    func buildProductForm() {
-        self.title = "Product"
+    // Build Product Form
+    func buildProductForm(_ builder: FormBuilder) {
+        builder += SectionHeaderViewFormItem()
+        productNameField = TextFieldFormItem().title("Name").placeholder("e.g. Shower Base").keyboardType(.default)
+        builder += productNameField!
+        productModelField = TextFieldFormItem().title("Model").placeholder("e.g. D1000a").keyboardType(.default)
+        builder += productModelField!
+        builder += SectionHeaderViewFormItem()
+        productDescField = TextViewFormItem().title("Description: ").placeholder("It can be a brief introduction.")
+        builder += productDescField!
     }
     
-    func buildToolForm() {
+    // Build Tool Form
+    func buildToolForm(_ builder: FormBuilder) {
         self.title = "Tool"
     }
     
-    func buildSiteForm() {
+    // Build Site Form
+    func buildSiteForm(_ builder: FormBuilder) {
         self.title = "Site"
-    }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return form.sections.count
     }
 
 }
