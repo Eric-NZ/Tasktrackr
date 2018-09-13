@@ -27,11 +27,16 @@ class ItemFormController: FormViewController {
     var selectedWorker: Worker?
     var selectedProduct: Product?
     var selectedTool: Tool?
+    var selectedAction: Action?
     
     /**
      Outlet Control Variable List:
      */
     // For Action Form
+    var actionTitleField: TextFieldFormItem?
+    var actionDescField: TextViewFormItem?
+    var actionToolsField: OptionPickerFormItem?
+    var actionProductsField: OptionPickerFormItem?
     
     // For Worker Form
     var firstNameField: TextFieldFormItem?
@@ -79,6 +84,24 @@ class ItemFormController: FormViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    // Build forms as per different pages
+    func buildForm(for page: String, _ builder: FormBuilder) {
+        switch (page) {     // restoration id: was set same to Storyboard ID
+        case Constants.ACTION_PAGE:
+            buildActionForm(builder)
+        case Constants.WORKER_PAGE:
+            buildWorkerForm(builder)
+        case Constants.PRODUCT_PAGE:
+            buildProductForm(builder)
+        case Constants.TOOL_PAGE:
+            buildToolForm(builder)
+        case Constants.SITE_PAGE:
+            buildSiteForm(builder)
+        default:
+            return
+        }
+    }
+    
     // save item as per different page
     func saveFormData(for page: String) {
         switch(page) {
@@ -97,22 +120,81 @@ class ItemFormController: FormViewController {
         }
     }
     
-    // Build forms as per different pages
-    func buildForm(for page: String, _ builder: FormBuilder) {
-        switch (page) {     // restoration id: was set same to Storyboard ID
-        case Constants.ACTION_PAGE:
-            buildActionForm(builder)
-        case Constants.WORKER_PAGE:
-            buildWorkerForm(builder)
-        case Constants.PRODUCT_PAGE:
-            buildProductForm(builder)
-        case Constants.TOOL_PAGE:
-            buildToolForm(builder)
-        case Constants.SITE_PAGE:
-            buildSiteForm(builder)
-        default:
-            return
+    // Build Action Form
+    func buildActionForm(_ builder: FormBuilder) {
+        
+        // Title and Desc
+        self.title = "Action"
+        builder += SectionHeaderViewFormItem()
+        actionTitleField = TextFieldFormItem().title("Action Title").placeholder("e.g. Install Shower base").keyboardType(.default)
+        builder += actionTitleField!
+        actionDescField = TextViewFormItem().title("Action Description").placeholder("It can be a brief instruction.")
+        builder += actionDescField!
+        
+        // Products
+        builder += SectionHeaderTitleFormItem().title("Applied Products")
+        
+        
+        // Tools
+        builder += SectionHeaderTitleFormItem().title("Applied Tools")
+        for _ in 0..<12 {
+            let tool1: SwitchFormItem = {
+                let instance = SwitchFormItem()
+                instance.title = "tool1"
+                instance.value = true
+                return instance
+            }()
+            builder += tool1
         }
+    }
+    
+    // Build Worker Form
+    func buildWorkerForm(_ builder: FormBuilder) {
+        roleField = {
+            let instance = OptionPickerFormItem()
+            instance.title("Role").placeholder("Required")
+            instance.append("Worker").append("Senior Worker").append("Lead Worker").append("Expert")
+            
+            return instance
+        }()
+        
+        builder += SectionHeaderViewFormItem()
+        firstNameField = TextFieldFormItem().title("First Name").placeholder("e.g. John").keyboardType(.default)
+        builder += firstNameField!
+        lastNameField = TextFieldFormItem().title("Last Name").placeholder("e.g. Meltzer").keyboardType(.default)
+        builder += lastNameField!
+        
+        builder += SectionHeaderViewFormItem()
+        builder += roleField!
+        
+    }
+    
+    // Build Product Form
+    func buildProductForm(_ builder: FormBuilder) {
+        builder += SectionHeaderViewFormItem()
+        productNameField = TextFieldFormItem().title("Name").placeholder("e.g. Shower Base").keyboardType(.default)
+        builder += productNameField!
+        productModelField = TextFieldFormItem().title("Model").placeholder("e.g. D1000a").keyboardType(.default)
+        builder += productModelField!
+        builder += SectionHeaderViewFormItem()
+        productDescField = TextViewFormItem().title("Description    ").placeholder("It can be a brief introduction.")
+        builder += productDescField!
+    }
+    
+    // Build Tool Form
+    func buildToolForm(_ builder: FormBuilder) {
+        self.title = "Tool"
+        
+        builder += SectionHeaderViewFormItem()
+        toolNameField = TextFieldFormItem().title("Name").placeholder("e.g. hammer").keyboardType(.default)
+        builder += toolNameField!
+        toolDescField = TextViewFormItem().title("Description   ").placeholder("It can be a brief introduction.")
+        builder += toolDescField!
+    }
+    
+    // Build Site Form
+    func buildSiteForm(_ builder: FormBuilder) {
+        self.title = "Site"
     }
     
     // Save Action Item to Data Server
@@ -181,59 +263,4 @@ class ItemFormController: FormViewController {
     
     // save Site item to data server
     func saveSiteForm() {}
-    
-    // Build Action Form
-    func buildActionForm(_ builder: FormBuilder) {
-        self.title = "Action"
-    }
-    
-    // Build Worker Form
-    func buildWorkerForm(_ builder: FormBuilder) {
-        roleField = {
-            let instance = OptionPickerFormItem()
-            instance.title("Role").placeholder("Required")
-            instance.append("Worker").append("Senior Worker").append("Lead Worker").append("Expert")
-            
-            return instance
-        }()
-        
-        builder += SectionHeaderViewFormItem()
-        firstNameField = TextFieldFormItem().title("First Name").placeholder("e.g. John").keyboardType(.default)
-        builder += firstNameField!
-        lastNameField = TextFieldFormItem().title("Last Name").placeholder("e.g. Meltzer").keyboardType(.default)
-        builder += lastNameField!
-        
-        builder += SectionHeaderViewFormItem()
-        builder += roleField!
-
-    }
-    
-    // Build Product Form
-    func buildProductForm(_ builder: FormBuilder) {
-        builder += SectionHeaderViewFormItem()
-        productNameField = TextFieldFormItem().title("Name").placeholder("e.g. Shower Base").keyboardType(.default)
-        builder += productNameField!
-        productModelField = TextFieldFormItem().title("Model").placeholder("e.g. D1000a").keyboardType(.default)
-        builder += productModelField!
-        builder += SectionHeaderViewFormItem()
-        productDescField = TextViewFormItem().title("Description    ").placeholder("It can be a brief introduction.")
-        builder += productDescField!
-    }
-    
-    // Build Tool Form
-    func buildToolForm(_ builder: FormBuilder) {
-        self.title = "Tool"
-        
-        builder += SectionHeaderViewFormItem()
-        toolNameField = TextFieldFormItem().title("Name").placeholder("e.g. hammer").keyboardType(.default)
-        builder += toolNameField!
-        toolDescField = TextViewFormItem().title("Description   ").placeholder("It can be a brief introduction.")
-        builder += toolDescField!
-    }
-    
-    // Build Site Form
-    func buildSiteForm(_ builder: FormBuilder) {
-        self.title = "Site"
-    }
-
 }

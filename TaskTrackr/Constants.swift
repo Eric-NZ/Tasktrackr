@@ -36,4 +36,5 @@ struct Constants {
     static let PRODUCT_SEGUE = "OpenProductForm"
     static let TOOL_SEGUE = "OpenToolForm"
     static let SITE_SEGUE = "OpenSiteForm"
+    static let SELECTION_SEGUE = "ShowSelectionController"
 }

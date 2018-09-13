@@ -7,42 +7,72 @@
 //
 
 import UIKit
+import RealmSwift
 
-class ActionsTableViewController: UITableViewController, ManageItemDelegate {
- 
-    let actions: [String] = ["ssssssss", "dddddddddd", "ddf", "fffff", "fffffff"]
+class ActionsTableViewController: UITableViewController, ManageItemDelegate, ItemFormControllerDelegate {
     
-    func getInstance() -> UIViewController {
-        return self
+    let realm = DatabaseService.shared.getRealm()
+    var actions: Results<Action>
+    var selectedAction: Action?
+    var isNewItem: Bool = true
+    
+    required init?(coder aDecoder: NSCoder) {
+        actions = realm.objects(Action.self)
+        
+        super.init(coder: aDecoder)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let formController = segue.destination as! ItemFormController
+        formController.isNewItem = self.isNewItem
+        formController.clientPageIdentifer = Constants.ACTION_PAGE
+        formController.selectedAction = self.selectedAction
+    }
+    
+    func openFormController(forNewItem: Bool, sender: Any?) {
+        performSegue(withIdentifier: Constants.ACTION_SEGUE, sender: sender)
+    }
+    
+    // MARK: - ItemFormControllerDelegate
+    
+    func loadFormData(for form: UIViewController) {
+        print("I will build an action form...")
     }
     
     // MARK: - MangeItemDelegate
     func addItem(sender: Any?) {
-        print("Will add an action!")
+        openFormController(forNewItem: true, sender: sender)
     }
     
     func editingMode(editing: Bool, animate: Bool) {
-        
+        setEditing(editing, animated: animate)
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return actions.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ActionCell", for: indexPath)
-
-        cell.textLabel?.text = actions[indexPath.row]
-
+        
+        cell.textLabel?.text = actions[indexPath.row].actionTitle
+        cell.detailTextLabel?.text = actions[indexPath.row].actionDesc
+        
         return cell
     }
-
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        selectedAction = actions[indexPath.row]
+        openFormController(forNewItem: false, sender: self)
+    }
+    
 }
