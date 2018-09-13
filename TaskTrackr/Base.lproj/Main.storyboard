@@ -298,12 +298,27 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <segue destination="AOq-hz-yXo" kind="show" identifier="OpenProductForm" id="qZb-9n-eDb"/>
+                        <segue destination="XcZ-LF-xdd" kind="show" identifier="OpenProductForm" id="Qwe-9H-8hh"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nY9-a3-FgF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3884" y="1827"/>
+        </scene>
+        <!--Product Models-->
+        <scene sceneID="5P7-2m-1iG">
+            <objects>
+                <viewController title="Product Models" id="XcZ-LF-xdd" customClass="ProductModelsViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rS2-4E-Mlz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="BzG-hG-uka"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DYF-lk-GUv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3884" y="2665"/>
         </scene>
         <!--Tools-->
         <scene sceneID="JQK-NY-691">
@@ -427,6 +442,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="qZb-9n-eDb"/>
+        <segue reference="r9T-Tp-9x6"/>
     </inferredMetricsTieBreakers>
 </document>
