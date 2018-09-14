@@ -174,8 +174,13 @@ class ItemFormController: FormViewController {
         builder += SectionHeaderViewFormItem()
         productNameField = TextFieldFormItem().title("Name").placeholder("e.g. Shower Base").keyboardType(.default)
         builder += productNameField!
-        productModelField = TextFieldFormItem().title("Model").placeholder("e.g. D1000a").keyboardType(.default)
-        builder += productModelField!
+        
+        
+        // Models
+        builder += SectionHeaderViewFormItem()
+        let childController = ViewControllerFormItem().title("Models").viewControllerFromInstance(from: Constants.PRODUCT_MODELS)
+        builder += childController
+        
         builder += SectionHeaderViewFormItem()
         productDescField = TextViewFormItem().title("Description    ").placeholder("It can be a brief introduction.")
         builder += productDescField!
@@ -263,4 +268,15 @@ class ItemFormController: FormViewController {
     
     // save Site item to data server
     func saveSiteForm() {}
+}
+
+extension ViewControllerFormItem {
+    
+    @discardableResult
+    public func viewControllerFromInstance(from identifier: String) -> Self {
+        createViewController = { (dismissCommand: CommandProtocol) in
+            return RootPagingViewController.getInstance(with: identifier)
+        }
+        return self
+    }
 }

@@ -298,7 +298,8 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <segue destination="XcZ-LF-xdd" kind="show" identifier="OpenProductForm" id="Qwe-9H-8hh"/>
+                        <segue destination="XcZ-LF-xdd" kind="show" identifier="OpenProductView" id="Qwe-9H-8hh"/>
+                        <segue destination="AOq-hz-yXo" kind="show" identifier="OpenProductForm" id="E2z-Pc-xj2"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nY9-a3-FgF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -308,17 +309,17 @@
         <!--Product Models-->
         <scene sceneID="5P7-2m-1iG">
             <objects>
-                <viewController title="Product Models" id="XcZ-LF-xdd" customClass="ProductModelsViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProductModelForm" title="Product Models" useStoryboardIdentifierAsRestorationIdentifier="YES" id="XcZ-LF-xdd" customClass="ProductModelsViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rS2-4E-Mlz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="BzG-hG-uka"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DYF-lk-GUv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3884" y="2665"/>
+            <point key="canvasLocation" x="3884" y="2664.9175412293857"/>
         </scene>
         <!--Tools-->
         <scene sceneID="JQK-NY-691">
@@ -442,6 +443,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="r9T-Tp-9x6"/>
+        <segue reference="E2z-Pc-xj2"/>
     </inferredMetricsTieBreakers>
 </document>

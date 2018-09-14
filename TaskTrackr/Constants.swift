@@ -31,6 +31,8 @@ struct Constants {
     static let SITE_PAGE = "SiteViewController"
     static let ROOT_PAGE = "RootPagingViewController"
     
+    static let PRODUCT_MODELS = "ProductModelForm"
+    
     static let ACTION_SEGUE = "OpenActionForm"
     static let WORKER_SEGUE = "OpenWorkerForm"
     static let PRODUCT_SEGUE = "OpenProductForm"
