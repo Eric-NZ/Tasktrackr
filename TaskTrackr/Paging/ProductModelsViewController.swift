@@ -7,15 +7,19 @@
 //
 
 import UIKit
-import SwiftyFORM
+import TagListView
 
 class ProductModelsViewController: UIViewController {
+    @IBOutlet weak var modelTagView: TagListView!
+    
+    let done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
+    
     override func viewDidLoad() {
-//        navigationItem.rightBarButtonItems?.append(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPressed)))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPressed))
+        
+        navigationItem.rightBarButtonItem = done
     }
     
-    @objc func addPressed() {
-        print("add pressed!!")
+    @objc func donePressed() {
+        
     }
 }
