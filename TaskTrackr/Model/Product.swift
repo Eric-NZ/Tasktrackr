@@ -8,6 +8,18 @@
 
 import RealmSwift
 
+class Model: Object {
+    
+    @objc dynamic var modelId: String = UUID().uuidString
+    @objc dynamic var modelName: String?
+    @objc dynamic var product: Product?
+    
+    override static func primaryKey() -> String? {
+        return "modelId"
+    }
+    
+}
+
 class Product: Object {
     
     // Auto Id
@@ -16,6 +28,8 @@ class Product: Object {
     @objc dynamic var productName: String?
     // Model Name
     @objc dynamic var productModel: String?
+    // Models
+    let models = List<Model>()
     // Product Description
     @objc dynamic var productDesc: String?
     // Actions that can use this product: a list of actionIds
@@ -26,5 +40,9 @@ class Product: Object {
     // Primary Key
     override static func primaryKey() -> String {
         return "productId"
+    }
+    
+    public func modelList() -> List<Model> {
+        return models
     }
 }

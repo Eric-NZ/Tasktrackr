@@ -16,16 +16,30 @@ protocol ItemFormControllerDelegate {
     func loadFormData(for form: UIViewController)
 }
 
+extension Results {
+    func toArray<T>(ofType: T.Type) -> [T] {
+        var array = [T]()
+        for i in 0 ..< count {
+            if let result = self[i] as? T {
+                array.append(result)
+            }
+        }
+        
+        return array
+    }
+}
+
 /* UITableViewController
  */
-class ItemFormController: FormViewController {
+class ItemFormController: FormViewController, SelectRowDelegate {
     
-    let realm: Realm = DatabaseService.shared.getRealm()
     var delegate: ItemFormControllerDelegate?
+    let realm: Realm = DatabaseService.shared.getRealm()
     var isNewItem: Bool = true
     var clientPageIdentifer: String = ""
     var selectedWorker: Worker?
     var selectedProduct: Product?
+    var modelsInSelectedProduct: [Model] = []
     var selectedTool: Tool?
     var selectedAction: Action?
     
@@ -68,7 +82,15 @@ class ItemFormController: FormViewController {
         // If it is not a new item, load data to the form.
         if !isNewItem {
             delegate?.loadFormData(for: self)
+            
+            // get models in selected product
+            modelsInSelectedProduct = realm.objects(Model.self).filter("product=%@", selectedProduct as Any).toArray(ofType: Model.self)
         }
+    }
+    
+    // MARK: - SelectRowDelegate
+    func form_didSelectRow(indexPath: IndexPath, tableView: UITableView) {
+        print("form_didSelectRow")
     }
     
     override func populate(_ builder: FormBuilder) {
@@ -175,12 +197,12 @@ class ItemFormController: FormViewController {
         productNameField = TextFieldFormItem().title("Name").placeholder("e.g. Shower Base").keyboardType(.default)
         builder += productNameField!
         
-        
         // Models
         builder += SectionHeaderViewFormItem()
         let childController = ViewControllerFormItem().title("Models").viewControllerFromInstance(from: Constants.PRODUCT_MODELS)
         builder += childController
         
+        // Description
         builder += SectionHeaderViewFormItem()
         productDescField = TextViewFormItem().title("Description    ").placeholder("It can be a brief introduction.")
         builder += productDescField!
@@ -268,7 +290,9 @@ class ItemFormController: FormViewController {
     
     // save Site item to data server
     func saveSiteForm() {}
+    
 }
+
 
 extension ViewControllerFormItem {
     
