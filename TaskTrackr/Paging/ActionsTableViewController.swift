@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class ActionsTableViewController: UITableViewController, ManageItemDelegate, ItemFormControllerDelegate {
+class ActionsTableViewController: UITableViewController, ManageItemDelegate {
     
     let realm = DatabaseService.shared.getRealm()
     var actions: Results<Action>
@@ -29,19 +29,10 @@ class ActionsTableViewController: UITableViewController, ManageItemDelegate, Ite
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let formController = segue.destination as! ItemFormController
-        formController.isNewItem = self.isNewItem
-        formController.clientPageIdentifer = Constants.ACTION_PAGE
-        formController.selectedAction = self.selectedAction
     }
     
     func openFormController(forNewItem: Bool, sender: Any?) {
         performSegue(withIdentifier: Constants.ACTION_SEGUE, sender: sender)
-    }
-    
-    // MARK: - ItemFormControllerDelegate
-    
-    func loadFormData(for form: UIViewController) {
-        print("I will build an action form...")
     }
     
     // MARK: - MangeItemDelegate

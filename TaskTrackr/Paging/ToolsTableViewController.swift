@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class ToolsTableViewController: UITableViewController, ManageItemDelegate, ItemFormControllerDelegate {
+class ToolsTableViewController: UITableViewController, ManageItemDelegate {
     
     let realm = DatabaseService.shared.getRealm()
     let tools : Results<Tool>
@@ -68,17 +68,12 @@ class ToolsTableViewController: UITableViewController, ManageItemDelegate, ItemF
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let formController = segue.destination as! ItemFormController
-        formController.isNewItem = self.isNewForm
-        formController.selectedTool = self.selectedTool
-        formController.clientPageIdentifer = Constants.TOOL_PAGE
-        formController.delegate = self
     }
     
     // MARK: - ItemFormControllerDelegate
     func loadFormData(for form: UIViewController) {
         let formController = form as! ItemFormController
-        formController.toolNameField?.value = (selectedTool?.toolName)!
-        formController.toolDescField?.value = (selectedTool?.toolDesc)!
+        
     }
     
     // MARK: - ManageItemDelegate

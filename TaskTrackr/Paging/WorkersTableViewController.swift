@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import SwiftyFORM
 import RealmSwift
 
-class WorkersTableViewController: UITableViewController, ManageItemDelegate, ItemFormControllerDelegate {
+class WorkersTableViewController: UITableViewController, ManageItemDelegate {
     
     let workers: Results<Worker>
     let realm = DatabaseService.shared.getRealm()
@@ -31,9 +30,7 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate, Ite
      */
     func loadFormData(for form: UIViewController) {
         let formController = form as! ItemFormController
-        formController.firstNameField?.value = (selectedWorker?.firstName)!
-        formController.lastNameField!.value = (selectedWorker?.lastName)!
-        formController.roleField?.selectOptionWithTitle((selectedWorker?.role)!)
+        
     }
     
     override func viewDidLoad() {
@@ -86,15 +83,7 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate, Ite
         // 3. which item is selected
         
         let itemFormController = segue.destination as! ItemFormController
-        itemFormController.delegate = self
         
-        // will build a new form without filling data
-        itemFormController.isNewItem = isNewForm
-        // let ItemFormController know client page it will build a form for
-        itemFormController.clientPageIdentifer = Constants.WORKER_PAGE
-        // which item is selected
-        guard selectedWorker != nil else {return}
-        itemFormController.selectedWorker = selectedWorker
     }
 
     // MARK: - Table view data source

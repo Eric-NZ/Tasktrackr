@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class ProductsTableViewController: UITableViewController, ManageItemDelegate, ItemFormControllerDelegate {
+class ProductsTableViewController: UITableViewController, ManageItemDelegate {
 
     let products: Results<Product>
     let realm = DatabaseService.shared.getRealm()
@@ -58,19 +58,7 @@ class ProductsTableViewController: UITableViewController, ManageItemDelegate, It
             }
         }
     }
-    
-    /**
-        deliver property values to ItemFormController
-     */
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let formController = segue.destination as! ItemFormController
-        formController.clientPageIdentifer = Constants.PRODUCT_PAGE
-        formController.isNewItem = self.isNewForm
-        formController.delegate = self
-        
-        guard selectedProduct != nil else {return}
-        formController.selectedProduct = self.selectedProduct!
-    }
+
     
     func removeProduct(product: Product) {
         try! realm.write {
@@ -89,14 +77,6 @@ class ProductsTableViewController: UITableViewController, ManageItemDelegate, It
     // MARK: - ManageItemDelegate
     func addItem(sender: Any?) {
         openProductForm(isNewItem: true, sender: sender)
-    }
-    
-    // MARK: - ItemFormControllerDelegate
-    func loadFormData(for form: UIViewController) {
-        let formController = form as! ItemFormController
-        formController.productNameField?.value = (selectedProduct?.productName)!
-        formController.productModelField?.value = (selectedProduct?.productModel)!
-        formController.productDescField?.value = (selectedProduct?.productDesc)!
     }
     
     func editingMode(editing: Bool, animate: Bool) {
