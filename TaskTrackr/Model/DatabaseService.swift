@@ -9,6 +9,19 @@
 import Foundation
 import RealmSwift
 
+extension Results {
+    func toArray<T>(ofType: T.Type) -> [T] {
+        var array = [T]()
+        for i in 0 ..< count {
+            if let result = self[i] as? T {
+                array.append(result)
+            }
+        }
+        
+        return array
+    }
+}
+
 class DatabaseService {
     static var shared = DatabaseService()
     
@@ -35,12 +48,28 @@ class DatabaseService {
         return SyncUser.current!
     }
     
-//    func retriveAllUsers() -> [[String: SyncUser]] {
-//        var users = [[String: SyncUser]]()
-//        for user in SyncUser.all {
-//            debugPrint("user: \(user.key) - \(user.value)")
-//            users.append(user)
-//        }
-//        return users
-//    }
+    func getModelArray(in product: Product) -> [Model] {
+        let realm = getRealm()
+        return realm.objects(Model.self).filter("product=%@", product.self).toArray(ofType: Model.self)
+    }
+    
+    func getModels(in product: Product) -> Results<Model> {
+        let models = getRealm().objects(Model.self).filter("product=%@", product.self)
+        return models
+    }
+    
+    func saveModelList(for product: Product, with modelArray: [Model]) {
+        let realm = getRealm()
+        // delete all models in the product
+        let models = getModels(in: product)
+        try! realm.write {
+            realm.delete(models)
+        }
+        // reload
+        for model in modelArray {
+            try! realm.write {
+                realm.add(model)
+            }
+        }
+    }
 }

@@ -10,33 +10,6 @@ import UIKit
 import RealmSwift
 import Former
 
-extension Results {
-    func toArray<T>(ofType: T.Type) -> [T] {
-        var array = [T]()
-        for i in 0 ..< count {
-            if let result = self[i] as? T {
-                array.append(result)
-            }
-        }
-        
-        return array
-    }
-}
-
-extension UIColor {
-    
-    class func formerColor() -> UIColor {
-        return UIColor(red: 0.14, green: 0.16, blue: 0.22, alpha: 1)
-    }
-    
-    class func formerSubColor() -> UIColor {
-        return UIColor(red: 0.9, green: 0.55, blue: 0.08, alpha: 1)
-    }
-    
-    class func formerHighlightedSubColor() -> UIColor {
-        return UIColor(red: 1, green: 0.7, blue: 0.12, alpha: 1)
-    }
-}
 
 class ItemFormController: FormViewController {
     
@@ -116,7 +89,9 @@ class ItemFormController: FormViewController {
                 $0.rowHeight = UITableView.automaticDimension
         }
         let tagControl = CustomRowFormer<TagControlTableViewCell>(instantiateType: .Nib(nibName: "TagControlTableViewCell")) {
-            print($0)
+            $0.onAddPressed = { newTagName in
+                print(newTagName)
+            }
         }
         
         let sectionModels = SectionFormer(rowFormer: tagRow, tagControl).set(headerViewFormer: createHeader("Product Models"))
