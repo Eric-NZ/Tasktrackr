@@ -106,11 +106,20 @@ class ItemFormController: FormViewController {
                                      "ssss", "ddddd", "qqqqq", "cccc", "dddd", "ssss",
                                      "ddddd", "qqqqq", "cccc", "dddd", "ssss", "ddddd",
                                      "qqqqq", "cccc", "dddd", "ssss", "ddddd", "qqqqq",
+                                     "cccc", "dddd", "ssss", "ddddd", "qqqqq", "cccc",
+                                     "dddd", "ssss", "ddddd", "qqqqq", "ccfffffcc", "dddd",
+                                     "ssss", "ddddd", "qqqqq", "cccc", "dddd", "ssss",
+                                     "ddddd", "qqqqq", "cccc", "dddd", "ssss", "ddddd",
+                                     "qqqqq", "cccc", "dddd", "ssss", "ddddd", "qqqqq",
                                      "cccc", "dddd", "ssss", "ddddd", "qqqqq", "cccc"])
             }.configure {
                 $0.rowHeight = UITableView.automaticDimension
         }
-        let sectionModels = SectionFormer(rowFormer: tagRow).set(headerViewFormer: createHeader("Product Models"))
+        let tagControl = CustomRowFormer<TagControlTableViewCell>(instantiateType: .Nib(nibName: "TagControlTableViewCell")) {
+            print($0)
+        }
+        
+        let sectionModels = SectionFormer(rowFormer: tagRow, tagControl).set(headerViewFormer: createHeader("Product Models"))
         former.append(sectionFormer: sectionBasic, sectionModels)
     }
     

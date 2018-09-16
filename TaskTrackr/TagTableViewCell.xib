@@ -11,15 +11,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="156" id="KGk-i7-Jjw" customClass="TagTableViewCell" customModule="TaskTrackr" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="156"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="233" id="KGk-i7-Jjw" customClass="TagTableViewCell" customModule="TaskTrackr" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="333" height="233"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="155.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="333" height="232.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3OI-Qo-L4F" customClass="TagListView" customModule="TagListView">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="155.5"/>
+                        <rect key="frame" x="21" y="16" width="291" height="201"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="removeButtonIconSize">
@@ -33,17 +33,17 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="3OI-Qo-L4F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="0WG-hl-yQu"/>
-                    <constraint firstAttribute="trailing" secondItem="3OI-Qo-L4F" secondAttribute="trailing" id="21D-Wl-dsc"/>
-                    <constraint firstAttribute="bottom" secondItem="3OI-Qo-L4F" secondAttribute="bottom" id="QTR-Tk-DIC"/>
-                    <constraint firstItem="3OI-Qo-L4F" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ZMj-0C-jYT"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="3OI-Qo-L4F" secondAttribute="trailing" constant="5" id="7L1-jK-hpC"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="3OI-Qo-L4F" secondAttribute="bottom" constant="5" id="I5F-uL-Fjc"/>
+                    <constraint firstItem="3OI-Qo-L4F" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="Qib-JD-1dq"/>
+                    <constraint firstItem="3OI-Qo-L4F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="oZe-rr-1oy"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="modelTagList" destination="3OI-Qo-L4F" id="hba-Qc-khK"/>
             </connections>
-            <point key="canvasLocation" x="52.799999999999997" y="19.790104947526238"/>
+            <point key="canvasLocation" x="63.200000000000003" y="54.422788605697157"/>
         </tableViewCell>
     </objects>
 </document>

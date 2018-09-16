@@ -32,6 +32,7 @@
 		21EA13AF213622C900C5CB34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21EA13AD213622C900C5CB34 /* LaunchScreen.storyboard */; };
 		21EA13C121364FF200C5CB34 /* ActivatedTasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EA13C021364FF200C5CB34 /* ActivatedTasksTableViewController.swift */; };
 		21EA13C32136505200C5CB34 /* AllTasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EA13C22136505200C5CB34 /* AllTasksTableViewController.swift */; };
+		21F7A8CF214E263A00A01AB5 /* TagControlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21F7A8CD214E263A00A01AB5 /* TagControlTableViewCell.xib */; };
 		B7F2E06E71D2CEECD93433CC /* Pods_TaskTrackr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A6487C605C9341862DA23B1 /* Pods_TaskTrackr.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		21EA13B0213622C900C5CB34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21EA13C021364FF200C5CB34 /* ActivatedTasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivatedTasksTableViewController.swift; sourceTree = "<group>"; };
 		21EA13C22136505200C5CB34 /* AllTasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTasksTableViewController.swift; sourceTree = "<group>"; };
+		21F7A8CD214E263A00A01AB5 /* TagControlTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagControlTableViewCell.xib; sourceTree = "<group>"; };
 		9A6487C605C9341862DA23B1 /* Pods_TaskTrackr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaskTrackr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7D12C04F2B5A29FEE2D4BD5 /* Pods-TaskTrackr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskTrackr.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaskTrackr/Pods-TaskTrackr.release.xcconfig"; sourceTree = "<group>"; };
 		D66AE966DB494017D1AA2BB8 /* Pods-TaskTrackr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskTrackr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaskTrackr/Pods-TaskTrackr.debug.xcconfig"; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				21A67483214220020012B555 /* ItemFormController.swift */,
 				21DF277C214E0A6800BB2799 /* TagTableViewCell.swift */,
 				21DF277D214E0A6800BB2799 /* TagTableViewCell.xib */,
+				21F7A8CD214E263A00A01AB5 /* TagControlTableViewCell.xib */,
 				21EA13C22136505200C5CB34 /* AllTasksTableViewController.swift */,
 				210620212141239B00BA2050 /* Extensions */,
 				21D8D654213F969D0092AEBB /* Paging */,
@@ -235,6 +238,7 @@
 				21DF277F214E0A6800BB2799 /* TagTableViewCell.xib in Resources */,
 				21EA13AF213622C900C5CB34 /* LaunchScreen.storyboard in Resources */,
 				21EA13AC213622C900C5CB34 /* Assets.xcassets in Resources */,
+				21F7A8CF214E263A00A01AB5 /* TagControlTableViewCell.xib in Resources */,
 				21EA13A7213622C800C5CB34 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
