@@ -67,12 +67,10 @@ class ToolsTableViewController: UITableViewController, ManageItemDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let formController = segue.destination as! ItemFormController
     }
     
     // MARK: - ItemFormControllerDelegate
     func loadFormData(for form: UIViewController) {
-        let formController = form as! ItemFormController
         
     }
     

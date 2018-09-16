@@ -21,14 +21,13 @@
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="AL8-O0-eIq">
                         <rect key="frame" x="5" y="0.0" width="310" height="43.5"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Add New Model" minimumFontSize="15" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="fx9-QL-g1x">
-                                <rect key="frame" x="0.0" y="0.0" width="272" height="43.5"/>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Add New Model" minimumFontSize="13" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="fx9-QL-g1x">
+                                <rect key="frame" x="0.0" y="0.0" width="280" height="43.5"/>
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7uu-Fj-Dwk">
-                                <rect key="frame" x="280" y="0.0" width="30" height="43.5"/>
-                                <state key="normal" title="Add"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7uu-Fj-Dwk">
+                                <rect key="frame" x="288" y="0.0" width="22" height="43.5"/>
                                 <connections>
                                     <action selector="onAdd:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hH0-7A-apI"/>
                                 </connections>

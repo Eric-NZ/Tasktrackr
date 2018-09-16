@@ -29,7 +29,7 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate {
     /** ItemFormControllerDelegate
      */
     func loadFormData(for form: UIViewController) {
-        let formController = form as! ItemFormController
+       
         
     }
     
@@ -81,9 +81,7 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate {
         // 1. is a new form? - isNewForm: Bool
         // 2. who will use the form? -  paingIdentifier: String
         // 3. which item is selected
-        
-        let itemFormController = segue.destination as! ItemFormController
-        
+                
     }
 
     // MARK: - Table view data source

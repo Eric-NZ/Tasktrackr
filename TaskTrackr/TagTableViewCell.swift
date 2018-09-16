@@ -23,8 +23,8 @@ class TagTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+        
     }
-    
 }
 
 class TagControlTableViewCell: UITableViewCell {
@@ -43,5 +43,6 @@ class TagControlTableViewCell: UITableViewCell {
     }
     
     @IBAction func onAdd(_ sender: UIButton) {
+        
     }
 }

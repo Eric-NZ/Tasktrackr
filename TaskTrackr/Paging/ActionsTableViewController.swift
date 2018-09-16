@@ -28,7 +28,6 @@ class ActionsTableViewController: UITableViewController, ManageItemDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let formController = segue.destination as! ItemFormController
     }
     
     func openFormController(forNewItem: Bool, sender: Any?) {
