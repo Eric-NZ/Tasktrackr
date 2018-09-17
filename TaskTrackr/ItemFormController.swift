@@ -21,6 +21,10 @@ class ItemFormController: FormViewController {
     var currentTool: Tool?
     var currentSite: Site?
     
+    // for action
+    var actionTitle: String = ""
+    var actionDesc: String = ""
+    
     // for product
     var tagListView: TagListView?
     var productName: String = ""
@@ -147,7 +151,44 @@ class ItemFormController: FormViewController {
     }
     
     // build Action form
-    func buildActionForm(){}
+    func buildActionForm(){
+        // Action Title
+        let nameField = TextFieldRowFormer<FormTextFieldCell>() {
+            $0.titleLabel.text = "Action Title"
+            $0.titleLabel.font = .boldSystemFont(ofSize: 16)
+            $0.textField.textColor = .formerSubColor()
+            $0.textField.font = .boldSystemFont(ofSize: 14)
+            }.configure {
+                $0.placeholder = "Action Title"
+                $0.text = currentAction != nil ? currentAction?.actionTitle : ""
+                actionTitle = $0.text!
+            }.onTextChanged { (text) in
+                // save product name
+                self.productName = text
+        }
+        // Action Desc
+        let descField = TextViewRowFormer<FormTextViewCell>() {
+            $0.titleLabel.text = "Description"
+            $0.titleLabel.font = .boldSystemFont(ofSize: 16)
+            $0.textView.textColor = .formerSubColor()
+            $0.textView.font = .systemFont(ofSize: 15)
+            }.configure {
+                $0.placeholder = "Add action introduction."
+                $0.text = currentAction != nil ? currentAction?.actionDesc : ""
+                actionDesc = $0.text!
+            }.onTextChanged { (text) in
+                // save action desc
+                self.actionDesc = text
+        }
+        
+        let sectionBasic = SectionFormer(rowFormer: nameField, descField).set(headerViewFormer: createHeader("Basic Action Info"))
+        
+        // applied products
+        
+        // applied tools
+        
+        former.append(sectionFormer: sectionBasic)
+    }
     // save Action form
     func saveActionForm() -> Bool {
         return true

@@ -28,15 +28,18 @@ class ActionsTableViewController: UITableViewController, ManageItemDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let itemForm = segue.destination as! ItemFormController
+        itemForm.currentAction = sender == nil ? nil : selectedAction
+        itemForm.clientPage = Static.action_page
     }
     
-    func openFormController(forNewItem: Bool, sender: Any?) {
+    func openFormController(sender: Any?) {
         performSegue(withIdentifier: Static.action_segue, sender: sender)
     }
     
     // MARK: - MangeItemDelegate
     func addItem(sender: Any?) {
-        openFormController(forNewItem: true, sender: sender)
+        openFormController(sender: nil)
     }
     
     func editingMode(editing: Bool, animate: Bool) {
@@ -62,7 +65,7 @@ class ActionsTableViewController: UITableViewController, ManageItemDelegate {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         selectedAction = actions[indexPath.row]
-        openFormController(forNewItem: false, sender: self)
+        openFormController(sender: self)
     }
     
 }
