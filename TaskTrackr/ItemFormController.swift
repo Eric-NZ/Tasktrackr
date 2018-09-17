@@ -91,6 +91,7 @@ class ItemFormController: FormViewController {
             }.configure {
                 $0.placeholder = "Product Name"
                 $0.text = currentProduct != nil ? currentProduct?.productName : ""
+                productName = $0.text!
             }.onTextChanged { (text) in
                 // save product name
                 self.productName = text
@@ -104,6 +105,7 @@ class ItemFormController: FormViewController {
             }.configure {
                 $0.placeholder = "Add product introduction."
                 $0.text = currentProduct != nil ? currentProduct?.productDesc : ""
+                productDesc = $0.text!
             }.onTextChanged { (text) in
                 // save product desc
                 self.productDesc = text
@@ -127,6 +129,9 @@ class ItemFormController: FormViewController {
                 // text from the textField in TagControlTableViewCell
                 if !newTagName.isEmpty {
                     self.tagListView?.addTag(newTagName)
+                    
+                    // in order to update the custom cell height
+                    self.tableView.reloadData()
                 }
             }
         }

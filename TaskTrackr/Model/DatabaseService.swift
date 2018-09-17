@@ -80,6 +80,15 @@ class DatabaseService {
         }
     }
     
+    // remove models belong to specific product
+    func removeModels(for product: Product) {
+        let realm = getRealm()
+        let toDeleteModels = realm.objects(Model.self).filter("product=%@", product.self)
+        try! realm.write {
+            realm.delete(toDeleteModels)
+        }
+    }
+    
     // add a new product
     func addProduct(with product: Product) {
         let realm = getRealm()

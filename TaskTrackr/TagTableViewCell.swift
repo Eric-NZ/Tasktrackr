@@ -9,14 +9,15 @@
 import UIKit
 import TagListView
 
-class TagTableViewCell: UITableViewCell {
-
+class TagTableViewCell: UITableViewCell, TagListViewDelegate {
+    
     @IBOutlet weak var modelTagList: TagListView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         selectionStyle = .none
+        modelTagList.delegate = self
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,6 +25,15 @@ class TagTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
         
+    }
+    
+    // MARK: - TagListViewDelegate
+    func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
+        print("tagPressed")
+    }
+    
+    func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
+        sender.removeTagView(tagView)
     }
     
 }
