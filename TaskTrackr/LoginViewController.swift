@@ -12,9 +12,6 @@ import RealmSwift
 
 class LoginViewController: UIViewController, LFLoginControllerDelegate {
     
-    // user status: has signed in?
-    static var currentUser: SyncUser?
-    
     var loginViewController: LFLoginController? = nil
 
     
@@ -41,7 +38,7 @@ class LoginViewController: UIViewController, LFLoginControllerDelegate {
         SyncUser.logIn(with: creds, server: Static.AUTH_URL) { (user, err) in
             if let _ = user {
                 // User is logged in
-                LoginViewController.currentUser = user
+                Static.currentUser = user
                 // display a Toast
                 Static.showToast(toastText: "Login successful!")
                 // forward to home controller

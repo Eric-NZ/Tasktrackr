@@ -8,6 +8,7 @@
 
 import Foundation
 import Toaster
+import RealmSwift
 
 struct Static {
     // **** Realm Cloud Users:
@@ -24,6 +25,8 @@ struct Static {
     static let AUTH_URL  = URL(string: "https://\(MY_INSTANCE_ADDRESS)")!
     static let REALM_URL = URL(string: "realms://\(MY_INSTANCE_ADDRESS)/TaskTrackr")!
     
+    // user status: has signed in?
+    static var currentUser: SyncUser?
     
     static let action_page = "ActionViewController"
     static let worker_page = "WorkerViewController"
@@ -43,7 +46,7 @@ struct Static {
     }
     
     /*
-     static: Get Instance of UIViewController
+     static: Get Instance of UIViewController using storyboard identifier.
      */
     static func getInstance(with indentifier: String) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
