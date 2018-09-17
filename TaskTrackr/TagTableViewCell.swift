@@ -16,6 +16,7 @@ class TagTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -46,5 +47,7 @@ class TagControlTableViewCell: UITableViewCell {
     
     @IBAction func onAdd(_ sender: UIButton) {
         onAddPressed?(newModelField.text ?? "")
+        // empty the text field
+        newModelField.text = ""
     }
 }

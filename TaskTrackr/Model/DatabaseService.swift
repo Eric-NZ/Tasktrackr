@@ -41,11 +41,20 @@ class DatabaseService {
     
     func getRealm() -> Realm {
         let realm = try! Realm(configuration: DatabaseService.shared.getRealmConfig())
+//        let realm = try! Realm()
         return realm
     }
     
     func getCurrentUser() -> SyncUser {
         return SyncUser.current!
+    }
+    
+    // convert an array to a list
+    func arrayToList<T>(from array: [T]) -> List<T> {
+        let list = List<T>()
+        list.append(objectsIn: array)
+        
+        return list
     }
     
     func getModelArray(in product: Product) -> [Model] {
@@ -58,7 +67,7 @@ class DatabaseService {
         return models
     }
     
-    func saveModelList(for product: Product, with modelArray: [Model]) {
+    func saveModels(to product: Product, with modelArray: [Model]) {
         let realm = getRealm()
         // delete all models in the product
         let models = getModels(in: product)
@@ -66,10 +75,26 @@ class DatabaseService {
             realm.delete(models)
         }
         // reload
-        for model in modelArray {
-            try! realm.write {
-                realm.add(model)
-            }
+        try! realm.write {
+            realm.add(modelArray)
+        }
+    }
+    
+    // add a new product
+    func addProduct(with product: Product) {
+        let realm = getRealm()
+        try! realm.write {
+            realm.add(product)
+        }
+    }
+    
+    // update an existing product
+    func updateProduct(for product: Product, with name: String, with desc: String, with models: [Model]) {
+        let realm = getRealm()
+        try! realm.write {
+            product.productName = name
+            product.productDesc = desc
+            product.models = arrayToList(from: models)
         }
     }
 }

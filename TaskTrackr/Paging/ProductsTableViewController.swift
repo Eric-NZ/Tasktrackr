@@ -15,7 +15,6 @@ class ProductsTableViewController: UITableViewController, ManageItemDelegate {
     let realm = DatabaseService.shared.getRealm()
     var notificationToken: NotificationToken?
     var selectedProduct: Product?
-    var isNewForm: Bool = true
     
     required init?(coder aDecoder: NSCoder) {
         
@@ -66,17 +65,21 @@ class ProductsTableViewController: UITableViewController, ManageItemDelegate {
         }
     }
     
-    func openProductForm(isNewItem: Bool, sender: Any?) {
-        // set property isNewItem
-        self.isNewForm = isNewItem
-        
+    func openProductForm(sender: Any?) {
         // perform the segue
         performSegue(withIdentifier: Constants.PRODUCT_SEGUE, sender: sender)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let itemForm = segue.destination as! ItemFormController
+        // tell destination controller which product is selected
+        itemForm.currentProduct = sender == nil ? nil : selectedProduct
+    }
+    
     // MARK: - ManageItemDelegate
     func addItem(sender: Any?) {
-        openProductForm(isNewItem: true, sender: sender)
+        // set sender as nil to identify if want to create a new item.
+        openProductForm(sender: nil)
     }
     
     func editingMode(editing: Bool, animate: Bool) {
@@ -104,7 +107,7 @@ class ProductsTableViewController: UITableViewController, ManageItemDelegate {
         // let destination controller know which product is selected
         selectedProduct = products[indexPath.row]
         // let destination controller know it's not a new item
-        openProductForm(isNewItem: false, sender: self)
+        openProductForm(sender: self)
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
