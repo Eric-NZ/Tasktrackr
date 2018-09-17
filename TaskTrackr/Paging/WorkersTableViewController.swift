@@ -123,7 +123,7 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate {
      */
     func rootViewController() -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: Constants.ROOT_PAGE)
+        return storyboard.instantiateViewController(withIdentifier: Constants.root_page)
     }
     
     /**
@@ -139,7 +139,7 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate {
     func openWorkerForm(isNewForm: Bool, sender: Any?) {
         self.isNewForm = isNewForm
         
-        performSegue(withIdentifier: Constants.WORKER_SEGUE, sender: sender)
+        performSegue(withIdentifier: Constants.worker_segue, sender: sender)
     }
     
 }

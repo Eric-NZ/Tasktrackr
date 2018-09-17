@@ -67,7 +67,7 @@ class ProductsTableViewController: UITableViewController, ManageItemDelegate {
     
     func openProductForm(sender: Any?) {
         // perform the segue
-        performSegue(withIdentifier: Constants.PRODUCT_SEGUE, sender: sender)
+        performSegue(withIdentifier: Constants.product_segue, sender: sender)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

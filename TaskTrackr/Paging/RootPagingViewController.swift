@@ -61,11 +61,11 @@ class RootPagingViewController: UIViewController, PagingViewControllerDelegate, 
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
-        viewControllers = [RootPagingViewController.getInstance(with: Constants.ACTION_PAGE),
-                           RootPagingViewController.getInstance(with: Constants.WORKER_PAGE),
-                           RootPagingViewController.getInstance(with: Constants.PRODUCT_PAGE),
-                           RootPagingViewController.getInstance(with: Constants.TOOL_PAGE),
-                           RootPagingViewController.getInstance(with: Constants.SITE_PAGE)]
+        viewControllers = [RootPagingViewController.getInstance(with: Constants.action_page),
+                           RootPagingViewController.getInstance(with: Constants.worker_page),
+                           RootPagingViewController.getInstance(with: Constants.product_page),
+                           RootPagingViewController.getInstance(with: Constants.tool_page),
+                           RootPagingViewController.getInstance(with: Constants.site_page)]
         
         initPagingViewController()
         pagingViewController.delegate = self
@@ -84,40 +84,14 @@ class RootPagingViewController: UIViewController, PagingViewControllerDelegate, 
     }
     
     func initPagingViewController() {
-//        pagingViewController = FixedPagingViewController(viewControllers: getViewControllers())
         addChild(pagingViewController)
         view.addSubview(pagingViewController.view)
         view.constrainToEdges(pagingViewController.view)
         pagingViewController.didMove(toParent: self)
     }
-        
-    func getViewControllers() -> [UIViewController] {
-        
-        return viewControllers
-    }
     
     func setLeftBarItem() {
         navigationItem.leftBarButtonItem = editButtonItem
-    }
-    
-    /* get instance of selected viewController
-     */
-    func selectedViewController(selectedPageIndex: Int) -> UIViewController? {
-        
-        switch selectedPageIndex {
-        case 0: // Action
-            return RootPagingViewController.getInstance(with: Constants.ACTION_PAGE)
-        case 1: // Worker
-            return RootPagingViewController.getInstance(with: Constants.WORKER_PAGE)
-        case 2: // Product
-            return RootPagingViewController.getInstance(with: Constants.PRODUCT_PAGE)
-        case 3: // Tool
-            return RootPagingViewController.getInstance(with: Constants.TOOL_PAGE)
-        case 4: // Site
-            return RootPagingViewController.getInstance(with: Constants.SITE_PAGE)
-        default:
-            return nil
-        }
     }
     
     /**

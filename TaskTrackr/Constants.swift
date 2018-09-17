@@ -24,19 +24,16 @@ struct Constants {
     static let REALM_URL = URL(string: "realms://\(MY_INSTANCE_ADDRESS)/TaskTrackr")!
     
     
-    static let ACTION_PAGE = "ActionViewController"
-    static let WORKER_PAGE = "WorkerViewController"
-    static let PRODUCT_PAGE = "ProductViewController"
-    static let TOOL_PAGE = "ToolViewController"
-    static let SITE_PAGE = "SiteViewController"
-    static let ROOT_PAGE = "RootPagingViewController"
-    static let ITEM_FORM = "ItemFormController"
+    static let action_page = "ActionViewController"
+    static let worker_page = "WorkerViewController"
+    static let product_page = "ProductViewController"
+    static let tool_page = "ToolViewController"
+    static let site_page = "SiteViewController"
+    static let root_page = "RootPagingViewController"
     
-    static let PRODUCT_MODELS = "ProductModelForm"
-    
-    static let ACTION_SEGUE = "OpenActionForm"
-    static let WORKER_SEGUE = "OpenWorkerForm"
-    static let PRODUCT_SEGUE = "OpenProductForm"
-    static let TOOL_SEGUE = "OpenToolForm"
-    static let SITE_SEGUE = "OpenSiteForm"
+    static let action_segue = "OpenActionForm"
+    static let worker_segue = "OpenWorkerForm"
+    static let product_segue = "OpenProductForm"
+    static let tool_segue = "OpenToolForm"
+    static let site_segue = "OpenSiteForm"
 }
