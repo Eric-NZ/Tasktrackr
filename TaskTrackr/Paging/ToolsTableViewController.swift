@@ -55,8 +55,7 @@ class ToolsTableViewController: UITableViewController, ManageItemDelegate {
         }
     }
     
-    func openItemForm(isNewForm: Bool, sender: Any?) {
-        self.isNewForm = isNewForm
+    func openItemForm(sender: Any?) {
         performSegue(withIdentifier: Static.tool_segue, sender: sender)
     }
     
@@ -67,16 +66,14 @@ class ToolsTableViewController: UITableViewController, ManageItemDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    }
-    
-    // MARK: - ItemFormControllerDelegate
-    func loadFormData(for form: UIViewController) {
-        
+        let itemForm = segue.destination as! ItemFormController
+        itemForm.clientPage = Static.tool_page
+        itemForm.currentTool = sender == nil ? nil : selectedTool
     }
     
     // MARK: - ManageItemDelegate
     func addItem(sender: Any?) {
-        openItemForm(isNewForm: true, sender: sender)
+        openItemForm(sender: nil)
     }
     
     func editingMode(editing: Bool, animate: Bool) {
@@ -104,7 +101,7 @@ class ToolsTableViewController: UITableViewController, ManageItemDelegate {
         
         selectedTool = tools[indexPath.row]
         
-        openItemForm(isNewForm: false, sender: self)
+        openItemForm(sender: self)
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

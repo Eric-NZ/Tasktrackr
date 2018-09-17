@@ -30,6 +30,10 @@ class ItemFormController: FormViewController {
     var firstName: String = ""
     var lastName: String = ""
     
+    // for tool
+    var toolName: String = ""
+    var toolDesc: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,10 +62,27 @@ class ItemFormController: FormViewController {
     }
     
     @objc func donePressed() {
-        saveProductForm()
+        var isSaved: Bool = false
+        
+        switch clientPage {
+        case Static.action_page:
+            isSaved = saveActionForm()
+        case Static.worker_page:
+            isSaved = saveWorkerForm()
+        case Static.product_page:
+            isSaved = saveProductForm()
+        case Static.tool_page:
+            isSaved = saveToolForm()
+        case Static.site_page:
+            isSaved = saveSiteForm()
+        default:
+            break
+        }
         
         // if chose present modally call "dismiss", otherwise, call this:
-        navigationController?.popViewController(animated: true)
+        if isSaved {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     // Section Header
@@ -125,7 +146,9 @@ class ItemFormController: FormViewController {
     // build Action form
     func buildActionForm(){}
     // save Action form
-    func saveActionForm(){}
+    func saveActionForm() -> Bool {
+        return true
+    }
     // build Workder form
     func buildWorkerForm() {
         // worker first name
@@ -167,8 +190,8 @@ class ItemFormController: FormViewController {
         former.append(sectionFormer: sectionBasic, sectionRole)
     }
     
-    func saveWorkerForm() {
-        
+    func saveWorkerForm() -> Bool {
+        return true
     }
     
     // build Product form
@@ -255,10 +278,10 @@ class ItemFormController: FormViewController {
     }
 
     // save Product form
-    func saveProductForm() {
+    func saveProductForm() -> Bool {
         guard !productName.isEmpty else {
             Static.showToast(toastText: "Please provide a product name.")
-            return
+            return false
         }
         
         if (currentProduct == nil) {
@@ -277,14 +300,68 @@ class ItemFormController: FormViewController {
         
         // save models
         DatabaseService.shared.saveModels(to: currentProduct!, with: changedModelArray())
+        
+        return true
     }
     
     // build Tool form
-    func buildToolForm() {}
+    func buildToolForm() {
+        // Tool name
+        let nameField = TextFieldRowFormer<FormTextFieldCell>() {
+            $0.titleLabel.text = "Tool Name"
+            $0.titleLabel.font = .boldSystemFont(ofSize: 16)
+            $0.textField.textColor = .formerSubColor()
+            $0.textField.font = .boldSystemFont(ofSize: 14)
+            }.configure {
+                $0.placeholder = "Tool Name"
+                $0.text = currentTool != nil ? currentTool?.toolName : ""
+                toolName = $0.text!
+            }.onTextChanged { (text) in
+                // save product name
+                self.toolName = text
+        }
+        // Tool desc
+        let descField = TextViewRowFormer<FormTextViewCell>() {
+            $0.titleLabel.text = "Description"
+            $0.titleLabel.font = .boldSystemFont(ofSize: 16)
+            $0.textView.textColor = .formerSubColor()
+            $0.textView.font = .systemFont(ofSize: 15)
+            }.configure {
+                $0.placeholder = "Add tool introduction."
+                $0.text = currentTool != nil ? currentTool?.toolDesc : ""
+                toolDesc = $0.text!
+            }.onTextChanged { (text) in
+                // save product desc
+                self.toolDesc = text
+        }
+        let sectionBasic = SectionFormer(rowFormer: nameField, descField).set(headerViewFormer: createHeader("Tool Info"))
+        
+        former.append(sectionFormer: sectionBasic)
+    }
     // save Tool form
-    func saveToolForm() {}
+    func saveToolForm() -> Bool {
+        guard !toolName.isEmpty else {
+            Static.showToast(toastText: "Please enter a tool name.")
+            return false
+        }
+        
+        if currentTool == nil {
+            // create a new tool
+            currentTool = Tool()
+            currentTool?.toolName = toolName
+            currentTool?.toolDesc = toolDesc
+            // save to database
+            DatabaseService.shared.addObject(for: currentTool!)
+        } else {
+            // update existing tool
+            DatabaseService.shared.updateTool(for: currentTool!, with: toolName, with: toolDesc)
+        }
+        return true
+    }
     // build Site form
     func buildSiteForm() {}
     // save Site form
-    func saveSiteForm() {}
+    func saveSiteForm() -> Bool {
+        return true
+    }
 }

@@ -80,10 +80,19 @@ class DatabaseService {
         }
     }
     
+    // remove a single object
     func removeObject(toRemove: Object) {
         let realm = getRealm()
         try! realm.write {
             realm.delete(toRemove)
+        }
+    }
+    
+    // add a single object
+    func addObject(for object: Object) {
+        let realm = getRealm()
+        try! realm.write {
+            realm.add(object)
         }
     }
     
@@ -96,15 +105,15 @@ class DatabaseService {
         }
     }
     
-    // remove objects using key precidate
-    func removeObject(toRemove: Object, with keyName: String, with keyValue: String) {
-        let realm = getRealm()
-        let precidate = String(format: "%@=%@", keyName, keyValue)
-        let toRemove = realm.objects(Object.self).filter(precidate)
-        try! realm.write {
-            realm.delete(toRemove)
-        }
-    }
+//    // remove objects using key precidate
+//    func removeObject(toRemove: Object, with keyName: String, with keyValue: String) {
+//        let realm = getRealm()
+//        let precidate = String(format: "%@=%@", keyName, keyValue)
+//        let toRemove = realm.objects(Object.self).filter(precidate)
+//        try! realm.write {
+//            realm.delete(toRemove)
+//        }
+//    }
     
     // add a new product
     func addProduct(with product: Product) {
@@ -121,6 +130,23 @@ class DatabaseService {
             product.productName = name
             product.productDesc = desc
             product.models = arrayToList(from: models)
+        }
+    }
+    
+    // update an existing tool
+    func updateTool(for tool: Tool, with name: String, with desc: String) {
+        let realm = getRealm()
+        try! realm.write {
+            tool.setValue(name, forKey: "toolName")
+            tool.setValue(desc, forKey: "toolDesc")
+        }
+    }
+    
+//    // update an existing object
+    func updateObject(for object: Object, with keyValues: [String: String]) {
+        let realm = getRealm()
+        try! realm.write {
+            //
         }
     }
 }
