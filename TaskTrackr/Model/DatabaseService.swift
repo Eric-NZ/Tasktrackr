@@ -34,7 +34,7 @@ class DatabaseService {
     }
     
     func getRealmConfig() -> Realm.Configuration {
-        let realmConfig = Realm.Configuration(syncConfiguration: SyncConfiguration(user: SyncUser.current!, realmURL: Constants.REALM_URL))
+        let realmConfig = Realm.Configuration(syncConfiguration: SyncConfiguration(user: SyncUser.current!, realmURL: Static.REALM_URL))
         
         return realmConfig
     }

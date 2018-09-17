@@ -16,21 +16,12 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate {
     var notificationToken: NotificationToken?
     var selectedWorker: Worker?
     
-    var isNewForm: Bool = true
-    
     required init?(coder aDecoder: NSCoder) {
 
         // initialize self.realm
         workers = realm.objects(Worker.self).sorted(byKeyPath: "timestamp", ascending: false)
         
         super.init(coder: aDecoder)
-    }
-    
-    /** ItemFormControllerDelegate
-     */
-    func loadFormData(for form: UIViewController) {
-       
-        
     }
     
     override func viewDidLoad() {
@@ -67,7 +58,7 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate {
     
     // MARK: - ManageItemDelegate
     func addItem(sender: Any?) {        // sender: RootPaingViewController, create a new form
-        openWorkerForm(isNewForm: true, sender: sender)
+        openWorkerForm(sender: nil)
     }
     
     func editingMode(editing: Bool, animate: Bool) {
@@ -77,11 +68,9 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
-        // tell the destination View controller 2 things:
-        // 1. is a new form? - isNewForm: Bool
-        // 2. who will use the form? -  paingIdentifier: String
-        // 3. which item is selected
-                
+        // tell the destination View controller which worker item is selected
+        let itemForm = segue.destination as! ItemFormController
+        itemForm.currentWorker = sender == nil ? nil : selectedWorker
     }
 
     // MARK: - Table view data source
@@ -115,7 +104,7 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate {
         
         // open item detail form controller
         selectedWorker = workers[indexPath.row]
-        openWorkerForm(isNewForm: false, sender: self)
+        openWorkerForm(sender: self)
     }
     
     /**
@@ -123,7 +112,7 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate {
      */
     func rootViewController() -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: Constants.root_page)
+        return storyboard.instantiateViewController(withIdentifier: Static.root_page)
     }
     
     /**
@@ -136,10 +125,8 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate {
     }
     
 
-    func openWorkerForm(isNewForm: Bool, sender: Any?) {
-        self.isNewForm = isNewForm
-        
-        performSegue(withIdentifier: Constants.worker_segue, sender: sender)
+    func openWorkerForm(sender: Any?) {
+        performSegue(withIdentifier: Static.worker_segue, sender: sender)
     }
     
 }

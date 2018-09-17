@@ -12,15 +12,21 @@ import TagListView
 
 class ItemFormController: FormViewController {
     
+    // current item
     var currentAction: Action?
     var currentWorker: Worker?
     var currentProduct: Product?
     var currentTool: Tool?
     var currentSite: Site?
     
+    // for product
     var tagListView: TagListView?
     var productName: String = ""
     var productDesc: String = ""
+    
+    // for worker
+    var firstName: String = ""
+    var lastName: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +35,7 @@ class ItemFormController: FormViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
         
         // build form
-        buildForm()
+        buildProductForm()
         
     }
     
@@ -59,7 +65,7 @@ class ItemFormController: FormViewController {
         return models
     }
     
-    func buildForm() {
+    func buildProductForm() {
         
         // Section Header
         let createHeader : ((String) -> ViewFormer ) = { text in
@@ -142,7 +148,7 @@ class ItemFormController: FormViewController {
     
     @objc func donePressed() {
         guard !productName.isEmpty else {
-            LoginViewController.showToast(toastText: "Please provide a product name.")
+            Static.showToast(toastText: "Please provide a product name.")
             return
         }
         

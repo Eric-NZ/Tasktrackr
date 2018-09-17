@@ -9,7 +9,6 @@
 import UIKit
 import LFLoginController
 import RealmSwift
-import Toaster
 
 class LoginViewController: UIViewController, LFLoginControllerDelegate {
     
@@ -24,7 +23,7 @@ class LoginViewController: UIViewController, LFLoginControllerDelegate {
             login(userName: email, password: password)
         } else {                // user is signing up
             let creds = SyncCredentials.usernamePassword(username: email, password: password, register: true)
-            SyncUser.logIn(with: creds, server: Constants.AUTH_URL) { (user, err) in
+            SyncUser.logIn(with: creds, server: Static.AUTH_URL) { (user, err) in
                 // sign up successfully!
             }
             
@@ -39,12 +38,12 @@ class LoginViewController: UIViewController, LFLoginControllerDelegate {
         
         let creds = SyncCredentials.usernamePassword(username: userName, password: password, register: false)
         
-        SyncUser.logIn(with: creds, server: Constants.AUTH_URL) { (user, err) in
+        SyncUser.logIn(with: creds, server: Static.AUTH_URL) { (user, err) in
             if let _ = user {
                 // User is logged in
                 LoginViewController.currentUser = user
                 // display a Toast
-                LoginViewController.showToast(toastText: "Login successful!")
+                Static.showToast(toastText: "Login successful!")
                 // forward to home controller
                 self.presentHomeController()
                 
@@ -54,10 +53,6 @@ class LoginViewController: UIViewController, LFLoginControllerDelegate {
             }
         }
         
-    }
-    
-    static func showToast(toastText: String) {
-        Toast(text: toastText, delay: 0, duration: Delay.long).show()
     }
     
     func presentHomeController() {

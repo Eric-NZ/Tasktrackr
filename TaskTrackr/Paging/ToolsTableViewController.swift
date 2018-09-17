@@ -57,7 +57,7 @@ class ToolsTableViewController: UITableViewController, ManageItemDelegate {
     
     func openItemForm(isNewForm: Bool, sender: Any?) {
         self.isNewForm = isNewForm
-        performSegue(withIdentifier: Constants.tool_segue, sender: sender)
+        performSegue(withIdentifier: Static.tool_segue, sender: sender)
     }
     
     func removeTool(tool: Tool) {

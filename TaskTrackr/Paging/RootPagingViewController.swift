@@ -61,11 +61,11 @@ class RootPagingViewController: UIViewController, PagingViewControllerDelegate, 
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
-        viewControllers = [RootPagingViewController.getInstance(with: Constants.action_page),
-                           RootPagingViewController.getInstance(with: Constants.worker_page),
-                           RootPagingViewController.getInstance(with: Constants.product_page),
-                           RootPagingViewController.getInstance(with: Constants.tool_page),
-                           RootPagingViewController.getInstance(with: Constants.site_page)]
+        viewControllers = [RootPagingViewController.getInstance(with: Static.action_page),
+                           RootPagingViewController.getInstance(with: Static.worker_page),
+                           RootPagingViewController.getInstance(with: Static.product_page),
+                           RootPagingViewController.getInstance(with: Static.tool_page),
+                           RootPagingViewController.getInstance(with: Static.site_page)]
         
         initPagingViewController()
         pagingViewController.delegate = self

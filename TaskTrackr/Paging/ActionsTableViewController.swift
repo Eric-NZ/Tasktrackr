@@ -31,7 +31,7 @@ class ActionsTableViewController: UITableViewController, ManageItemDelegate {
     }
     
     func openFormController(forNewItem: Bool, sender: Any?) {
-        performSegue(withIdentifier: Constants.action_segue, sender: sender)
+        performSegue(withIdentifier: Static.action_segue, sender: sender)
     }
     
     // MARK: - MangeItemDelegate

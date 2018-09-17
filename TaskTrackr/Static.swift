@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import Toaster
 
-struct Constants {
+struct Static {
     // **** Realm Cloud Users:
     // **** Replace MY_INSTANCE_ADDRESS with the hostname of your cloud instance
     // **** e.g., "mycoolapp.us1.cloud.realm.io"
@@ -36,4 +37,8 @@ struct Constants {
     static let product_segue = "OpenProductForm"
     static let tool_segue = "OpenToolForm"
     static let site_segue = "OpenSiteForm"
+    
+    static func showToast(toastText: String) {
+        Toast(text: toastText, delay: 0, duration: Delay.long).show()
+    }
 }
