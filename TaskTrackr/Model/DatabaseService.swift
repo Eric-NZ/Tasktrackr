@@ -123,6 +123,14 @@ class DatabaseService {
         }
     }
     
+    // add a new worker
+    func addWorker(with worker: Worker) {
+        let realm = getRealm()
+        try! realm.write {
+            realm.add(worker)
+        }
+    }
+    
     // update an existing product
     func updateProduct(for product: Product, with name: String, with desc: String, with models: [Model]) {
         let realm = getRealm()
@@ -139,6 +147,16 @@ class DatabaseService {
         try! realm.write {
             tool.setValue(name, forKey: "toolName")
             tool.setValue(desc, forKey: "toolDesc")
+        }
+    }
+    
+    // update an existing worker
+    func updateWorker(for worker: Worker, with firstName: String, with lastName: String, with role: String) {
+        let realm = getRealm()
+        try! realm.write {
+            worker.setValue(firstName, forKey: "firstName")
+            worker.setValue(lastName, forKey: "lastName")
+            worker.setValue(role, forKey: "role")
         }
     }
     

@@ -29,6 +29,7 @@ class ItemFormController: FormViewController {
     // for worker
     var firstName: String = ""
     var lastName: String = ""
+    var role: String = ""
     
     // for tool
     var toolName: String = ""
@@ -132,6 +133,8 @@ class ItemFormController: FormViewController {
                 options.forEach { title in
                     sheet.addAction(UIAlertAction(title: title, style: .default, handler: { [weak rowFormer] _ in
                         rowFormer?.subText = title
+                        // save to variable.
+                        self?.role = title
                         rowFormer?.update()
                     })
                     )
@@ -185,12 +188,30 @@ class ItemFormController: FormViewController {
         
         // worker role
         let options = ["Worker", "Senior Worker", "Lead Worker", "Expert"]
-        let roleRow = createSelectorRow("Role", options[0], sheetSelectorRowSelected(options: options))
+        let roleRow = createSelectorRow("Role", currentWorker == nil ? "" : (currentWorker?.role)!, sheetSelectorRowSelected(options: options))
         let sectionRole = SectionFormer(rowFormer: roleRow).set(headerViewFormer: createHeader("Role"))
         former.append(sectionFormer: sectionBasic, sectionRole)
     }
     
     func saveWorkerForm() -> Bool {
+        guard !firstName.isEmpty else {
+            Static.showToast(toastText: "Please at least provide the first name.")
+            return false
+        }
+        if currentWorker == nil {
+            // create a new worker object
+            currentWorker = Worker()
+            currentWorker?.firstName = firstName
+            currentWorker?.lastName = lastName
+            currentWorker?.role = role
+            
+            // add new item
+            DatabaseService.shared.addWorker(with: currentWorker!)
+        } else {
+            // update item
+            DatabaseService.shared.updateWorker(for: currentWorker!, with: firstName, with: lastName, with: role)
+        }
+        
         return true
     }
     
