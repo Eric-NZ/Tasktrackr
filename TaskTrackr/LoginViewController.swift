@@ -44,8 +44,7 @@ class LoginViewController: UIViewController, LFLoginControllerDelegate {
                 // User is logged in
                 LoginViewController.currentUser = user
                 // display a Toast
-                let toast = Toast(text: "Login successful!", delay: 0, duration: Delay.long)
-                toast.show()
+                LoginViewController.showToast(toastText: "Login successful!")
                 // forward to home controller
                 self.presentHomeController()
                 
@@ -55,6 +54,10 @@ class LoginViewController: UIViewController, LFLoginControllerDelegate {
             }
         }
         
+    }
+    
+    static func showToast(toastText: String) {
+        Toast(text: toastText, delay: 0, duration: Delay.long).show()
     }
     
     func presentHomeController() {
@@ -71,7 +74,7 @@ class LoginViewController: UIViewController, LFLoginControllerDelegate {
         self.view.addSubview(loginViewController!.view)
         
         loginViewController!.delegate = self
-        loginViewController?.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+        loginViewController?.backgroundColor = #colorLiteral(red: 0.3440366972, green: 0.5581039755, blue: 0.8980392157, alpha: 1)
     }
 
 }

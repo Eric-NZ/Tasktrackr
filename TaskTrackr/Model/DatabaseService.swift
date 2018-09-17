@@ -62,7 +62,7 @@ class DatabaseService {
         return realm.objects(Model.self).filter("product=%@", product.self).toArray(ofType: Model.self)
     }
     
-    func getModels(in product: Product) -> Results<Model> {
+    private func getModels(in product: Product) -> Results<Model> {
         let models = getRealm().objects(Model.self).filter("product=%@", product.self)
         return models
     }
@@ -80,12 +80,29 @@ class DatabaseService {
         }
     }
     
+    func removeObject(toRemove: Object) {
+        let realm = getRealm()
+        try! realm.write {
+            realm.delete(toRemove)
+        }
+    }
+    
     // remove models belong to specific product
     func removeModels(for product: Product) {
         let realm = getRealm()
         let toDeleteModels = realm.objects(Model.self).filter("product=%@", product.self)
         try! realm.write {
             realm.delete(toDeleteModels)
+        }
+    }
+    
+    // remove objects using key precidate
+    func removeObject(toRemove: Object, with keyName: String, with keyValue: String) {
+        let realm = getRealm()
+        let precidate = String(format: "%@=%@", keyName, keyValue)
+        let toRemove = realm.objects(Object.self).filter(precidate)
+        try! realm.write {
+            realm.delete(toRemove)
         }
     }
     

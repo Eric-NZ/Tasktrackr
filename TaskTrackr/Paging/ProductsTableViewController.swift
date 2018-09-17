@@ -62,9 +62,7 @@ class ProductsTableViewController: UITableViewController, ManageItemDelegate {
     func removeProduct(product: Product) {
         // to remove a product, remove models belong to the product first
         DatabaseService.shared.removeModels(for: product)
-        try! realm.write {
-            realm.delete(product)
-        }
+        DatabaseService.shared.removeObject(toRemove: product)
     }
     
     func openProductForm(sender: Any?) {

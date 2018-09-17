@@ -141,6 +141,10 @@ class ItemFormController: FormViewController {
     }
     
     @objc func donePressed() {
+        guard !productName.isEmpty else {
+            LoginViewController.showToast(toastText: "Please provide a product name.")
+            return
+        }
         
         if (currentProduct == nil) {
             // create a new item

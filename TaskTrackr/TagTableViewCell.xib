@@ -24,12 +24,15 @@
                         <viewLayoutGuide key="safeArea" id="t6D-p4-OSL"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="removeButtonIconSize">
-                                <real key="value" value="6"/>
+                                <integer key="value" value="7"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="removeIconLineWidth">
                                 <real key="value" value="2"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="enableRemoveButton" value="YES"/>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
+                                <color key="value" red="0.34403669720000002" green="0.55810397550000002" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
