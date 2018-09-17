@@ -71,6 +71,7 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate {
         // tell the destination View controller which worker item is selected
         let itemForm = segue.destination as! ItemFormController
         itemForm.currentWorker = sender == nil ? nil : selectedWorker
+        itemForm.clientPage = Static.worker_page
     }
 
     // MARK: - Table view data source

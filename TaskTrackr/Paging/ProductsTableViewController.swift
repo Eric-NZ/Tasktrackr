@@ -74,6 +74,7 @@ class ProductsTableViewController: UITableViewController, ManageItemDelegate {
         let itemForm = segue.destination as! ItemFormController
         // tell destination controller which product is selected
         itemForm.currentProduct = sender == nil ? nil : selectedProduct
+        itemForm.clientPage = Static.product_page
     }
     
     // MARK: - ManageItemDelegate

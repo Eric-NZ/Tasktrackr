@@ -12,6 +12,8 @@ import TagListView
 
 class ItemFormController: FormViewController {
     
+    // client page identifer
+    var clientPage: String = ""
     // current item
     var currentAction: Action?
     var currentWorker: Worker?
@@ -35,58 +37,142 @@ class ItemFormController: FormViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
         
         // build form
-        buildProductForm()
-        
+        switch clientPage {
+        case Static.action_page:
+            buildActionForm()
+        case Static.worker_page:
+            buildWorkerForm()
+        case Static.product_page:
+            buildProductForm()
+        case Static.tool_page:
+            buildToolForm()
+        case Static.site_page:
+            buildSiteForm()
+        default:
+            break
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         former.deselect(animated: animated)
     }
     
-    // initial model array
-    func initialModelArray() -> [Model] {
-        if (currentProduct == nil) {
-            return []
-        } else {
-            let models: [Model] = DatabaseService.shared.getModelArray(in: currentProduct!)
-            return models
-        }
-    }
-    
-    // changed model array
-    func changedModelArray() -> [Model] {
-        let tagViews: [TagView] = (tagListView?.tagViews)!
-        let models: [Model] = tagViews.map {
-            let model = Model()
-            model.modelName = $0.titleLabel?.text
-            model.product = currentProduct
-            return model
-        }
-        return models
-    }
-    
-    func buildProductForm() {
+    @objc func donePressed() {
+        saveProductForm()
         
-        // Section Header
-        let createHeader : ((String) -> ViewFormer ) = { text in
-            return LabelViewFormer<FormLabelHeaderView>().configure {
+        // if chose present modally call "dismiss", otherwise, call this:
+        navigationController?.popViewController(animated: true)
+    }
+    
+    // Section Header
+    let createHeader : ((String) -> ViewFormer ) = { text in
+        return LabelViewFormer<FormLabelHeaderView>().configure {
+            $0.text = text
+            $0.viewHeight = 44
+        }
+    }
+    
+    // Menu
+    let createMenu : ((String, (() -> Void)?) -> RowFormer) = { (text, onSelected) in
+        return LabelRowFormer<FormLabelCell>() {
+            $0.titleLabel.textColor = .formerColor()
+            $0.titleLabel.font = .boldSystemFont(ofSize: 16)
+            $0.accessoryType = .disclosureIndicator
+            }.configure {
                 $0.text = text
-                $0.viewHeight = 44
+            }.onSelected({ _ in
+                onSelected?()
+            })
+    }
+    
+    // selector
+    let createSelectorRow = { (
+        text: String,
+        subText: String,
+        onSelected: ((RowFormer) -> Void)?
+        ) -> RowFormer in
+        return LabelRowFormer<FormLabelCell>() {
+            $0.titleLabel.textColor = .formerColor()
+            $0.titleLabel.font = .boldSystemFont(ofSize: 16)
+            $0.subTextLabel.textColor = .formerSubColor()
+            $0.subTextLabel.font = .boldSystemFont(ofSize: 14)
+            $0.accessoryType = .disclosureIndicator
+            }.configure { form in
+                _ = onSelected.map { form.onSelected($0) }
+                form.text = text
+                form.subText = subText
+        }
+    }
+    
+    private func sheetSelectorRowSelected(options: [String]) -> (RowFormer) -> Void {
+        return { [weak self] rowFormer in
+            if let rowFormer = rowFormer as? LabelRowFormer<FormLabelCell> {
+                let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                options.forEach { title in
+                    sheet.addAction(UIAlertAction(title: title, style: .default, handler: { [weak rowFormer] _ in
+                        rowFormer?.subText = title
+                        rowFormer?.update()
+                    })
+                    )
+                }
+                sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self?.present(sheet, animated: true, completion: nil)
+                self?.former.deselect(animated: true)
             }
         }
-        
-        // Menu
-        let _: ((String, (() -> Void)?) -> RowFormer) = { (text, onSelected) in
-            return LabelRowFormer<FormLabelCell>() {
-                $0.titleLabel.textColor = .formerColor()
-                $0.titleLabel.font = .boldSystemFont(ofSize: 16)
-                $0.accessoryType = .disclosureIndicator
-                }.configure {
-                    $0.text = text
-                }.onSelected({ _ in
-                    onSelected?()
-                })
+    }
+    
+    // build Action form
+    func buildActionForm(){}
+    // save Action form
+    func saveActionForm(){}
+    // build Workder form
+    func buildWorkerForm() {
+        // worker first name
+        let firstNameField = TextFieldRowFormer<FormTextFieldCell>() {
+            $0.titleLabel.text = "First Name"
+            $0.titleLabel.font = .boldSystemFont(ofSize: 16)
+            $0.textField.textColor = .formerSubColor()
+            $0.textField.font = .boldSystemFont(ofSize: 14)
+            }.configure {
+                $0.placeholder = "First Name"
+                $0.text = currentWorker != nil ? currentWorker?.firstName : ""
+                firstName = $0.text!
+            }.onTextChanged { (text) in
+                // save product name
+                self.firstName = text
         }
+        
+        // worker last name
+        let lastNameField = TextFieldRowFormer<FormTextFieldCell>() {
+            $0.titleLabel.text = "Last Name"
+            $0.titleLabel.font = .boldSystemFont(ofSize: 16)
+            $0.textField.textColor = .formerSubColor()
+            $0.textField.font = .boldSystemFont(ofSize: 14)
+            }.configure {
+                $0.placeholder = "Last Name"
+                $0.text = currentWorker != nil ? currentWorker?.lastName : ""
+                lastName = $0.text!
+            }.onTextChanged { (text) in
+                // save product name
+                self.lastName = text
+        }
+        
+        let sectionBasic = SectionFormer(rowFormer: firstNameField, lastNameField).set(headerViewFormer: createHeader("Basic Worker Info"))
+        
+        // worker role
+        let options = ["Worker", "Senior Worker", "Lead Worker", "Expert"]
+        let roleRow = createSelectorRow("Role", options[0], sheetSelectorRowSelected(options: options))
+        let sectionRole = SectionFormer(rowFormer: roleRow).set(headerViewFormer: createHeader("Role"))
+        former.append(sectionFormer: sectionBasic, sectionRole)
+    }
+    
+    func saveWorkerForm() {
+        
+    }
+    
+    // build Product form
+    func buildProductForm() {
         
         // product name
         let nameField = TextFieldRowFormer<FormTextFieldCell>() {
@@ -146,7 +232,30 @@ class ItemFormController: FormViewController {
         former.append(sectionFormer: sectionBasic, sectionModels)
     }
     
-    @objc func donePressed() {
+    // initial model array
+    func initialModelArray() -> [Model] {
+        if (currentProduct == nil) {
+            return []
+        } else {
+            let models: [Model] = DatabaseService.shared.getModelArray(in: currentProduct!)
+            return models
+        }
+    }
+    
+    // changed model array
+    func changedModelArray() -> [Model] {
+        let tagViews: [TagView] = (tagListView?.tagViews)!
+        let models: [Model] = tagViews.map {
+            let model = Model()
+            model.modelName = $0.titleLabel?.text
+            model.product = currentProduct
+            return model
+        }
+        return models
+    }
+
+    // save Product form
+    func saveProductForm() {
         guard !productName.isEmpty else {
             Static.showToast(toastText: "Please provide a product name.")
             return
@@ -168,8 +277,14 @@ class ItemFormController: FormViewController {
         
         // save models
         DatabaseService.shared.saveModels(to: currentProduct!, with: changedModelArray())
-        
-        // if chose present modally call "dismiss", otherwise, call this:
-        navigationController?.popViewController(animated: true)
     }
+    
+    // build Tool form
+    func buildToolForm() {}
+    // save Tool form
+    func saveToolForm() {}
+    // build Site form
+    func buildSiteForm() {}
+    // save Site form
+    func saveSiteForm() {}
 }
