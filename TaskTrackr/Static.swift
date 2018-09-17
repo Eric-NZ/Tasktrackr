@@ -41,4 +41,12 @@ struct Static {
     static func showToast(toastText: String) {
         Toast(text: toastText, delay: 0, duration: Delay.long).show()
     }
+    
+    /*
+     static: Get Instance of UIViewController
+     */
+    static func getInstance(with indentifier: String) -> UIViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: indentifier)
+    }
 }

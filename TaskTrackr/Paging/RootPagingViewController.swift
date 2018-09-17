@@ -61,11 +61,11 @@ class RootPagingViewController: UIViewController, PagingViewControllerDelegate, 
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
-        viewControllers = [RootPagingViewController.getInstance(with: Static.action_page),
-                           RootPagingViewController.getInstance(with: Static.worker_page),
-                           RootPagingViewController.getInstance(with: Static.product_page),
-                           RootPagingViewController.getInstance(with: Static.tool_page),
-                           RootPagingViewController.getInstance(with: Static.site_page)]
+        viewControllers = [Static.getInstance(with: Static.action_page),
+                           Static.getInstance(with: Static.worker_page),
+                           Static.getInstance(with: Static.product_page),
+                           Static.getInstance(with: Static.tool_page),
+                           Static.getInstance(with: Static.site_page)]
         
         initPagingViewController()
         pagingViewController.delegate = self
@@ -101,13 +101,5 @@ class RootPagingViewController: UIViewController, PagingViewControllerDelegate, 
         super.setEditing(editing, animated: animated)
         
         delegate?.editingMode(editing: editing, animate: animated)
-    }
-    
-    /*
-     static: Get Instance of UIViewController
-     */
-    static func getInstance(with indentifier: String) -> UIViewController {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: indentifier)
     }
 }
