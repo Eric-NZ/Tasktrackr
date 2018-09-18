@@ -27,33 +27,8 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addNotificationHandle()
-    }
-    
-    /** Once data changed, controller will be notified.
-     */
-    func addNotificationHandle() {
-        notificationToken = workers.observe { [weak self] (changes) in
-            guard let tableView = self?.tableView else { return }
-            switch changes {
-            case .initial:
-                // Results are now populated and can be accessed without blocking the UI
-                tableView.reloadData()
-            case .update(_, let deletions, let insertions, let modifications):
-                // Query results have changed, so apply them to the UITableView
-                tableView.beginUpdates()
-                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
-                                     with: .automatic)
-                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
-                                     with: .automatic)
-                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
-                                     with: .automatic)
-                tableView.endUpdates()
-            case .error(let error):
-                // An error occurred while opening the Realm file on the background worker thread
-                fatalError("\(error)")
-            }
-        }
+//        addNotificationHandle()
+        notificationToken = DatabaseService.shared.addNotificationHandle(objects: workers, tableView: self.tableView)
     }
     
     // MARK: - ManageItemDelegate

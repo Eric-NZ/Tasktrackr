@@ -11,6 +11,7 @@ import RealmSwift
 
 class ActionsTableViewController: UITableViewController, ManageItemDelegate {
     
+    var notificationToken: NotificationToken?
     let realm = DatabaseService.shared.getRealm()
     var actions: Results<Action>
     var selectedAction: Action?
@@ -25,6 +26,7 @@ class ActionsTableViewController: UITableViewController, ManageItemDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        notificationToken = DatabaseService.shared.addNotificationHandle(objects: actions, tableView: self.tableView)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
