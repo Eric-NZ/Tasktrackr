@@ -326,24 +326,24 @@ class ItemFormController: FormViewController {
         let sectionModels = SectionFormer(rowFormer: tagRow, tagControl).set(headerViewFormer: createHeader("Product Models"))
         former.append(sectionFormer: sectionBasic, sectionModels)
     }
-    
-    // changed model array
-    func changedModelArray() -> [Model] {
-        let tagViews: [TagView] = (tagListView?.tagViews)!
-        let models: [Model] = tagViews.map {
-            let model = Model()
-            model.modelName = $0.titleLabel?.text
-            model.product = currentProduct
-            return model
-        }
-        return models
-    }
 
     // save Product form
     func saveProductForm() -> Bool {
         guard !productName.isEmpty else {
             Static.showToast(toastText: "Please provide a product name.")
             return false
+        }
+        
+        // changed model array
+        let changedModelArray: () -> [Model] = {
+            let tagViews: [TagView] = (self.tagListView?.tagViews)!
+            let models: [Model] = tagViews.map {
+                let model = Model()
+                model.modelName = $0.titleLabel?.text
+                model.product = self.currentProduct
+                return model
+            }
+            return models
         }
         
         if (currentProduct == nil) {
