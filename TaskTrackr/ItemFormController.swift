@@ -9,6 +9,7 @@
 import UIKit
 import Former
 import TagListView
+import ExpandableCell
 
 class ItemFormController: FormViewController {
     
