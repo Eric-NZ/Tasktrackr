@@ -17,6 +17,7 @@ class TagTableViewCell: UITableViewCell, TagListViewDelegate {
         super.awakeFromNib()
         // Initialization code
         selectionStyle = .none
+        modelTagList.textFont = UIFont.systemFont(ofSize: 18)
         modelTagList.delegate = self
     }
 
