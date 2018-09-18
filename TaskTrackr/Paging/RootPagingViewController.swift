@@ -60,7 +60,7 @@ class RootPagingViewController: UIViewController, PagingViewControllerDelegate, 
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-
+        
         viewControllers = [Static.getInstance(with: Static.action_page),
                            Static.getInstance(with: Static.worker_page),
                            Static.getInstance(with: Static.product_page),

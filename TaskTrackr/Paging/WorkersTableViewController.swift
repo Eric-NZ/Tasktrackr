@@ -95,11 +95,8 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate {
         Remove Worker Item
      */
     func removeWorker(worker: Worker) {
-        try! realm.write {
-            realm.delete(worker)
-        }
+        DatabaseService.shared.removeObject(toRemove: worker)
     }
-    
 
     func openWorkerForm(sender: Any?) {
         performSegue(withIdentifier: Static.worker_segue, sender: sender)

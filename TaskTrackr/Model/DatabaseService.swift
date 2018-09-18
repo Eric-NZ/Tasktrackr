@@ -115,46 +115,20 @@ class DatabaseService {
         }
     }
     
+    // remove objects using key precidate
+    func removeObjects(objectType: Object.Type, with precidate: NSPredicate?) {
+        let realm = getRealm()
+        let toRemove = realm.objects(objectType).filter(precidate!)
+        try! realm.write {
+            realm.delete(toRemove)
+        }
+    }
+    
     // add a single object
     func addObject(for object: Object) {
         let realm = getRealm()
         try! realm.write {
             realm.add(object)
-        }
-    }
-    
-    // remove models belong to specific product
-    func removeModels(for product: Product) {
-        let realm = getRealm()
-        let toDeleteModels = realm.objects(Model.self).filter("product=%@", product.self)
-        try! realm.write {
-            realm.delete(toDeleteModels)
-        }
-    }
-    
-//    // remove objects using key precidate
-//    func removeObject(toRemove: Object, with keyName: String, with keyValue: String) {
-//        let realm = getRealm()
-//        let precidate = String(format: "%@=%@", keyName, keyValue)
-//        let toRemove = realm.objects(Object.self).filter(precidate)
-//        try! realm.write {
-//            realm.delete(toRemove)
-//        }
-//    }
-    
-    // add a new product
-    func addProduct(with product: Product) {
-        let realm = getRealm()
-        try! realm.write {
-            realm.add(product)
-        }
-    }
-    
-    // add a new worker
-    func addWorker(with worker: Worker) {
-        let realm = getRealm()
-        try! realm.write {
-            realm.add(worker)
         }
     }
     

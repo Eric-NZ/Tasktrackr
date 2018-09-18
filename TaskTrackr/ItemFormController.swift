@@ -247,7 +247,7 @@ class ItemFormController: FormViewController {
             currentWorker?.role = role
             
             // add new item
-            DatabaseService.shared.addWorker(with: currentWorker!)
+            DatabaseService.shared.addObject(for: currentWorker!)
         } else {
             // update item
             DatabaseService.shared.updateWorker(for: currentWorker!, with: firstName, with: lastName, with: role)
@@ -354,7 +354,7 @@ class ItemFormController: FormViewController {
             let list = DatabaseService.shared.arrayToList(from: changedModelArray())
             currentProduct?.models = list
             // add to database
-            DatabaseService.shared.addProduct(with: currentProduct!)
+            DatabaseService.shared.addObject(for: currentProduct!)
         } else {
             // edit an existing item
             DatabaseService.shared.updateProduct(for: currentProduct!, with: productName, with: productDesc, with: changedModelArray())

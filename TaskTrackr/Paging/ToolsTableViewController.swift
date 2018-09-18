@@ -34,9 +34,7 @@ class ToolsTableViewController: UITableViewController, ManageItemDelegate {
     }
     
     func removeTool(tool: Tool) {
-        try! realm.write {
-            realm.delete(tool)
-            }
+        DatabaseService.shared.removeObject(toRemove: tool)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
