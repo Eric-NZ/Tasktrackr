@@ -259,6 +259,16 @@ class ItemFormController: FormViewController {
     // build Product form
     func buildProductForm() {
         
+        // initial model array
+        let initialModelArray : () -> [Model] = {
+            if (self.currentProduct == nil) {
+                return []
+            } else {
+                let models: [Model] = DatabaseService.shared.getModelArray(in: self.currentProduct!)
+                return models
+            }
+        }
+        
         // product name
         let nameField = TextFieldRowFormer<FormTextFieldCell>() {
             $0.titleLabel.text = "Product Name"
@@ -292,7 +302,7 @@ class ItemFormController: FormViewController {
         
         // models
         let tagRow = CustomRowFormer<TagTableViewCell>(instantiateType: .Nib(nibName: "TagTableViewCell")) {
-            let models: [String] = self.initialModelArray().map {
+            let models: [String] = initialModelArray().map {
                 return $0.modelName!
             }
             $0.modelTagList.addTags(models)
@@ -315,16 +325,6 @@ class ItemFormController: FormViewController {
         
         let sectionModels = SectionFormer(rowFormer: tagRow, tagControl).set(headerViewFormer: createHeader("Product Models"))
         former.append(sectionFormer: sectionBasic, sectionModels)
-    }
-    
-    // initial model array
-    func initialModelArray() -> [Model] {
-        if (currentProduct == nil) {
-            return []
-        } else {
-            let models: [Model] = DatabaseService.shared.getModelArray(in: currentProduct!)
-            return models
-        }
     }
     
     // changed model array
