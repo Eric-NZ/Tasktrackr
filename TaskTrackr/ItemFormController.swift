@@ -186,6 +186,7 @@ class ItemFormController: FormViewController {
         
         // applied products
         
+        
         // applied tools
         
         former.append(sectionFormer: sectionBasic)
@@ -230,7 +231,8 @@ class ItemFormController: FormViewController {
         
         // worker role
         let options = ["Worker", "Senior Worker", "Lead Worker", "Expert"]
-        let roleRow = createSelectorRow("Role", currentWorker == nil ? "" : (currentWorker?.role)!, sheetSelectorRowSelected(options: options))
+        role = currentWorker == nil ? "" : (currentWorker?.role)!
+        let roleRow = createSelectorRow("Role", role, sheetSelectorRowSelected(options: options))
         let sectionRole = SectionFormer(rowFormer: roleRow).set(headerViewFormer: createHeader("Role"))
         former.append(sectionFormer: sectionBasic, sectionRole)
     }

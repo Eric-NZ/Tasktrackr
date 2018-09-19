@@ -11,6 +11,8 @@
 		210C04D2213CAF7E00576564 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210C04D1213CAF7E00576564 /* DatabaseService.swift */; };
 		2122019E21436D3000EE8A06 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2122019D21436D3000EE8A06 /* LoginViewController.swift */; };
 		2125E6AE214E4AF0002FE54B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6AD214E4AF0002FE54B /* UIColor.swift */; };
+		213CF3D72151C73100DD77F6 /* FolderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213CF3D52151C73100DD77F6 /* FolderTableViewCell.swift */; };
+		213CF3D82151C73100DD77F6 /* FolderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213CF3D62151C73100DD77F6 /* FolderTableViewCell.xib */; };
 		21A265E92140781200671F6C /* ProductsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265E82140781200671F6C /* ProductsTableViewController.swift */; };
 		21A265EB2140782E00671F6C /* ToolsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265EA2140782E00671F6C /* ToolsTableViewController.swift */; };
 		21A265ED2140787100671F6C /* SitesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265EC2140787100671F6C /* SitesTableViewController.swift */; };
@@ -42,6 +44,8 @@
 		210C04D1213CAF7E00576564 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		2122019D21436D3000EE8A06 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2125E6AD214E4AF0002FE54B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		213CF3D52151C73100DD77F6 /* FolderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTableViewCell.swift; sourceTree = "<group>"; };
+		213CF3D62151C73100DD77F6 /* FolderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FolderTableViewCell.xib; sourceTree = "<group>"; };
 		21A265E82140781200671F6C /* ProductsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewController.swift; sourceTree = "<group>"; };
 		21A265EA2140782E00671F6C /* ToolsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableViewController.swift; sourceTree = "<group>"; };
 		21A265EC2140787100671F6C /* SitesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SitesTableViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +154,8 @@
 				21EA13C22136505200C5CB34 /* AllTasksTableViewController.swift */,
 				21EA13C021364FF200C5CB34 /* ActivatedTasksTableViewController.swift */,
 				21A67483214220020012B555 /* ItemFormController.swift */,
+				213CF3D52151C73100DD77F6 /* FolderTableViewCell.swift */,
+				213CF3D62151C73100DD77F6 /* FolderTableViewCell.xib */,
 				21DF277C214E0A6800BB2799 /* TagTableViewCell.swift */,
 				21DF277D214E0A6800BB2799 /* TagTableViewCell.xib */,
 				21F7A8CD214E263A00A01AB5 /* TagControlTableViewCell.xib */,
@@ -239,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21DF277F214E0A6800BB2799 /* TagTableViewCell.xib in Resources */,
+				213CF3D82151C73100DD77F6 /* FolderTableViewCell.xib in Resources */,
 				21EA13AF213622C900C5CB34 /* LaunchScreen.storyboard in Resources */,
 				21EA13AC213622C900C5CB34 /* Assets.xcassets in Resources */,
 				21F7A8CF214E263A00A01AB5 /* TagControlTableViewCell.xib in Resources */,
@@ -315,6 +322,7 @@
 				21DF277E214E0A6800BB2799 /* TagTableViewCell.swift in Sources */,
 				2125E6AE214E4AF0002FE54B /* UIColor.swift in Sources */,
 				21A265E92140781200671F6C /* ProductsTableViewController.swift in Sources */,
+				213CF3D72151C73100DD77F6 /* FolderTableViewCell.swift in Sources */,
 				21BBC78A213E65890006B5B4 /* Product.swift in Sources */,
 				2122019E21436D3000EE8A06 /* LoginViewController.swift in Sources */,
 				21062025214131CB00BA2050 /* UIView+constraints.swift in Sources */,
