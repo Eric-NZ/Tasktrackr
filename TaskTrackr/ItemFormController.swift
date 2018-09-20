@@ -184,12 +184,13 @@ class ItemFormController: FormViewController {
         
         let sectionBasic = SectionFormer(rowFormer: nameField, descField).set(headerViewFormer: createHeader("Basic Action Info"))
         
-        // applied products
+        // applied products and Tools
+        let productSelectorRow = createMenu("Applicable Products and Tools") { [weak self] in
+            self?.performSegue(withIdentifier: Static.selector_segue, sender: self)
+        }
         
-        
-        // applied tools
-        
-        former.append(sectionFormer: sectionBasic)
+        let sectionSelector = SectionFormer(rowFormer: productSelectorRow)
+        former.append(sectionFormer: sectionBasic, sectionSelector)
     }
     // save Action form
     func saveActionForm() -> Bool {

@@ -40,6 +40,7 @@ struct Static {
     static let product_segue = "OpenProductForm"
     static let tool_segue = "OpenToolForm"
     static let site_segue = "OpenSiteForm"
+    static let selector_segue = "OpenSelectorController"
     
     static func showToast(toastText: String) {
         Toast(text: toastText, delay: 0, duration: Delay.long).show()
