@@ -84,17 +84,23 @@ class DatabaseService {
         return notificationToken
     }
     
-    func getModelArray(in product: Product) -> [Model] {
-        let realm = getRealm()
-        return realm.objects(Model.self).filter("product=%@", product.self).toArray(ofType: Model.self)
-    }
-    
     private func getModels(in product: Product) -> Results<Model> {
         let models = getRealm().objects(Model.self).filter("product=%@", product.self)
         return models
     }
     
-    func saveModels(to product: Product, with modelArray: [Model]) {
+    public func getModelArray(in product: Product) -> [Model] {
+        let realm = getRealm()
+        return realm.objects(Model.self).filter("product=%@", product.self).toArray(ofType: Model.self)
+    }
+    
+    // get object array, this function is not working for model objects.
+    public func getObjectArray(objectType: Object.Type) -> [Object] {
+        let realm = getRealm()
+        return realm.objects(objectType).toArray(ofType: objectType)
+    }
+    
+    public func saveModels(to product: Product, with modelArray: [Model]) {
         let realm = getRealm()
         // delete all models in the product
         let models = getModels(in: product)
@@ -108,7 +114,7 @@ class DatabaseService {
     }
     
     // remove a single object
-    func removeObject(toRemove: Object) {
+    public func removeObject(toRemove: Object) {
         let realm = getRealm()
         try! realm.write {
             realm.delete(toRemove)
@@ -116,7 +122,7 @@ class DatabaseService {
     }
     
     // remove objects using key precidate
-    func removeObjects(objectType: Object.Type, with precidate: NSPredicate?) {
+    public func removeObjects(objectType: Object.Type, with precidate: NSPredicate?) {
         let realm = getRealm()
         let toRemove = realm.objects(objectType).filter(precidate!)
         try! realm.write {
@@ -125,7 +131,7 @@ class DatabaseService {
     }
     
     // add a single object
-    func addObject(for object: Object) {
+    public func addObject(for object: Object) {
         let realm = getRealm()
         try! realm.write {
             realm.add(object)
@@ -161,7 +167,7 @@ class DatabaseService {
         }
     }
     
-//    // update an existing object
+    // update an existing object
     func updateObject(for object: Object, with keyValues: [String: String]) {
         let realm = getRealm()
         try! realm.write {

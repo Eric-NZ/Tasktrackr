@@ -184,12 +184,17 @@ class ItemFormController: FormViewController {
         
         let sectionBasic = SectionFormer(rowFormer: nameField, descField).set(headerViewFormer: createHeader("Basic Action Info"))
         
-        // applied products and Tools
-        let productSelectorRow = createMenu("Applicable Products and Tools") { [weak self] in
+        // applied products
+        let productSelectorRow = createMenu("Applicable Products") { [weak self] in
             self?.performSegue(withIdentifier: Static.selector_segue, sender: self)
         }
         
-        let sectionSelector = SectionFormer(rowFormer: productSelectorRow)
+        // applied tools: if the sender is nil, means I will present the selector for Tools
+        let toolSelectorRow = createMenu("Applicable Tools") { [weak self] in
+            self?.performSegue(withIdentifier: Static.selector_segue, sender: nil)
+        }
+        
+        let sectionSelector = SectionFormer(rowFormer: productSelectorRow, toolSelectorRow)
         former.append(sectionFormer: sectionBasic, sectionSelector)
     }
     // save Action form
@@ -429,5 +434,12 @@ class ItemFormController: FormViewController {
     // save Site form
     func saveSiteForm() -> Bool {
         return true
+    }
+    
+    // prepare information for the popping up selector view controller
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let selector = segue.destination as! SelectorViewController
+        
+        selector.sType = (sender == nil) ? .fromTool : .fromProduct
     }
 }

@@ -267,17 +267,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lYy-LT-cIU" customClass="ExpandableTableView" customModule="ExpandableCell">
-                                <rect key="frame" x="16" y="273" width="343" height="374"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" axis="vertical" spacing="278" translatesAutoresizingMaskIntoConstraints="NO" id="9TN-je-Z0h">
+                                <rect key="frame" x="5" y="25" width="365" height="637"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nRd-TB-tPa" customClass="TagListView" customModule="TagListView">
+                                        <rect key="frame" x="0.0" y="0.0" width="365" height="16"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lYy-LT-cIU" customClass="ExpandableTableView" customModule="ExpandableCell">
+                                        <rect key="frame" x="0.0" y="294" width="365" height="343"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="YNM-j8-dOs" firstAttribute="trailing" secondItem="9TN-je-Z0h" secondAttribute="trailing" constant="5" id="D92-mF-Kr9"/>
+                            <constraint firstItem="9TN-je-Z0h" firstAttribute="leading" secondItem="aOi-te-FNs" secondAttribute="leading" constant="5" id="LmQ-qW-2fP"/>
+                            <constraint firstItem="9TN-je-Z0h" firstAttribute="top" secondItem="YNM-j8-dOs" secondAttribute="top" constant="5" id="e6X-ay-jRf"/>
+                            <constraint firstItem="YNM-j8-dOs" firstAttribute="bottom" secondItem="9TN-je-Z0h" secondAttribute="bottom" constant="5" id="eOo-Y5-Ou0"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="YNM-j8-dOs"/>
                     </view>
                     <connections>
-                        <outlet property="expandableTableView" destination="lYy-LT-cIU" id="slu-du-DlD"/>
+                        <outlet property="tableView" destination="lYy-LT-cIU" id="slu-du-DlD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z3R-H3-nMe" userLabel="First Responder" sceneMemberID="firstResponder"/>
