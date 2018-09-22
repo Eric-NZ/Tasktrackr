@@ -81,6 +81,11 @@ class SelectorViewController: UIViewController, ExpandableDelegate {
         }
         
     }
+    
+    // NOTE: if this function doesn't return true, cell selection would not be working.
+    func expandableTableView(_ expandableTableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 
     func numberOfSections(in expandableTableView: ExpandableTableView) -> Int {
         return 1
@@ -109,4 +114,16 @@ class SelectorViewController: UIViewController, ExpandableDelegate {
         }
     }
     
+    // solve select event
+    func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectRowAt indexPath: IndexPath) {
+        print("didSelectRowAt - selected row: \(indexPath.row)")
+    }
+    
+    func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectExpandedRowAt indexPath: IndexPath) {
+        print("didSelectExpandedRowAt - selected row: \(indexPath.row)")
+    }
+    
+    func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCell: UITableViewCell, didSelectExpandedRowAt indexPath: IndexPath) {
+        print("expandedCell - selected row: \(indexPath.row)")
+    }
 }
