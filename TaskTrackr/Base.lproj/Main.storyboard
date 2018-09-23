@@ -270,12 +270,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" axis="vertical" spacing="278" translatesAutoresizingMaskIntoConstraints="NO" id="9TN-je-Z0h">
                                 <rect key="frame" x="5" y="25" width="365" height="637"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nRd-TB-tPa" customClass="TagListView" customModule="TagListView">
-                                        <rect key="frame" x="0.0" y="0.0" width="365" height="16"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lYy-LT-cIU" customClass="ExpandableTableView" customModule="ExpandableCell">
-                                        <rect key="frame" x="0.0" y="294" width="365" height="343"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lYy-LT-cIU" customClass="LUExpandableTableView" customModule="LUExpandableTableView">
+                                        <rect key="frame" x="0.0" y="0.0" width="365" height="637"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableView>
                                 </subviews>
@@ -291,7 +287,7 @@
                         <viewLayoutGuide key="safeArea" id="YNM-j8-dOs"/>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="lYy-LT-cIU" id="slu-du-DlD"/>
+                        <outlet property="tableView" destination="lYy-LT-cIU" id="buk-P0-MQy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z3R-H3-nMe" userLabel="First Responder" sceneMemberID="firstResponder"/>

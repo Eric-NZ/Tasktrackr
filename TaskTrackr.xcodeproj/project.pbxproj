@@ -14,9 +14,8 @@
 		213CF3DB2151D79B00DD77F6 /* SelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213CF3DA2151D79B00DD77F6 /* SelectorViewController.swift */; };
 		213DA7122153A03E00D0C7AF /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213DA7102153A03E00D0C7AF /* Cells.swift */; };
 		213DA7132153A03E00D0C7AF /* ToolTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213DA7112153A03E00D0C7AF /* ToolTableViewCell.xib */; };
-		213DA7172153A0E400D0C7AF /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213DA7152153A0E400D0C7AF /* ProductTableViewCell.xib */; };
 		213DA71B2153A0F500D0C7AF /* ModelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213DA7192153A0F500D0C7AF /* ModelTableViewCell.xib */; };
-		213DA71F2153A46D00D0C7AF /* NormalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213DA71D2153A46D00D0C7AF /* NormalTableViewCell.xib */; };
+		218936A22157336500398B69 /* SectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218936A02157336500398B69 /* SectionHeaderCell.swift */; };
 		21A265E92140781200671F6C /* ProductsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265E82140781200671F6C /* ProductsTableViewController.swift */; };
 		21A265EB2140782E00671F6C /* ToolsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265EA2140782E00671F6C /* ToolsTableViewController.swift */; };
 		21A265ED2140787100671F6C /* SitesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265EC2140787100671F6C /* SitesTableViewController.swift */; };
@@ -51,9 +50,8 @@
 		213CF3DA2151D79B00DD77F6 /* SelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectorViewController.swift; sourceTree = "<group>"; };
 		213DA7102153A03E00D0C7AF /* Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
 		213DA7112153A03E00D0C7AF /* ToolTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToolTableViewCell.xib; sourceTree = "<group>"; };
-		213DA7152153A0E400D0C7AF /* ProductTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
 		213DA7192153A0F500D0C7AF /* ModelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModelTableViewCell.xib; sourceTree = "<group>"; };
-		213DA71D2153A46D00D0C7AF /* NormalTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NormalTableViewCell.xib; sourceTree = "<group>"; };
+		218936A02157336500398B69 /* SectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderCell.swift; sourceTree = "<group>"; };
 		21A265E82140781200671F6C /* ProductsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewController.swift; sourceTree = "<group>"; };
 		21A265EA2140782E00671F6C /* ToolsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableViewController.swift; sourceTree = "<group>"; };
 		21A265EC2140787100671F6C /* SitesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SitesTableViewController.swift; sourceTree = "<group>"; };
@@ -126,9 +124,8 @@
 				21F7A8CD214E263A00A01AB5 /* TagControlTableViewCell.xib */,
 				213DA7102153A03E00D0C7AF /* Cells.swift */,
 				213DA7112153A03E00D0C7AF /* ToolTableViewCell.xib */,
-				213DA7152153A0E400D0C7AF /* ProductTableViewCell.xib */,
 				213DA7192153A0F500D0C7AF /* ModelTableViewCell.xib */,
-				213DA71D2153A46D00D0C7AF /* NormalTableViewCell.xib */,
+				218936A02157336500398B69 /* SectionHeaderCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -268,8 +265,6 @@
 				213DA7132153A03E00D0C7AF /* ToolTableViewCell.xib in Resources */,
 				21EA13AF213622C900C5CB34 /* LaunchScreen.storyboard in Resources */,
 				213DA71B2153A0F500D0C7AF /* ModelTableViewCell.xib in Resources */,
-				213DA7172153A0E400D0C7AF /* ProductTableViewCell.xib in Resources */,
-				213DA71F2153A46D00D0C7AF /* NormalTableViewCell.xib in Resources */,
 				21EA13AC213622C900C5CB34 /* Assets.xcassets in Resources */,
 				21F7A8CF214E263A00A01AB5 /* TagControlTableViewCell.xib in Resources */,
 				21EA13A7213622C800C5CB34 /* Main.storyboard in Resources */,
@@ -286,9 +281,9 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TaskTrackr/Pods-TaskTrackr-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ExpandableCell/ExpandableCell.framework",
 				"${BUILT_PRODUCTS_DIR}/Former/Former.framework",
 				"${BUILT_PRODUCTS_DIR}/LFLoginController/LFLoginController.framework",
+				"${BUILT_PRODUCTS_DIR}/LUExpandableTableView/LUExpandableTableView.framework",
 				"${BUILT_PRODUCTS_DIR}/Parchment/Parchment.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
@@ -297,9 +292,9 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ExpandableCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Former.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LFLoginController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LUExpandableTableView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parchment.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
@@ -337,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21A67484214220020012B555 /* ItemFormController.swift in Sources */,
+				218936A22157336500398B69 /* SectionHeaderCell.swift in Sources */,
 				210C04D2213CAF7E00576564 /* DatabaseService.swift in Sources */,
 				21A265EB2140782E00671F6C /* ToolsTableViewController.swift in Sources */,
 				21BBC790213E6BB00006B5B4 /* Action.swift in Sources */,
