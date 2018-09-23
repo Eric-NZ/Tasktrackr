@@ -11,6 +11,5 @@ import LUExpandableTableView
 
 class SectionHeaderCell: LUExpandableTableViewSectionHeader {
     
-    
     static let ID = "SelectorSectionHeader"
 }
