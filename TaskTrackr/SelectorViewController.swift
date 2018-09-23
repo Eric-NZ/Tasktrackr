@@ -7,11 +7,10 @@
 //
 
 import UIKit
-import LUExpandableTableView
 
-class SelectorViewController: UIViewController, LUExpandableTableViewDelegate, LUExpandableTableViewDataSource {
+class SelectorViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
-    @IBOutlet weak var tableView: LUExpandableTableView!
+    @IBOutlet weak var tableView: UITableView!
     
     var tools: [Tool] = DatabaseService.shared.getObjectArray(objectType: Tool.self) as! [Tool]
     var products: [Product] = DatabaseService.shared.getObjectArray(objectType: Product.self) as! [Product]
@@ -26,75 +25,41 @@ class SelectorViewController: UIViewController, LUExpandableTableViewDelegate, L
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tableView.register(SectionHeaderCell.self, forHeaderFooterViewReuseIdentifier: SectionHeaderCell.ID)
+        
+        tableView.register(UINib(nibName: "HeaderTableViewCell", bundle: nil), forCellReuseIdentifier: HeaderTableViewCell.ID)
         tableView.register(UINib(nibName: "ToolTableViewCell", bundle: nil), forCellReuseIdentifier: ToolTableViewCell.ID)
         tableView.register(UINib(nibName: "ModelTableViewCell", bundle: nil), forCellReuseIdentifier: ModelTableViewCell.ID)
+        tableView.delegate = self
+        tableView.dataSource = self
         
-        tableView.expandableTableViewDelegate = self
-        tableView.expandableTableViewDataSource = self
         // load all models for each product
         modelArrays = products.map({
             return DatabaseService.shared.getModelArray(in: $0)
         })
         
-        tableView.expandSections(at: [0, 1])
+        //
     }
     
-    // MARK: - LUExpandableTableViewDelegate & LUExpandableTableViewDataSource
-
-    func expandableTableView(_ expandableTableView: LUExpandableTableView, sectionHeaderOfSection section: Int) -> LUExpandableTableViewSectionHeader {
-        guard let sectionHeader = expandableTableView.dequeueReusableHeaderFooterView(withIdentifier: SectionHeaderCell.ID) as? SectionHeaderCell else {
-            assertionFailure("Section header shouldn't be nil")
-            return LUExpandableTableViewSectionHeader()
-        }
-        switch sType {
-        case .fromTool:
-            sectionHeader.textLabel?.text = "All Tools"
-        case .fromProduct:
-            sectionHeader.textLabel?.text = products[section].productName
-        }
-        
-        return sectionHeader
-    }
-    
-    func expandableTableView(_ expandableTableView: LUExpandableTableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("cellForRowAt")
-        switch sType {
-        case .fromTool:     // for Tool
-            let cell = expandableTableView.dequeueReusableCell(withIdentifier: ToolTableViewCell.ID)
-            cell?.textLabel?.text = tools[indexPath.row].toolName
-            cell?.detailTextLabel?.text = tools[indexPath.row].toolDesc
-            return cell!
-        case .fromProduct:     // for Product
-            let cell = expandableTableView.dequeueReusableCell(withIdentifier: ModelTableViewCell.ID)
-            let model = modelArrays[indexPath.section][indexPath.row]
-            cell?.textLabel?.text = model.modelName
-            return cell!
-        }
-    }
-    
-    func expandableTableView(_ expandableTableView: LUExpandableTableView, heightForHeaderInSection section: Int) -> CGFloat {
-        let height = expandableTableView.estimatedSectionHeaderHeight
-        return height
-    }
-    
-    func expandableTableView(_ expandableTableView: LUExpandableTableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let height = expandableTableView.estimatedRowHeight
-        return height
-    }
-    
-    func expandableTableView(_ expandableTableView: LUExpandableTableView, numberOfRowsInSection section: Int) -> Int {
-        print("numberOfRowsInSection")
+    // MARK: - UITableViewDelegate, UITableViewDataSource
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sType == .fromProduct ? modelArrays[section].count : tools.count
     }
     
-    func numberOfSections(in expandableTableView: LUExpandableTableView) -> Int {
-        print("numberOfSections")
-        return sType == .fromProduct ? products.count : 1
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch sType {
+        case .fromTool:
+            let cell = tableView.dequeueReusableCell(withIdentifier: ToolTableViewCell.ID)
+            cell?.textLabel?.text = tools[indexPath.row].toolName
+            return cell!
+        case .fromProduct:
+            let cell = tableView.dequeueReusableCell(withIdentifier: ModelTableViewCell.ID)
+            cell?.textLabel?.text = modelArrays[indexPath.section][indexPath.row].modelName
+            return cell!
+        }
+        
     }
     
-    func expandableTableView(_ expandableTableView: LUExpandableTableView, didSelectSectionHeader sectionHeader: LUExpandableTableViewSectionHeader, atSection section: Int) {
-        print("didSelectSectionHeader")
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sType == .fromTool ? 1 : products.count
     }
 }

@@ -9,7 +9,6 @@
 import UIKit
 import Former
 import TagListView
-import LUExpandableTableView
 
 class ItemFormController: FormViewController {
     

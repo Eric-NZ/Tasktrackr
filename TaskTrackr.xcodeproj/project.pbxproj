@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		21062025214131CB00BA2050 /* UIView+constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21062024214131CB00BA2050 /* UIView+constraints.swift */; };
+		21084F6D215757AE00339A80 /* HeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21084F6B215757AE00339A80 /* HeaderTableViewCell.xib */; };
 		210C04D2213CAF7E00576564 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210C04D1213CAF7E00576564 /* DatabaseService.swift */; };
 		2122019E21436D3000EE8A06 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2122019D21436D3000EE8A06 /* LoginViewController.swift */; };
 		2125E6AE214E4AF0002FE54B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6AD214E4AF0002FE54B /* UIColor.swift */; };
@@ -15,7 +16,6 @@
 		213DA7122153A03E00D0C7AF /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213DA7102153A03E00D0C7AF /* Cells.swift */; };
 		213DA7132153A03E00D0C7AF /* ToolTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213DA7112153A03E00D0C7AF /* ToolTableViewCell.xib */; };
 		213DA71B2153A0F500D0C7AF /* ModelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213DA7192153A0F500D0C7AF /* ModelTableViewCell.xib */; };
-		218936A22157336500398B69 /* SectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218936A02157336500398B69 /* SectionHeaderCell.swift */; };
 		21A265E92140781200671F6C /* ProductsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265E82140781200671F6C /* ProductsTableViewController.swift */; };
 		21A265EB2140782E00671F6C /* ToolsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265EA2140782E00671F6C /* ToolsTableViewController.swift */; };
 		21A265ED2140787100671F6C /* SitesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265EC2140787100671F6C /* SitesTableViewController.swift */; };
@@ -44,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		21062024214131CB00BA2050 /* UIView+constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+constraints.swift"; sourceTree = "<group>"; };
+		21084F6B215757AE00339A80 /* HeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderTableViewCell.xib; sourceTree = "<group>"; };
 		210C04D1213CAF7E00576564 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		2122019D21436D3000EE8A06 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2125E6AD214E4AF0002FE54B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -51,7 +52,6 @@
 		213DA7102153A03E00D0C7AF /* Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
 		213DA7112153A03E00D0C7AF /* ToolTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToolTableViewCell.xib; sourceTree = "<group>"; };
 		213DA7192153A0F500D0C7AF /* ModelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModelTableViewCell.xib; sourceTree = "<group>"; };
-		218936A02157336500398B69 /* SectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderCell.swift; sourceTree = "<group>"; };
 		21A265E82140781200671F6C /* ProductsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewController.swift; sourceTree = "<group>"; };
 		21A265EA2140782E00671F6C /* ToolsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableViewController.swift; sourceTree = "<group>"; };
 		21A265EC2140787100671F6C /* SitesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SitesTableViewController.swift; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 				213DA7102153A03E00D0C7AF /* Cells.swift */,
 				213DA7112153A03E00D0C7AF /* ToolTableViewCell.xib */,
 				213DA7192153A0F500D0C7AF /* ModelTableViewCell.xib */,
-				218936A02157336500398B69 /* SectionHeaderCell.swift */,
+				21084F6B215757AE00339A80 /* HeaderTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -266,6 +266,7 @@
 				21EA13AF213622C900C5CB34 /* LaunchScreen.storyboard in Resources */,
 				213DA71B2153A0F500D0C7AF /* ModelTableViewCell.xib in Resources */,
 				21EA13AC213622C900C5CB34 /* Assets.xcassets in Resources */,
+				21084F6D215757AE00339A80 /* HeaderTableViewCell.xib in Resources */,
 				21F7A8CF214E263A00A01AB5 /* TagControlTableViewCell.xib in Resources */,
 				21EA13A7213622C800C5CB34 /* Main.storyboard in Resources */,
 			);
@@ -283,7 +284,6 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-TaskTrackr/Pods-TaskTrackr-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Former/Former.framework",
 				"${BUILT_PRODUCTS_DIR}/LFLoginController/LFLoginController.framework",
-				"${BUILT_PRODUCTS_DIR}/LUExpandableTableView/LUExpandableTableView.framework",
 				"${BUILT_PRODUCTS_DIR}/Parchment/Parchment.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
@@ -294,7 +294,6 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Former.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LFLoginController.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LUExpandableTableView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parchment.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
@@ -332,7 +331,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				21A67484214220020012B555 /* ItemFormController.swift in Sources */,
-				218936A22157336500398B69 /* SectionHeaderCell.swift in Sources */,
 				210C04D2213CAF7E00576564 /* DatabaseService.swift in Sources */,
 				21A265EB2140782E00671F6C /* ToolsTableViewController.swift in Sources */,
 				21BBC790213E6BB00006B5B4 /* Action.swift in Sources */,
