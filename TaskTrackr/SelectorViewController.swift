@@ -8,9 +8,11 @@
 
 import UIKit
 
-class SelectorViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class SelectorViewController: UIViewController{
 
     @IBOutlet weak var tableView: UITableView!
+    
+    var sectionHeaderView: SectionHeaderView?
     
     var tools: [Tool] = DatabaseService.shared.getObjectArray(objectType: Tool.self) as! [Tool]
     var products: [Product] = DatabaseService.shared.getObjectArray(objectType: Product.self) as! [Product]
@@ -26,7 +28,6 @@ class SelectorViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UINib(nibName: "HeaderTableViewCell", bundle: nil), forCellReuseIdentifier: HeaderTableViewCell.ID)
         tableView.register(UINib(nibName: "ToolTableViewCell", bundle: nil), forCellReuseIdentifier: ToolTableViewCell.ID)
         tableView.register(UINib(nibName: "ModelTableViewCell", bundle: nil), forCellReuseIdentifier: ModelTableViewCell.ID)
         tableView.delegate = self
@@ -39,6 +40,9 @@ class SelectorViewController: UIViewController, UITableViewDelegate, UITableView
         
         //
     }
+}
+
+extension SelectorViewController: UITableViewDelegate, UITableViewDataSource, SectionHeaderViewDelegate {
     
     // MARK: - UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -62,4 +66,29 @@ class SelectorViewController: UIViewController, UITableViewDelegate, UITableView
     func numberOfSections(in tableView: UITableView) -> Int {
         return sType == .fromTool ? 1 : products.count
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 34
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+        sectionHeaderView = SectionHeaderView.instanceFromNib() as? SectionHeaderView
+        sectionHeaderView?.backgroundColor = UIColor.groupTableViewBackground
+        sectionHeaderView?.tag = section
+        sectionHeaderView?.delegate = self
+
+        return sectionHeaderView
+    }
+    
+    // MARK: - SectionHeaderViewDelegate
+    func didSectionHeaderTapped(on selectedTag: Int) {
+        switch sType {
+        case .fromProduct:
+            print ("fromProduct: \(selectedTag)")
+        case .fromTool:
+            print ("fromProduct: \(selectedTag)")
+        }
+    }
 }
+

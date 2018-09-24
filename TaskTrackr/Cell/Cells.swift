@@ -24,11 +24,4 @@ class ModelTableViewCell: UITableViewCell {
     }
 }
 
-class HeaderTableViewCell: UITableViewCell {
-    static let ID = "ProductCell"
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-}
 

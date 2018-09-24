@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		21062025214131CB00BA2050 /* UIView+constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21062024214131CB00BA2050 /* UIView+constraints.swift */; };
-		21084F6D215757AE00339A80 /* HeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21084F6B215757AE00339A80 /* HeaderTableViewCell.xib */; };
 		210C04D2213CAF7E00576564 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210C04D1213CAF7E00576564 /* DatabaseService.swift */; };
 		2122019E21436D3000EE8A06 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2122019D21436D3000EE8A06 /* LoginViewController.swift */; };
 		2125E6AE214E4AF0002FE54B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6AD214E4AF0002FE54B /* UIColor.swift */; };
@@ -16,6 +15,8 @@
 		213DA7122153A03E00D0C7AF /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213DA7102153A03E00D0C7AF /* Cells.swift */; };
 		213DA7132153A03E00D0C7AF /* ToolTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213DA7112153A03E00D0C7AF /* ToolTableViewCell.xib */; };
 		213DA71B2153A0F500D0C7AF /* ModelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213DA7192153A0F500D0C7AF /* ModelTableViewCell.xib */; };
+		219872AE215885A200D10FF0 /* SectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 219872AD215885A200D10FF0 /* SectionHeaderView.xib */; };
+		219872B02158869F00D10FF0 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219872AF2158869F00D10FF0 /* SectionHeaderView.swift */; };
 		21A265E92140781200671F6C /* ProductsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265E82140781200671F6C /* ProductsTableViewController.swift */; };
 		21A265EB2140782E00671F6C /* ToolsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265EA2140782E00671F6C /* ToolsTableViewController.swift */; };
 		21A265ED2140787100671F6C /* SitesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265EC2140787100671F6C /* SitesTableViewController.swift */; };
@@ -44,7 +45,6 @@
 
 /* Begin PBXFileReference section */
 		21062024214131CB00BA2050 /* UIView+constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+constraints.swift"; sourceTree = "<group>"; };
-		21084F6B215757AE00339A80 /* HeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderTableViewCell.xib; sourceTree = "<group>"; };
 		210C04D1213CAF7E00576564 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		2122019D21436D3000EE8A06 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2125E6AD214E4AF0002FE54B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -52,6 +52,8 @@
 		213DA7102153A03E00D0C7AF /* Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
 		213DA7112153A03E00D0C7AF /* ToolTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToolTableViewCell.xib; sourceTree = "<group>"; };
 		213DA7192153A0F500D0C7AF /* ModelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModelTableViewCell.xib; sourceTree = "<group>"; };
+		219872AD215885A200D10FF0 /* SectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeaderView.xib; sourceTree = "<group>"; };
+		219872AF2158869F00D10FF0 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		21A265E82140781200671F6C /* ProductsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewController.swift; sourceTree = "<group>"; };
 		21A265EA2140782E00671F6C /* ToolsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableViewController.swift; sourceTree = "<group>"; };
 		21A265EC2140787100671F6C /* SitesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SitesTableViewController.swift; sourceTree = "<group>"; };
@@ -125,7 +127,8 @@
 				213DA7102153A03E00D0C7AF /* Cells.swift */,
 				213DA7112153A03E00D0C7AF /* ToolTableViewCell.xib */,
 				213DA7192153A0F500D0C7AF /* ModelTableViewCell.xib */,
-				21084F6B215757AE00339A80 /* HeaderTableViewCell.xib */,
+				219872AD215885A200D10FF0 /* SectionHeaderView.xib */,
+				219872AF2158869F00D10FF0 /* SectionHeaderView.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -266,9 +269,9 @@
 				21EA13AF213622C900C5CB34 /* LaunchScreen.storyboard in Resources */,
 				213DA71B2153A0F500D0C7AF /* ModelTableViewCell.xib in Resources */,
 				21EA13AC213622C900C5CB34 /* Assets.xcassets in Resources */,
-				21084F6D215757AE00339A80 /* HeaderTableViewCell.xib in Resources */,
 				21F7A8CF214E263A00A01AB5 /* TagControlTableViewCell.xib in Resources */,
 				21EA13A7213622C800C5CB34 /* Main.storyboard in Resources */,
+				219872AE215885A200D10FF0 /* SectionHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +355,7 @@
 				21EA13A2213622C800C5CB34 /* AppDelegate.swift in Sources */,
 				21BBC786213E5A330006B5B4 /* Static.swift in Sources */,
 				21EA13C32136505200C5CB34 /* AllTasksTableViewController.swift in Sources */,
+				219872B02158869F00D10FF0 /* SectionHeaderView.swift in Sources */,
 				21BBC78E213E69440006B5B4 /* Site.swift in Sources */,
 				21EA13AA213622C800C5CB34 /* TaskTrackr.xcdatamodeld in Sources */,
 			);
