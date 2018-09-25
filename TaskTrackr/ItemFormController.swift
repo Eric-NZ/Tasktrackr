@@ -439,6 +439,6 @@ class ItemFormController: FormViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let selector = segue.destination as! SelectorViewController
         
-        selector.sType = (sender == nil) ? .fromTool : .fromProduct
+        selector.eventFrom = (sender == nil) ? .fromTool : .fromProduct
     }
 }

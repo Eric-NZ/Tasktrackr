@@ -9,7 +9,6 @@
 import UIKit
 
 protocol SectionHeaderCellDelegate {
-    func didSectionHeaderTapped (on selectedTag: Int)
     func willExpandSection(on selectedTag: Int)
     func willFoldSection(on selectedTag: Int)
 }

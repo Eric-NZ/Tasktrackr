@@ -23,7 +23,7 @@ class SelectorViewController: UIViewController{
         case fromTool
         case fromProduct
     }
-    var sType = selectedFrom.fromTool
+    var eventFrom = selectedFrom.fromTool
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,8 +37,6 @@ class SelectorViewController: UIViewController{
         modelArrays = products.map({
             return DatabaseService.shared.getModelArray(in: $0)
         })
-        
-        //
     }
 }
 
@@ -47,16 +45,16 @@ extension SelectorViewController: UITableViewDelegate, HoExpandableDataSource, S
     // MARK: - HoExpandableDataSource
     
     func tableView(_ tableView: HoExpandableTableView, numberOfRowsInSection section: Int) -> Int {
-        switch sType {
+        switch eventFrom {
         case .fromProduct:
-            return tableView.isSectionExpanded(in: section) ? modelArrays[section].count : 0
+            return tableView.sectionExpanded(in: section) ? modelArrays[section].count : 0
         case .fromTool:
-            return tableView.isSectionExpanded(in: section) ? tools.count : 0
+            return tableView.sectionExpanded(in: section) ? tools.count : 0
         }
     }
     
     func tableView(_: HoExpandableTableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch sType {
+        switch eventFrom {
         case .fromTool:
             let cell = tableView.dequeueReusableCell(withIdentifier: ToolTableViewCell.ID)
             cell?.textLabel?.text = tools[indexPath.row].toolName
@@ -69,7 +67,7 @@ extension SelectorViewController: UITableViewDelegate, HoExpandableDataSource, S
     }
     
     func numberOfSections(in tableView: HoExpandableTableView) -> Int {
-        return sType == .fromTool ? 1 : products.count
+        return eventFrom == .fromTool ? 1 : products.count
     }
     
     // MARK: - UITableViewDelegate
@@ -89,24 +87,26 @@ extension SelectorViewController: UITableViewDelegate, HoExpandableDataSource, S
     
     // MARK: - SectionHeaderCellDelegate
     func willExpandSection(on selectedTag: Int) {
-        print("section \(selectedTag) will be expanded!")
-        
-    }
-    
-    func willFoldSection(on selectedTag: Int) {
-        switch sType {
+        switch eventFrom {
         case .fromProduct:
-            let indecis = modelArrays[selectedTag].indices
-            tableView.foldSection(for: selectedTag, at: indecis, animate: .fade)
+            let indices = modelArrays[selectedTag].indices
+            tableView.expandSection(for: selectedTag, at: indices, animate: .fade)
         case .fromTool:
-            let indecis = tools.indices
-            tableView.foldSection(for: selectedTag, at: indecis, animate: .fade)
+            let indices = tools.indices
+            tableView.expandSection(for: selectedTag, at: indices, animate: .fade)
         }
         
     }
     
-    func didSectionHeaderTapped(on selectedTag: Int) {
+    func willFoldSection(on selectedTag: Int) {
+        switch eventFrom {
+        case .fromProduct:
+            let indices = modelArrays[selectedTag].indices
+            tableView.foldSection(for: selectedTag, at: indices, animate: .fade)
+        case .fromTool:
+            let indices = tools.indices
+            tableView.foldSection(for: selectedTag, at: indices, animate: .fade)
+        }
         
     }
 }
-

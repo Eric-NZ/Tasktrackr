@@ -31,12 +31,13 @@ class HoExpandableTableView: UITableView {
         dataSource = self
     }
     
-    func isSectionExpanded(in section: Int) -> Bool {
+    public func sectionExpanded(in section: Int) -> Bool {
         return expandingStates[section]
     }
     
-    func foldSection(for section: Int, at indices: Range<Int>, animate: RowAnimation) {
-
+    // collapse section
+    public func foldSection(for section: Int, at indices: Range<Int>, animate: RowAnimation) {
+        
         // delete rows
         let indexPaths = indices.map {
             return IndexPath(row: $0, section: section)
@@ -46,9 +47,22 @@ class HoExpandableTableView: UITableView {
         deleteRows(at: indexPaths, with: animate)
     }
     
+    // expand section
+    public func expandSection(for section: Int, at indices: Range<Int>, animate: RowAnimation) {
+        let indexPaths = indices.map {
+            return IndexPath(row: $0, section: section)
+        }
+        setExpandingStatus(for: section, isExpanded: true)
+        insertRows(at: indexPaths, with: animate)
+    }
+    
     private func setExpandingStatus(for section: Int, isExpanded: Bool) {
         expandingStates[section] = isExpanded
     }
+    
+    
+    
+    
 }
 
 extension HoExpandableTableView: UITableViewDataSource {
