@@ -11,10 +11,12 @@ import CollapsibleTableSectionViewController
 
 class PickupViewController: CollapsibleTableSectionViewController {
 
-    var tools: [Tool] = DatabaseService.shared.getObjectArray(objectType: Tool.self) as! [Tool]
     var products: [Product] = DatabaseService.shared.getObjectArray(objectType: Product.self) as! [Product]
     // NOTE: this is an array includes arrays that include models belong to each specific product.
     var modelArrays: [[Model]] = []
+    var tools: [Tool] = DatabaseService.shared.getObjectArray(objectType: Tool.self) as! [Tool]
+    var modelBoolArrays: [[Bool]] = []
+    var toolBoolArray: [Bool] = []
     
     enum selectedFrom {
         case fromTool
@@ -30,6 +32,19 @@ class PickupViewController: CollapsibleTableSectionViewController {
             return DatabaseService.shared.getModelArray(in: $0)
         })
         
+        // build a Bool two-dimensional array which has the same item structure as modelArrays
+        modelBoolArrays = modelArrays.map({ (models) -> [Bool] in
+            let bools: [Bool] = models.map({ (model) -> Bool in
+                return false
+            })
+            return bools
+        })
+        // build a Bool array which has the same item structure as toolArray, initialize all item to false
+        toolBoolArray = tools.map({ (tool) -> Bool in
+            return false
+        })
+        
+        // set delegate
         delegate = self
     }
 }
@@ -55,10 +70,14 @@ extension PickupViewController: CollapsibleTableSectionDelegate {
         case .fromTool:
             let cell = tableView.dequeueReusableCell(withIdentifier: ToolTableViewCell.ID) ?? UITableViewCell(style: .default, reuseIdentifier: ToolTableViewCell.ID)
             cell.textLabel?.text = tools[indexPath.row].toolName
+            // present checkmark state
+            cell.accessoryType = toolBoolArray[indexPath.row] ? .checkmark : .none
             return cell
         case .fromProduct:
             let cell = tableView.dequeueReusableCell(withIdentifier: ModelTableViewCell.ID) ?? UITableViewCell(style: .default, reuseIdentifier: ModelTableViewCell.ID)
             cell.textLabel?.text = modelArrays[indexPath.section][indexPath.row].modelName
+            // present checkmark state
+            cell.accessoryType = modelBoolArrays[indexPath.section][indexPath.row] ? .checkmark : .none
             return cell
         }
     }
@@ -66,7 +85,29 @@ extension PickupViewController: CollapsibleTableSectionDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return eventFrom == .fromProduct ? products[section].productName : "All Tools"
     }
+    
+    func collapsibleTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let cell = tableView.cellForRow(at: indexPath)
+        switch eventFrom {
+        case .fromProduct:
+            if cell?.accessoryType == .checkmark {      // previously selected
+                modelBoolArrays[indexPath.section][indexPath.row] = false
+                cell?.accessoryType = .none
+            } else {                                    // previously deselected
+                modelBoolArrays[indexPath.section][indexPath.row] = true
+                cell?.accessoryType = .checkmark
+            }
+        case .fromTool:
+            if cell?.accessoryType == .checkmark {      // previously selected
+                toolBoolArray[indexPath.row] = false
+                cell?.accessoryType = .none
+            } else {                                    // previously deselected
+                toolBoolArray[indexPath.row] = true
+                cell?.accessoryType = .checkmark
+            }
+            break
+        }
+    }
 
 }
-
-
