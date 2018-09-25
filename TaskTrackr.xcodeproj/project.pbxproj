@@ -20,6 +20,7 @@
 		219065B12158BD87004D96AC /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219065B02158BD87004D96AC /* UIImage.swift */; };
 		219065B32158D272004D96AC /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219065B22158D272004D96AC /* UITableViewCell.swift */; };
 		219065B52158D9B8004D96AC /* HoExpandableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219065B42158D9B8004D96AC /* HoExpandableTableView.swift */; };
+		2195F4BA2159DEFA00309990 /* PickupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2195F4B92159DEFA00309990 /* PickupViewController.swift */; };
 		219872B02158869F00D10FF0 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219872AF2158869F00D10FF0 /* SectionHeaderView.swift */; };
 		21A265E92140781200671F6C /* ProductsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265E82140781200671F6C /* ProductsTableViewController.swift */; };
 		21A265EB2140782E00671F6C /* ToolsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265EA2140782E00671F6C /* ToolsTableViewController.swift */; };
@@ -61,6 +62,7 @@
 		219065B02158BD87004D96AC /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		219065B22158D272004D96AC /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		219065B42158D9B8004D96AC /* HoExpandableTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HoExpandableTableView.swift; path = Ho/HoExpandableTableView.swift; sourceTree = "<group>"; };
+		2195F4B92159DEFA00309990 /* PickupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupViewController.swift; sourceTree = "<group>"; };
 		219872AF2158869F00D10FF0 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		21A265E82140781200671F6C /* ProductsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewController.swift; sourceTree = "<group>"; };
 		21A265EA2140782E00671F6C /* ToolsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableViewController.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				21EA13C22136505200C5CB34 /* AllTasksTableViewController.swift */,
 				21EA13C021364FF200C5CB34 /* ActivatedTasksTableViewController.swift */,
 				21A67483214220020012B555 /* ItemFormController.swift */,
+				2195F4B92159DEFA00309990 /* PickupViewController.swift */,
 				213CF3DA2151D79B00DD77F6 /* SelectorViewController.swift */,
 				219065B42158D9B8004D96AC /* HoExpandableTableView.swift */,
 				21BBC785213E5A330006B5B4 /* Static.swift */,
@@ -297,6 +300,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TaskTrackr/Pods-TaskTrackr-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CollapsibleTableSectionViewController/CollapsibleTableSectionViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/Former/Former.framework",
 				"${BUILT_PRODUCTS_DIR}/LFLoginController/LFLoginController.framework",
 				"${BUILT_PRODUCTS_DIR}/Parchment/Parchment.framework",
@@ -307,6 +311,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CollapsibleTableSectionViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Former.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LFLoginController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parchment.framework",
@@ -345,6 +350,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2195F4BA2159DEFA00309990 /* PickupViewController.swift in Sources */,
 				21A67484214220020012B555 /* ItemFormController.swift in Sources */,
 				210C04D2213CAF7E00576564 /* DatabaseService.swift in Sources */,
 				219065AE21589C01004D96AC /* SectionHeaderCell.swift in Sources */,

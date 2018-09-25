@@ -185,12 +185,12 @@ class ItemFormController: FormViewController {
         
         // applied products
         let productSelectorRow = createMenu("Applicable Products") { [weak self] in
-            self?.performSegue(withIdentifier: Static.selector_segue, sender: self)
+            self?.performSegue(withIdentifier: Static.pickup_segue, sender: self)
         }
         
         // applied tools: if the sender is nil, means I will present the selector for Tools
         let toolSelectorRow = createMenu("Applicable Tools") { [weak self] in
-            self?.performSegue(withIdentifier: Static.selector_segue, sender: nil)
+            self?.performSegue(withIdentifier: Static.pickup_segue, sender: nil)
         }
         
         let sectionSelector = SectionFormer(rowFormer: productSelectorRow, toolSelectorRow)
@@ -437,7 +437,7 @@ class ItemFormController: FormViewController {
     
     // prepare information for the popping up selector view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let selector = segue.destination as! SelectorViewController
+        let selector = segue.destination as! PickupViewController
         
         selector.eventFrom = (sender == nil) ? .fromTool : .fromProduct
     }

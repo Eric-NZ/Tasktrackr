@@ -31,7 +31,7 @@ class HoExpandableTableView: UITableView {
         dataSource = self
     }
     
-    public func sectionExpanded(in section: Int) -> Bool {
+    public func didSectionExpanded(in section: Int) -> Bool {
         return expandingStates[section]
     }
     
@@ -59,10 +59,7 @@ class HoExpandableTableView: UITableView {
     private func setExpandingStatus(for section: Int, isExpanded: Bool) {
         expandingStates[section] = isExpanded
     }
-    
-    
-    
-    
+
 }
 
 extension HoExpandableTableView: UITableViewDataSource {

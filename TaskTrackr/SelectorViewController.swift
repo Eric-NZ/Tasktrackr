@@ -47,22 +47,22 @@ extension SelectorViewController: UITableViewDelegate, HoExpandableDataSource, S
     func tableView(_ tableView: HoExpandableTableView, numberOfRowsInSection section: Int) -> Int {
         switch eventFrom {
         case .fromProduct:
-            return tableView.sectionExpanded(in: section) ? modelArrays[section].count : 0
+            return tableView.didSectionExpanded(in: section) ? modelArrays[section].count : 0
         case .fromTool:
-            return tableView.sectionExpanded(in: section) ? tools.count : 0
+            return tableView.didSectionExpanded(in: section) ? tools.count : 0
         }
     }
     
     func tableView(_: HoExpandableTableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch eventFrom {
         case .fromTool:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ToolTableViewCell.ID)
-            cell?.textLabel?.text = tools[indexPath.row].toolName
-            return cell!
+            let cell = tableView.dequeueReusableCell(withIdentifier: ToolTableViewCell.ID) ?? UITableViewCell(style: .default, reuseIdentifier: ToolTableViewCell.ID)
+            cell.textLabel?.text = tools[indexPath.row].toolName
+            return cell
         case .fromProduct:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ModelTableViewCell.ID)
-            cell?.textLabel?.text = modelArrays[indexPath.section][indexPath.row].modelName
-            return cell!
+            let cell = tableView.dequeueReusableCell(withIdentifier: ModelTableViewCell.ID) ?? UITableViewCell(style: .default, reuseIdentifier: ModelTableViewCell.ID)
+            cell.textLabel?.text = modelArrays[indexPath.section][indexPath.row].modelName
+            return cell
         }
     }
     
