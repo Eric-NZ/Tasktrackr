@@ -15,7 +15,11 @@
 		213DA7122153A03E00D0C7AF /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213DA7102153A03E00D0C7AF /* Cells.swift */; };
 		213DA7132153A03E00D0C7AF /* ToolTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213DA7112153A03E00D0C7AF /* ToolTableViewCell.xib */; };
 		213DA71B2153A0F500D0C7AF /* ModelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213DA7192153A0F500D0C7AF /* ModelTableViewCell.xib */; };
-		219872AE215885A200D10FF0 /* SectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 219872AD215885A200D10FF0 /* SectionHeaderView.xib */; };
+		219065AE21589C01004D96AC /* SectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219065AC21589C01004D96AC /* SectionHeaderCell.swift */; };
+		219065AF21589C01004D96AC /* SectionHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 219065AD21589C01004D96AC /* SectionHeaderCell.xib */; };
+		219065B12158BD87004D96AC /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219065B02158BD87004D96AC /* UIImage.swift */; };
+		219065B32158D272004D96AC /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219065B22158D272004D96AC /* UITableViewCell.swift */; };
+		219065B52158D9B8004D96AC /* HoExpandableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219065B42158D9B8004D96AC /* HoExpandableTableView.swift */; };
 		219872B02158869F00D10FF0 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219872AF2158869F00D10FF0 /* SectionHeaderView.swift */; };
 		21A265E92140781200671F6C /* ProductsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265E82140781200671F6C /* ProductsTableViewController.swift */; };
 		21A265EB2140782E00671F6C /* ToolsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265EA2140782E00671F6C /* ToolsTableViewController.swift */; };
@@ -52,7 +56,11 @@
 		213DA7102153A03E00D0C7AF /* Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
 		213DA7112153A03E00D0C7AF /* ToolTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToolTableViewCell.xib; sourceTree = "<group>"; };
 		213DA7192153A0F500D0C7AF /* ModelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModelTableViewCell.xib; sourceTree = "<group>"; };
-		219872AD215885A200D10FF0 /* SectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeaderView.xib; sourceTree = "<group>"; };
+		219065AC21589C01004D96AC /* SectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderCell.swift; sourceTree = "<group>"; };
+		219065AD21589C01004D96AC /* SectionHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeaderCell.xib; sourceTree = "<group>"; };
+		219065B02158BD87004D96AC /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		219065B22158D272004D96AC /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
+		219065B42158D9B8004D96AC /* HoExpandableTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HoExpandableTableView.swift; path = Ho/HoExpandableTableView.swift; sourceTree = "<group>"; };
 		219872AF2158869F00D10FF0 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		21A265E82140781200671F6C /* ProductsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewController.swift; sourceTree = "<group>"; };
 		21A265EA2140782E00671F6C /* ToolsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +109,8 @@
 			children = (
 				21062024214131CB00BA2050 /* UIView+constraints.swift */,
 				2125E6AD214E4AF0002FE54B /* UIColor.swift */,
+				219065B02158BD87004D96AC /* UIImage.swift */,
+				219065B22158D272004D96AC /* UITableViewCell.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -127,8 +137,9 @@
 				213DA7102153A03E00D0C7AF /* Cells.swift */,
 				213DA7112153A03E00D0C7AF /* ToolTableViewCell.xib */,
 				213DA7192153A0F500D0C7AF /* ModelTableViewCell.xib */,
-				219872AD215885A200D10FF0 /* SectionHeaderView.xib */,
 				219872AF2158869F00D10FF0 /* SectionHeaderView.swift */,
+				219065AC21589C01004D96AC /* SectionHeaderCell.swift */,
+				219065AD21589C01004D96AC /* SectionHeaderCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -178,6 +189,7 @@
 				21EA13C021364FF200C5CB34 /* ActivatedTasksTableViewController.swift */,
 				21A67483214220020012B555 /* ItemFormController.swift */,
 				213CF3DA2151D79B00DD77F6 /* SelectorViewController.swift */,
+				219065B42158D9B8004D96AC /* HoExpandableTableView.swift */,
 				21BBC785213E5A330006B5B4 /* Static.swift */,
 				213DA70F2153A00A00D0C7AF /* Cell */,
 				210620212141239B00BA2050 /* Extensions */,
@@ -268,10 +280,10 @@
 				213DA7132153A03E00D0C7AF /* ToolTableViewCell.xib in Resources */,
 				21EA13AF213622C900C5CB34 /* LaunchScreen.storyboard in Resources */,
 				213DA71B2153A0F500D0C7AF /* ModelTableViewCell.xib in Resources */,
+				219065AF21589C01004D96AC /* SectionHeaderCell.xib in Resources */,
 				21EA13AC213622C900C5CB34 /* Assets.xcassets in Resources */,
 				21F7A8CF214E263A00A01AB5 /* TagControlTableViewCell.xib in Resources */,
 				21EA13A7213622C800C5CB34 /* Main.storyboard in Resources */,
-				219872AE215885A200D10FF0 /* SectionHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,9 +347,12 @@
 			files = (
 				21A67484214220020012B555 /* ItemFormController.swift in Sources */,
 				210C04D2213CAF7E00576564 /* DatabaseService.swift in Sources */,
+				219065AE21589C01004D96AC /* SectionHeaderCell.swift in Sources */,
 				21A265EB2140782E00671F6C /* ToolsTableViewController.swift in Sources */,
 				21BBC790213E6BB00006B5B4 /* Action.swift in Sources */,
+				219065B32158D272004D96AC /* UITableViewCell.swift in Sources */,
 				21EA13C121364FF200C5CB34 /* ActivatedTasksTableViewController.swift in Sources */,
+				219065B12158BD87004D96AC /* UIImage.swift in Sources */,
 				21D8D65B213FE30D0092AEBB /* RootPagingViewController.swift in Sources */,
 				21DF277E214E0A6800BB2799 /* TagTableViewCell.swift in Sources */,
 				213CF3DB2151D79B00DD77F6 /* SelectorViewController.swift in Sources */,
@@ -347,6 +362,7 @@
 				213DA7122153A03E00D0C7AF /* Cells.swift in Sources */,
 				2122019E21436D3000EE8A06 /* LoginViewController.swift in Sources */,
 				21062025214131CB00BA2050 /* UIView+constraints.swift in Sources */,
+				219065B52158D9B8004D96AC /* HoExpandableTableView.swift in Sources */,
 				21BBC788213E63F00006B5B4 /* Tool.swift in Sources */,
 				21A265ED2140787100671F6C /* SitesTableViewController.swift in Sources */,
 				21BBC78C213E681D0006B5B4 /* Worker.swift in Sources */,
