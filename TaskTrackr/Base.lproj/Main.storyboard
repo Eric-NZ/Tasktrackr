@@ -252,7 +252,6 @@
                     </view>
                     <connections>
                         <segue destination="2h4-Mc-dKm" kind="show" identifier="OpenSiteForm" id="RAk-Pp-Lmo"/>
-                        <segue destination="6ro-EW-VUu" kind="show" identifier="OpenSelectorController" id="Ohv-qf-Lrn"/>
                         <segue destination="6Ez-BA-ZVQ" kind="show" identifier="OpenPickupController" id="cmc-Iu-lCG"/>
                     </connections>
                 </viewController>
@@ -273,42 +272,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G63-mG-Gby" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4758" y="162"/>
-        </scene>
-        <!--Selector View Controller-->
-        <scene sceneID="dk9-fo-Izm">
-            <objects>
-                <viewController storyboardIdentifier="SelectorController" id="6ro-EW-VUu" customClass="SelectorViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="aOi-te-FNs">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" axis="vertical" spacing="278" translatesAutoresizingMaskIntoConstraints="NO" id="9TN-je-Z0h">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lYy-LT-cIU" customClass="HoExpandableTableView" customModule="TaskTrackr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </tableView>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="YNM-j8-dOs" firstAttribute="trailing" secondItem="9TN-je-Z0h" secondAttribute="trailing" id="D92-mF-Kr9"/>
-                            <constraint firstItem="9TN-je-Z0h" firstAttribute="leading" secondItem="aOi-te-FNs" secondAttribute="leading" id="LmQ-qW-2fP"/>
-                            <constraint firstItem="9TN-je-Z0h" firstAttribute="top" secondItem="YNM-j8-dOs" secondAttribute="top" id="e6X-ay-jRf"/>
-                            <constraint firstItem="YNM-j8-dOs" firstAttribute="bottom" secondItem="9TN-je-Z0h" secondAttribute="bottom" id="eOo-Y5-Ou0"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="YNM-j8-dOs"/>
-                    </view>
-                    <connections>
-                        <outlet property="tableView" destination="lYy-LT-cIU" id="buk-P0-MQy"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Z3R-H3-nMe" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4751.1999999999998" y="864.91754122938539"/>
+            <point key="canvasLocation" x="4511" y="868"/>
         </scene>
         <!--Products-->
         <scene sceneID="mf1-yB-hLe">

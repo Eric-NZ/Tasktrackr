@@ -9,14 +9,24 @@
 import UIKit
 import CollapsibleTableSectionViewController
 
+protocol ToolAndModelPickupDelegate {
+    func finishSelection(selectedtools: [Tool], selectedModels: [Model])
+}
+
 class PickupViewController: CollapsibleTableSectionViewController {
+    
+    var pickupDelegate: ToolAndModelPickupDelegate?
 
     var products: [Product] = DatabaseService.shared.getObjectArray(objectType: Product.self) as! [Product]
     // NOTE: this is an array includes arrays that include models belong to each specific product.
     var allModelArrays: [[Model]] = []
+    // all tools
     var allTools: [Tool] = DatabaseService.shared.getObjectArray(objectType: Tool.self) as! [Tool]
+    // this 2-dimension array has the same structure as array allModelArrays
     var modelBoolArrays: [[Bool]] = []
+    // this array has the same structure as allTools
     var toolBoolArray: [Bool] = []
+    // for collecting selected tools and models
     var selectedTools: [Tool] = []
     var selectedModels: [Model] = []
     
@@ -37,33 +47,46 @@ class PickupViewController: CollapsibleTableSectionViewController {
             return DatabaseService.shared.getModelArray(in: $0)
         })
         
-        // build a Bool two-dimensional array which has the same item structure as modelArrays
-        modelBoolArrays = allModelArrays.map({
-            let bools: [Bool] = $0.map({ (model) -> Bool in
-                return false
-            })
-            return bools
-        })
-        // build a Bool array which has the same item structure as toolArray, initialize all item to false
-        toolBoolArray = allTools.map({ (tool) -> Bool in
-            return false
-        })
+        // initialize check states
+        initSelectionStates()
+        
+        print(modelBoolArrays)
         
         // set delegate
         delegate = self
     }
     
-    // append selected tools using both toolBoolArray and allTools
-    func collectTools() {
+    /** Initial selection states depend on the arrays: selectedModels & selectedTools.
+        this function just converts the array structure.
+     */
+    func initSelectionStates() {
+        // build a Bool two-dimensional array which has the same item structure as modelArrays
+        modelBoolArrays = allModelArrays.map({
+            let bools: [Bool] = $0.map({ (model) -> Bool in
+                return selectedModels.contains(model) ? true : false
+            })
+            return bools
+        })
+        // build a Bool array which has the same item structure as toolArray, initialize all item to false
+        toolBoolArray = allTools.map({ (tool) -> Bool in
+            return selectedTools.contains(tool) ? true : false
+        })
+    }
+    
+    /** append selected models using both modelBoolArrays and allModalArrays(2-dimension array)
+        append selected tools
+    */
+    func collectSelection() {
+        // NOTE: make sure the arrays are empty before append
+        selectedTools.removeAll()
+        selectedModels.removeAll()
+        
         for i in toolBoolArray.indices {
             if toolBoolArray[i] == true {
                 selectedTools.append(allTools[i])
             }
         }
-    }
-    
-    // append selected models using both modelBoolArrays and allModalArrays(2-dimension array)
-    func collectModels() {
+        
         for i in modelBoolArrays.indices {
             for j in modelBoolArrays[i].indices {
                 if modelBoolArrays[i][j] == true {
@@ -74,10 +97,13 @@ class PickupViewController: CollapsibleTableSectionViewController {
     }
     
     @objc func onSelectPressed() {
-        // collect selected tools
-        collectTools()
-        // collect selected models
-        collectModels()
+        // collect selected tools & models
+        collectSelection()
+        
+        // perform delegate method
+        if pickupDelegate != nil {
+            pickupDelegate?.finishSelection(selectedtools: selectedTools, selectedModels: selectedModels)
+        }
         
         navigationController?.popViewController(animated: true)
     }

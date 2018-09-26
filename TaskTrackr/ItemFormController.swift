@@ -24,6 +24,8 @@ class ItemFormController: FormViewController {
     // for action
     var actionTitle: String = ""
     var actionDesc: String = ""
+    var selectedTools: [Tool] = []
+    var selectedModels: [Model] = []
     
     // for product
     var tagListView: TagListView?
@@ -433,10 +435,24 @@ class ItemFormController: FormViewController {
         return true
     }
     
+    
+}
+
+extension ItemFormController: ToolAndModelPickupDelegate {
+    func finishSelection(selectedtools: [Tool], selectedModels: [Model]) {
+        self.selectedModels = selectedModels
+        self.selectedTools = selectedtools
+    }
+    
     // prepare information for the popping up selector view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let selector = segue.destination as! PickupViewController
-        
+        // tells selector whether pickup tools or product models
         selector.eventFrom = (sender == nil) ? .fromTool : .fromProduct
+        // init original selected tools & models
+        selector.selectedTools = selectedTools
+        selector.selectedModels = selectedModels
+        // init the delegate of selector
+        selector.pickupDelegate = self
     }
 }
