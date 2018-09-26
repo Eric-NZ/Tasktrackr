@@ -54,6 +54,8 @@ class RootPagingViewController: UIViewController, PagingViewControllerDelegate, 
     func updateNavigationBarTitle(to newTitle: String) {
         let newTitle = String(format: "Manage %@", newTitle)
         self.navigationController?.navigationBar.topItem?.title = newTitle
+        // reset the editing state
+        setEditing(false, animated: true)
     }
     
     override func viewDidLoad() {
