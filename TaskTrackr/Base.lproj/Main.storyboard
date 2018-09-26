@@ -78,11 +78,11 @@
             </objects>
             <point key="canvasLocation" x="-530" y="868"/>
         </scene>
-        <!--Activated Tasks-->
+        <!--Track-->
         <scene sceneID="PMZ-k1-vSV">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3fT-IQ-b4i" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Activated Tasks" id="g7Q-U4-NA8"/>
+                    <tabBarItem key="tabBarItem" title="Track" id="g7Q-U4-NA8"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="t2V-yj-hMK">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -140,11 +140,11 @@
             </objects>
             <point key="canvasLocation" x="1687" y="868"/>
         </scene>
-        <!--All Tasks-->
+        <!--View All Tasks-->
         <scene sceneID="eva-Tf-BUJ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8d3-A4-cU6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="All Tasks" id="Ycs-Nh-2dM"/>
+                    <tabBarItem key="tabBarItem" title="View All Tasks" id="Ycs-Nh-2dM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NUT-Oo-atq">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -454,11 +454,11 @@
             </objects>
             <point key="canvasLocation" x="1644" y="1827"/>
         </scene>
-        <!--Management-->
+        <!--Manage-->
         <scene sceneID="46G-cA-bbe">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RFi-js-DX8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Management" id="X4z-Q4-pZD"/>
+                    <tabBarItem key="tabBarItem" title="Manage" id="X4z-Q4-pZD"/>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="2ge-jo-NjU">
