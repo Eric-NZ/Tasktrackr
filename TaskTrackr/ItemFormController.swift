@@ -359,8 +359,6 @@ class ItemFormController: FormViewController {
             currentProduct = Product()
             currentProduct?.productName = productName
             currentProduct?.productDesc = productDesc
-            let list = DatabaseService.shared.arrayToList(from: changedModelArray())
-            currentProduct?.models = list
             // add to database
             DatabaseService.shared.addObject(for: currentProduct!)
         } else {

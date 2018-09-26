@@ -13,10 +13,12 @@ class PickupViewController: CollapsibleTableSectionViewController {
 
     var products: [Product] = DatabaseService.shared.getObjectArray(objectType: Product.self) as! [Product]
     // NOTE: this is an array includes arrays that include models belong to each specific product.
-    var modelArrays: [[Model]] = []
-    var tools: [Tool] = DatabaseService.shared.getObjectArray(objectType: Tool.self) as! [Tool]
+    var allModelArrays: [[Model]] = []
+    var allTools: [Tool] = DatabaseService.shared.getObjectArray(objectType: Tool.self) as! [Tool]
     var modelBoolArrays: [[Bool]] = []
     var toolBoolArray: [Bool] = []
+    var selectedTools: [Tool] = []
+    var selectedModels: [Model] = []
     
     enum selectedFrom {
         case fromTool
@@ -31,19 +33,19 @@ class PickupViewController: CollapsibleTableSectionViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Select", style: .done, target: self, action: #selector(onSelectPressed))
 
         // load all models for each product
-        modelArrays = products.map({
+        allModelArrays = products.map({
             return DatabaseService.shared.getModelArray(in: $0)
         })
         
         // build a Bool two-dimensional array which has the same item structure as modelArrays
-        modelBoolArrays = modelArrays.map({ (models) -> [Bool] in
-            let bools: [Bool] = models.map({ (model) -> Bool in
+        modelBoolArrays = allModelArrays.map({
+            let bools: [Bool] = $0.map({ (model) -> Bool in
                 return false
             })
             return bools
         })
         // build a Bool array which has the same item structure as toolArray, initialize all item to false
-        toolBoolArray = tools.map({ (tool) -> Bool in
+        toolBoolArray = allTools.map({ (tool) -> Bool in
             return false
         })
         
@@ -51,8 +53,33 @@ class PickupViewController: CollapsibleTableSectionViewController {
         delegate = self
     }
     
+    // append selected tools using both toolBoolArray and allTools
+    func collectTools() {
+        for i in toolBoolArray.indices {
+            if toolBoolArray[i] == true {
+                selectedTools.append(allTools[i])
+            }
+        }
+    }
+    
+    // append selected models using both modelBoolArrays and allModalArrays(2-dimension array)
+    func collectModels() {
+        for i in modelBoolArrays.indices {
+            for j in modelBoolArrays[i].indices {
+                if modelBoolArrays[i][j] == true {
+                    selectedModels.append(allModelArrays[i][j])
+                }
+            }
+        }
+    }
+    
     @objc func onSelectPressed() {
+        // collect selected tools
+        collectTools()
+        // collect selected models
+        collectModels()
         
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -66,9 +93,9 @@ extension PickupViewController: CollapsibleTableSectionDelegate {
     func collapsibleTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch eventFrom {
         case .fromProduct:
-            return modelArrays[section].count
+            return allModelArrays[section].count
         case .fromTool:
-            return tools.count
+            return allTools.count
         }
     }
     
@@ -76,13 +103,13 @@ extension PickupViewController: CollapsibleTableSectionDelegate {
         switch eventFrom {
         case .fromTool:
             let cell = tableView.dequeueReusableCell(withIdentifier: ToolTableViewCell.ID) ?? UITableViewCell(style: .default, reuseIdentifier: ToolTableViewCell.ID)
-            cell.textLabel?.text = tools[indexPath.row].toolName
+            cell.textLabel?.text = allTools[indexPath.row].toolName
             // present checkmark state
             cell.accessoryType = toolBoolArray[indexPath.row] ? .checkmark : .none
             return cell
         case .fromProduct:
             let cell = tableView.dequeueReusableCell(withIdentifier: ModelTableViewCell.ID) ?? UITableViewCell(style: .default, reuseIdentifier: ModelTableViewCell.ID)
-            cell.textLabel?.text = modelArrays[indexPath.section][indexPath.row].modelName
+            cell.textLabel?.text = allModelArrays[indexPath.section][indexPath.row].modelName
             // present checkmark state
             cell.accessoryType = modelBoolArrays[indexPath.section][indexPath.row] ? .checkmark : .none
             return cell

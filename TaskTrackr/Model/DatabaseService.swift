@@ -144,7 +144,6 @@ class DatabaseService {
         try! realm.write {
             product.productName = name
             product.productDesc = desc
-            product.models = arrayToList(from: models)
         }
     }
     

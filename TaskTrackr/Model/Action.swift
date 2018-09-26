@@ -16,11 +16,9 @@ class Action: Object {
     // Action Description
     @objc dynamic var actionDesc: String?
 //    // Applied Tools
-//    @objc dynamic var appliedTools: [String]?  -->   No!!
     var appliedTools: List<Tool>?
     // Applied Products
-//    @objc dynamic var appliedProducts: [String]?  -->  No!!
-    var appliedProducts: List<Product>?
+    var appliedProductModels: List<Model>?
     // Created Date
     @objc dynamic var timestamp: Date = Date()
     
