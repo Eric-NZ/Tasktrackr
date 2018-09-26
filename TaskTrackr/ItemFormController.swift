@@ -43,7 +43,7 @@ class ItemFormController: FormViewController {
         super.viewDidLoad()
         
         // set right bar button
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePressed))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(donePressed))
         
         // build form
         switch clientPage {

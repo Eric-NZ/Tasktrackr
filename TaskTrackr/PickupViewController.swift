@@ -26,6 +26,9 @@ class PickupViewController: CollapsibleTableSectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // initialize right bar button item
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Select", style: .done, target: self, action: #selector(onSelectPressed))
 
         // load all models for each product
         modelArrays = products.map({
@@ -46,6 +49,10 @@ class PickupViewController: CollapsibleTableSectionViewController {
         
         // set delegate
         delegate = self
+    }
+    
+    @objc func onSelectPressed() {
+        
     }
 }
 
