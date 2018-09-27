@@ -150,7 +150,7 @@ class DatabaseService {
         let realm = getRealm()
         
         if update {
-            
+            // if update, ensure removeing all tools & models before appending
             try! realm.write {
                 service.tools.removeAll()
                 service.models.removeAll()
