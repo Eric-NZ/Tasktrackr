@@ -15,10 +15,10 @@ class Service: Object {
     @objc dynamic var serviceTitle: String?
     // Service Description
     @objc dynamic var serviceDesc: String?
-//    // Applied Tools
-    var appliedTools: List<Tool>?
-    // Applied Products
-    var appliedProductModels: List<Model>?
+    // Applicable Tools
+    var tools = List<Tool>()
+    // Applicable Product models
+    var models = List<Model>()
     // Created Date
     @objc dynamic var timestamp: Date = Date()
     

@@ -70,4 +70,19 @@ class ServicesTableViewController: UITableViewController, ManageItemDelegate {
         openFormController(sender: self)
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            removeService(service: services[indexPath.row])
+        default:
+            break
+        }
+    }
+    
+    // remove entire service
+    func removeService(service: Service ) {
+        DatabaseService.shared.removeObject(toRemove: service)
+    }
+    
 }
+

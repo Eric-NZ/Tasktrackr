@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 extension Results {
-    func toArray<T>(ofType: T.Type) -> [T] {
+    func resultToArray<T>(ofType: T.Type) -> [T] {
         var array = [T]()
         for i in 0 ..< count {
             if let result = self[i] as? T {
@@ -49,14 +49,6 @@ class DatabaseService {
         return SyncUser.current!
     }
     
-    // convert an array to a list
-    func arrayToList<T>(from array: [T]) -> List<T> {
-        let list = List<T>()
-        list.append(objectsIn: array)
-        
-        return list
-    }
-    
     /** Once data changed, controller will be notified.
      */
     func addNotificationHandle<T>(objects: Results<T>, tableView: UITableView?) -> NotificationToken {
@@ -89,15 +81,29 @@ class DatabaseService {
         return models
     }
     
+    public func modelListToArray(from list: List<Model>) -> [Model] {
+        var array: [Model] = []
+        array.append(contentsOf: list)
+        
+        return array
+    }
+    
+    public func toolListToArray(from list: List<Tool>) -> [Tool] {
+        var array: [Tool] = []
+        array.append(contentsOf: list)
+        
+        return array
+    }
+    
     public func getModelArray(in product: Product) -> [Model] {
         let realm = getRealm()
-        return realm.objects(Model.self).filter("product=%@", product.self).toArray(ofType: Model.self)
+        return realm.objects(Model.self).filter("product=%@", product.self).resultToArray(ofType: Model.self)
     }
     
     // get object array, this function is not working for model objects.
     public func getObjectArray(objectType: Object.Type) -> [Object] {
         let realm = getRealm()
-        return realm.objects(objectType).toArray(ofType: objectType)
+        return realm.objects(objectType).resultToArray(ofType: objectType)
     }
     
     public func saveModels(to product: Product, with modelArray: [Model]) {
@@ -135,6 +141,34 @@ class DatabaseService {
         let realm = getRealm()
         try! realm.write {
             realm.add(object)
+        }
+    }
+    
+    // add / update a service object
+    public func addService(add service: Service, _ title: String?, _ desc: String?, tools: [Tool], models: [Model], update: Bool) {
+        
+        let realm = getRealm()
+        
+        if update {
+            
+            try! realm.write {
+                service.tools.removeAll()
+                service.models.removeAll()
+                service.tools.append(objectsIn: tools)
+                service.models.append(objectsIn: models)
+                service.setValue(title, forKey: "serviceTitle")
+                service.setValue(desc, forKey: "serviceDesc")
+                
+            }
+        } else {
+            service.tools.append(objectsIn: tools)
+            service.models.append(objectsIn: models)
+            service.serviceTitle = title
+            service.serviceDesc = desc
+            
+            try! realm.write {
+                realm.add(service, update: update)
+            }
         }
     }
     

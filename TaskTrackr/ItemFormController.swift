@@ -157,6 +157,11 @@ class ItemFormController: FormViewController {
     
     // build Service form
     func buildServiceForm(){
+        // initialize model list & tool arrays
+        if currentService != nil {
+            applicableModels = DatabaseService.shared.modelListToArray(from: (currentService?.models)!)
+            applicableTools = DatabaseService.shared.toolListToArray(from: (currentService?.tools)!)
+        }
         // Service Title
         let nameField = TextFieldRowFormer<FormTextFieldCell>() {
             $0.titleLabel.text = "Service Title"
@@ -164,7 +169,7 @@ class ItemFormController: FormViewController {
             $0.textField.textColor = .formerSubColor()
             $0.textField.font = .boldSystemFont(ofSize: 14)
             }.configure {
-                $0.placeholder = "Service Title"
+                $0.placeholder = "e.g. Install Shower Trays"
                 $0.text = currentService != nil ? currentService?.serviceTitle : ""
                 serviceTitle = $0.text!
             }.onTextChanged { (text) in
@@ -189,12 +194,12 @@ class ItemFormController: FormViewController {
         let sectionBasic = SectionFormer(rowFormer: nameField, descField).set(headerViewFormer: createHeader("Basic Service Info"))
         
         // applied products
-        productSelectorMenu = createMenu("Applicable Products", Static.none_selected) { [weak self] in
+        productSelectorMenu = createMenu("Applicable Products", getProductSelectionStateText()) { [weak self] in
             self?.performSegue(withIdentifier: Static.pickup_segue, sender: self)
             } as? LabelRowFormer<FormLabelCell>
         
         // applied tools: if the sender is nil, means I will present the selector for Tools
-        toolSelectorMenu = createMenu("Applicable Tools", Static.none_selected) { [weak self] in
+        toolSelectorMenu = createMenu("Applicable Tools", getToolSelectionStateText()) { [weak self] in
             self?.performSegue(withIdentifier: Static.pickup_segue, sender: nil)
             } as? LabelRowFormer<FormLabelCell>
         
@@ -208,18 +213,14 @@ class ItemFormController: FormViewController {
             return false
         }
         
+        var isUpdate = false
         if currentService == nil {       // if it is a new Service
             currentService = Service()
-            currentService?.serviceTitle = serviceTitle
-            currentService?.serviceDesc = serviceDesc
-            currentService?.appliedProductModels = DatabaseService.shared.arrayToList(from: applicableModels)
-            currentService?.appliedTools = DatabaseService.shared.arrayToList(from: applicableTools)
-            
-            DatabaseService.shared.addObject(for: currentService!)
-            
+    
         } else {                        // if we are editing an existing Service
-            
+            isUpdate = true
         }
+        DatabaseService.shared.addService(add: currentService!, serviceTitle, serviceDesc, tools: applicableTools, models: applicableModels, update: isUpdate)
         
         return true
     }
@@ -468,12 +469,8 @@ extension ItemFormController: ToolAndModelPickupDelegate {
         updateSelectorMenu()
     }
     
-    func updateSelectorMenu() {
-        guard productSelectorMenu != nil else {return}
-        guard toolSelectorMenu != nil else {return}
-        
+    func getProductSelectionStateText() -> String {
         let numberOfModels = applicableModels.count
-        let numberOfTools = applicableTools.count
         
         let productSubText: String = {
             switch numberOfModels {
@@ -486,6 +483,12 @@ extension ItemFormController: ToolAndModelPickupDelegate {
             }
         }()
         
+        return productSubText
+    }
+    
+    func getToolSelectionStateText() -> String {
+        let numberOfTools = applicableTools.count
+        
         let toolSubText: String = {
             switch numberOfTools {
             case 0:
@@ -497,8 +500,15 @@ extension ItemFormController: ToolAndModelPickupDelegate {
             }
         }()
         
-        productSelectorMenu?.subText = productSubText
-        toolSelectorMenu?.subText = toolSubText
+        return toolSubText
+    }
+    
+    func updateSelectorMenu() {
+        guard productSelectorMenu != nil else {return}
+        guard toolSelectorMenu != nil else {return}
+        
+        productSelectorMenu?.subText = getProductSelectionStateText()
+        toolSelectorMenu?.subText = getToolSelectionStateText()
   
         former.reload()
     }
