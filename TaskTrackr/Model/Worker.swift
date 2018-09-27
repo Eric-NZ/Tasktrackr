@@ -16,8 +16,6 @@ class Worker: Object {
     @objc dynamic var lastName: String?
     // Job Title
     @objc dynamic var role: String?
-//    // What Actions this worker can do?
-//    @objc dynamic var actionsApplied: [String]?
     // Join Date
     @objc dynamic var timestamp: Date = Date()
     

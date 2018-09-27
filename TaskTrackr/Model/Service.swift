@@ -1,5 +1,5 @@
 //
-//  Action.swift
+//  Service.swift
 //  TaskTrackr
 //
 //  Created by Eric Ho on 4/09/18.
@@ -8,13 +8,13 @@
 
 import RealmSwift
 
-class Action: Object {
+class Service: Object {
     // Automatic Id
-    @objc dynamic var actionId: String = UUID().uuidString
-    // Action Title
-    @objc dynamic var actionTitle: String?
-    // Action Description
-    @objc dynamic var actionDesc: String?
+    @objc dynamic var serviceId: String = UUID().uuidString
+    // Service Title
+    @objc dynamic var serviceTitle: String?
+    // Service Description
+    @objc dynamic var serviceDesc: String?
 //    // Applied Tools
     var appliedTools: List<Tool>?
     // Applied Products
@@ -24,6 +24,6 @@ class Action: Object {
     
     // Primary Key
     override static func primaryKey() -> String {
-        return "actionId"
+        return "serviceId"
     }
 }

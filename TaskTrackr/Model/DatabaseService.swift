@@ -26,7 +26,7 @@ class DatabaseService {
     static var shared = DatabaseService()
     
     enum objectType {
-        case action, worker, product, tool, site
+        case service, worker, product, tool, site
     }
     
     init() {

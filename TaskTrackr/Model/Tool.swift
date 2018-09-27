@@ -16,8 +16,6 @@ class Tool: Object {
     @objc dynamic var toolName: String?
     // Tool Description
     @objc dynamic var toolDesc: String?
-    // Actions that can use this tool
-//    @objc dynamic var actionsApplied: [String]?
     // Created Date
     @objc dynamic var timestamp: Date = Date()
     

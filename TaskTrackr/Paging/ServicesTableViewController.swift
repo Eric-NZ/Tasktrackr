@@ -1,5 +1,5 @@
 //
-//  ActionsTableViewController.swift
+//  ServicesTableViewController.swift
 //  TaskTrackr
 //
 //  Created by Eric Ho on 5/09/18.
@@ -9,16 +9,16 @@
 import UIKit
 import RealmSwift
 
-class ActionsTableViewController: UITableViewController, ManageItemDelegate {
+class ServicesTableViewController: UITableViewController, ManageItemDelegate {
     
     var notificationToken: NotificationToken?
     let realm = DatabaseService.shared.getRealm()
-    var actions: Results<Action>
-    var selectedAction: Action?
+    var services: Results<Service>
+    var selectedService: Service?
     var isNewItem: Bool = true
     
     required init?(coder aDecoder: NSCoder) {
-        actions = realm.objects(Action.self)
+        services = realm.objects(Service.self)
         
         super.init(coder: aDecoder)
     }
@@ -26,17 +26,17 @@ class ActionsTableViewController: UITableViewController, ManageItemDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        notificationToken = DatabaseService.shared.addNotificationHandle(objects: actions, tableView: self.tableView)
+        notificationToken = DatabaseService.shared.addNotificationHandle(objects: services, tableView: self.tableView)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let itemForm = segue.destination as! ItemFormController
-        itemForm.currentAction = sender == nil ? nil : selectedAction
-        itemForm.clientPage = Static.action_page
+        itemForm.currentService = sender == nil ? nil : selectedService
+        itemForm.clientPage = Static.service_page
     }
     
     func openFormController(sender: Any?) {
-        performSegue(withIdentifier: Static.action_segue, sender: sender)
+        performSegue(withIdentifier: Static.service_segue, sender: sender)
     }
     
     // MARK: - MangeItemDelegate
@@ -52,21 +52,21 @@ class ActionsTableViewController: UITableViewController, ManageItemDelegate {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return actions.count
+        return services.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ActionCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceCell", for: indexPath)
         
-        cell.textLabel?.text = actions[indexPath.row].actionTitle
-        cell.detailTextLabel?.text = actions[indexPath.row].actionDesc
+        cell.textLabel?.text = services[indexPath.row].serviceTitle
+        cell.detailTextLabel?.text = services[indexPath.row].serviceDesc
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        selectedAction = actions[indexPath.row]
+        selectedService = services[indexPath.row]
         openFormController(sender: self)
     }
     

@@ -15,15 +15,15 @@ class ItemFormController: FormViewController {
     // client page identifer
     var clientPage: String = ""
     // current item
-    var currentAction: Action?
+    var currentService: Service?
     var currentWorker: Worker?
     var currentProduct: Product?
     var currentTool: Tool?
     var currentSite: Site?
     
-    // for action
-    var actionTitle: String = ""
-    var actionDesc: String = ""
+    // for service
+    var serviceTitle: String = ""
+    var serviceDesc: String = ""
     var productSelectorMenu: LabelRowFormer<FormLabelCell>?
     var toolSelectorMenu: LabelRowFormer<FormLabelCell>?
     var applicableTools: [Tool] = []
@@ -51,8 +51,8 @@ class ItemFormController: FormViewController {
         
         // build form
         switch clientPage {
-        case Static.action_page:
-            buildActionForm()
+        case Static.service_page:
+            buildServiceForm()
         case Static.worker_page:
             buildWorkerForm()
         case Static.product_page:
@@ -74,8 +74,8 @@ class ItemFormController: FormViewController {
         var isSaved: Bool = false
         
         switch clientPage {
-        case Static.action_page:
-            isSaved = saveActionForm()
+        case Static.service_page:
+            isSaved = saveServiceForm()
         case Static.worker_page:
             isSaved = saveWorkerForm()
         case Static.product_page:
@@ -155,38 +155,38 @@ class ItemFormController: FormViewController {
         }
     }
     
-    // build Action form
-    func buildActionForm(){
-        // Action Title
+    // build Service form
+    func buildServiceForm(){
+        // Service Title
         let nameField = TextFieldRowFormer<FormTextFieldCell>() {
-            $0.titleLabel.text = "Action Title"
+            $0.titleLabel.text = "Service Title"
             $0.titleLabel.font = .boldSystemFont(ofSize: 16)
             $0.textField.textColor = .formerSubColor()
             $0.textField.font = .boldSystemFont(ofSize: 14)
             }.configure {
-                $0.placeholder = "Action Title"
-                $0.text = currentAction != nil ? currentAction?.actionTitle : ""
-                actionTitle = $0.text!
+                $0.placeholder = "Service Title"
+                $0.text = currentService != nil ? currentService?.serviceTitle : ""
+                serviceTitle = $0.text!
             }.onTextChanged { (text) in
                 // save product name
-                self.productName = text
+                self.serviceTitle = text
         }
-        // Action Desc
+        // Service Desc
         let descField = TextViewRowFormer<FormTextViewCell>() {
             $0.titleLabel.text = "Description"
             $0.titleLabel.font = .boldSystemFont(ofSize: 16)
             $0.textView.textColor = .formerSubColor()
             $0.textView.font = .systemFont(ofSize: 15)
             }.configure {
-                $0.placeholder = "Add action introduction."
-                $0.text = currentAction != nil ? currentAction?.actionDesc : ""
-                actionDesc = $0.text!
+                $0.placeholder = "Add Service Introduction"
+                $0.text = currentService != nil ? currentService?.serviceDesc : ""
+                serviceDesc = $0.text!
             }.onTextChanged { (text) in
-                // save action desc
-                self.actionDesc = text
+                // save service desc
+                self.serviceDesc = text
         }
         
-        let sectionBasic = SectionFormer(rowFormer: nameField, descField).set(headerViewFormer: createHeader("Basic Action Info"))
+        let sectionBasic = SectionFormer(rowFormer: nameField, descField).set(headerViewFormer: createHeader("Basic Service Info"))
         
         // applied products
         productSelectorMenu = createMenu("Applicable Products", Static.none_selected) { [weak self] in
@@ -201,9 +201,25 @@ class ItemFormController: FormViewController {
         let sectionSelector = SectionFormer(rowFormer: productSelectorMenu!, toolSelectorMenu!)
         former.append(sectionFormer: sectionBasic, sectionSelector)
     }
-    // save Action form
-    func saveActionForm() -> Bool {
-        //
+    // save Service form
+    func saveServiceForm() -> Bool {
+        guard !serviceTitle.isEmpty else {
+            Static.showToast(toastText: "Please provide an Service Title.")
+            return false
+        }
+        
+        if currentService == nil {       // if it is a new Service
+            currentService = Service()
+            currentService?.serviceTitle = serviceTitle
+            currentService?.serviceDesc = serviceDesc
+            currentService?.appliedProductModels = DatabaseService.shared.arrayToList(from: applicableModels)
+            currentService?.appliedTools = DatabaseService.shared.arrayToList(from: applicableTools)
+            
+            DatabaseService.shared.addObject(for: currentService!)
+            
+        } else {                        // if we are editing an existing Service
+            
+        }
         
         return true
     }

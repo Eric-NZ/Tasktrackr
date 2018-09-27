@@ -28,14 +28,14 @@ struct Static {
     // user status: has signed in?
     static var currentUser: SyncUser?
     
-    static let action_page = "ActionViewController"
+    static let service_page = "ServiceViewController"
     static let worker_page = "WorkerViewController"
     static let product_page = "ProductViewController"
     static let tool_page = "ToolViewController"
     static let site_page = "SiteViewController"
     static let root_page = "RootPagingViewController"
     
-    static let action_segue = "OpenActionForm"
+    static let service_segue = "OpenServiceForm"
     static let worker_segue = "OpenWorkerForm"
     static let product_segue = "OpenProductForm"
     static let tool_segue = "OpenToolForm"
