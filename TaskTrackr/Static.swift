@@ -43,6 +43,8 @@ struct Static {
     static let selector_segue = "OpenSelectorController"
     static let pickup_segue = "OpenPickupController"
     
+    static let none_selected = "None Selected"
+    
     static func showToast(toastText: String) {
         Toast(text: toastText, delay: 0, duration: Delay.long).show()
     }

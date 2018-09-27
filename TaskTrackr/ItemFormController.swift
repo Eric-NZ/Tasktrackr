@@ -24,8 +24,10 @@ class ItemFormController: FormViewController {
     // for action
     var actionTitle: String = ""
     var actionDesc: String = ""
-    var selectedTools: [Tool] = []
-    var selectedModels: [Model] = []
+    var productSelectorMenu: LabelRowFormer<FormLabelCell>?
+    var toolSelectorMenu: LabelRowFormer<FormLabelCell>?
+    var applicableTools: [Tool] = []
+    var applicableModels: [Model] = []
     
     // for product
     var tagListView: TagListView?
@@ -101,13 +103,14 @@ class ItemFormController: FormViewController {
     }
     
     // Menu
-    let createMenu : ((String, (() -> Void)?) -> RowFormer) = { (text, onSelected) in
+    let createMenu : ((String, String, (() -> Void)?) -> RowFormer) = { (text, subText, onSelected) in
         return LabelRowFormer<FormLabelCell>() {
             $0.titleLabel.textColor = .formerColor()
             $0.titleLabel.font = .boldSystemFont(ofSize: 16)
             $0.accessoryType = .disclosureIndicator
             }.configure {
                 $0.text = text
+                $0.subText = subText
             }.onSelected({ _ in
                 onSelected?()
             })
@@ -186,20 +189,22 @@ class ItemFormController: FormViewController {
         let sectionBasic = SectionFormer(rowFormer: nameField, descField).set(headerViewFormer: createHeader("Basic Action Info"))
         
         // applied products
-        let productSelectorRow = createMenu("Applicable Products") { [weak self] in
+        productSelectorMenu = createMenu("Applicable Products", Static.none_selected) { [weak self] in
             self?.performSegue(withIdentifier: Static.pickup_segue, sender: self)
-        }
+            } as? LabelRowFormer<FormLabelCell>
         
         // applied tools: if the sender is nil, means I will present the selector for Tools
-        let toolSelectorRow = createMenu("Applicable Tools") { [weak self] in
+        toolSelectorMenu = createMenu("Applicable Tools", Static.none_selected) { [weak self] in
             self?.performSegue(withIdentifier: Static.pickup_segue, sender: nil)
-        }
+            } as? LabelRowFormer<FormLabelCell>
         
-        let sectionSelector = SectionFormer(rowFormer: productSelectorRow, toolSelectorRow)
+        let sectionSelector = SectionFormer(rowFormer: productSelectorMenu!, toolSelectorMenu!)
         former.append(sectionFormer: sectionBasic, sectionSelector)
     }
     // save Action form
     func saveActionForm() -> Bool {
+        //
+        
         return true
     }
     // build Workder form
@@ -435,13 +440,51 @@ class ItemFormController: FormViewController {
         return true
     }
     
-    
 }
 
+// MARK: - ToolAndModelPickupDelegate
 extension ItemFormController: ToolAndModelPickupDelegate {
     func finishSelection(selectedtools: [Tool], selectedModels: [Model]) {
-        self.selectedModels = selectedModels
-        self.selectedTools = selectedtools
+        self.applicableModels = selectedModels
+        self.applicableTools = selectedtools
+        
+        // update summary on selector menus
+        updateSelectorMenu()
+    }
+    
+    func updateSelectorMenu() {
+        guard productSelectorMenu != nil else {return}
+        guard toolSelectorMenu != nil else {return}
+        
+        let numberOfModels = applicableModels.count
+        let numberOfTools = applicableTools.count
+        
+        let productSubText: String = {
+            switch numberOfModels {
+            case 0:
+                return Static.none_selected
+            case 1:
+                return "1 Model Selected"
+            default:
+                return String.init(format: "%d Models Selected", numberOfModels)
+            }
+        }()
+        
+        let toolSubText: String = {
+            switch numberOfTools {
+            case 0:
+                return Static.none_selected
+            case 1:
+                return "1 Tool Selected"
+            default:
+                return String.init(format: "%d Tools Selected", numberOfTools)
+            }
+        }()
+        
+        productSelectorMenu?.subText = productSubText
+        toolSelectorMenu?.subText = toolSubText
+  
+        former.reload()
     }
     
     // prepare information for the popping up selector view controller
@@ -450,8 +493,8 @@ extension ItemFormController: ToolAndModelPickupDelegate {
         // tells selector whether pickup tools or product models
         selector.eventFrom = (sender == nil) ? .fromTool : .fromProduct
         // init original selected tools & models
-        selector.selectedTools = selectedTools
-        selector.selectedModels = selectedModels
+        selector.selectedTools = applicableTools
+        selector.selectedModels = applicableModels
         // init the delegate of selector
         selector.pickupDelegate = self
     }
