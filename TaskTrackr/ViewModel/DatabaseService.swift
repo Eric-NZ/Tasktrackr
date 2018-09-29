@@ -76,13 +76,13 @@ class DatabaseService {
         return notificationToken
     }
     
-    private func getModels(in product: Product) -> Results<Model> {
-        let models = getRealm().objects(Model.self).filter("product=%@", product.self)
+    private func getModels(in product: Product) -> Results<ProductModel> {
+        let models = getRealm().objects(ProductModel.self).filter("product=%@", product.self)
         return models
     }
     
-    public func modelListToArray(from list: List<Model>) -> [Model] {
-        var array: [Model] = []
+    public func modelListToArray(from list: List<ProductModel>) -> [ProductModel] {
+        var array: [ProductModel] = []
         array.append(contentsOf: list)
         
         return array
@@ -95,9 +95,9 @@ class DatabaseService {
         return array
     }
     
-    public func getModelArray(in product: Product) -> [Model] {
+    public func getModelArray(in product: Product) -> [ProductModel] {
         let realm = getRealm()
-        return realm.objects(Model.self).filter("product=%@", product.self).resultToArray(ofType: Model.self)
+        return realm.objects(ProductModel.self).filter("product=%@", product.self).resultToArray(ofType: ProductModel.self)
     }
     
     // get object array, this function is not working for model objects.
@@ -106,7 +106,7 @@ class DatabaseService {
         return realm.objects(objectType).resultToArray(ofType: objectType)
     }
     
-    public func saveModels(to product: Product, with modelArray: [Model]) {
+    public func saveModels(to product: Product, with modelArray: [ProductModel]) {
         let realm = getRealm()
         // delete all models in the product
         let models = getModels(in: product)
@@ -145,7 +145,7 @@ class DatabaseService {
     }
     
     // add / update a service object
-    public func addService(add service: Service, _ title: String?, _ desc: String?, tools: [Tool], models: [Model], update: Bool) {
+    public func addService(add service: Service, _ title: String?, _ desc: String?, tools: [Tool], models: [ProductModel], update: Bool) {
         
         let realm = getRealm()
         
@@ -173,7 +173,7 @@ class DatabaseService {
     }
     
     // update an existing product
-    func updateProduct(for product: Product, with name: String, with desc: String, with models: [Model]) {
+    func updateProduct(for product: Product, with name: String, with desc: String, with models: [ProductModel]) {
         let realm = getRealm()
         try! realm.write {
             product.productName = name

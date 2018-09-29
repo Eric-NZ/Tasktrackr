@@ -10,7 +10,7 @@ import UIKit
 import CollapsibleTableSectionViewController
 
 protocol ToolAndModelPickupDelegate {
-    func finishSelection(selectedtools: [Tool], selectedModels: [Model])
+    func finishSelection(selectedtools: [Tool], selectedModels: [ProductModel])
 }
 
 class PickupViewController: CollapsibleTableSectionViewController {
@@ -19,7 +19,7 @@ class PickupViewController: CollapsibleTableSectionViewController {
 
     var products: [Product] = DatabaseService.shared.getObjectArray(objectType: Product.self) as! [Product]
     // NOTE: this is an array includes arrays that include models belong to each specific product.
-    var allModelArrays: [[Model]] = []
+    var allModelArrays: [[ProductModel]] = []
     // all tools
     var allTools: [Tool] = DatabaseService.shared.getObjectArray(objectType: Tool.self) as! [Tool]
     // this 2-dimension array has the same structure as array allModelArrays
@@ -28,7 +28,7 @@ class PickupViewController: CollapsibleTableSectionViewController {
     var toolBoolArray: [Bool] = []
     // for collecting selected tools and models
     var selectedTools: [Tool] = []
-    var selectedModels: [Model] = []
+    var selectedModels: [ProductModel] = []
     
     enum selectedFrom {
         case fromTool
@@ -40,7 +40,7 @@ class PickupViewController: CollapsibleTableSectionViewController {
         super.viewDidLoad()
         
         // initialize right bar button item
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Select", style: .done, target: self, action: #selector(onSelectPressed))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(onSelectPressed))
 
         // load all models for each product
         allModelArrays = products.map({

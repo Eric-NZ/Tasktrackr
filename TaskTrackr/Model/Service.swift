@@ -18,7 +18,7 @@ class Service: Object {
     // Applicable Tools
     var tools = List<Tool>()
     // Applicable Product models
-    var models = List<Model>()
+    var models = List<ProductModel>()
     // Created Date
     @objc dynamic var timestamp: Date = Date()
     

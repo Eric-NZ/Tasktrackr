@@ -27,7 +27,7 @@ class ItemFormController: FormViewController {
     var productSelectorMenu: LabelRowFormer<FormLabelCell>?
     var toolSelectorMenu: LabelRowFormer<FormLabelCell>?
     var applicableTools: [Tool] = []
-    var applicableModels: [Model] = []
+    var applicableModels: [ProductModel] = []
     
     // for product
     var tagListView: TagListView?
@@ -292,11 +292,11 @@ class ItemFormController: FormViewController {
     func buildProductForm() {
         
         // initial model array
-        let initialModelArray : () -> [Model] = {
+        let initialModelArray : () -> [ProductModel] = {
             if (self.currentProduct == nil) {
                 return []
             } else {
-                let models: [Model] = DatabaseService.shared.getModelArray(in: self.currentProduct!)
+                let models: [ProductModel] = DatabaseService.shared.getModelArray(in: self.currentProduct!)
                 return models
             }
         }
@@ -367,10 +367,10 @@ class ItemFormController: FormViewController {
         }
         
         // changed model array
-        let changedModelArray: () -> [Model] = {
+        let changedModelArray: () -> [ProductModel] = {
             let tagViews: [TagView] = (self.tagListView?.tagViews)!
-            let models: [Model] = tagViews.map {
-                let model = Model()
+            let models: [ProductModel] = tagViews.map {
+                let model = ProductModel()
                 model.modelName = $0.titleLabel?.text
                 model.product = self.currentProduct
                 return model
@@ -461,7 +461,7 @@ class ItemFormController: FormViewController {
 
 // MARK: - ToolAndModelPickupDelegate
 extension ItemFormController: ToolAndModelPickupDelegate {
-    func finishSelection(selectedtools: [Tool], selectedModels: [Model]) {
+    func finishSelection(selectedtools: [Tool], selectedModels: [ProductModel]) {
         self.applicableModels = selectedModels
         self.applicableTools = selectedtools
         

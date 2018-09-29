@@ -8,7 +8,7 @@
 
 import RealmSwift
 
-class Model: Object {
+class ProductModel: Object {
     
     @objc dynamic var modelId: String = UUID().uuidString
     @objc dynamic var modelName: String?
