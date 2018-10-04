@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AllTasksTableViewController: UITableViewController {
+class TaskSearchTableViewController: UITableViewController {
     
     @IBOutlet weak var addButton: UIBarButtonItem!
     let allTaskArray: [String] = ["task1", "task2", "task3", "task4", "task5", "task6", "task11", "task12", "task13", "task14", "task15", "task16"]

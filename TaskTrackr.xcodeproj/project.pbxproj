@@ -41,7 +41,7 @@
 		21EA13AC213622C900C5CB34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21EA13AB213622C900C5CB34 /* Assets.xcassets */; };
 		21EA13AF213622C900C5CB34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21EA13AD213622C900C5CB34 /* LaunchScreen.storyboard */; };
 		21EA13C121364FF200C5CB34 /* TaskTrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EA13C021364FF200C5CB34 /* TaskTrackingViewController.swift */; };
-		21EA13C32136505200C5CB34 /* AllTasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EA13C22136505200C5CB34 /* AllTasksTableViewController.swift */; };
+		21EA13C32136505200C5CB34 /* TaskSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EA13C22136505200C5CB34 /* TaskSearchTableViewController.swift */; };
 		21F7A8CF214E263A00A01AB5 /* TagControlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21F7A8CD214E263A00A01AB5 /* TagControlTableViewCell.xib */; };
 		B7F2E06E71D2CEECD93433CC /* Pods_TaskTrackr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A6487C605C9341862DA23B1 /* Pods_TaskTrackr.framework */; };
 /* End PBXBuildFile section */
@@ -83,7 +83,7 @@
 		21EA13AE213622C900C5CB34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		21EA13B0213622C900C5CB34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21EA13C021364FF200C5CB34 /* TaskTrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTrackingViewController.swift; sourceTree = "<group>"; };
-		21EA13C22136505200C5CB34 /* AllTasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTasksTableViewController.swift; sourceTree = "<group>"; };
+		21EA13C22136505200C5CB34 /* TaskSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSearchTableViewController.swift; sourceTree = "<group>"; };
 		21F7A8CD214E263A00A01AB5 /* TagControlTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagControlTableViewCell.xib; sourceTree = "<group>"; };
 		9A6487C605C9341862DA23B1 /* Pods_TaskTrackr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaskTrackr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7D12C04F2B5A29FEE2D4BD5 /* Pods-TaskTrackr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskTrackr.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaskTrackr/Pods-TaskTrackr.release.xcconfig"; sourceTree = "<group>"; };
@@ -190,7 +190,7 @@
 				21EA13A8213622C800C5CB34 /* TaskTrackr.xcdatamodeld */,
 				21EA13B0213622C900C5CB34 /* Info.plist */,
 				2122019D21436D3000EE8A06 /* LoginViewController.swift */,
-				21EA13C22136505200C5CB34 /* AllTasksTableViewController.swift */,
+				21EA13C22136505200C5CB34 /* TaskSearchTableViewController.swift */,
 				21EA13C021364FF200C5CB34 /* TaskTrackingViewController.swift */,
 				21A67483214220020012B555 /* ItemFormController.swift */,
 				2195F4B92159DEFA00309990 /* PickupViewController.swift */,
@@ -377,7 +377,7 @@
 				21EA13A2213622C800C5CB34 /* AppDelegate.swift in Sources */,
 				21BBC786213E5A330006B5B4 /* Static.swift in Sources */,
 				2135DD8B215F45EB004AAC96 /* DataModel.swift in Sources */,
-				21EA13C32136505200C5CB34 /* AllTasksTableViewController.swift in Sources */,
+				21EA13C32136505200C5CB34 /* TaskSearchTableViewController.swift in Sources */,
 				21BBC78E213E69440006B5B4 /* Site.swift in Sources */,
 				21EA13AA213622C800C5CB34 /* TaskTrackr.xcdatamodeld in Sources */,
 			);
