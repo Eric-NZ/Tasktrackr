@@ -49,6 +49,13 @@ class DatabaseService {
         return SyncUser.current!
     }
     
+    func logout() {
+        for user in SyncUser.all {
+            debugPrint("user: \(user.key) - \(user.value)")
+            user.value.logOut()
+        }
+    }
+    
     /** Once data changed, controller will be notified.
      */
     func addNotificationHandle<T>(objects: Results<T>, tableView: UITableView?) -> NotificationToken {

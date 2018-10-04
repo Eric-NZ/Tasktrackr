@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         // logout
-        DatabaseService.shared.getCurrentUser().logOut()
+        DatabaseService.shared.logout()
     }
 
 }

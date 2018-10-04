@@ -17,6 +17,10 @@ class LoginViewController: UIViewController, LFLoginControllerDelegate {
     
     func loginDidFinish(email: String, password: String, type: LFLoginController.SendType) {
         if type == .Login {     // user is logging in
+            
+            // logout any other users
+            DatabaseService.shared.logout()
+            // log in current user
             login(userName: email, password: password)
         } else {                // user is signing up
             let creds = SyncCredentials.usernamePassword(username: email, password: password, register: true)
