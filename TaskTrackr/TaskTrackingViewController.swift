@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ActivatedTasksTableViewController: UITableViewController {
+class TaskTrackingViewController: UITableViewController {
     
     let activatedTaskArray: [String] = ["task1", "task3", "task4", "task6",]
 

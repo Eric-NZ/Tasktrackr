@@ -20,5 +20,5 @@ class Task: Object {
     // service
     var service: Service?
     // images
-    var images: [String] = []
+    var images: [UIImage] = []
 }
