@@ -53,25 +53,6 @@ class TaskEditorViewController: FormViewController {
                 })
         }
         
-        // Selector
-        let createSelectorRow = { (
-            text: String,
-            subText: String,
-            onSelected: ((RowFormer) -> Void)?
-            ) -> RowFormer in
-            return LabelRowFormer<FormLabelCell>() {
-                $0.titleLabel.textColor = .formerColor()
-                $0.titleLabel.font = .boldSystemFont(ofSize: 16)
-                $0.subTextLabel.textColor = .formerSubColor()
-                $0.subTextLabel.font = .boldSystemFont(ofSize: 14)
-                $0.accessoryType = .disclosureIndicator
-                }.configure { form in
-                    _ = onSelected.map { form.onSelected($0) }
-                    form.text = text
-                    form.subText = subText
-            }
-        }
-        
         // necessary elements: 1.title, 2.desc, 3.service, 4.designated workers, 5.due date, 6.location, 7.ref images
         // Enter Title
         let titleField = TextFieldRowFormer<FormTextFieldCell>() {
@@ -101,23 +82,34 @@ class TaskEditorViewController: FormViewController {
         // Select Service: Single Selection
         let serviceSelector = createMenu("Select Service", "None Selected") { [weak self] in
             // perform segue here:
-            //
+            self?.performSegue(withIdentifier: Static.servicePicker_segue, sender: self)
             } as? LabelRowFormer<FormLabelCell>
         
         // Pickup Designated Workers: Multi Selection
         let workerSelector = createMenu("Designate Workers", "None Selected") { [weak self] in
             // perform segue here:
-            //
+            self?.performSegue(withIdentifier: Static.workerPicker_segue, sender: self)
             } as? LabelRowFormer<FormLabelCell>
         // Select Due Date
-        
+        let dueDatePicker = InlineDatePickerRowFormer<FormInlineDatePickerCell>() {
+            $0.titleLabel.text = "Date"
+            $0.titleLabel.textColor = .formerColor()
+            $0.titleLabel.font = .boldSystemFont(ofSize: 16)
+            $0.displayLabel.textColor = .formerSubColor()
+            $0.displayLabel.font = .boldSystemFont(ofSize: 14)
+            }.inlineCellSetup {
+                $0.datePicker.datePickerMode = .dateAndTime
+            }.configure {
+                $0.displayEditingColor = .formerHighlightedSubColor()
+            }.displayTextFromDate(String.mediumDateShortTime)
         // Search&Pickup Location
         
         // Upload Images
         
         let sectionBasic = SectionFormer(rowFormer: titleField, descField).set(headerViewFormer: createHeader("Basic Task Info"))
-        let sectionSelectors = SectionFormer(rowFormer: serviceSelector!, workerSelector!).set(headerViewFormer: createHeader("Basic Task Info"))
-        former.append(sectionFormer: sectionBasic, sectionSelectors)
+        let sectionSelectors = SectionFormer(rowFormer: serviceSelector!, workerSelector!)
+        let sectionDatePicker = SectionFormer(rowFormer: dueDatePicker)
+        former.append(sectionFormer: sectionBasic, sectionSelectors, sectionDatePicker)
     }
 
     func saveNewTask() {
