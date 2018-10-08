@@ -30,9 +30,10 @@
 		21BBC78C213E681D0006B5B4 /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBC78B213E681D0006B5B4 /* Worker.swift */; };
 		21BBC78E213E69440006B5B4 /* Site.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBC78D213E69440006B5B4 /* Site.swift */; };
 		21BBC790213E6BB00006B5B4 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBC78F213E6BB00006B5B4 /* Service.swift */; };
+		21C4B346216B3D6900913ADB /* TaskCreatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C4B345216B3D6900913ADB /* TaskCreatorViewController.swift */; };
 		21D8D656213F96E00092AEBB /* ServicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D8D655213F96E00092AEBB /* ServicesTableViewController.swift */; };
 		21D8D658213F97170092AEBB /* WorkersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D8D657213F97170092AEBB /* WorkersTableViewController.swift */; };
-		21D8D65B213FE30D0092AEBB /* RootPagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D8D65A213FE30D0092AEBB /* RootPagingViewController.swift */; };
+		21D8D65B213FE30D0092AEBB /* PageHolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D8D65A213FE30D0092AEBB /* PageHolderViewController.swift */; };
 		21DF277E214E0A6800BB2799 /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF277C214E0A6800BB2799 /* TagTableViewCell.swift */; };
 		21DF277F214E0A6800BB2799 /* TagTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21DF277D214E0A6800BB2799 /* TagTableViewCell.xib */; };
 		21EA13A2213622C800C5CB34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EA13A1213622C800C5CB34 /* AppDelegate.swift */; };
@@ -70,9 +71,10 @@
 		21BBC78B213E681D0006B5B4 /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
 		21BBC78D213E69440006B5B4 /* Site.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Site.swift; sourceTree = "<group>"; };
 		21BBC78F213E6BB00006B5B4 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		21C4B345216B3D6900913ADB /* TaskCreatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreatorViewController.swift; sourceTree = "<group>"; };
 		21D8D655213F96E00092AEBB /* ServicesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesTableViewController.swift; sourceTree = "<group>"; };
 		21D8D657213F97170092AEBB /* WorkersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkersTableViewController.swift; sourceTree = "<group>"; };
-		21D8D65A213FE30D0092AEBB /* RootPagingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootPagingViewController.swift; sourceTree = "<group>"; };
+		21D8D65A213FE30D0092AEBB /* PageHolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHolderViewController.swift; sourceTree = "<group>"; };
 		21DF277C214E0A6800BB2799 /* TagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
 		21DF277D214E0A6800BB2799 /* TagTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagTableViewCell.xib; sourceTree = "<group>"; };
 		21EA139E213622C800C5CB34 /* TaskTrackr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskTrackr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,7 +138,7 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		213DA70F2153A00A00D0C7AF /* Cell */ = {
+		213DA70F2153A00A00D0C7AF /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				21DF277C214E0A6800BB2799 /* TagTableViewCell.swift */,
@@ -146,20 +148,32 @@
 				213DA7112153A03E00D0C7AF /* ToolTableViewCell.xib */,
 				213DA7192153A0F500D0C7AF /* ModelTableViewCell.xib */,
 			);
-			path = Cell;
+			path = Components;
 			sourceTree = "<group>";
 		};
-		21D8D654213F969D0092AEBB /* Paging */ = {
+		21C4B347216B3DF200913ADB /* Task */ = {
 			isa = PBXGroup;
 			children = (
-				21D8D65A213FE30D0092AEBB /* RootPagingViewController.swift */,
+				21EA13C22136505200C5CB34 /* TaskSearchTableViewController.swift */,
+				21C4B345216B3D6900913ADB /* TaskCreatorViewController.swift */,
+				21EA13C021364FF200C5CB34 /* TaskTrackingViewController.swift */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		21D8D654213F969D0092AEBB /* Management */ = {
+			isa = PBXGroup;
+			children = (
+				2195F4B92159DEFA00309990 /* PickupViewController.swift */,
+				21A67483214220020012B555 /* ItemFormController.swift */,
+				21D8D65A213FE30D0092AEBB /* PageHolderViewController.swift */,
 				21D8D655213F96E00092AEBB /* ServicesTableViewController.swift */,
 				21D8D657213F97170092AEBB /* WorkersTableViewController.swift */,
 				21A265E82140781200671F6C /* ProductsTableViewController.swift */,
 				21A265EA2140782E00671F6C /* ToolsTableViewController.swift */,
 				21A265EC2140787100671F6C /* SitesTableViewController.swift */,
 			);
-			path = Paging;
+			path = Management;
 			sourceTree = "<group>";
 		};
 		21EA1395213622C800C5CB34 = {
@@ -190,14 +204,11 @@
 				21EA13A8213622C800C5CB34 /* TaskTrackr.xcdatamodeld */,
 				21EA13B0213622C900C5CB34 /* Info.plist */,
 				2122019D21436D3000EE8A06 /* LoginViewController.swift */,
-				21EA13C22136505200C5CB34 /* TaskSearchTableViewController.swift */,
-				21EA13C021364FF200C5CB34 /* TaskTrackingViewController.swift */,
-				21A67483214220020012B555 /* ItemFormController.swift */,
-				2195F4B92159DEFA00309990 /* PickupViewController.swift */,
 				21BBC785213E5A330006B5B4 /* Static.swift */,
-				21D8D654213F969D0092AEBB /* Paging */,
+				21C4B347216B3DF200913ADB /* Task */,
+				21D8D654213F969D0092AEBB /* Management */,
 				210620212141239B00BA2050 /* Extensions */,
-				213DA70F2153A00A00D0C7AF /* Cell */,
+				213DA70F2153A00A00D0C7AF /* Components */,
 				2135DD85215F424E004AAC96 /* ViewModel */,
 				210C04D3213CAF9C00576564 /* Model */,
 			);
@@ -359,7 +370,7 @@
 				219065B32158D272004D96AC /* UITableViewCell.swift in Sources */,
 				21EA13C121364FF200C5CB34 /* TaskTrackingViewController.swift in Sources */,
 				219065B12158BD87004D96AC /* UIImage.swift in Sources */,
-				21D8D65B213FE30D0092AEBB /* RootPagingViewController.swift in Sources */,
+				21D8D65B213FE30D0092AEBB /* PageHolderViewController.swift in Sources */,
 				21DF277E214E0A6800BB2799 /* TagTableViewCell.swift in Sources */,
 				2135DD81215F40CF004AAC96 /* ViewModel.swift in Sources */,
 				2125E6AE214E4AF0002FE54B /* UIColor.swift in Sources */,
@@ -375,6 +386,7 @@
 				21D8D656213F96E00092AEBB /* ServicesTableViewController.swift in Sources */,
 				21D8D658213F97170092AEBB /* WorkersTableViewController.swift in Sources */,
 				21EA13A2213622C800C5CB34 /* AppDelegate.swift in Sources */,
+				21C4B346216B3D6900913ADB /* TaskCreatorViewController.swift in Sources */,
 				21BBC786213E5A330006B5B4 /* Static.swift in Sources */,
 				2135DD8B215F45EB004AAC96 /* DataModel.swift in Sources */,
 				21EA13C32136505200C5CB34 /* TaskSearchTableViewController.swift in Sources */,
