@@ -92,7 +92,7 @@ class TaskEditorViewController: FormViewController {
             } as? LabelRowFormer<FormLabelCell>
         // Select Due Date
         let dueDatePicker = InlineDatePickerRowFormer<FormInlineDatePickerCell>() {
-            $0.titleLabel.text = "Date"
+            $0.titleLabel.text = "Due Date"
             $0.titleLabel.textColor = .formerColor()
             $0.titleLabel.font = .boldSystemFont(ofSize: 16)
             $0.displayLabel.textColor = .formerSubColor()

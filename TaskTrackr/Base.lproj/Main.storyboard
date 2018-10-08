@@ -135,11 +135,11 @@
             </objects>
             <point key="canvasLocation" x="1687" y="868"/>
         </scene>
-        <!--View All Tasks-->
+        <!--View Archived Tasks-->
         <scene sceneID="eva-Tf-BUJ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8d3-A4-cU6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="View All Tasks" id="Ycs-Nh-2dM"/>
+                    <tabBarItem key="tabBarItem" title="View Archived Tasks" id="Ycs-Nh-2dM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NUT-Oo-atq">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
