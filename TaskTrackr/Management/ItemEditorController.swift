@@ -10,7 +10,7 @@ import UIKit
 import Former
 import TagListView
 
-class ItemFormController: FormViewController {
+class ItemEditorController: FormViewController {
     
     // client page identifer
     var clientPage: String = ""
@@ -460,7 +460,7 @@ class ItemFormController: FormViewController {
 }
 
 // MARK: - ToolAndModelPickupDelegate
-extension ItemFormController: ToolAndModelPickupDelegate {
+extension ItemEditorController: ToolAndModelPickupDelegate {
     func finishSelection(selectedtools: [Tool], selectedModels: [ProductModel]) {
         self.applicableModels = selectedModels
         self.applicableTools = selectedtools

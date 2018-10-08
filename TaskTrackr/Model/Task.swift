@@ -9,6 +9,15 @@
 import RealmSwift
 
 class Task: Object {
+    
+    // task states
+    enum TaskState {
+        case created
+        case pending
+        case processing
+        case finished
+    }
+    
     // task id
     @objc dynamic var taskId: String = UUID().uuidString
     // timestamp
@@ -21,4 +30,6 @@ class Task: Object {
     var service: Service?
     // images
     var images: [UIImage] = []
+    // task state (4.Finished / 3.processing / 2.pending / 1.created)
+    var taskState: TaskState = .created
 }

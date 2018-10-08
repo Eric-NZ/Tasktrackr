@@ -44,7 +44,7 @@ class ProductsTableViewController: UITableViewController, ManageItemDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let itemForm = segue.destination as! ItemFormController
+        let itemForm = segue.destination as! ItemEditorController
         // tell destination controller which product is selected
         itemForm.currentProduct = sender == nil ? nil : selectedProduct
         itemForm.clientPage = Static.product_page

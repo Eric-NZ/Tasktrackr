@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TaskTrackingViewController: UITableViewController {
+class TaskTrackingViewController: UIViewController {
     
     let activatedTaskArray: [String] = ["task1", "task3", "task4", "task6",]
 
@@ -17,17 +17,13 @@ class TaskTrackingViewController: UITableViewController {
 
     }
 
-    // MARK: - Table view data source
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return activatedTaskArray.count
+    @IBAction func addPressed(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: Static.task_editor, sender: self)
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ActivatedTaskCell")
-        cell?.textLabel?.text = activatedTaskArray[indexPath.row]
-        return cell!
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        _ = segue.destination as! TaskEditorViewController
+        
     }
 
 }

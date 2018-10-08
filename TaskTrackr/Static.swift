@@ -42,6 +42,7 @@ struct Static {
     static let site_segue = "OpenSiteForm"
     static let selector_segue = "OpenSelectorController"
     static let pickup_segue = "OpenPickupController"
+    static let task_editor = "OpenTaskEditor"
     
     static let none_selected = "None Selected"
     

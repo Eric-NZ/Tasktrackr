@@ -44,7 +44,7 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate {
         super.prepare(for: segue, sender: sender)
         
         // tell the destination View controller which worker item is selected
-        let itemForm = segue.destination as! ItemFormController
+        let itemForm = segue.destination as! ItemEditorController
         itemForm.currentWorker = sender == nil ? nil : selectedWorker
         itemForm.clientPage = Static.worker_page
     }

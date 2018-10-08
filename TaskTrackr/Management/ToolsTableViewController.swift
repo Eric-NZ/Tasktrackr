@@ -38,7 +38,7 @@ class ToolsTableViewController: UITableViewController, ManageItemDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let itemForm = segue.destination as! ItemFormController
+        let itemForm = segue.destination as! ItemEditorController
         itemForm.clientPage = Static.tool_page
         itemForm.currentTool = sender == nil ? nil : selectedTool
     }

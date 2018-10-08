@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import Former
 
-class TaskCreatorViewController: UIViewController {
+class TaskEditorViewController: FormViewController {
+    
+    var currentTask: Task?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
 
 }

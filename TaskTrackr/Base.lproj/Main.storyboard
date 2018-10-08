@@ -9,36 +9,39 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Activated Tasks-->
-        <scene sceneID="NsV-6J-Qkw">
+        <!--Task Details-->
+        <scene sceneID="eL9-3L-FYD">
             <objects>
-                <tableViewController title="Activated Tasks" id="d7l-p5-Igc" customClass="TaskTrackingViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="HuY-CC-pzf">
+                <viewController title="Task Details" id="sBb-eY-PQM" customClass="TaskEditorViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NVT-Ja-9DG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ActivatedTaskCell" id="vCT-FV-H0h">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vCT-FV-H0h" id="Qb9-26-x3q">
-                                    <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="d7l-p5-Igc" id="V6Q-d7-na4"/>
-                            <outlet property="delegate" destination="d7l-p5-Igc" id="FSe-In-IfR"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Activated Tasks" id="YiW-xU-ygA">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Wbw-dO-H6H"/>
-                    </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2yS-tV-P3f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <viewLayoutGuide key="safeArea" id="Zdh-FY-C4b"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HXl-A8-dpd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1687.2" y="-66.11694152923539"/>
+            <point key="canvasLocation" x="2578" y="-66"/>
+        </scene>
+        <!--Tracking-->
+        <scene sceneID="ctq-bU-wEA">
+            <objects>
+                <viewController title="Tracking" id="inp-zA-Q6T" customClass="TaskTrackingViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="URh-3i-Ld0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="91A-bg-ds0"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Tracking" id="iHJ-1j-mcz"/>
+                    <connections>
+                        <segue destination="sBb-eY-PQM" kind="show" identifier="OpenTaskEditor" id="Q75-5d-3ql"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mtc-Xg-aVf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1686" y="-66"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="Dop-BQ-IhD">
@@ -90,17 +93,17 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="d7l-p5-Igc" kind="relationship" relationship="rootViewController" id="led-Mf-h1D"/>
+                        <segue destination="inp-zA-Q6T" kind="relationship" relationship="rootViewController" id="chp-kX-tnD"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pao-HS-tsH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="748" y="-66.11694152923539"/>
         </scene>
-        <!--All Tasks-->
+        <!--Archive Tasks-->
         <scene sceneID="b8v-4j-6cS">
             <objects>
-                <tableViewController title="All Tasks" id="1fb-KE-5Za" customClass="TaskSearchTableViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Archive Tasks" id="1fb-KE-5Za" customClass="TaskSearchTableViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ozu-YX-LmI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -120,16 +123,7 @@
                             <outlet property="delegate" destination="1fb-KE-5Za" id="ITe-Dz-wiI"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="All Tasks" id="i1H-8y-WLx">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="X3u-rn-yaC">
-                            <connections>
-                                <action selector="addPressed:" destination="1fb-KE-5Za" id="CXF-gp-f3t"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="addButton" destination="X3u-rn-yaC" id="g0d-GY-f73"/>
-                    </connections>
+                    <navigationItem key="navigationItem" title="Archived Tasks" id="i1H-8y-WLx"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cez-KW-Oe6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -251,10 +245,10 @@
             </objects>
             <point key="canvasLocation" x="3212" y="1827"/>
         </scene>
-        <!--Item Form Controller-->
+        <!--Item Editor Controller-->
         <scene sceneID="jcg-5E-Nh7">
             <objects>
-                <viewController storyboardIdentifier="ItemFormController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7PU-ky-Fat" customClass="ItemFormController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ItemFormController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7PU-ky-Fat" customClass="ItemEditorController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4wm-bB-eLe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -427,7 +421,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oiJ-mG-bY6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1644" y="1827"/>
+            <point key="canvasLocation" x="450" y="1764"/>
         </scene>
         <!--Manage-->
         <scene sceneID="46G-cA-bbe">
@@ -447,7 +441,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fSH-tJ-hZW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="748" y="1827"/>
+            <point key="canvasLocation" x="-530" y="1764"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
