@@ -126,6 +126,12 @@ class DatabaseService {
         }
     }
     
+    // add new task
+    public func addNewTask(task: Task) {
+        // NOTE: tasks may have images
+        
+    }
+    
     // remove a single object
     public func removeObject(toRemove: Object) {
         let realm = getRealm()

@@ -22,8 +22,9 @@ class TaskTrackingViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        _ = segue.destination as! TaskEditorViewController
-        
+        let editor = segue.destination as! TaskEditorViewController
+        // if nil, means it should be a new task
+        editor.currentTask = nil
     }
 
 }

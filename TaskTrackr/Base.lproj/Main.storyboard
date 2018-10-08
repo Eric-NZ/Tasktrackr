@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Task Details-->
+        <!--New Task-->
         <scene sceneID="eL9-3L-FYD">
             <objects>
-                <viewController title="Task Details" id="sBb-eY-PQM" customClass="TaskEditorViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="New Task" id="sBb-eY-PQM" customClass="TaskEditorViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NVT-Ja-9DG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -34,7 +34,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="91A-bg-ds0"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Tracking" id="iHJ-1j-mcz"/>
+                    <navigationItem key="navigationItem" title="Tracking" id="iHJ-1j-mcz">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="2Th-SS-cSg">
+                            <connections>
+                                <action selector="addPressed:" destination="inp-zA-Q6T" id="Fo1-NV-ElI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="sBb-eY-PQM" kind="show" identifier="OpenTaskEditor" id="Q75-5d-3ql"/>
                     </connections>
@@ -404,7 +410,7 @@
         <!--Manage Services-->
         <scene sceneID="662-e2-6co">
             <objects>
-                <viewController storyboardIdentifier="RootPagingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="36P-5s-JAF" customClass="PageHolderViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RootPagingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="36P-5s-JAF" customClass="PageRouterViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DE9-pw-Q1h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -12,10 +12,11 @@ class Task: Object {
     
     // task states
     enum TaskState {
-        case created
-        case pending
-        case processing
-        case finished
+        case created            // task has just been created, not yet assigned
+        case pending            // task has been assigned but waiting for process
+        case processing         // task has been processing
+        case finished           // task has been finished :)
+        case failed             // task is failed :(
     }
     
     // task id
@@ -28,8 +29,14 @@ class Task: Object {
     var taskDesc: String?
     // service
     var service: Service?
+    // designate workers
+    var workers = List<Worker>()
+    // due date
+    var dueDate: Date?
+    // location
+    var address: String?
     // images
     var images: [UIImage] = []
-    // task state (4.Finished / 3.processing / 2.pending / 1.created)
+    // task state (5.failed / 4.finished / 3.processing / 2.pending / 1.created)
     var taskState: TaskState = .created
 }

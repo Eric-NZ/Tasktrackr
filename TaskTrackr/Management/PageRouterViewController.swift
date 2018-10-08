@@ -14,7 +14,7 @@ protocol ManageItemDelegate {
     func editingMode(editing: Bool, animate: Bool)
 }
 
-class PageHolderViewController: UIViewController, PagingViewControllerDelegate, PagingViewControllerDataSource {
+class PageRouterViewController: UIViewController, PagingViewControllerDelegate, PagingViewControllerDataSource {
     
     var pagingViewController = PagingViewController<PagingIndexItem>()
     var viewControllers:[UIViewController] = []
