@@ -45,6 +45,7 @@ struct Static {
     static let taskEditor_segue = "OpenTaskEditor"
     static let workerPicker_segue = "OpenWorkerPicker"
     static let servicePicker_segue = "OpenServicePicker"
+    static let locationSelector_segue = "OpenLocationSelector"
     
     static let none_selected = "None Selected"
     

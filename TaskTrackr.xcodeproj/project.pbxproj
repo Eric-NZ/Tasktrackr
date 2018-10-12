@@ -37,6 +37,7 @@
 		21D8D65B213FE30D0092AEBB /* PageRouterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D8D65A213FE30D0092AEBB /* PageRouterViewController.swift */; };
 		21DF277E214E0A6800BB2799 /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF277C214E0A6800BB2799 /* TagTableViewCell.swift */; };
 		21DF277F214E0A6800BB2799 /* TagTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21DF277D214E0A6800BB2799 /* TagTableViewCell.xib */; };
+		21E7176A21708F8000FA177C /* LocationSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E7176921708F8000FA177C /* LocationSelectViewController.swift */; };
 		21EA13A2213622C800C5CB34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EA13A1213622C800C5CB34 /* AppDelegate.swift */; };
 		21EA13A7213622C800C5CB34 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21EA13A5213622C800C5CB34 /* Main.storyboard */; };
 		21EA13AA213622C800C5CB34 /* TaskTrackr.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 21EA13A8213622C800C5CB34 /* TaskTrackr.xcdatamodeld */; };
@@ -79,6 +80,7 @@
 		21D8D65A213FE30D0092AEBB /* PageRouterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageRouterViewController.swift; sourceTree = "<group>"; };
 		21DF277C214E0A6800BB2799 /* TagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
 		21DF277D214E0A6800BB2799 /* TagTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagTableViewCell.xib; sourceTree = "<group>"; };
+		21E7176921708F8000FA177C /* LocationSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSelectViewController.swift; sourceTree = "<group>"; };
 		21EA139E213622C800C5CB34 /* TaskTrackr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskTrackr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21EA13A1213622C800C5CB34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21EA13A6213622C800C5CB34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				21EA13C22136505200C5CB34 /* TaskSearchTableViewController.swift */,
 				21C4B345216B3D6900913ADB /* TaskEditorViewController.swift */,
 				21EA13C021364FF200C5CB34 /* TaskTrackingViewController.swift */,
+				21E7176921708F8000FA177C /* LocationSelectViewController.swift */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				219065B32158D272004D96AC /* UITableViewCell.swift in Sources */,
 				21EA13C121364FF200C5CB34 /* TaskTrackingViewController.swift in Sources */,
 				219065B12158BD87004D96AC /* UIImage.swift in Sources */,
+				21E7176A21708F8000FA177C /* LocationSelectViewController.swift in Sources */,
 				21D8D65B213FE30D0092AEBB /* PageRouterViewController.swift in Sources */,
 				21DF277E214E0A6800BB2799 /* TagTableViewCell.swift in Sources */,
 				2135DD81215F40CF004AAC96 /* ViewModel.swift in Sources */,

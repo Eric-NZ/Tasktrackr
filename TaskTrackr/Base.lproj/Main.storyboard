@@ -19,10 +19,28 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Zdh-FY-C4b"/>
                     </view>
+                    <connections>
+                        <segue destination="yPB-6x-j5C" kind="show" identifier="OpenLocationSelector" id="bf3-wE-6as"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HXl-A8-dpd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2578" y="-66"/>
+        </scene>
+        <!--Location Select View Controller-->
+        <scene sceneID="SPK-l6-r4l">
+            <objects>
+                <viewController id="yPB-6x-j5C" customClass="LocationSelectViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="X5C-iD-nfX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="3Ee-mo-lwB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pnc-Rj-Cd3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3421" y="-65"/>
         </scene>
         <!--Tracking-->
         <scene sceneID="ctq-bU-wEA">

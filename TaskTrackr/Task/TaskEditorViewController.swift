@@ -23,6 +23,11 @@ class TaskEditorViewController: FormViewController {
         buildEditor()
     }
     
+    // reset select state
+    override func viewWillAppear(_ animated: Bool) {
+        former.deselect(animated: animated)
+    }
+    
     @objc func onDonePressed() {
         // create a new task
         saveNewTask()
@@ -31,7 +36,7 @@ class TaskEditorViewController: FormViewController {
     // build user input entry
     func buildEditor() {
         
-        // Section Header
+        // Section Header creator
         let createHeader : ((String) -> ViewFormer ) = { text in
             return LabelViewFormer<FormLabelHeaderView>().configure {
                 $0.text = text
@@ -39,7 +44,7 @@ class TaskEditorViewController: FormViewController {
             }
         }
         
-        // Menu
+        // Menu creator
         let createMenu : ((String, String, (() -> Void)?) -> RowFormer) = { (text, subText, onSelected) in
             return LabelRowFormer<FormLabelCell>() {
                 $0.titleLabel.textColor = .formerColor()
@@ -54,7 +59,7 @@ class TaskEditorViewController: FormViewController {
         }
         
         // necessary elements: 1.title, 2.desc, 3.service, 4.designated workers, 5.due date, 6.location, 7.ref images
-        // Enter Title
+        // MARK: Enter Title
         let titleField = TextFieldRowFormer<FormTextFieldCell>() {
             $0.titleLabel.text = "Task Title"
             $0.titleLabel.font = .boldSystemFont(ofSize: 16)
@@ -66,7 +71,7 @@ class TaskEditorViewController: FormViewController {
             }.onTextChanged { (text) in
 
         }
-        // Enter Desc
+        // MARK: Enter Desc
         let descField = TextViewRowFormer<FormTextViewCell>() {
             $0.titleLabel.text = "Description"
             $0.titleLabel.font = .boldSystemFont(ofSize: 16)
@@ -79,18 +84,18 @@ class TaskEditorViewController: FormViewController {
                 // save Task desc
         }
         
-        // Select Service: Single Selection
+        // MARK: Select Service: Single Selection
         let serviceSelector = createMenu("Select Service", "None Selected") { [weak self] in
             // perform segue here:
             self?.performSegue(withIdentifier: Static.servicePicker_segue, sender: self)
             } as? LabelRowFormer<FormLabelCell>
         
-        // Pickup Designated Workers: Multi Selection
+        // MARK: Pickup Designated Workers: Multi Selection
         let workerSelector = createMenu("Designate Workers", "None Selected") { [weak self] in
             // perform segue here:
             self?.performSegue(withIdentifier: Static.workerPicker_segue, sender: self)
             } as? LabelRowFormer<FormLabelCell>
-        // Select Due Date
+        // MARK: Select Due Date of Task
         let dueDatePicker = InlineDatePickerRowFormer<FormInlineDatePickerCell>() {
             $0.titleLabel.text = "Due Date"
             $0.titleLabel.textColor = .formerColor()
@@ -102,12 +107,15 @@ class TaskEditorViewController: FormViewController {
             }.configure {
                 $0.displayEditingColor = .formerHighlightedSubColor()
             }.displayTextFromDate(String.mediumDateShortTime)
-        // Search&Pickup Location
-        
-        // Upload Images
+        // MARK: Search&Pickup Location
+        let locationSelector = createMenu("Location", "27 Linwood Avenue, Mt Albert, Auckland") {[weak self] in
+            // perform segue here:
+            self?.performSegue(withIdentifier: Static.locationSelector_segue, sender: self)
+        }
+        // MARK: Upload Images
         
         let sectionBasic = SectionFormer(rowFormer: titleField, descField).set(headerViewFormer: createHeader("Basic Task Info"))
-        let sectionSelectors = SectionFormer(rowFormer: serviceSelector!, workerSelector!)
+        let sectionSelectors = SectionFormer(rowFormer: serviceSelector!, workerSelector!, locationSelector)
         let sectionDatePicker = SectionFormer(rowFormer: dueDatePicker)
         former.append(sectionFormer: sectionBasic, sectionSelectors, sectionDatePicker)
     }
@@ -122,3 +130,4 @@ class TaskEditorViewController: FormViewController {
         }
     }
 }
+
