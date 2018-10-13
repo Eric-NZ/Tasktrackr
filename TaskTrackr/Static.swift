@@ -28,26 +28,31 @@ struct Static {
     // user status: has signed in?
     static var currentUser: SyncUser?
     
-    static let service_page = "ServiceViewController"
-    static let worker_page = "WorkerViewController"
-    static let product_page = "ProductViewController"
-    static let tool_page = "ToolViewController"
-    static let site_page = "SiteViewController"
-    static let root_page = "RootPagingViewController"
+    static let page_service = "ServiceViewController"
+    static let page_worker = "WorkerViewController"
+    static let page_product = "ProductViewController"
+    static let page_tool = "ToolViewController"
+    static let page_site = "SiteViewController"
+    static let pageRouter = "RootPagingViewController"
     
-    static let service_segue = "OpenServiceForm"
-    static let worker_segue = "OpenWorkerForm"
-    static let product_segue = "OpenProductForm"
-    static let tool_segue = "OpenToolForm"
-    static let site_segue = "OpenSiteForm"
-    static let selector_segue = "OpenSelectorController"
-    static let pickup_segue = "OpenPickupController"
-    static let taskEditor_segue = "OpenTaskEditor"
-    static let workerPicker_segue = "OpenWorkerPicker"
-    static let servicePicker_segue = "OpenServicePicker"
-    static let locationSelector_segue = "OpenLocationSelector"
+    static let segue_openServiceForm = "OpenServiceForm"
+    static let segue_openWorkerForm = "OpenWorkerForm"
+    static let segue_openProductForm = "OpenProductForm"
+    static let segue_openToolForm = "OpenToolForm"
+    static let segue_openSiteForm = "OpenSiteForm"
+    static let segue_openProductSelector = "OpenPickupController"
+    static let segue_openTaskEditor = "OpenTaskEditor"
+    static let segue_openWorkerPicker = "OpenWorkerPicker"
+    static let segue_openServicePicker = "OpenServicePicker"
+    static let segue_openLocationSelector = "OpenLocationSelector"
+    static let segue_openPicturePicker = "OpenPicturePicker"
     
     static let none_selected = "None Selected"
+    static let address_required = "Address Required"
+    
+    // Users' location latitude and longtitude
+    static let userLocationDegree = (-36.848461, 174.763336)    // Auckland
+    static let regionSpan = (1000.00, 1000.00)                  // KM
     
     static func showToast(toastText: String) {
         Toast(text: toastText, delay: 0, duration: Delay.long).show()

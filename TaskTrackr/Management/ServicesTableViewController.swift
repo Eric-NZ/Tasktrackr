@@ -32,11 +32,11 @@ class ServicesTableViewController: UITableViewController, ManageItemDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let itemForm = segue.destination as! ItemEditorController
         itemForm.currentService = sender == nil ? nil : selectedService
-        itemForm.clientPage = Static.service_page
+        itemForm.clientPage = Static.page_service
     }
     
     func openFormController(sender: Any?) {
-        performSegue(withIdentifier: Static.service_segue, sender: sender)
+        performSegue(withIdentifier: Static.segue_openServiceForm, sender: sender)
     }
     
     // MARK: - MangeItemDelegate

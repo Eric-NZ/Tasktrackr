@@ -46,7 +46,7 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate {
         // tell the destination View controller which worker item is selected
         let itemForm = segue.destination as! ItemEditorController
         itemForm.currentWorker = sender == nil ? nil : selectedWorker
-        itemForm.clientPage = Static.worker_page
+        itemForm.clientPage = Static.page_worker
     }
 
     // MARK: - Table view data source
@@ -88,7 +88,7 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate {
      */
     func rootViewController() -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: Static.root_page)
+        return storyboard.instantiateViewController(withIdentifier: Static.pageRouter)
     }
     
     /**
@@ -99,7 +99,7 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate {
     }
 
     func openWorkerForm(sender: Any?) {
-        performSegue(withIdentifier: Static.worker_segue, sender: sender)
+        performSegue(withIdentifier: Static.segue_openWorkerForm, sender: sender)
     }
     
 }

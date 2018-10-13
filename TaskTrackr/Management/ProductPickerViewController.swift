@@ -13,7 +13,7 @@ protocol ToolAndModelPickupDelegate {
     func finishSelection(selectedtools: [Tool], selectedModels: [ProductModel])
 }
 
-class PickupViewController: CollapsibleTableSectionViewController {
+class ProductPickerViewController: CollapsibleTableSectionViewController {
     
     var pickupDelegate: ToolAndModelPickupDelegate?
 
@@ -109,7 +109,7 @@ class PickupViewController: CollapsibleTableSectionViewController {
     }
 }
 
-extension PickupViewController: CollapsibleTableSectionDelegate {
+extension ProductPickerViewController: CollapsibleTableSectionDelegate {
 
     // MARK: - CollapsibleTableSectionDelegate
     func numberOfSections(_ tableView: UITableView) -> Int {

@@ -16,8 +16,8 @@ class TaskEditorViewController: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // set right bar button
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(onDonePressed))
+        // config custom navigation bar items
+        setCustomNavigationItem()
         
         // build editor form
         buildEditor()
@@ -31,6 +31,13 @@ class TaskEditorViewController: FormViewController {
     @objc func onDonePressed() {
         // create a new task
         saveNewTask()
+    }
+    
+    func setCustomNavigationItem() {
+        // set right bar button
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(onDonePressed))
+        // set back button
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: nil)
     }
     
     // build user input entry
@@ -85,15 +92,15 @@ class TaskEditorViewController: FormViewController {
         }
         
         // MARK: Select Service: Single Selection
-        let serviceSelector = createMenu("Select Service", "None Selected") { [weak self] in
+        let serviceSelector = createMenu("Select Service", Static.none_selected) { [weak self] in
             // perform segue here:
-            self?.performSegue(withIdentifier: Static.servicePicker_segue, sender: self)
+            self?.performSegue(withIdentifier: Static.segue_openServicePicker, sender: self)
             } as? LabelRowFormer<FormLabelCell>
         
         // MARK: Pickup Designated Workers: Multi Selection
-        let workerSelector = createMenu("Designate Workers", "None Selected") { [weak self] in
+        let workerSelector = createMenu("Designate Workers", Static.none_selected) { [weak self] in
             // perform segue here:
-            self?.performSegue(withIdentifier: Static.workerPicker_segue, sender: self)
+            self?.performSegue(withIdentifier: Static.segue_openWorkerPicker, sender: self)
             } as? LabelRowFormer<FormLabelCell>
         // MARK: Select Due Date of Task
         let dueDatePicker = InlineDatePickerRowFormer<FormInlineDatePickerCell>() {
@@ -108,9 +115,9 @@ class TaskEditorViewController: FormViewController {
                 $0.displayEditingColor = .formerHighlightedSubColor()
             }.displayTextFromDate(String.mediumDateShortTime)
         // MARK: Search&Pickup Location
-        let locationSelector = createMenu("Location", "27 Linwood Avenue, Mt Albert, Auckland") {[weak self] in
+        let locationSelector = createMenu("Location", Static.address_required) {[weak self] in
             // perform segue here:
-            self?.performSegue(withIdentifier: Static.locationSelector_segue, sender: self)
+            self?.performSegue(withIdentifier: Static.segue_openLocationSelector, sender: self)
         }
         // MARK: Upload Images
         
@@ -131,3 +138,23 @@ class TaskEditorViewController: FormViewController {
     }
 }
 
+extension TaskEditorViewController {
+    // prepare info for different segues
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case Static.segue_openWorkerPicker:
+            print("worker")
+            break
+        case Static.segue_openServicePicker:
+            print("service")
+            break
+        case Static.segue_openLocationSelector:
+            break
+        case Static.segue_openPicturePicker:
+            print("picture")
+            break
+        default:
+            break
+        }
+    }
+}

@@ -40,14 +40,14 @@ class ProductsTableViewController: UITableViewController, ManageItemDelegate {
     
     func openProductForm(sender: Any?) {
         // perform the segue
-        performSegue(withIdentifier: Static.product_segue, sender: sender)
+        performSegue(withIdentifier: Static.segue_openProductForm, sender: sender)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let itemForm = segue.destination as! ItemEditorController
         // tell destination controller which product is selected
         itemForm.currentProduct = sender == nil ? nil : selectedProduct
-        itemForm.clientPage = Static.product_page
+        itemForm.clientPage = Static.page_product
     }
     
     // MARK: - ManageItemDelegate

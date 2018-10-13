@@ -30,7 +30,7 @@ class ToolsTableViewController: UITableViewController, ManageItemDelegate {
     }
     
     func openItemForm(sender: Any?) {
-        performSegue(withIdentifier: Static.tool_segue, sender: sender)
+        performSegue(withIdentifier: Static.segue_openToolForm, sender: sender)
     }
     
     func removeTool(tool: Tool) {
@@ -39,7 +39,7 @@ class ToolsTableViewController: UITableViewController, ManageItemDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let itemForm = segue.destination as! ItemEditorController
-        itemForm.clientPage = Static.tool_page
+        itemForm.clientPage = Static.page_tool
         itemForm.currentTool = sender == nil ? nil : selectedTool
     }
     

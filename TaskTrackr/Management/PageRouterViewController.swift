@@ -63,11 +63,11 @@ class PageRouterViewController: UIViewController, PagingViewControllerDelegate, 
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        viewControllers = [Static.getInstance(with: Static.service_page),
-                           Static.getInstance(with: Static.worker_page),
-                           Static.getInstance(with: Static.product_page),
-                           Static.getInstance(with: Static.tool_page),
-                           Static.getInstance(with: Static.site_page)]
+        viewControllers = [Static.getInstance(with: Static.page_service),
+                           Static.getInstance(with: Static.page_worker),
+                           Static.getInstance(with: Static.page_product),
+                           Static.getInstance(with: Static.page_tool),
+                           Static.getInstance(with: Static.page_site)]
         
         initPagingViewController()
         pagingViewController.delegate = self

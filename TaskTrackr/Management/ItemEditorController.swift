@@ -51,15 +51,15 @@ class ItemEditorController: FormViewController {
         
         // build form
         switch clientPage {
-        case Static.service_page:
+        case Static.page_service:
             buildServiceForm()
-        case Static.worker_page:
+        case Static.page_worker:
             buildWorkerForm()
-        case Static.product_page:
+        case Static.page_product:
             buildProductForm()
-        case Static.tool_page:
+        case Static.page_tool:
             buildToolForm()
-        case Static.site_page:
+        case Static.page_site:
             buildSiteForm()
         default:
             break
@@ -74,15 +74,15 @@ class ItemEditorController: FormViewController {
         var isSaved: Bool = false
         
         switch clientPage {
-        case Static.service_page:
+        case Static.page_service:
             isSaved = saveServiceForm()
-        case Static.worker_page:
+        case Static.page_worker:
             isSaved = saveWorkerForm()
-        case Static.product_page:
+        case Static.page_product:
             isSaved = saveProductForm()
-        case Static.tool_page:
+        case Static.page_tool:
             isSaved = saveToolForm()
-        case Static.site_page:
+        case Static.page_site:
             isSaved = saveSiteForm()
         default:
             break
@@ -195,12 +195,12 @@ class ItemEditorController: FormViewController {
         
         // applied products
         productSelectorMenu = createMenu("Applicable Products", getProductSelectionStateText()) { [weak self] in
-            self?.performSegue(withIdentifier: Static.pickup_segue, sender: self)
+            self?.performSegue(withIdentifier: Static.segue_openProductSelector, sender: self)
             } as? LabelRowFormer<FormLabelCell>
         
         // applied tools: if the sender is nil, means I will present the selector for Tools
         toolSelectorMenu = createMenu("Applicable Tools", getToolSelectionStateText()) { [weak self] in
-            self?.performSegue(withIdentifier: Static.pickup_segue, sender: nil)
+            self?.performSegue(withIdentifier: Static.segue_openProductSelector, sender: nil)
             } as? LabelRowFormer<FormLabelCell>
         
         let sectionSelector = SectionFormer(rowFormer: productSelectorMenu!, toolSelectorMenu!)
@@ -515,7 +515,7 @@ extension ItemEditorController: ToolAndModelPickupDelegate {
     
     // prepare information for the popping up selector view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let selector = segue.destination as! PickupViewController
+        let selector = segue.destination as! ProductPickerViewController
         // tells selector whether pickup tools or product models
         selector.eventFrom = (sender == nil) ? .fromTool : .fromProduct
         // init original selected tools & models

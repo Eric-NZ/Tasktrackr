@@ -18,7 +18,7 @@ class TaskTrackingViewController: UIViewController {
     }
 
     @IBAction func addPressed(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: Static.taskEditor_segue, sender: self)
+        performSegue(withIdentifier: Static.segue_openTaskEditor, sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
