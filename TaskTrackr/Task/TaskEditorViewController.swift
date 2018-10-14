@@ -12,13 +12,22 @@ import Former
 class TaskEditorViewController: FormViewController {
     
     var currentTask: Task?
+    var taskTitle: String = ""
+    var desc: String = ""
+    var service: Service?
+    var workers: [Worker] = []
+    var location: (address: String, latitude: Double, longitude: Double)?
+    var dueDate: Date?
+    var images: [UIImage] = []
+    var taskState: Task.TaskState?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // config custom navigation bar items
         setCustomNavigationItem()
-        
+        // extract properties
+        extractCurrentTask()
         // build editor form
         buildEditor()
     }
@@ -38,6 +47,17 @@ class TaskEditorViewController: FormViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(onDonePressed))
         // set back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: nil)
+    }
+    
+    // extract properties from currentTask object
+    func extractCurrentTask() {
+        if currentTask != nil {
+            taskTitle = currentTask!.taskTitle
+            desc = currentTask!.taskDesc
+            service = currentTask?.service
+            location = (currentTask?.address, currentTask?.latitude, currentTask?.longitude) as? (address: String, latitude: Double, longitude: Double)
+            
+        }
     }
     
     // build user input entry
@@ -74,9 +94,9 @@ class TaskEditorViewController: FormViewController {
             $0.textField.font = .boldSystemFont(ofSize: 14)
             }.configure {
                 $0.placeholder = "e.g. "
-                $0.text = ""
+                $0.text = taskTitle
             }.onTextChanged { (text) in
-
+                self.taskTitle = text
         }
         // MARK: Enter Desc
         let descField = TextViewRowFormer<FormTextViewCell>() {
@@ -86,9 +106,10 @@ class TaskEditorViewController: FormViewController {
             $0.textView.font = .systemFont(ofSize: 15)
             }.configure {
                 $0.placeholder = "Add Task Introduction"
-                $0.text = ""
+                $0.text = desc
             }.onTextChanged { (text) in
                 // save Task desc
+                self.desc = text
         }
         
         // MARK: Select Service: Single Selection
@@ -149,6 +170,10 @@ extension TaskEditorViewController {
             print("service")
             break
         case Static.segue_openLocationSelector:
+            let locationSelector = segue.destination as! LocationSelectViewController
+                // e.g.  - latitude : -36.90557246200854, - longitude : 174.81874617786053
+            locationSelector.locationTuple = (address: "28 Linwood Avenue, Mt Albert, Auckland", latitude: -36.90557246200854, longitude: 174.81874617786053)
+//            locationSelector.originalLocation = nil
             break
         case Static.segue_openPicturePicker:
             print("picture")

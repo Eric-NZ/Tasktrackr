@@ -24,17 +24,21 @@ class Task: Object {
     // timestamp
     var timestamp: Date = Date()
     // task title
-    var taskTitle: String?
+    var taskTitle: String = ""
     // task description
-    var taskDesc: String?
+    var taskDesc: String = ""
     // service
     var service: Service?
     // designate workers
     var workers = List<Worker>()
     // due date
     var dueDate: Date?
-    // location
+    // location: address
     var address: String?
+    // location: latitude
+    var latitude: Double?
+    // location: longitude
+    var longitude: Double?
     // images
     var images: [UIImage] = []
     // task state (5.failed / 4.finished / 3.processing / 2.pending / 1.created)

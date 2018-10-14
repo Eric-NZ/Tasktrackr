@@ -195,11 +195,11 @@
             </objects>
             <point key="canvasLocation" x="-530" y="868"/>
         </scene>
-        <!--Track-->
+        <!--Tracking-->
         <scene sceneID="PMZ-k1-vSV">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3fT-IQ-b4i" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Track" id="g7Q-U4-NA8"/>
+                    <tabBarItem key="tabBarItem" title="Tracking" image="tab_tracking" selectedImage="tab_tracking" id="g7Q-U4-NA8"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="t2V-yj-hMK">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -214,10 +214,10 @@
             </objects>
             <point key="canvasLocation" x="748" y="-66.11694152923539"/>
         </scene>
-        <!--Archive Tasks-->
+        <!--Completed Tasks-->
         <scene sceneID="b8v-4j-6cS">
             <objects>
-                <tableViewController title="Archive Tasks" id="1fb-KE-5Za" customClass="TaskSearchTableViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Completed Tasks" id="1fb-KE-5Za" customClass="TaskSearchTableViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ozu-YX-LmI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -237,17 +237,17 @@
                             <outlet property="delegate" destination="1fb-KE-5Za" id="ITe-Dz-wiI"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Archived Tasks" id="i1H-8y-WLx"/>
+                    <navigationItem key="navigationItem" title="Completed Tasks" id="i1H-8y-WLx"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cez-KW-Oe6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1687" y="868"/>
         </scene>
-        <!--View Archived Tasks-->
+        <!--Completed Tasks-->
         <scene sceneID="eva-Tf-BUJ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8d3-A4-cU6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="View Archived Tasks" id="Ycs-Nh-2dM"/>
+                    <tabBarItem key="tabBarItem" title="Completed Tasks" image="tab_history_task" selectedImage="tab_history_task" id="Ycs-Nh-2dM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NUT-Oo-atq">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -537,11 +537,11 @@
             </objects>
             <point key="canvasLocation" x="450" y="1764"/>
         </scene>
-        <!--Manage-->
+        <!--Management-->
         <scene sceneID="46G-cA-bbe">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RFi-js-DX8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Manage" id="X4z-Q4-pZD"/>
+                    <tabBarItem key="tabBarItem" title="Management" image="tab_manage" selectedImage="tab_manage" id="X4z-Q4-pZD"/>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="2ge-jo-NjU">
@@ -558,6 +558,11 @@
             <point key="canvasLocation" x="-530" y="1764"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="tab_history_task" width="24" height="24"/>
+        <image name="tab_manage" width="24" height="24"/>
+        <image name="tab_tracking" width="24" height="24"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="WX5-jW-pfv"/>
     </inferredMetricsTieBreakers>

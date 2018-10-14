@@ -9,11 +9,18 @@
 import UIKit
 import MapKit
 
+protocol LocationSelectorDelegate {
+    func onLocationReady(location: (address: String, latitude: Double, longitude: Double))
+}
+
 class LocationSelectViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var mapView: MKMapView!
     var searchResultTable: SearchResultTable?
     var searchResult: [MKMapItem] = []
-    var selectedMapItem: MKMapItem?
+    var currentMapItem: MKMapItem?
+    var delegate: LocationSelectorDelegate?
+    // using this Tuple to communicate with other controllers
+    var locationTuple: (address: String, latitude: Double, longitude: Double)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,10 +29,16 @@ class LocationSelectViewController: UIViewController, UISearchBarDelegate {
         searchResultTable?.delegate = self
         // create a search controller
         setupNavigationItem()
-        // restore map item
-        restoreMapItem()
-        // init camera using selectedMapItem
-        initCamera()
+        
+        // set camera to original location
+        if let place = locationTuple {
+            // restore map item
+            wrapMapItem()
+            // zoom to location
+            zoomToLocation(location: place)
+            // update search bar text
+            updateNavigationItem(currentMapItem)
+        }
         
     }
     
@@ -47,9 +60,9 @@ class LocationSelectViewController: UIViewController, UISearchBarDelegate {
     
     // update navigation item
     func updateNavigationItem(_ selectedItem: MKMapItem? = nil) {
-        if let item = selectedItem {
+        if let annotation = mapView.annotations.first {
             // update text on search bar
-            navigationItem.searchController?.searchBar.text = item.placemark.title
+            navigationItem.searchController?.searchBar.text = annotation.title!
             // add right button
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(onDoneButton))
         } else {
@@ -59,17 +72,14 @@ class LocationSelectViewController: UIViewController, UISearchBarDelegate {
     }
     
     // restore mapItem using Geo data
-    func restoreMapItem() {
-        
-    }
-    
-    func initCamera() {
-        if let mapItem = selectedMapItem {
-            // zoom to selected item
-            zoomToSelectedPlace(mapItem: mapItem)
-        } else {
-            // init region
-            initRegion(rangeSpan: MKCoordinateSpan(latitudeDelta: Static.regionSpan.0, longitudeDelta: Static.regionSpan.1))
+    func wrapMapItem() {
+        if let location = locationTuple {
+            let coodinate2D = CLLocationCoordinate2DMake(location.latitude, location.longitude)
+            let placemark = MKPlacemark(coordinate: coodinate2D)
+            
+            let mapItem = MKMapItem(placemark: placemark)
+            
+            currentMapItem = mapItem
         }
     }
     
@@ -87,8 +97,18 @@ class LocationSelectViewController: UIViewController, UISearchBarDelegate {
     
     @objc func onDoneButton() {
         // save map item info
-        if let item = selectedMapItem {
+        if let item = currentMapItem {
             print(item.placemark.title!)
+            let coordinate = item.placemark.coordinate
+            let address = item.placemark.title
+            // save location tuple
+            locationTuple?.address = address!
+            locationTuple?.latitude = coordinate.latitude
+            locationTuple?.longitude = coordinate.longitude
+            
+            if delegate != nil {
+                delegate?.onLocationReady(location: locationTuple!)
+            }
         }
     }
     
@@ -102,13 +122,13 @@ extension LocationSelectViewController: SearchResultTableDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         // if text deleted
         if searchText.isEmpty {
-            updateNavigationItem()
-            // clear annotations
             // remove existing annotations
             let annotations = mapView.annotations
             mapView.removeAnnotations(annotations)
+            // update search text
+            updateNavigationItem()
         }
-        
+        // if input new key word
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = searchText
         request.region = mapView.region
@@ -143,25 +163,28 @@ extension LocationSelectViewController: SearchResultTableDelegate {
         // dismiss search result table view controller
         searchResultTable?.dismiss(animated: true, completion: nil)
         // zoom to selected item
-        zoomToSelectedPlace(mapItem: item)
+        zoomToLocation(location: (address: searchResult[index].placemark.title!,
+                                  latitude: searchResult[index].placemark.coordinate.latitude,
+                                  longitude: searchResult[index].placemark.coordinate.longitude))
         // update navigationBar
         updateNavigationItem(item)
         // set selectedMapItem
-        selectedMapItem = item
+        currentMapItem = item
     }
     
-    // zoom to place with a pin
-    func zoomToSelectedPlace(mapItem: MKMapItem) {
+    // zoom to location with a pin
+    func zoomToLocation(location: (address: String, latitude: Double, longitude: Double)) {
+        let coodinate2D = CLLocationCoordinate2DMake(location.latitude, location.longitude)
         // remove existing annotations
         let annotations = mapView.annotations
         mapView.removeAnnotations(annotations)
         // update camera
-        let camera = MKMapCamera(lookingAtCenter: mapItem.placemark.coordinate, fromDistance: 500.00, pitch: 60.00, heading: 0)
+        let camera = MKMapCamera(lookingAtCenter: coodinate2D, fromDistance: 500.00, pitch: 60.00, heading: 0)
         mapView.setCamera(camera, animated: true)
         // add a pin(annotation)
         let pin = MKPointAnnotation()
-        pin.coordinate = mapItem.placemark.coordinate
-        pin.title = mapItem.placemark.title
+        pin.coordinate = coodinate2D
+        pin.title = location.address
         mapView.addAnnotation(pin)
     }
 }
