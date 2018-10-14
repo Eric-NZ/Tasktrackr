@@ -11,15 +11,19 @@ import Former
 
 class TaskEditorViewController: FormViewController {
     
+    // for private data:
     var currentTask: Task?
     var taskTitle: String = ""
     var desc: String = ""
     var service: Service?
     var workers: [Worker] = []
-    var location: (address: String, latitude: Double, longitude: Double)?
+    var locationTuple: (address: String, latitude: Double, longitude: Double)?
     var dueDate: Date?
     var images: [UIImage] = []
     var taskState: Task.TaskState?
+    
+    // for UI:
+    var locationSelector: LabelRowFormer<FormLabelCell>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +59,7 @@ class TaskEditorViewController: FormViewController {
             taskTitle = currentTask!.taskTitle
             desc = currentTask!.taskDesc
             service = currentTask?.service
-            location = (currentTask?.address, currentTask?.latitude, currentTask?.longitude) as? (address: String, latitude: Double, longitude: Double)
+            locationTuple = (currentTask?.address, currentTask?.latitude, currentTask?.longitude) as? (address: String, latitude: Double, longitude: Double)
             
         }
     }
@@ -136,16 +140,17 @@ class TaskEditorViewController: FormViewController {
                 $0.displayEditingColor = .formerHighlightedSubColor()
             }.displayTextFromDate(String.mediumDateShortTime)
         // MARK: Search&Pickup Location
-        let locationSelector = createMenu("Location", Static.address_required) {[weak self] in
+        locationSelector = createMenu("Search for an address", Static.address_required) {[weak self] in
             // perform segue here:
             self?.performSegue(withIdentifier: Static.segue_openLocationSelector, sender: self)
-        }
+            } as? LabelRowFormer<FormLabelCell>
         // MARK: Upload Images
         
         let sectionBasic = SectionFormer(rowFormer: titleField, descField).set(headerViewFormer: createHeader("Basic Task Info"))
-        let sectionSelectors = SectionFormer(rowFormer: serviceSelector!, workerSelector!, locationSelector)
+        let sectionSelectors = SectionFormer(rowFormer: serviceSelector!, workerSelector!)
+        let sectionLocationSelector = SectionFormer(rowFormer: locationSelector!).set(headerViewFormer: createHeader("Site Location"))
         let sectionDatePicker = SectionFormer(rowFormer: dueDatePicker)
-        former.append(sectionFormer: sectionBasic, sectionSelectors, sectionDatePicker)
+        former.append(sectionFormer: sectionBasic, sectionSelectors, sectionLocationSelector, sectionDatePicker)
     }
 
     func saveNewTask() {
@@ -171,9 +176,9 @@ extension TaskEditorViewController {
             break
         case Static.segue_openLocationSelector:
             let locationSelector = segue.destination as! LocationSelectViewController
-                // e.g.  - latitude : -36.90557246200854, - longitude : 174.81874617786053
-            locationSelector.locationTuple = (address: "28 Linwood Avenue, Mt Albert, Auckland", latitude: -36.90557246200854, longitude: 174.81874617786053)
-//            locationSelector.originalLocation = nil
+            locationSelector.locationTuple = locationTuple
+            // set delegate
+            locationSelector.delegate = self
             break
         case Static.segue_openPicturePicker:
             print("picture")
@@ -181,5 +186,20 @@ extension TaskEditorViewController {
         default:
             break
         }
+    }
+}
+
+extension TaskEditorViewController: LocationSelectorDelegate {
+    // MARK: - LocationSelectorDelegate
+    func onLocationReady(location: (address: String, latitude: Double, longitude: Double)) {
+        // update local property: locationTuple
+        locationTuple = location
+        // update location selector menu
+        updateSelectorMenu(address: (locationTuple?.address)!)
+    }
+    
+    func updateSelectorMenu(address: String) {
+        locationSelector?.subText = address
+        locationSelector?.update()
     }
 }

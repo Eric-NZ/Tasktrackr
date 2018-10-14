@@ -30,6 +30,9 @@ class LocationSelectViewController: UIViewController, UISearchBarDelegate {
         // create a search controller
         setupNavigationItem()
         
+        // init region
+        initRegion(rangeSpan: Static.regionSpan)
+        
         // set camera to original location
         if let place = locationTuple {
             // restore map item
@@ -38,6 +41,8 @@ class LocationSelectViewController: UIViewController, UISearchBarDelegate {
             zoomToLocation(location: place)
             // update search bar text
             updateNavigationItem(currentMapItem)
+        } else {
+            print("location tuple is nil")
         }
         
     }
@@ -78,12 +83,12 @@ class LocationSelectViewController: UIViewController, UISearchBarDelegate {
             let placemark = MKPlacemark(coordinate: coodinate2D)
             
             let mapItem = MKMapItem(placemark: placemark)
-            
+            // set current map item
             currentMapItem = mapItem
         }
     }
     
-    func initRegion(rangeSpan: MKCoordinateSpan) {
+    func initRegion(rangeSpan: (latitudeDelta: Double, longitudeDelta: Double)) {
         // 2D coordinate: 
         let coordinate2d = CLLocationCoordinate2DMake(Static.userLocationDegree.0, Static.userLocationDegree.1)
         
@@ -96,20 +101,13 @@ class LocationSelectViewController: UIViewController, UISearchBarDelegate {
     }
     
     @objc func onDoneButton() {
-        // save map item info
-        if let item = currentMapItem {
-            print(item.placemark.title!)
-            let coordinate = item.placemark.coordinate
-            let address = item.placemark.title
-            // save location tuple
-            locationTuple?.address = address!
-            locationTuple?.latitude = coordinate.latitude
-            locationTuple?.longitude = coordinate.longitude
-            
-            if delegate != nil {
-                delegate?.onLocationReady(location: locationTuple!)
-            }
+        
+        if (locationTuple != nil), delegate != nil {
+            // deliver tuple value
+            delegate?.onLocationReady(location: locationTuple!)
         }
+        // dismiss current view controller
+        navigationController?.popViewController(animated: true)
     }
     
 }
@@ -163,9 +161,12 @@ extension LocationSelectViewController: SearchResultTableDelegate {
         // dismiss search result table view controller
         searchResultTable?.dismiss(animated: true, completion: nil)
         // zoom to selected item
-        zoomToLocation(location: (address: searchResult[index].placemark.title!,
-                                  latitude: searchResult[index].placemark.coordinate.latitude,
-                                  longitude: searchResult[index].placemark.coordinate.longitude))
+        let place = (address: searchResult[index].placemark.title!,
+                     latitude: searchResult[index].placemark.coordinate.latitude,
+                     longitude: searchResult[index].placemark.coordinate.longitude)
+        zoomToLocation(location: place)
+        // update location tuple
+        locationTuple = place
         // update navigationBar
         updateNavigationItem(item)
         // set selectedMapItem
@@ -179,7 +180,7 @@ extension LocationSelectViewController: SearchResultTableDelegate {
         let annotations = mapView.annotations
         mapView.removeAnnotations(annotations)
         // update camera
-        let camera = MKMapCamera(lookingAtCenter: coodinate2D, fromDistance: 500.00, pitch: 60.00, heading: 0)
+        let camera = MKMapCamera(lookingAtCenter: coodinate2D, fromDistance: 300.00, pitch: 60.00, heading: 0)
         mapView.setCamera(camera, animated: true)
         // add a pin(annotation)
         let pin = MKPointAnnotation()

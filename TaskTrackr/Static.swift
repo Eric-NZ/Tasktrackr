@@ -48,11 +48,12 @@ struct Static {
     static let segue_openPicturePicker = "OpenPicturePicker"
     
     static let none_selected = "None Selected"
-    static let address_required = "Address Required"
+    static let address_required = "Not Set"
     
     // Users' location latitude and longtitude
     static let userLocationDegree = (-36.848461, 174.763336)    // Auckland
-    static let regionSpan = (1000.00, 1000.00)                  // KM
+    // 400KM
+    static let regionSpan = (400000.00, 400000.00)
     
     static func showToast(toastText: String) {
         Toast(text: toastText, delay: 0, duration: Delay.long).show()
