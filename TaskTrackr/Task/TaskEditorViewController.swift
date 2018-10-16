@@ -21,9 +21,16 @@ class TaskEditorViewController: FormViewController {
     var dueDate: Date?
     var images: [UIImage] = []
     var taskState: Task.TaskState?
+    enum Selector {
+        case service
+        case workers
+        case location
+        case pictures
+    }
     
     // for UI:
     var locationSelector: LabelRowFormer<FormLabelCell>?
+    var pictureSelector: LabelRowFormer<FormLabelCell>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,19 +124,19 @@ class TaskEditorViewController: FormViewController {
         }
         
         // MARK: Select Service: Single Selection
-        let serviceSelector = createMenu("Select Service", Static.none_selected) { [weak self] in
+        let serviceSelector = createMenu("💁 Select Service", Static.none_selected) { [weak self] in
             // perform segue here:
             self?.performSegue(withIdentifier: Static.segue_openServicePicker, sender: self)
             } as? LabelRowFormer<FormLabelCell>
         
         // MARK: Pickup Designated Workers: Multi Selection
-        let workerSelector = createMenu("Designate Workers", Static.none_selected) { [weak self] in
+        let workerSelector = createMenu("👷 Designate Workers", Static.none_selected) { [weak self] in
             // perform segue here:
             self?.performSegue(withIdentifier: Static.segue_openWorkerPicker, sender: self)
             } as? LabelRowFormer<FormLabelCell>
         // MARK: Select Due Date of Task
         let dueDatePicker = InlineDatePickerRowFormer<FormInlineDatePickerCell>() {
-            $0.titleLabel.text = "Due Date"
+            $0.titleLabel.text = "📆 Select Due Date"
             $0.titleLabel.textColor = .formerColor()
             $0.titleLabel.font = .boldSystemFont(ofSize: 16)
             $0.displayLabel.textColor = .formerSubColor()
@@ -139,18 +146,22 @@ class TaskEditorViewController: FormViewController {
             }.configure {
                 $0.displayEditingColor = .formerHighlightedSubColor()
             }.displayTextFromDate(String.mediumDateShortTime)
-        // MARK: Search&Pickup Location
-        locationSelector = createMenu("Search for an address", Static.address_required) {[weak self] in
+        // MARK: Search Location
+        locationSelector = createMenu("📍 Address", Static.not_set) {[weak self] in
             // perform segue here:
             self?.performSegue(withIdentifier: Static.segue_openLocationSelector, sender: self)
             } as? LabelRowFormer<FormLabelCell>
         // MARK: Upload Images
-        
+        pictureSelector = createMenu("🖼️ Upload Pictures", Static.not_set) {[weak self] in
+            // perform segue here:
+            self?.performSegue(withIdentifier: Static.segue_openPicturePicker, sender: self)
+            } as? LabelRowFormer<FormLabelCell>
         let sectionBasic = SectionFormer(rowFormer: titleField, descField).set(headerViewFormer: createHeader("Basic Task Info"))
         let sectionSelectors = SectionFormer(rowFormer: serviceSelector!, workerSelector!)
-        let sectionLocationSelector = SectionFormer(rowFormer: locationSelector!).set(headerViewFormer: createHeader("Site Location"))
+        let sectionLocationSelector = SectionFormer(rowFormer: locationSelector!)
+        let sectionUploadPicture = SectionFormer(rowFormer: pictureSelector!)
         let sectionDatePicker = SectionFormer(rowFormer: dueDatePicker)
-        former.append(sectionFormer: sectionBasic, sectionSelectors, sectionLocationSelector, sectionDatePicker)
+        former.append(sectionFormer: sectionBasic, sectionSelectors, sectionLocationSelector, sectionUploadPicture, sectionDatePicker)
     }
 
     func saveNewTask() {
@@ -181,7 +192,11 @@ extension TaskEditorViewController {
             locationSelector.delegate = self
             break
         case Static.segue_openPicturePicker:
-            print("picture")
+            let picPicker = segue.destination as! PicPickerViewController
+            // assign images
+            picPicker.images = self.images
+            // set delegate
+            picPicker.delegate = self
             break
         default:
             break
@@ -189,17 +204,44 @@ extension TaskEditorViewController {
     }
 }
 
-extension TaskEditorViewController: LocationSelectorDelegate {
+extension TaskEditorViewController: LocationSelectorDelegate, PicturePickerDelegate {
+    // update selector subtext
+    func updateSelectorSubText(on selector: Selector, _ selection: Any?) {
+        switch selector {
+        case .service:
+            break
+        case .workers:
+            break
+        case .location:
+            let address = selection as? String
+            // trim the string
+            let subText = Static.trimString(for: address, to: 25, true)
+            locationSelector?.subText = subText
+            locationSelector?.update()
+        case .pictures:
+            if let count = selection as? Int {
+                let subText = String(format: count > 1 ? "%d Pictures": "%d Picture", count)
+                pictureSelector?.subText = subText
+                pictureSelector?.update()
+            }
+        }
+    }
+
     // MARK: - LocationSelectorDelegate
     func onLocationReady(location: (address: String, latitude: Double, longitude: Double)) {
         // update local property: locationTuple
         locationTuple = location
         // update location selector menu
-        updateSelectorMenu(address: (locationTuple?.address)!)
+        updateSelectorSubText(on: TaskEditorViewController.Selector.location, location.address)
     }
     
-    func updateSelectorMenu(address: String) {
-        locationSelector?.subText = address
-        locationSelector?.update()
+    // MARK: - PicturePickerDelegate
+    func onPictureSelectionFinished(images: [UIImage]) {
+        // collect images to inner property.
+        self.images = images
+        // update subtitle for selector menu
+        let count = images.count
+        
+        updateSelectorSubText(on: TaskEditorViewController.Selector.pictures, count)
     }
 }

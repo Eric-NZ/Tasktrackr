@@ -48,7 +48,15 @@ struct Static {
     static let segue_openPicturePicker = "OpenPicturePicker"
     
     static let none_selected = "None Selected"
-    static let address_required = "Not Set"
+    static let not_set = "Not Set"
+    
+    enum Emojis: String {
+        case service = "💁"
+        case worder = "👷"
+        case product = "🚿"
+        case tool = "🔨"
+        case site = "📍"
+    }
     
     // Users' location latitude and longtitude
     static let userLocationDegree = (-36.848461, 174.763336)    // Auckland
@@ -65,5 +73,17 @@ struct Static {
     static func getInstance(with indentifier: String) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: indentifier)
+    }
+    
+    // trim String to designate length with '...'
+    static func trimString(for string: String? = nil, to length: Int, _ withDots: Bool? = true) -> String? {
+        if var string = string {
+            let index = string.index(string.startIndex, offsetBy: length)
+            string = String(string[..<index])
+            string = String(format: withDots! ? "%@...": "%@", string)
+            return string
+        } else {
+            return nil
+        }
     }
 }

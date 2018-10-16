@@ -194,12 +194,12 @@ class ItemEditorController: FormViewController {
         let sectionBasic = SectionFormer(rowFormer: nameField, descField).set(headerViewFormer: createHeader("Basic Service Info"))
         
         // applied products
-        productSelectorMenu = createMenu("Applicable Products", getProductSelectionStateText()) { [weak self] in
+        productSelectorMenu = createMenu("🚿 Applicable Products", getProductSelectionStateText()) { [weak self] in
             self?.performSegue(withIdentifier: Static.segue_openProductSelector, sender: self)
             } as? LabelRowFormer<FormLabelCell>
         
         // applied tools: if the sender is nil, means I will present the selector for Tools
-        toolSelectorMenu = createMenu("Applicable Tools", getToolSelectionStateText()) { [weak self] in
+        toolSelectorMenu = createMenu("🔨 Applicable Tools", getToolSelectionStateText()) { [weak self] in
             self?.performSegue(withIdentifier: Static.segue_openProductSelector, sender: nil)
             } as? LabelRowFormer<FormLabelCell>
         

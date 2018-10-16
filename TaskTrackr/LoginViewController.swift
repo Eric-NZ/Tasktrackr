@@ -70,7 +70,9 @@ class LoginViewController: UIViewController, LFLoginControllerDelegate {
         self.view.addSubview(loginViewController!.view)
         
         loginViewController!.delegate = self
-        loginViewController?.backgroundColor = #colorLiteral(red: 0.3440366972, green: 0.5581039755, blue: 0.8980392157, alpha: 1)
+//        loginViewController?.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        loginViewController!.view.backgroundColor = UIColor(patternImage: UIImage(named: "LaunchScreen.png")!)
+        loginViewController!.view.contentMode = UIView.ContentMode.scaleAspectFill
     }
 
 }

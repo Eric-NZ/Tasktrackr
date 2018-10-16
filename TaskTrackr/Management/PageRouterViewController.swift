@@ -52,7 +52,14 @@ class PageRouterViewController: UIViewController, PagingViewControllerDelegate, 
     }
     
     func updateNavigationBarTitle(to newTitle: String) {
-        let newTitle = String(format: "Manage %@", newTitle)
+        // remove emoji
+        var title = newTitle
+        if let index = title.range(of: " ")?.lowerBound {
+            title.removeSubrange(..<index)
+        }
+        print(title)
+        let newTitle = String(format: "Manage %@", title)
+        
         self.navigationController?.navigationBar.topItem?.title = newTitle
         // reset the editing state
         setEditing(false, animated: true)
