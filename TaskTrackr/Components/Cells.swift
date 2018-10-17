@@ -8,8 +8,8 @@
 
 import UIKit
 
-class ToolTableViewCell: UITableViewCell {
-    static let ID = "ToolCell"
+class CommonTableViewCell: UITableViewCell {
+    static let ID = "CommonCell"
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

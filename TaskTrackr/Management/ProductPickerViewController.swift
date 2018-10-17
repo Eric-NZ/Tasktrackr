@@ -7,16 +7,15 @@
 //
 
 import UIKit
-import CollapsibleTableSectionViewController
 
 protocol ToolAndModelPickupDelegate {
     func finishSelection(selectedtools: [Tool], selectedModels: [ProductModel])
 }
 
-class ProductPickerViewController: CollapsibleTableSectionViewController {
+class ProductPickerViewController: ExpandableSelectorController {
     
     var pickupDelegate: ToolAndModelPickupDelegate?
-
+    
     var products: [Product] = DatabaseService.shared.getObjectArray(objectType: Product.self) as! [Product]
     // NOTE: this is an array includes arrays that include models belong to each specific product.
     var allModelArrays: [[ProductModel]] = []
@@ -39,6 +38,10 @@ class ProductPickerViewController: CollapsibleTableSectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // configure arrow image for expandable table view section
+        configureSectionArrow(arrowImage: UIImage(named: "down-arrow")!)
+        // datasource
+        expandableTableViewDataSource = self
         // initialize right bar button item
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(onSelectPressed))
 
@@ -51,9 +54,6 @@ class ProductPickerViewController: CollapsibleTableSectionViewController {
         initSelectionStates()
         
         print(modelBoolArrays)
-        
-        // set delegate
-        delegate = self
     }
     
     /** Initial selection states depend on the arrays: selectedModels & selectedTools.
@@ -109,14 +109,14 @@ class ProductPickerViewController: CollapsibleTableSectionViewController {
     }
 }
 
-extension ProductPickerViewController: CollapsibleTableSectionDelegate {
+extension ProductPickerViewController: ExpandableTableViewDataSource {
 
     // MARK: - CollapsibleTableSectionDelegate
     func numberOfSections(_ tableView: UITableView) -> Int {
         return eventFrom == .fromTool ? 1 : products.count
     }
     
-    func collapsibleTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func expandableTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch eventFrom {
         case .fromProduct:
             return allModelArrays[section].count
@@ -125,10 +125,10 @@ extension ProductPickerViewController: CollapsibleTableSectionDelegate {
         }
     }
     
-    func collapsibleTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func expandableTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch eventFrom {
         case .fromTool:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ToolTableViewCell.ID) ?? UITableViewCell(style: .default, reuseIdentifier: ToolTableViewCell.ID)
+            let cell = tableView.dequeueReusableCell(withIdentifier: CommonTableViewCell.ID) ?? UITableViewCell(style: .default, reuseIdentifier: CommonTableViewCell.ID)
             cell.textLabel?.text = allTools[indexPath.row].toolName
             // present checkmark state
             cell.accessoryType = toolBoolArray[indexPath.row] ? .checkmark : .none
@@ -146,7 +146,7 @@ extension ProductPickerViewController: CollapsibleTableSectionDelegate {
         return eventFrom == .fromProduct ? products[section].productName : "All Tools"
     }
     
-    func collapsibleTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func selectorTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let cell = tableView.cellForRow(at: indexPath)
         switch eventFrom {

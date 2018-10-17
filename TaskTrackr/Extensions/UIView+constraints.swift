@@ -10,6 +10,18 @@ import UIKit
 
 extension UIView {
     
+    // rotate view
+    func rotate(_ toValue: CGFloat, duration: CFTimeInterval = 0.2) {
+        let animation = CABasicAnimation(keyPath: "transform.rotation")
+        
+        animation.toValue = toValue
+        animation.duration = duration
+        animation.isRemovedOnCompletion = false
+        animation.fillMode = CAMediaTimingFillMode.forwards
+        
+        self.layer.add(animation, forKey: nil)
+    }
+    // center view
     func constrainCentered(_ subview: UIView) {
         
         subview.translatesAutoresizingMaskIntoConstraints = false
@@ -58,6 +70,7 @@ extension UIView {
         
     }
     
+    // constraint view to edges
     func constrainToEdges(_ subview: UIView) {
         
         subview.translatesAutoresizingMaskIntoConstraints = false

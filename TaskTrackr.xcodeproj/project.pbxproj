@@ -9,15 +9,18 @@
 /* Begin PBXBuildFile section */
 		21062025214131CB00BA2050 /* UIView+constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21062024214131CB00BA2050 /* UIView+constraints.swift */; };
 		210C04D2213CAF7E00576564 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210C04D1213CAF7E00576564 /* DatabaseService.swift */; };
+		211632252176E777005B3DBC /* ExpandableTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211632242176E777005B3DBC /* ExpandableTableViewHeader.swift */; };
 		2122019E21436D3000EE8A06 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2122019D21436D3000EE8A06 /* LoginViewController.swift */; };
 		2125E6AE214E4AF0002FE54B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6AD214E4AF0002FE54B /* UIColor.swift */; };
 		2135DD81215F40CF004AAC96 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2135DD80215F40CF004AAC96 /* ViewModel.swift */; };
 		2135DD89215F437E004AAC96 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2135DD88215F437E004AAC96 /* Task.swift */; };
 		2135DD8B215F45EB004AAC96 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2135DD8A215F45EB004AAC96 /* DataModel.swift */; };
 		213DA7122153A03E00D0C7AF /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213DA7102153A03E00D0C7AF /* Cells.swift */; };
-		213DA7132153A03E00D0C7AF /* ToolTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213DA7112153A03E00D0C7AF /* ToolTableViewCell.xib */; };
+		213DA7132153A03E00D0C7AF /* CommonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213DA7112153A03E00D0C7AF /* CommonTableViewCell.xib */; };
 		213DA71B2153A0F500D0C7AF /* ModelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213DA7192153A0F500D0C7AF /* ModelTableViewCell.xib */; };
 		2148615621715C1E0021EBD7 /* SearchResultTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2148615521715C1E0021EBD7 /* SearchResultTable.swift */; };
+		2154D34B2176B8A600D9D4E5 /* ServicePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2154D34A2176B8A600D9D4E5 /* ServicePickerViewController.swift */; };
+		2154D34D2176BA0C00D9D4E5 /* ExpandableSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2154D34C2176BA0C00D9D4E5 /* ExpandableSelectorController.swift */; };
 		216D69AE2172FAD400E7CDE1 /* PicPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D69AD2172FAD400E7CDE1 /* PicPickerViewController.swift */; };
 		219065B12158BD87004D96AC /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219065B02158BD87004D96AC /* UIImage.swift */; };
 		219065B32158D272004D96AC /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219065B22158D272004D96AC /* UITableViewCell.swift */; };
@@ -58,15 +61,18 @@
 /* Begin PBXFileReference section */
 		21062024214131CB00BA2050 /* UIView+constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+constraints.swift"; sourceTree = "<group>"; };
 		210C04D1213CAF7E00576564 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		211632242176E777005B3DBC /* ExpandableTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableTableViewHeader.swift; sourceTree = "<group>"; };
 		2122019D21436D3000EE8A06 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2125E6AD214E4AF0002FE54B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		2135DD80215F40CF004AAC96 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		2135DD88215F437E004AAC96 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		2135DD8A215F45EB004AAC96 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		213DA7102153A03E00D0C7AF /* Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
-		213DA7112153A03E00D0C7AF /* ToolTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToolTableViewCell.xib; sourceTree = "<group>"; };
+		213DA7112153A03E00D0C7AF /* CommonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonTableViewCell.xib; sourceTree = "<group>"; };
 		213DA7192153A0F500D0C7AF /* ModelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModelTableViewCell.xib; sourceTree = "<group>"; };
 		2148615521715C1E0021EBD7 /* SearchResultTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchResultTable.swift; path = TaskTrackr/Components/SearchResultTable.swift; sourceTree = SOURCE_ROOT; };
+		2154D34A2176B8A600D9D4E5 /* ServicePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePickerViewController.swift; sourceTree = "<group>"; };
+		2154D34C2176BA0C00D9D4E5 /* ExpandableSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableSelectorController.swift; sourceTree = "<group>"; };
 		216D69AD2172FAD400E7CDE1 /* PicPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicPickerViewController.swift; sourceTree = "<group>"; };
 		219065B02158BD87004D96AC /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		219065B22158D272004D96AC /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
@@ -159,6 +165,8 @@
 		213DA70F2153A00A00D0C7AF /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				2154D34C2176BA0C00D9D4E5 /* ExpandableSelectorController.swift */,
+				211632242176E777005B3DBC /* ExpandableTableViewHeader.swift */,
 				21D83F4621747AA700B15AE4 /* OptionSheetController.swift */,
 				21D83F402174443900B15AE4 /* ImageCollectionCell.swift */,
 				21D83F412174443900B15AE4 /* ImageCollectionCell.xib */,
@@ -167,7 +175,7 @@
 				21DF277D214E0A6800BB2799 /* TagTableViewCell.xib */,
 				21F7A8CD214E263A00A01AB5 /* TagControlTableViewCell.xib */,
 				213DA7102153A03E00D0C7AF /* Cells.swift */,
-				213DA7112153A03E00D0C7AF /* ToolTableViewCell.xib */,
+				213DA7112153A03E00D0C7AF /* CommonTableViewCell.xib */,
 				213DA7192153A0F500D0C7AF /* ModelTableViewCell.xib */,
 			);
 			path = Components;
@@ -181,6 +189,7 @@
 				21E7176921708F8000FA177C /* LocationSelectViewController.swift */,
 				21EA13C22136505200C5CB34 /* TaskSearchTableViewController.swift */,
 				216D69AD2172FAD400E7CDE1 /* PicPickerViewController.swift */,
+				2154D34A2176B8A600D9D4E5 /* ServicePickerViewController.swift */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -323,7 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21DF277F214E0A6800BB2799 /* TagTableViewCell.xib in Resources */,
-				213DA7132153A03E00D0C7AF /* ToolTableViewCell.xib in Resources */,
+				213DA7132153A03E00D0C7AF /* CommonTableViewCell.xib in Resources */,
 				21EA13AF213622C900C5CB34 /* LaunchScreen.storyboard in Resources */,
 				213DA71B2153A0F500D0C7AF /* ModelTableViewCell.xib in Resources */,
 				21F7A8CF214E263A00A01AB5 /* TagControlTableViewCell.xib in Resources */,
@@ -343,7 +352,6 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TaskTrackr/Pods-TaskTrackr-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/CollapsibleTableSectionViewController/CollapsibleTableSectionViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/Former/Former.framework",
 				"${BUILT_PRODUCTS_DIR}/LFLoginController/LFLoginController.framework",
 				"${BUILT_PRODUCTS_DIR}/Parchment/Parchment.framework",
@@ -354,7 +362,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CollapsibleTableSectionViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Former.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LFLoginController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parchment.framework",
@@ -408,17 +415,20 @@
 				2135DD81215F40CF004AAC96 /* ViewModel.swift in Sources */,
 				2125E6AE214E4AF0002FE54B /* UIColor.swift in Sources */,
 				2135DD89215F437E004AAC96 /* Task.swift in Sources */,
+				2154D34B2176B8A600D9D4E5 /* ServicePickerViewController.swift in Sources */,
 				21A265E92140781200671F6C /* ProductsTableViewController.swift in Sources */,
 				21BBC78A213E65890006B5B4 /* Product.swift in Sources */,
 				213DA7122153A03E00D0C7AF /* Cells.swift in Sources */,
 				2122019E21436D3000EE8A06 /* LoginViewController.swift in Sources */,
 				2148615621715C1E0021EBD7 /* SearchResultTable.swift in Sources */,
 				21D83F4721747AA700B15AE4 /* OptionSheetController.swift in Sources */,
+				211632252176E777005B3DBC /* ExpandableTableViewHeader.swift in Sources */,
 				21062025214131CB00BA2050 /* UIView+constraints.swift in Sources */,
 				21BBC788213E63F00006B5B4 /* Tool.swift in Sources */,
 				21A265ED2140787100671F6C /* SitesTableViewController.swift in Sources */,
 				21BBC78C213E681D0006B5B4 /* Worker.swift in Sources */,
 				21D8D656213F96E00092AEBB /* ServicesTableViewController.swift in Sources */,
+				2154D34D2176BA0C00D9D4E5 /* ExpandableSelectorController.swift in Sources */,
 				21D8D658213F97170092AEBB /* WorkersTableViewController.swift in Sources */,
 				21EA13A2213622C800C5CB34 /* AppDelegate.swift in Sources */,
 				21C4B346216B3D6900913ADB /* TaskEditorViewController.swift in Sources */,

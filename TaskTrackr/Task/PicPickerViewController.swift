@@ -16,11 +16,6 @@ class PicPickerViewController: UIViewController {
     @IBOutlet weak var imageCollectionView: UICollectionView!
     var delegate: PicturePickerDelegate?
     var images: [UIImage] = []
-    enum ImageSource {
-        case fromCamera
-        case fromAlbum
-        case cancel
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
