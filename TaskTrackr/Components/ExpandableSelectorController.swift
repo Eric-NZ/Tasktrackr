@@ -19,6 +19,8 @@ class ExpandableSelectorController: UIViewController {
     var tableView: UITableView!
     var sectionArrowImage: UIImage?
     var expandableTableViewDataSource: ExpandableTableViewDataSource?
+    // array cells to store state for each one
+    var markStates: [[UITableViewCell.AccessoryType?]?] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +62,27 @@ extension ExpandableSelectorController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return expandableTableViewDataSource?.expandableTableView(tableView, cellForRowAt: indexPath) ?? UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "DefaultCell")
+        if let cell = expandableTableViewDataSource?.expandableTableView(tableView, cellForRowAt: indexPath) {
+            // if not stored yet, store cell to array
+            // - append section
+            if markStates.count <= indexPath.section {
+                markStates.append([])
+            }
+            // - append row
+            if (markStates[indexPath.section]?.count)! <= indexPath.row {
+                markStates[indexPath.section]?.append(.none)
+            }
+            
+            // after above appending, the 2d array can be used as normal
+            if let markState = markStates[indexPath.section]?[indexPath.row] {
+                cell.accessoryType = markState
+            }
+            
+            return cell
+            
+        } else {
+            return UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "DefaultCell")
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -88,6 +110,17 @@ extension ExpandableSelectorController: UITableViewDelegate {
         return 32
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if let cell = tableView.cellForRow(at: indexPath) {
+            let isMarked = cell.accessoryType == .checkmark
+            cell.accessoryType = isMarked ? .none : .checkmark
+            
+            // store cell check state
+            markStates[indexPath.section]?[indexPath.row] = cell.accessoryType
+        }
+    }
 }
 
 // MARK: - ExpandableTableViewHeaderDelegate

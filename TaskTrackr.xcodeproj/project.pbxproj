@@ -10,6 +10,7 @@
 		21062025214131CB00BA2050 /* UIView+constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21062024214131CB00BA2050 /* UIView+constraints.swift */; };
 		210C04D2213CAF7E00576564 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210C04D1213CAF7E00576564 /* DatabaseService.swift */; };
 		211632252176E777005B3DBC /* ExpandableTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211632242176E777005B3DBC /* ExpandableTableViewHeader.swift */; };
+		21163227217721EA005B3DBC /* WorkerPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21163226217721EA005B3DBC /* WorkerPickerViewController.swift */; };
 		2122019E21436D3000EE8A06 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2122019D21436D3000EE8A06 /* LoginViewController.swift */; };
 		2125E6AE214E4AF0002FE54B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6AD214E4AF0002FE54B /* UIColor.swift */; };
 		2135DD81215F40CF004AAC96 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2135DD80215F40CF004AAC96 /* ViewModel.swift */; };
@@ -62,6 +63,7 @@
 		21062024214131CB00BA2050 /* UIView+constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+constraints.swift"; sourceTree = "<group>"; };
 		210C04D1213CAF7E00576564 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		211632242176E777005B3DBC /* ExpandableTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableTableViewHeader.swift; sourceTree = "<group>"; };
+		21163226217721EA005B3DBC /* WorkerPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerPickerViewController.swift; sourceTree = "<group>"; };
 		2122019D21436D3000EE8A06 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2125E6AD214E4AF0002FE54B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		2135DD80215F40CF004AAC96 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				21EA13C22136505200C5CB34 /* TaskSearchTableViewController.swift */,
 				216D69AD2172FAD400E7CDE1 /* PicPickerViewController.swift */,
 				2154D34A2176B8A600D9D4E5 /* ServicePickerViewController.swift */,
+				21163226217721EA005B3DBC /* WorkerPickerViewController.swift */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				21A67484214220020012B555 /* ItemEditorController.swift in Sources */,
 				210C04D2213CAF7E00576564 /* DatabaseService.swift in Sources */,
 				21A265EB2140782E00671F6C /* ToolsTableViewController.swift in Sources */,
+				21163227217721EA005B3DBC /* WorkerPickerViewController.swift in Sources */,
 				21C4B34A216B5E8C00913ADB /* String.swift in Sources */,
 				21BBC790213E6BB00006B5B4 /* Service.swift in Sources */,
 				219065B32158D272004D96AC /* UITableViewCell.swift in Sources */,
