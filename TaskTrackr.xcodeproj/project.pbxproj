@@ -13,6 +13,7 @@
 		21163227217721EA005B3DBC /* WorkerPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21163226217721EA005B3DBC /* WorkerPickerViewController.swift */; };
 		2122019E21436D3000EE8A06 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2122019D21436D3000EE8A06 /* LoginViewController.swift */; };
 		2125E6AE214E4AF0002FE54B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6AD214E4AF0002FE54B /* UIColor.swift */; };
+		2132ABFC2177EC1B003F720B /* ToolPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132ABFB2177EC1B003F720B /* ToolPickerViewController.swift */; };
 		2135DD81215F40CF004AAC96 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2135DD80215F40CF004AAC96 /* ViewModel.swift */; };
 		2135DD89215F437E004AAC96 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2135DD88215F437E004AAC96 /* Task.swift */; };
 		2135DD8B215F45EB004AAC96 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2135DD8A215F45EB004AAC96 /* DataModel.swift */; };
@@ -66,6 +67,7 @@
 		21163226217721EA005B3DBC /* WorkerPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerPickerViewController.swift; sourceTree = "<group>"; };
 		2122019D21436D3000EE8A06 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2125E6AD214E4AF0002FE54B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		2132ABFB2177EC1B003F720B /* ToolPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolPickerViewController.swift; sourceTree = "<group>"; };
 		2135DD80215F40CF004AAC96 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		2135DD88215F437E004AAC96 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		2135DD8A215F45EB004AAC96 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				2195F4B92159DEFA00309990 /* ProductPickerViewController.swift */,
+				2132ABFB2177EC1B003F720B /* ToolPickerViewController.swift */,
 				21A67483214220020012B555 /* ItemEditorController.swift */,
 				21D8D65A213FE30D0092AEBB /* PageRouterViewController.swift */,
 				21D8D655213F96E00092AEBB /* ServicesTableViewController.swift */,
@@ -435,6 +438,7 @@
 				2154D34D2176BA0C00D9D4E5 /* ExpandableSelectorController.swift in Sources */,
 				21D8D658213F97170092AEBB /* WorkersTableViewController.swift in Sources */,
 				21EA13A2213622C800C5CB34 /* AppDelegate.swift in Sources */,
+				2132ABFC2177EC1B003F720B /* ToolPickerViewController.swift in Sources */,
 				21C4B346216B3D6900913ADB /* TaskEditorViewController.swift in Sources */,
 				21D83F422174443A00B15AE4 /* ImageCollectionCell.swift in Sources */,
 				21BBC786213E5A330006B5B4 /* Static.swift in Sources */,

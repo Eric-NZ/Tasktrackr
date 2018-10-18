@@ -284,10 +284,10 @@
             </objects>
             <point key="canvasLocation" x="748" y="868"/>
         </scene>
-        <!--💁 Services-->
+        <!--Services-->
         <scene sceneID="tx4-su-dDS">
             <objects>
-                <tableViewController storyboardIdentifier="ServiceViewController" title="💁 Services" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Cz6-no-pT4" customClass="ServicesTableViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ServiceViewController" title="Services" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Cz6-no-pT4" customClass="ServicesTableViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="els-Ew-x5L">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -334,10 +334,10 @@
             </objects>
             <point key="canvasLocation" x="2492" y="1827"/>
         </scene>
-        <!--👷 Workers-->
+        <!--Workers-->
         <scene sceneID="TF1-t7-vGq">
             <objects>
-                <tableViewController storyboardIdentifier="WorkerViewController" title="👷 Workers" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BW9-hE-0Ao" customClass="WorkersTableViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="WorkerViewController" title="Workers" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BW9-hE-0Ao" customClass="WorkersTableViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="3PG-lC-2lm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -393,12 +393,28 @@
                     </view>
                     <connections>
                         <segue destination="2h4-Mc-dKm" kind="show" identifier="OpenSiteForm" id="RAk-Pp-Lmo"/>
-                        <segue destination="6Ez-BA-ZVQ" kind="show" identifier="OpenPickupController" id="cmc-Iu-lCG"/>
+                        <segue destination="6Ez-BA-ZVQ" kind="show" identifier="OpenProductPicker" id="cmc-Iu-lCG"/>
+                        <segue destination="Yy2-Qc-IhM" kind="show" identifier="OpenToolPicker" id="5in-PP-qYb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cuf-tE-5Zj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3605.5999999999999" y="862.21889055472275"/>
+        </scene>
+        <!--Tool Picker View Controller-->
+        <scene sceneID="ms3-fW-p7k">
+            <objects>
+                <viewController id="Yy2-Qc-IhM" customClass="ToolPickerViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZoY-BN-zdc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Vem-4k-pC6"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wI8-cN-1zK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4513" y="834"/>
         </scene>
         <!--Product Picker View Controller-->
         <scene sceneID="F05-Mi-XAv">
@@ -413,12 +429,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G63-mG-Gby" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4511" y="868"/>
+            <point key="canvasLocation" x="4447" y="638"/>
         </scene>
-        <!--🚿 Products-->
+        <!--Products-->
         <scene sceneID="mf1-yB-hLe">
             <objects>
-                <tableViewController storyboardIdentifier="ProductViewController" title="🚿 Products" useStoryboardIdentifierAsRestorationIdentifier="YES" id="acL-7P-4cL" customClass="ProductsTableViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ProductViewController" title="Products" useStoryboardIdentifierAsRestorationIdentifier="YES" id="acL-7P-4cL" customClass="ProductsTableViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="kDg-Q3-WYP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -462,10 +478,10 @@
             </objects>
             <point key="canvasLocation" x="3884" y="1827"/>
         </scene>
-        <!--🔨 Tools-->
+        <!-- Tools-->
         <scene sceneID="JQK-NY-691">
             <objects>
-                <tableViewController storyboardIdentifier="ToolViewController" title="🔨 Tools" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0Rv-C7-U4x" customClass="ToolsTableViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ToolViewController" title=" Tools" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0Rv-C7-U4x" customClass="ToolsTableViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="0Es-Zg-QpB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -509,10 +525,10 @@
             </objects>
             <point key="canvasLocation" x="4596" y="1827"/>
         </scene>
-        <!--📍 Sites-->
+        <!--Sites-->
         <scene sceneID="3VE-Ou-Qom">
             <objects>
-                <tableViewController storyboardIdentifier="SiteViewController" title="📍 Sites" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2h4-Mc-dKm" customClass="SitesTableViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SiteViewController" title="Sites" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2h4-Mc-dKm" customClass="SitesTableViewController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Kwl-GU-T8L">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

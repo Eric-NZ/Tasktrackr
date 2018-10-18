@@ -11,17 +11,21 @@ import UIKit
 class WorkerPickerViewController: ExpandableSelectorController {
 
     let workers: [Worker] = DatabaseService.shared.getObjectArray(objectType: Worker.self) as! [Worker]
-    
+    var selectedWorkers: [Worker] = []
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // set arrow image
         configureSectionArrow(arrowImage: UIImage(named: "down-arrow")!)
-        // set datasource
-        expandableTableViewDataSource = self
         
         // register tableview cell
         tableView.register(CommonTableViewCell.self, forCellReuseIdentifier: CommonTableViewCell.ID)
+        
+        // set datasource
+        expandableTableViewDataSource = self
+        
+        // init checkmark states
+        initMarkStates(marked: DatabaseService.shared.mappingSegregatedIndices(wholeMatrix: [workers], elements: selectedWorkers))
     }
     
 }

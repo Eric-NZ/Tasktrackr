@@ -95,6 +95,19 @@ class DatabaseService {
         return array
     }
     
+    public func modelListTo2DArray(from list: List<ProductModel>) -> [[ProductModel]] {
+        var matrix: [[ProductModel]] = []
+        var products: [Product] = []
+        products = list.map({ (model) -> Product in
+            return model.product!
+        })
+        matrix = products.map({ (product) -> [ProductModel] in
+            return getModels(in: product).resultToArray(ofType: ProductModel.self)
+        })
+        
+        return matrix
+    }
+    
     public func toolListToArray(from list: List<Tool>) -> [Tool] {
         var array: [Tool] = []
         array.append(contentsOf: list)
@@ -113,6 +126,7 @@ class DatabaseService {
         return realm.objects(objectType).resultToArray(ofType: objectType)
     }
     
+    // NOTE: save product models to ProductModel.
     public func saveModels(to product: Product, with modelArray: [ProductModel]) {
         let realm = getRealm()
         // delete all models in the product
@@ -124,6 +138,11 @@ class DatabaseService {
         try! realm.write {
             realm.add(modelArray)
         }
+    }
+    
+    // NOTE: NOT NECESSARY - save models to the ProductModel List in Product
+    public func saveModelsToProduct(to product: Product, with modelArray: [ProductModel]) {
+        
     }
     
     // add new task
@@ -219,5 +238,23 @@ class DatabaseService {
         try! realm.write {
             //
         }
+    }
+    
+    // destArray(B) is a sub set of source2DArray(A), this function returns an indices where A contains elememts from B
+    func mappingSegregatedIndices(wholeMatrix: [[Object]], elements: [Object]) -> [[Int]]{
+        var indices: [[Int]] = []
+        
+        let numberOfSections = wholeMatrix.count
+        for section in 0..<numberOfSections {
+            indices.append([])
+            let numberOfRowsInSection = wholeMatrix[section].count
+            for row in 0..<numberOfRowsInSection {
+                if elements.contains(wholeMatrix[section][row]) {
+                    indices[section].append(row)
+                }
+            }
+        }
+        
+        return indices
     }
 }

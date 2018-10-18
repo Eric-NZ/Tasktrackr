@@ -20,7 +20,7 @@ class ExpandableSelectorController: UIViewController {
     var sectionArrowImage: UIImage?
     var expandableTableViewDataSource: ExpandableTableViewDataSource?
     // array cells to store state for each one
-    var markStates: [[UITableViewCell.AccessoryType?]?] = []
+    var markStates: [[UITableViewCell.AccessoryType]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +48,25 @@ class ExpandableSelectorController: UIViewController {
     public func configureSectionArrow(arrowImage: UIImage) {
         self.sectionArrowImage = arrowImage
     }
+    
+    // init checkmark states from indices array
+    public func initMarkStates(marked indices: [[Int]]) {
+        let numberOfSections = tableView.numberOfSections
+        for section in 0..<numberOfSections {
+            // markStates array has not yet current section, append an empty array
+            if markStates.count == section {
+                markStates.append([])
+            }
+            let numberOfRowsInSection = tableView.numberOfRows(inSection: section)
+            for row in 0..<numberOfRowsInSection {
+                // markStates[section] array has not yet current row, append current item
+                if markStates[section].count == row {
+                    markStates[section].append(.none)
+                }
+                markStates[section][row] = indices[section].contains(row) ? .checkmark : .none
+            }
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -63,21 +82,11 @@ extension ExpandableSelectorController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = expandableTableViewDataSource?.expandableTableView(tableView, cellForRowAt: indexPath) {
-            // if not stored yet, store cell to array
-            // - append section
-            if markStates.count <= indexPath.section {
-                markStates.append([])
+
+            // NOTE: initMarkStates must be invoked before this
+            if markStates.count > 0 {
+                cell.accessoryType = (markStates[indexPath.section][indexPath.row])
             }
-            // - append row
-            if (markStates[indexPath.section]?.count)! <= indexPath.row {
-                markStates[indexPath.section]?.append(.none)
-            }
-            
-            // after above appending, the 2d array can be used as normal
-            if let markState = markStates[indexPath.section]?[indexPath.row] {
-                cell.accessoryType = markState
-            }
-            
             return cell
             
         } else {
@@ -118,7 +127,9 @@ extension ExpandableSelectorController: UITableViewDelegate {
             cell.accessoryType = isMarked ? .none : .checkmark
             
             // store cell check state
-            markStates[indexPath.section]?[indexPath.row] = cell.accessoryType
+            if markStates.count > 0 {
+                markStates[indexPath.section][indexPath.row] = cell.accessoryType
+            }
         }
     }
 }

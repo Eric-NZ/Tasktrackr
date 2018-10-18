@@ -40,7 +40,8 @@ struct Static {
     static let segue_openProductForm = "OpenProductForm"
     static let segue_openToolForm = "OpenToolForm"
     static let segue_openSiteForm = "OpenSiteForm"
-    static let segue_openProductSelector = "OpenPickupController"
+    static let segue_openProductSelector = "OpenProductPicker"
+    static let segue_openToolSelector = "OpenToolPicker"
     static let segue_openTaskEditor = "OpenTaskEditor"
     static let segue_openWorkerPicker = "OpenWorkerPicker"
     static let segue_openServicePicker = "OpenServicePicker"
@@ -86,4 +87,6 @@ struct Static {
             return nil
         }
     }
+
 }
+

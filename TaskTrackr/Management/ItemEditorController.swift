@@ -155,7 +155,7 @@ class ItemEditorController: FormViewController {
         }
     }
     
-    // build Service form
+    // MARK: - build Service form
     func buildServiceForm(){
         // initialize model list & tool arrays
         if currentService != nil {
@@ -193,14 +193,15 @@ class ItemEditorController: FormViewController {
         
         let sectionBasic = SectionFormer(rowFormer: nameField, descField).set(headerViewFormer: createHeader("Basic Service Info"))
         
-        // applied products
+        // MARK: applied products
         productSelectorMenu = createMenu("🚿 Applicable Products", getProductSelectionStateText()) { [weak self] in
             self?.performSegue(withIdentifier: Static.segue_openProductSelector, sender: self)
             } as? LabelRowFormer<FormLabelCell>
         
-        // applied tools: if the sender is nil, means I will present the selector for Tools
+        // MARK: applied tools
         toolSelectorMenu = createMenu("🔨 Applicable Tools", getToolSelectionStateText()) { [weak self] in
-            self?.performSegue(withIdentifier: Static.segue_openProductSelector, sender: nil)
+            // perform segue: OpenToolPicker
+            self?.performSegue(withIdentifier: Static.segue_openToolSelector, sender: self)
             } as? LabelRowFormer<FormLabelCell>
         
         let sectionSelector = SectionFormer(rowFormer: productSelectorMenu!, toolSelectorMenu!)
@@ -224,7 +225,7 @@ class ItemEditorController: FormViewController {
         
         return true
     }
-    // build Workder form
+    // MARK: - build Workder form
     func buildWorkerForm() {
         // worker first name
         let firstNameField = TextFieldRowFormer<FormTextFieldCell>() {
@@ -288,7 +289,7 @@ class ItemEditorController: FormViewController {
         return true
     }
     
-    // build Product form
+    // MARK: - build Product form
     func buildProductForm() {
         
         // initial model array
@@ -396,7 +397,7 @@ class ItemEditorController: FormViewController {
         return true
     }
     
-    // build Tool form
+    // MARK: - build Tool form
     func buildToolForm() {
         // Tool name
         let nameField = TextFieldRowFormer<FormTextFieldCell>() {
@@ -460,10 +461,9 @@ class ItemEditorController: FormViewController {
 }
 
 // MARK: - ToolAndModelPickupDelegate
-extension ItemEditorController: ToolAndModelPickupDelegate {
-    func finishSelection(selectedtools: [Tool], selectedModels: [ProductModel]) {
+extension ItemEditorController: ModelPickupDelegate {
+    func finishSelection(selectedModels: [ProductModel]) {
         self.applicableModels = selectedModels
-        self.applicableTools = selectedtools
         
         // update summary on selector menus
         updateSelectorMenu()
@@ -513,14 +513,29 @@ extension ItemEditorController: ToolAndModelPickupDelegate {
         former.reload()
     }
     
-    // prepare information for the popping up selector view controller
+    // MARK: prepare information for the presented selector view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let selector = segue.destination as! ProductPickerViewController
-        // tells selector whether pickup tools or product models
-        selector.eventFrom = (sender == nil) ? .fromTool : .fromProduct
-        // init original selected tools & models
+        switch segue.identifier {
+        case Static.segue_openToolSelector:
+            prepareForTool(for: segue)
+        case Static.segue_openProductSelector:
+            prepareForProduct(for: segue)
+        default:
+            break
+        }
+    }
+    
+    private func prepareForTool(for segue: UIStoryboardSegue) {
+        let selector = segue.destination as! ToolPickerViewController
         selector.selectedTools = applicableTools
+    }
+    
+    private func prepareForProduct(for segue: UIStoryboardSegue) {
+        let selector = segue.destination as! ProductPickerViewController
+        // init original selected models
+        
         selector.selectedModels = applicableModels
+        
         // init the delegate of selector
         selector.pickupDelegate = self
     }
