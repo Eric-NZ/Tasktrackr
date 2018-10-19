@@ -37,6 +37,11 @@
 		21BBC78C213E681D0006B5B4 /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBC78B213E681D0006B5B4 /* Worker.swift */; };
 		21BBC78E213E69440006B5B4 /* Site.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBC78D213E69440006B5B4 /* Site.swift */; };
 		21BBC790213E6BB00006B5B4 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBC78F213E6BB00006B5B4 /* Service.swift */; };
+		21BBD230217A8371006EB159 /* DBService_Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBD22F217A8371006EB159 /* DBService_Task.swift */; };
+		21BBD232217A8472006EB159 /* DBService_Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBD231217A8472006EB159 /* DBService_Product.swift */; };
+		21BBD234217A8488006EB159 /* DBService_Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBD233217A8488006EB159 /* DBService_Service.swift */; };
+		21BBD236217A84BF006EB159 /* DBService_Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBD235217A84BF006EB159 /* DBService_Worker.swift */; };
+		21BBD238217A84DD006EB159 /* DBService_Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBD237217A84DD006EB159 /* DBService_Tool.swift */; };
 		21C4B346216B3D6900913ADB /* TaskEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C4B345216B3D6900913ADB /* TaskEditorViewController.swift */; };
 		21C4B34A216B5E8C00913ADB /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C4B349216B5E8C00913ADB /* String.swift */; };
 		21D498FF2179A3DD0004FFDA /* SinglePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D498FE2179A3DD0004FFDA /* SinglePickerController.swift */; };
@@ -91,6 +96,11 @@
 		21BBC78B213E681D0006B5B4 /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
 		21BBC78D213E69440006B5B4 /* Site.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Site.swift; sourceTree = "<group>"; };
 		21BBC78F213E6BB00006B5B4 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		21BBD22F217A8371006EB159 /* DBService_Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBService_Task.swift; sourceTree = "<group>"; };
+		21BBD231217A8472006EB159 /* DBService_Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBService_Product.swift; sourceTree = "<group>"; };
+		21BBD233217A8488006EB159 /* DBService_Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBService_Service.swift; sourceTree = "<group>"; };
+		21BBD235217A84BF006EB159 /* DBService_Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBService_Worker.swift; sourceTree = "<group>"; };
+		21BBD237217A84DD006EB159 /* DBService_Tool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBService_Tool.swift; sourceTree = "<group>"; };
 		21C4B345216B3D6900913ADB /* TaskEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditorViewController.swift; sourceTree = "<group>"; };
 		21C4B349216B5E8C00913ADB /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		21D498FE2179A3DD0004FFDA /* SinglePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePickerController.swift; sourceTree = "<group>"; };
@@ -161,6 +171,11 @@
 			isa = PBXGroup;
 			children = (
 				210C04D1213CAF7E00576564 /* DatabaseService.swift */,
+				21BBD22F217A8371006EB159 /* DBService_Task.swift */,
+				21BBD231217A8472006EB159 /* DBService_Product.swift */,
+				21BBD233217A8488006EB159 /* DBService_Service.swift */,
+				21BBD235217A84BF006EB159 /* DBService_Worker.swift */,
+				21BBD237217A84DD006EB159 /* DBService_Tool.swift */,
 				2135DD80215F40CF004AAC96 /* ViewModel.swift */,
 			);
 			path = ViewModel;
@@ -407,9 +422,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2195F4BA2159DEFA00309990 /* ProductPickerViewController.swift in Sources */,
+				21BBD236217A84BF006EB159 /* DBService_Worker.swift in Sources */,
 				21A67484214220020012B555 /* ItemEditorController.swift in Sources */,
 				210C04D2213CAF7E00576564 /* DatabaseService.swift in Sources */,
 				21A265EB2140782E00671F6C /* ToolsTableViewController.swift in Sources */,
+				21BBD238217A84DD006EB159 /* DBService_Tool.swift in Sources */,
 				21163227217721EA005B3DBC /* WorkerPickerViewController.swift in Sources */,
 				21C4B34A216B5E8C00913ADB /* String.swift in Sources */,
 				21BBC790213E6BB00006B5B4 /* Service.swift in Sources */,
@@ -419,6 +436,7 @@
 				219065B12158BD87004D96AC /* UIImage.swift in Sources */,
 				21E7176A21708F8000FA177C /* LocationSelectViewController.swift in Sources */,
 				21D8D65B213FE30D0092AEBB /* PageRouterViewController.swift in Sources */,
+				21BBD234217A8488006EB159 /* DBService_Service.swift in Sources */,
 				21DF277E214E0A6800BB2799 /* TagTableViewCell.swift in Sources */,
 				2135DD81215F40CF004AAC96 /* ViewModel.swift in Sources */,
 				2125E6AE214E4AF0002FE54B /* UIColor.swift in Sources */,
@@ -438,6 +456,8 @@
 				2154D34D2176BA0C00D9D4E5 /* ExpandableSelectorController.swift in Sources */,
 				21D8D658213F97170092AEBB /* WorkersTableViewController.swift in Sources */,
 				21EA13A2213622C800C5CB34 /* AppDelegate.swift in Sources */,
+				21BBD232217A8472006EB159 /* DBService_Product.swift in Sources */,
+				21BBD230217A8371006EB159 /* DBService_Task.swift in Sources */,
 				2132ABFC2177EC1B003F720B /* ToolPickerViewController.swift in Sources */,
 				21C4B346216B3D6900913ADB /* TaskEditorViewController.swift in Sources */,
 				21D83F422174443A00B15AE4 /* ImageCollectionCell.swift in Sources */,
