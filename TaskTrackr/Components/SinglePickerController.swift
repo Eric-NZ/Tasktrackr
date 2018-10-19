@@ -21,7 +21,9 @@ class SinglePickerController: UITableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        onSelectionChanged(on: selection!)
+        if selection != nil {
+            onSelectionChanged(on: selection!)
+        }
     }
     
     private func onSelectionChanged(on indexPath: IndexPath) {
@@ -57,5 +59,8 @@ extension SinglePickerController {
         tableView.deselectRow(at: indexPath, animated: true)
         setSelection(on: indexPath)
         selectionFinished(selection: indexPath)
+        if navigationController != nil {
+            navigationController!.popViewController(animated: true)
+        }
     }
 }

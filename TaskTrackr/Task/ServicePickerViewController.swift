@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol ServicePickerDelegate {
+    func selectionDidFinish(service: Service)
+}
+
 class ServicePickerViewController: SinglePickerController {
-    
+    var servicePickerDelegate: ServicePickerDelegate?
     var services: [Service] = DatabaseService.shared.getObjectArray(objectType: Service.self) as! [Service]
+    var service: Service?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,12 +24,34 @@ class ServicePickerViewController: SinglePickerController {
         tableView.register(CommonTableViewCell.self, forCellReuseIdentifier: CommonTableViewCell.ID)
         
         // select item
-        setSelection(on: IndexPath(row: 1, section: 0))
+        if service != nil {
+            setSelection(on: calcIndexPath(from: service!))
+        }
     }
     
     override func selectionFinished(selection: IndexPath) {
-        // 
+        self.service = matchService(from: selection)
+        if servicePickerDelegate != nil {
+            servicePickerDelegate?.selectionDidFinish(service: self.service!)
+        }
     }
+    
+    func calcIndexPath(from service: Service) -> IndexPath {
+        var row = 0
+        let numberOfServices = services.count
+        for r in 0..<numberOfServices {
+            if services[r] == service {
+                row = r
+            }
+        }
+        return IndexPath(row: row, section: 0)
+    }
+    
+    func matchService(from indexPath: IndexPath) -> Service {
+        let index = indexPath.row
+        return services[index]
+    }
+    
 }
 
 // MARK: - UITableView DataSource
