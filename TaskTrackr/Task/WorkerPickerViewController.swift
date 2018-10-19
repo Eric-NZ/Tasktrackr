@@ -8,14 +8,20 @@
 
 import UIKit
 
+protocol WorkerPickerDelegate {
+    func selectionDidFinish(selectedWorkers: [Worker])
+}
 class WorkerPickerViewController: ExpandableSelectorController {
-
+    var workerPickerDelegate: WorkerPickerDelegate?
     let workers: [Worker] = DatabaseService.shared.getObjectArray(objectType: Worker.self) as! [Worker]
     var selectedWorkers: [Worker] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // setup navigation right button
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(onDoneTapped))
 
-        // set arrow image
+        // setup arrow image
         configureSectionArrow(arrowImage: UIImage(named: "down-arrow")!)
         
         // register tableview cell
@@ -25,9 +31,34 @@ class WorkerPickerViewController: ExpandableSelectorController {
         expandableTableViewDataSource = self
         
         // init checkmark states
-        initMarkStates(marked: DatabaseService.shared.mappingSegregatedIndices(wholeMatrix: [workers], elements: selectedWorkers))
+        let indices = DatabaseService.shared.mappingSegregatedIndices(wholeMatrix: [workers], elements: selectedWorkers)
+        setupSelectionMatrixFromIndices(marked: indices)
     }
     
+    @objc func onDoneTapped() {
+        // call delegate method
+        if workerPickerDelegate != nil {
+            // calc selected workers
+            selectedWorkers = calcSelectedWorkers(selectionMatrix: getSelectionMatrix())
+            workerPickerDelegate?.selectionDidFinish(selectedWorkers: selectedWorkers)
+        }
+        // pop view controller(self)
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func calcSelectedWorkers(selectionMatrix: [[Bool]]) -> [Worker] {
+        var workers: [Worker] = []
+        let numberOfDepartment = selectionMatrix.count
+        for d in 0..<numberOfDepartment {
+            let numberOfWorkersInDepartment = selectionMatrix[d].count
+            for w in 0..<numberOfWorkersInDepartment {
+                if selectionMatrix[d][w] {
+                    workers.append(self.workers[w])
+                }
+            }
+        }
+        return workers
+    }
 }
 
 // MARK: - ExpandableTableViewDataSource
@@ -52,3 +83,4 @@ extension WorkerPickerViewController: ExpandableTableViewDataSource {
         return "Workers"
     }
 }
+

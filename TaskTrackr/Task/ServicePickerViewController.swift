@@ -8,40 +8,38 @@
 
 import UIKit
 
-class ServicePickerViewController: ExpandableSelectorController {
+class ServicePickerViewController: SinglePickerController {
     
     var services: [Service] = DatabaseService.shared.getObjectArray(objectType: Service.self) as! [Service]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // set arrow image
-        configureSectionArrow(arrowImage: UIImage(named: "down-arrow")!)
-        // set datasource
-        expandableTableViewDataSource = self
         
         // register tableview cell
         tableView.register(CommonTableViewCell.self, forCellReuseIdentifier: CommonTableViewCell.ID)
+        
+        // select item
+        setSelection(on: IndexPath(row: 1, section: 0))
     }
     
+    override func selectionFinished(selection: IndexPath) {
+        // 
+    }
 }
 
-extension ServicePickerViewController: ExpandableTableViewDataSource {
-    func expandableTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+// MARK: - UITableView DataSource
+extension ServicePickerViewController {
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return services.count
     }
     
-    func expandableTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: CommonTableViewCell.ID) {
-            cell.textLabel?.text = services[indexPath.row].serviceTitle
-            cell.detailTextLabel?.text = services[indexPath.row].serviceDesc
-            return cell
-        } else {
-            return UITableViewCell(style: .default, reuseIdentifier: CommonTableViewCell.ID)
-        }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CommonTableViewCell.ID) ?? UITableViewCell(style: .default, reuseIdentifier: CommonTableViewCell.ID)
+        cell.textLabel?.text = services[indexPath.row].serviceTitle
+        cell.detailTextLabel?.text = services[indexPath.row].serviceDesc
+        
+        return cell
     }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Services"
-    }
+
 }

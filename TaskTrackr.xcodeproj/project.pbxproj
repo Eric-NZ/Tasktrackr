@@ -39,10 +39,10 @@
 		21BBC790213E6BB00006B5B4 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBC78F213E6BB00006B5B4 /* Service.swift */; };
 		21C4B346216B3D6900913ADB /* TaskEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C4B345216B3D6900913ADB /* TaskEditorViewController.swift */; };
 		21C4B34A216B5E8C00913ADB /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C4B349216B5E8C00913ADB /* String.swift */; };
+		21D498FF2179A3DD0004FFDA /* SinglePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D498FE2179A3DD0004FFDA /* SinglePickerController.swift */; };
 		21D83F422174443A00B15AE4 /* ImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D83F402174443900B15AE4 /* ImageCollectionCell.swift */; };
 		21D83F432174443A00B15AE4 /* ImageCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D83F412174443900B15AE4 /* ImageCollectionCell.xib */; };
 		21D83F4521745A6400B15AE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21D83F4421745A6300B15AE4 /* Assets.xcassets */; };
-		21D83F4721747AA700B15AE4 /* OptionSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D83F4621747AA700B15AE4 /* OptionSheetController.swift */; };
 		21D8D656213F96E00092AEBB /* ServicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D8D655213F96E00092AEBB /* ServicesTableViewController.swift */; };
 		21D8D658213F97170092AEBB /* WorkersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D8D657213F97170092AEBB /* WorkersTableViewController.swift */; };
 		21D8D65B213FE30D0092AEBB /* PageRouterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D8D65A213FE30D0092AEBB /* PageRouterViewController.swift */; };
@@ -93,10 +93,10 @@
 		21BBC78F213E6BB00006B5B4 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		21C4B345216B3D6900913ADB /* TaskEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditorViewController.swift; sourceTree = "<group>"; };
 		21C4B349216B5E8C00913ADB /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		21D498FE2179A3DD0004FFDA /* SinglePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePickerController.swift; sourceTree = "<group>"; };
 		21D83F402174443900B15AE4 /* ImageCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionCell.swift; sourceTree = "<group>"; };
 		21D83F412174443900B15AE4 /* ImageCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionCell.xib; sourceTree = "<group>"; };
 		21D83F4421745A6300B15AE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		21D83F4621747AA700B15AE4 /* OptionSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSheetController.swift; sourceTree = "<group>"; };
 		21D8D655213F96E00092AEBB /* ServicesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesTableViewController.swift; sourceTree = "<group>"; };
 		21D8D657213F97170092AEBB /* WorkersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkersTableViewController.swift; sourceTree = "<group>"; };
 		21D8D65A213FE30D0092AEBB /* PageRouterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageRouterViewController.swift; sourceTree = "<group>"; };
@@ -171,7 +171,7 @@
 			children = (
 				2154D34C2176BA0C00D9D4E5 /* ExpandableSelectorController.swift */,
 				211632242176E777005B3DBC /* ExpandableTableViewHeader.swift */,
-				21D83F4621747AA700B15AE4 /* OptionSheetController.swift */,
+				21D498FE2179A3DD0004FFDA /* SinglePickerController.swift */,
 				21D83F402174443900B15AE4 /* ImageCollectionCell.swift */,
 				21D83F412174443900B15AE4 /* ImageCollectionCell.xib */,
 				2148615521715C1E0021EBD7 /* SearchResultTable.swift */,
@@ -413,6 +413,7 @@
 				21163227217721EA005B3DBC /* WorkerPickerViewController.swift in Sources */,
 				21C4B34A216B5E8C00913ADB /* String.swift in Sources */,
 				21BBC790213E6BB00006B5B4 /* Service.swift in Sources */,
+				21D498FF2179A3DD0004FFDA /* SinglePickerController.swift in Sources */,
 				219065B32158D272004D96AC /* UITableViewCell.swift in Sources */,
 				21EA13C121364FF200C5CB34 /* TaskTrackingViewController.swift in Sources */,
 				219065B12158BD87004D96AC /* UIImage.swift in Sources */,
@@ -428,7 +429,6 @@
 				213DA7122153A03E00D0C7AF /* Cells.swift in Sources */,
 				2122019E21436D3000EE8A06 /* LoginViewController.swift in Sources */,
 				2148615621715C1E0021EBD7 /* SearchResultTable.swift in Sources */,
-				21D83F4721747AA700B15AE4 /* OptionSheetController.swift in Sources */,
 				211632252176E777005B3DBC /* ExpandableTableViewHeader.swift in Sources */,
 				21062025214131CB00BA2050 /* UIView+constraints.swift in Sources */,
 				21BBC788213E63F00006B5B4 /* Tool.swift in Sources */,

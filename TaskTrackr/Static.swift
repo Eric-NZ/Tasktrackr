@@ -23,7 +23,7 @@ struct Static {
     static let MY_INSTANCE_ADDRESS = "tasktrackr.us1a.cloud.realm.io" // <- update this
     
     static let AUTH_URL  = URL(string: "https://\(MY_INSTANCE_ADDRESS)")!
-    static let REALM_URL = URL(string: "realms://\(MY_INSTANCE_ADDRESS)/TaskTrackr")!
+    static let REALM_URL = URL(string: "realms://\(MY_INSTANCE_ADDRESS)/TaskTracker-v1.00")!
     
     // user status: has signed in?
     static var currentUser: SyncUser?

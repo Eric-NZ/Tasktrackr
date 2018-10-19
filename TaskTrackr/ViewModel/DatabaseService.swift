@@ -115,6 +115,20 @@ class DatabaseService {
         return array
     }
     
+    public func workerListToArray(from list: List<Worker>) -> [Worker] {
+        var array: [Worker] = []
+        array.append(contentsOf: list)
+        
+        return array
+    }
+    
+    public func objectListToArray(from list: List<Object>) -> [Object] {
+        var array: [Object] = []
+        array.append(contentsOf: list)
+        
+        return array
+    }
+    
     public func getModelArray(in product: Product) -> [ProductModel] {
         let realm = getRealm()
         return realm.objects(ProductModel.self).filter("product=%@", product.self).resultToArray(ofType: ProductModel.self)
@@ -138,17 +152,6 @@ class DatabaseService {
         try! realm.write {
             realm.add(modelArray)
         }
-    }
-    
-    // NOTE: NOT NECESSARY - save models to the ProductModel List in Product
-    public func saveModelsToProduct(to product: Product, with modelArray: [ProductModel]) {
-        
-    }
-    
-    // add new task
-    public func addNewTask(task: Task) {
-        // NOTE: tasks may have images
-        
     }
     
     // remove a single object
@@ -176,7 +179,7 @@ class DatabaseService {
         }
     }
     
-    // add / update a service object
+    // add (or update) a service object
     public func addService(add service: Service, _ title: String?, _ desc: String?, tools: [Tool], models: [ProductModel], update: Bool) {
         
         let realm = getRealm()
@@ -199,7 +202,46 @@ class DatabaseService {
             service.serviceDesc = desc
             
             try! realm.write {
-                realm.add(service, update: update)
+                realm.add(service, update: false)
+            }
+        }
+    }
+    
+    // add (or update) a task object
+    public func addTask(add task: Task, _ title: String, _ desc: String, workers: [Worker], dueData: Date,
+                        locationTuple: (address: String, latitude: Double, longitude: Double),
+                        images: [UIImage], taskState: Task.TaskState, update: Bool) {
+        let realm = getRealm()
+        if update {
+            try! realm.write {
+                task.workers.removeAll()
+                task.workers.append(objectsIn: workers)
+                task.setValue(title, forKey: "taskTitle")
+                task.setValue(desc, forKey: "taskDesc")
+                task.setValue(dueData, forKey: "dueDate")
+                task.setValue(locationTuple.address, forKey: "address")
+                task.setValue(locationTuple.latitude, forKey: "latitude")
+                task.setValue(locationTuple.longitude, forKey: "longitude")
+                // image
+                //
+                task.setValue(taskState, forKey: "taskState")
+            }
+        } else {
+            task.workers.append(objectsIn: workers)
+            task.taskTitle = title
+            task.taskDesc = desc
+            task.dueDate = dueData
+            // location
+            task.address = locationTuple.address
+            task.latitude = locationTuple.latitude
+            task.longitude = locationTuple.longitude
+            // images
+            //
+            // progress
+//            task.taskState = taskState
+            
+            try! realm.write {
+                realm.add(task, update: false)
             }
         }
     }

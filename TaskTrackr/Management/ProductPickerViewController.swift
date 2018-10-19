@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol ModelPickupDelegate {
-    func finishSelection(selectedModels: [ProductModel])
+protocol ProductPickerDelegate {
+    func selectionDidFinish(selectedModels: [ProductModel])
 }
 
 class ProductPickerViewController: ExpandableSelectorController {
     
-    var pickupDelegate: ModelPickupDelegate?
+    var productPickerDelegate: ProductPickerDelegate?
     
     var products: [Product] = DatabaseService.shared.getObjectArray(objectType: Product.self) as! [Product]
     // NOTE: this is an array includes arrays that include models belong to each specific product.
@@ -22,9 +22,7 @@ class ProductPickerViewController: ExpandableSelectorController {
     var selectedModels: [ProductModel] = []
     // UPDATED: prefer to use selectedModelsMatrix
     var selectModelsMatrix: [[ProductModel]] = []
-    
-    // this 2-dimension array has the same structure as array allModelArrays
-    var modelBoolArrays: [[Bool]] = []
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +32,7 @@ class ProductPickerViewController: ExpandableSelectorController {
         // datasource
         expandableTableViewDataSource = self
         // initialize right bar button item
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(onDonePressed))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(onDoneTapped))
 
         // load all models for each product
         allModelArrays = products.map({
@@ -42,35 +40,34 @@ class ProductPickerViewController: ExpandableSelectorController {
         })
         
         let indices = DatabaseService.shared.mappingSegregatedIndices(wholeMatrix: allModelArrays, elements: selectedModels)
-        initMarkStates(marked: indices)
+        setupSelectionMatrixFromIndices(marked: indices)
     }
     
-    /** append selected models using both modelBoolArrays and allModalArrays(2-dimension array)
-        append selected tools
-    */
-    func collectSelection() {
-        // NOTE: make sure the arrays are empty before append
-        selectedModels.removeAll()
-        
-        for i in modelBoolArrays.indices {
-            for j in modelBoolArrays[i].indices {
-                if modelBoolArrays[i][j] == true {
-                    selectedModels.append(allModelArrays[i][j])
-                }
-            }
-        }
-    }
-    
-    @objc func onDonePressed() {
-        // collect selected tools & models
-        collectSelection()
+    @objc func onDoneTapped() {
         
         // invoke delegate method
-        if pickupDelegate != nil {
-            pickupDelegate?.finishSelection(selectedModels: selectedModels)
+        if productPickerDelegate != nil {
+            // calculate selectedProduct Models
+            let selectionMatrix = getSelectionMatrix()
+            selectedModels = calcSelectionModels(selectionMatrix: selectionMatrix)
+            productPickerDelegate?.selectionDidFinish(selectedModels: selectedModels)
         }
         
         navigationController?.popViewController(animated: true)
+    }
+    
+    func calcSelectionModels(selectionMatrix: [[Bool]]) -> [ProductModel] {
+        var models: [ProductModel] = []
+        let numberOfProduct = selectionMatrix.count
+        for p in 0..<numberOfProduct {
+            let numberOfModelsInProduct = selectionMatrix[p].count
+            for m in 0..<numberOfModelsInProduct {
+                if selectionMatrix[p][m] {
+                    models.append(allModelArrays[p][m])
+                }
+            }
+        }
+        return models
     }
 }
 

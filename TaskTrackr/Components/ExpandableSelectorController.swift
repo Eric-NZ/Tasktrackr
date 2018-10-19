@@ -50,7 +50,7 @@ class ExpandableSelectorController: UIViewController {
     }
     
     // init checkmark states from indices array
-    public func initMarkStates(marked indices: [[Int]]) {
+    public func setupSelectionMatrixFromIndices(marked indices: [[Int]]) {
         let numberOfSections = tableView.numberOfSections
         for section in 0..<numberOfSections {
             // markStates array has not yet current section, append an empty array
@@ -66,6 +66,19 @@ class ExpandableSelectorController: UIViewController {
                 markStates[section][row] = indices[section].contains(row) ? .checkmark : .none
             }
         }
+    }
+    
+    // get selection matrix
+    public func getSelectionMatrix() -> [[Bool]]{
+        var matrix: [[Bool]] = []
+        matrix = markStates.map({
+            let bools: [Bool] = $0.map({
+                return $0 == .checkmark ? true : false
+            })
+            return bools
+        })
+        
+        return matrix
     }
 }
 

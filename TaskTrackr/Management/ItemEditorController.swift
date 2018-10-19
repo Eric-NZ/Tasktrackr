@@ -460,12 +460,19 @@ class ItemEditorController: FormViewController {
     
 }
 
-// MARK: - ToolAndModelPickupDelegate
-extension ItemEditorController: ModelPickupDelegate {
-    func finishSelection(selectedModels: [ProductModel]) {
+// MARK: - ItemPickerDelegate
+extension ItemEditorController: ProductPickerDelegate, ToolPickerDelegate {
+    func selectionDidFinish(selectedTools: [Tool]) {
+        self.applicableTools = selectedTools
+        
+        // update subText on selector menu
+        updateSelectorMenu()
+    }
+    
+    func selectionDidFinish(selectedModels: [ProductModel]) {
         self.applicableModels = selectedModels
         
-        // update summary on selector menus
+        // update summary on selector menu
         updateSelectorMenu()
     }
     
@@ -512,7 +519,9 @@ extension ItemEditorController: ModelPickupDelegate {
   
         former.reload()
     }
-    
+}
+
+extension ItemEditorController {
     // MARK: prepare information for the presented selector view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
@@ -527,16 +536,17 @@ extension ItemEditorController: ModelPickupDelegate {
     
     private func prepareForTool(for segue: UIStoryboardSegue) {
         let selector = segue.destination as! ToolPickerViewController
+        // deliver selectedTools
         selector.selectedTools = applicableTools
+        // assign delegate
+        selector.toolPickerDelegate = self
     }
     
     private func prepareForProduct(for segue: UIStoryboardSegue) {
         let selector = segue.destination as! ProductPickerViewController
         // init original selected models
-        
         selector.selectedModels = applicableModels
-        
         // init the delegate of selector
-        selector.pickupDelegate = self
+        selector.productPickerDelegate = self
     }
 }

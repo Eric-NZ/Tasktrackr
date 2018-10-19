@@ -17,10 +17,11 @@ class TaskEditorViewController: FormViewController {
     var desc: String = ""
     var service: Service?
     var workers: [Worker] = []
+    var selectedWorkers: [Worker] = []
     var locationTuple: (address: String, latitude: Double, longitude: Double)?
     var dueDate: Date?
     var images: [UIImage] = []
-    var taskState: Task.TaskState?
+    var taskState: Task.TaskState = Task.TaskState.created
     enum Selector {
         case service
         case workers
@@ -31,6 +32,8 @@ class TaskEditorViewController: FormViewController {
     // for UI:
     var locationSelector: LabelRowFormer<FormLabelCell>?
     var pictureSelector: LabelRowFormer<FormLabelCell>?
+    var workerSelector: LabelRowFormer<FormLabelCell>?
+    var dueDatePicker: InlineDatePickerRowFormer<FormInlineDatePickerCell>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,8 +52,48 @@ class TaskEditorViewController: FormViewController {
     }
     
     @objc func onDonePressed() {
-        // create a new task
-        saveNewTask()
+        // verify input
+        guard verifyInput() else {return}
+        // save edited task
+        saveTask()
+        // pop current view controller
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func verifyInput() -> Bool {
+        // title
+        if taskTitle.isEmpty {
+            print("taskTitle.isEmpty")
+            return false
+        }
+        // desc
+        if desc.isEmpty {
+            print("")
+            return false
+        }
+        // service
+        if service == nil {
+            print("service is nil")
+            return true
+        }
+        // workers
+        if selectedWorkers.isEmpty {
+            print("no workers selected")
+            return false
+        }
+        // address
+        if locationTuple == nil {
+            print("no address")
+            return false
+        }
+        // images (optional)
+        // due date
+        if dueDate == nil {
+            print("no date")
+            return false
+        }
+        
+        return true
     }
     
     func setCustomNavigationItem() {
@@ -67,7 +110,6 @@ class TaskEditorViewController: FormViewController {
             desc = currentTask!.taskDesc
             service = currentTask?.service
             locationTuple = (currentTask?.address, currentTask?.latitude, currentTask?.longitude) as? (address: String, latitude: Double, longitude: Double)
-            
         }
     }
     
@@ -130,22 +172,24 @@ class TaskEditorViewController: FormViewController {
             } as? LabelRowFormer<FormLabelCell>
         
         // MARK: Pickup Designated Workers: Multi Selection
-        let workerSelector = createMenu("👷 Designate Workers", Static.none_selected) { [weak self] in
+        workerSelector = createMenu("👷 Designate Workers", Static.none_selected) { [weak self] in
             // perform segue here:
             self?.performSegue(withIdentifier: Static.segue_openWorkerPicker, sender: self)
             } as? LabelRowFormer<FormLabelCell>
         // MARK: Select Due Date of Task
-        let dueDatePicker = InlineDatePickerRowFormer<FormInlineDatePickerCell>() {
+        dueDatePicker = InlineDatePickerRowFormer<FormInlineDatePickerCell>() {
             $0.titleLabel.text = "📆 Select Due Date"
             $0.titleLabel.textColor = .formerColor()
             $0.titleLabel.font = .boldSystemFont(ofSize: 16)
             $0.displayLabel.textColor = .formerSubColor()
             $0.displayLabel.font = .boldSystemFont(ofSize: 14)
             }.inlineCellSetup {
-                $0.datePicker.datePickerMode = .dateAndTime
+                $0.datePicker.datePickerMode = .date
             }.configure {
                 $0.displayEditingColor = .formerHighlightedSubColor()
-            }.displayTextFromDate(String.mediumDateShortTime)
+            }.onDateChanged({
+                self.dueDate = $0
+            }).displayTextFromDate(String.mediumDateNoTime)
         // MARK: Search Location
         locationSelector = createMenu("📍 Address", Static.not_set) {[weak self] in
             // perform segue here:
@@ -160,58 +204,58 @@ class TaskEditorViewController: FormViewController {
         let sectionSelectors = SectionFormer(rowFormer: serviceSelector!, workerSelector!)
         let sectionLocationSelector = SectionFormer(rowFormer: locationSelector!)
         let sectionUploadPicture = SectionFormer(rowFormer: pictureSelector!)
-        let sectionDatePicker = SectionFormer(rowFormer: dueDatePicker)
+        let sectionDatePicker = SectionFormer(rowFormer: dueDatePicker!)
         former.append(sectionFormer: sectionBasic, sectionSelectors, sectionLocationSelector, sectionUploadPicture, sectionDatePicker)
     }
-
-    func saveNewTask() {
+    
+    func saveTask() {
         if currentTask == nil {
             currentTask = Task()
-            // set task properties...
-            //
-            //
-            DatabaseService.shared.addNewTask(task: currentTask!)
+            DatabaseService.shared.addTask(add: self.currentTask!, self.taskTitle, self.desc, workers: self.selectedWorkers, dueData: self.dueDate!, locationTuple: self.locationTuple!, images: self.images, taskState: self.taskState, update: false)
+        } else {
+            DatabaseService.shared.addTask(add: self.currentTask!, self.taskTitle, self.desc, workers: self.selectedWorkers, dueData: self.dueDate!, locationTuple: self.locationTuple!, images: self.images, taskState: self.taskState, update: true)
         }
     }
 }
 
+// MARK: - prepare info for segues, ui update
 extension TaskEditorViewController {
-    // prepare info for different segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case Static.segue_openWorkerPicker:
-            print("worker")
-            break
+            let workerPicker = segue.destination as! WorkerPickerViewController
+            workerPicker.selectedWorkers = self.selectedWorkers
+            workerPicker.workerPickerDelegate = self
         case Static.segue_openServicePicker:
-            print("service")
+            print("segue service")
             break
         case Static.segue_openLocationSelector:
             let locationSelector = segue.destination as! LocationSelectViewController
             locationSelector.locationTuple = locationTuple
             // set delegate
             locationSelector.delegate = self
-            break
         case Static.segue_openPicturePicker:
             let picPicker = segue.destination as! PicPickerViewController
             // assign images
             picPicker.images = self.images
             // set delegate
             picPicker.delegate = self
-            break
         default:
             break
         }
     }
-}
-
-extension TaskEditorViewController: LocationSelectorDelegate, PicturePickerDelegate {
+    
     // update selector subtext
-    func updateSelectorSubText(on selector: Selector, _ selection: Any?) {
+    private func updateSelectorSubText(on selector: Selector, _ selection: Any?) {
         switch selector {
         case .service:
             break
         case .workers:
-            break
+            if let count = selection as? Int {
+                let subText = String(format: count > 1 ? "%d workers" : "%d worker", count)
+                workerSelector?.subText = subText
+                workerSelector?.update()
+            }
         case .location:
             let address = selection as? String
             // trim the string
@@ -226,22 +270,34 @@ extension TaskEditorViewController: LocationSelectorDelegate, PicturePickerDeleg
             }
         }
     }
+}
 
-    // MARK: - LocationSelectorDelegate
+// MARK: - LocationSelectorDelegate, PicturePickerDelegate
+extension TaskEditorViewController: LocationSelectorDelegate, PicturePickerDelegate, WorkerPickerDelegate {
+
+    // LocationSelectorDelegate
     func onLocationReady(location: (address: String, latitude: Double, longitude: Double)) {
         // update local property: locationTuple
         locationTuple = location
         // update location selector menu
-        updateSelectorSubText(on: TaskEditorViewController.Selector.location, location.address)
+        updateSelectorSubText(on: .location, location.address)
     }
     
-    // MARK: - PicturePickerDelegate
+    // PicturePickerDelegate
     func onPictureSelectionFinished(images: [UIImage]) {
         // collect images to inner property.
         self.images = images
         // update subtitle for selector menu
         let count = images.count
         
-        updateSelectorSubText(on: TaskEditorViewController.Selector.pictures, count)
+        updateSelectorSubText(on: .pictures, count)
+    }
+    
+    // WorkerPickerDelegate
+    func selectionDidFinish(selectedWorkers: [Worker]) {
+        // receive selected result
+        self.selectedWorkers = selectedWorkers
+        // update ui
+        updateSelectorSubText(on: .workers, selectedWorkers.count)
     }
 }

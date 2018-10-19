@@ -22,25 +22,30 @@ class Task: Object {
     // task id
     @objc dynamic var taskId: String = UUID().uuidString
     // timestamp
-    var timestamp: Date = Date()
+    @objc dynamic var timestamp: Date = Date()
     // task title
-    var taskTitle: String = ""
+    @objc dynamic var taskTitle: String = ""
     // task description
-    var taskDesc: String = ""
+    @objc dynamic var taskDesc: String = ""
     // service
     var service: Service?
     // designate workers
     var workers = List<Worker>()
     // due date
-    var dueDate: Date?
+    @objc dynamic var dueDate: Date = Date()
     // location: address
-    var address: String?
+    @objc dynamic var address: String = ""
     // location: latitude
-    var latitude: Double?
+    @objc dynamic var latitude: Double = 0
     // location: longitude
-    var longitude: Double?
+    @objc dynamic var longitude: Double = 0
     // images
-    var images: [UIImage] = []
+//    var images: [UIImage] = []
     // task state (5.failed / 4.finished / 3.processing / 2.pending / 1.created)
-    var taskState: TaskState = .created
+//    var taskState: TaskState = .created
+    
+    // Primary Key
+    override static func primaryKey() -> String {
+        return "taskId"
+    }
 }

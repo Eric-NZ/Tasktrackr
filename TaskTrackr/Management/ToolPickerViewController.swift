@@ -8,14 +8,22 @@
 
 import UIKit
 
+protocol ToolPickerDelegate {
+    func selectionDidFinish(selectedTools: [Tool])
+}
+
 class ToolPickerViewController: ExpandableSelectorController {
 
+    var toolPickerDelegate: ToolPickerDelegate?
     var tools = DatabaseService.shared.getObjectArray(objectType: Tool.self) as! [Tool]
     // for collecting selected models
     var selectedTools: [Tool] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // config right bar button
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(onDoneTapped))
         
         // set arrow image
         configureSectionArrow(arrowImage: UIImage(named: "down-arrow")!)
@@ -26,7 +34,32 @@ class ToolPickerViewController: ExpandableSelectorController {
         
         // init checkmark states
         let indices = DatabaseService.shared.mappingSegregatedIndices(wholeMatrix: [tools], elements: selectedTools)
-        initMarkStates(marked: indices)
+        setupSelectionMatrixFromIndices(marked: indices)
+    }
+    
+    @objc func onDoneTapped() {
+        // get selection matrix
+        let matrix = getSelectionMatrix()
+        // calc selected tools
+        calcSelectedTools(selectionMatrix: matrix)
+        // call delegate method
+        if toolPickerDelegate != nil {
+            toolPickerDelegate?.selectionDidFinish(selectedTools: self.selectedTools)
+        }
+        // pop view controller
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func calcSelectedTools(selectionMatrix: [[Bool]]) {
+        var tools: [Tool] = []
+        for i in 0..<selectionMatrix.count {
+            for j in 0..<selectionMatrix[i].count {
+                if selectionMatrix[i][j] {
+                    tools.append(self.tools[j])
+                }
+            }
+        }
+        self.selectedTools = tools
     }
 
 }
