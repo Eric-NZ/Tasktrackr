@@ -20,7 +20,6 @@
 		213DA7122153A03E00D0C7AF /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213DA7102153A03E00D0C7AF /* Cells.swift */; };
 		213DA7132153A03E00D0C7AF /* CommonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213DA7112153A03E00D0C7AF /* CommonTableViewCell.xib */; };
 		213DA71B2153A0F500D0C7AF /* ModelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213DA7192153A0F500D0C7AF /* ModelTableViewCell.xib */; };
-		2148615621715C1E0021EBD7 /* SearchResultTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2148615521715C1E0021EBD7 /* SearchResultTable.swift */; };
 		2154D34B2176B8A600D9D4E5 /* ServicePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2154D34A2176B8A600D9D4E5 /* ServicePickerViewController.swift */; };
 		2154D34D2176BA0C00D9D4E5 /* ExpandableSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2154D34C2176BA0C00D9D4E5 /* ExpandableSelectorController.swift */; };
 		216D69AE2172FAD400E7CDE1 /* PicPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D69AD2172FAD400E7CDE1 /* PicPickerViewController.swift */; };
@@ -42,6 +41,8 @@
 		21BBD234217A8488006EB159 /* DBService_Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBD233217A8488006EB159 /* DBService_Service.swift */; };
 		21BBD236217A84BF006EB159 /* DBService_Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBD235217A84BF006EB159 /* DBService_Worker.swift */; };
 		21BBD238217A84DD006EB159 /* DBService_Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBD237217A84DD006EB159 /* DBService_Tool.swift */; };
+		21BBD23A217A8AE6006EB159 /* SearchResultTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBD239217A8AE6006EB159 /* SearchResultTable.swift */; };
+		21BBD23D217AD208006EB159 /* AutoActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBD23C217AD208006EB159 /* AutoActivityIndicator.swift */; };
 		21C4B346216B3D6900913ADB /* TaskEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C4B345216B3D6900913ADB /* TaskEditorViewController.swift */; };
 		21C4B34A216B5E8C00913ADB /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C4B349216B5E8C00913ADB /* String.swift */; };
 		21D498FF2179A3DD0004FFDA /* SinglePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D498FE2179A3DD0004FFDA /* SinglePickerController.swift */; };
@@ -79,7 +80,6 @@
 		213DA7102153A03E00D0C7AF /* Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
 		213DA7112153A03E00D0C7AF /* CommonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonTableViewCell.xib; sourceTree = "<group>"; };
 		213DA7192153A0F500D0C7AF /* ModelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModelTableViewCell.xib; sourceTree = "<group>"; };
-		2148615521715C1E0021EBD7 /* SearchResultTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchResultTable.swift; path = TaskTrackr/Components/SearchResultTable.swift; sourceTree = SOURCE_ROOT; };
 		2154D34A2176B8A600D9D4E5 /* ServicePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePickerViewController.swift; sourceTree = "<group>"; };
 		2154D34C2176BA0C00D9D4E5 /* ExpandableSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableSelectorController.swift; sourceTree = "<group>"; };
 		216D69AD2172FAD400E7CDE1 /* PicPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicPickerViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +101,8 @@
 		21BBD233217A8488006EB159 /* DBService_Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBService_Service.swift; sourceTree = "<group>"; };
 		21BBD235217A84BF006EB159 /* DBService_Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBService_Worker.swift; sourceTree = "<group>"; };
 		21BBD237217A84DD006EB159 /* DBService_Tool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBService_Tool.swift; sourceTree = "<group>"; };
+		21BBD239217A8AE6006EB159 /* SearchResultTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultTable.swift; sourceTree = "<group>"; };
+		21BBD23C217AD208006EB159 /* AutoActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoActivityIndicator.swift; sourceTree = "<group>"; };
 		21C4B345216B3D6900913ADB /* TaskEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditorViewController.swift; sourceTree = "<group>"; };
 		21C4B349216B5E8C00913ADB /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		21D498FE2179A3DD0004FFDA /* SinglePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePickerController.swift; sourceTree = "<group>"; };
@@ -181,15 +183,16 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		213DA70F2153A00A00D0C7AF /* Components */ = {
+		213DA70F2153A00A00D0C7AF /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
 				2154D34C2176BA0C00D9D4E5 /* ExpandableSelectorController.swift */,
 				211632242176E777005B3DBC /* ExpandableTableViewHeader.swift */,
 				21D498FE2179A3DD0004FFDA /* SinglePickerController.swift */,
 				21D83F402174443900B15AE4 /* ImageCollectionCell.swift */,
+				21BBD23C217AD208006EB159 /* AutoActivityIndicator.swift */,
+				21BBD239217A8AE6006EB159 /* SearchResultTable.swift */,
 				21D83F412174443900B15AE4 /* ImageCollectionCell.xib */,
-				2148615521715C1E0021EBD7 /* SearchResultTable.swift */,
 				21DF277C214E0A6800BB2799 /* TagTableViewCell.swift */,
 				21DF277D214E0A6800BB2799 /* TagTableViewCell.xib */,
 				21F7A8CD214E263A00A01AB5 /* TagControlTableViewCell.xib */,
@@ -197,7 +200,14 @@
 				213DA7112153A03E00D0C7AF /* CommonTableViewCell.xib */,
 				213DA7192153A0F500D0C7AF /* ModelTableViewCell.xib */,
 			);
-			path = Components;
+			path = "UI Components";
+			sourceTree = "<group>";
+		};
+		21BBD23B217AB720006EB159 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		21C4B347216B3DF200913ADB /* Task */ = {
@@ -262,8 +272,9 @@
 				21C4B347216B3DF200913ADB /* Task */,
 				21D8D654213F969D0092AEBB /* Management */,
 				210620212141239B00BA2050 /* Extensions */,
-				213DA70F2153A00A00D0C7AF /* Components */,
+				213DA70F2153A00A00D0C7AF /* UI Components */,
 				2135DD85215F424E004AAC96 /* ViewModel */,
+				21BBD23B217AB720006EB159 /* Storage */,
 				210C04D3213CAF9C00576564 /* Model */,
 			);
 			path = TaskTrackr;
@@ -373,6 +384,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TaskTrackr/Pods-TaskTrackr-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Cloudinary/Cloudinary.framework",
 				"${BUILT_PRODUCTS_DIR}/Former/Former.framework",
 				"${BUILT_PRODUCTS_DIR}/LFLoginController/LFLoginController.framework",
 				"${BUILT_PRODUCTS_DIR}/Parchment/Parchment.framework",
@@ -383,6 +396,8 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cloudinary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Former.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LFLoginController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parchment.framework",
@@ -428,7 +443,9 @@
 				21A265EB2140782E00671F6C /* ToolsTableViewController.swift in Sources */,
 				21BBD238217A84DD006EB159 /* DBService_Tool.swift in Sources */,
 				21163227217721EA005B3DBC /* WorkerPickerViewController.swift in Sources */,
+				21BBD23A217A8AE6006EB159 /* SearchResultTable.swift in Sources */,
 				21C4B34A216B5E8C00913ADB /* String.swift in Sources */,
+				21BBD23D217AD208006EB159 /* AutoActivityIndicator.swift in Sources */,
 				21BBC790213E6BB00006B5B4 /* Service.swift in Sources */,
 				21D498FF2179A3DD0004FFDA /* SinglePickerController.swift in Sources */,
 				219065B32158D272004D96AC /* UITableViewCell.swift in Sources */,
@@ -446,7 +463,6 @@
 				21BBC78A213E65890006B5B4 /* Product.swift in Sources */,
 				213DA7122153A03E00D0C7AF /* Cells.swift in Sources */,
 				2122019E21436D3000EE8A06 /* LoginViewController.swift in Sources */,
-				2148615621715C1E0021EBD7 /* SearchResultTable.swift in Sources */,
 				211632252176E777005B3DBC /* ExpandableTableViewHeader.swift in Sources */,
 				21062025214131CB00BA2050 /* UIView+constraints.swift in Sources */,
 				21BBC788213E63F00006B5B4 /* Tool.swift in Sources */,

@@ -40,7 +40,7 @@ class Task: Object {
     // location: longitude
     @objc dynamic var longitude: Double = 0
     // images
-//    var images: [UIImage] = []
+    var images = List<Data>()
     // task state (4.failed / 3.finished / 2.processing / 1.pending / 0.created)
     @objc dynamic var state = TaskState.created.rawValue
     var taskState: TaskState {

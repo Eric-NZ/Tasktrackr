@@ -52,11 +52,15 @@ class TaskEditorViewController: FormViewController {
         former.deselect(animated: animated)
     }
     
+    // MARK: onDonePressed
     @objc func onDonePressed() {
         // verify input
         guard verifyInput() else {return}
         // save edited task
+        let spinner = AutoActivityIndicator(self.view, style: .gray)
+        spinner.start()
         saveTask()
+        spinner.stop()
         // pop current view controller
         navigationController?.popViewController(animated: true)
     }

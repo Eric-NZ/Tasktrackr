@@ -90,8 +90,6 @@ class DatabaseService {
         return array
     }
     
-    
-    
     // get object array, this function is not working for model objects.
     public func getObjectArray(objectType: Object.Type) -> [Object] {
         let realm = getRealm()

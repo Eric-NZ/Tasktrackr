@@ -65,7 +65,7 @@ struct Static {
     static let regionSpan = (400000.00, 400000.00)
     
     static func showToast(toastText: String) {
-        Toast(text: toastText, delay: 0, duration: Delay.long).show()
+        Toast(text: toastText, delay: 0, duration: Delay.short).show()
     }
     
     /*

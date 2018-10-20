@@ -16,10 +16,10 @@ class ServicePickerViewController: SinglePickerController {
     var servicePickerDelegate: ServicePickerDelegate?
     var services: [Service] = DatabaseService.shared.getObjectArray(objectType: Service.self) as! [Service]
     var service: Service?
-
+     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // register tableview cell
         tableView.register(CommonTableViewCell.self, forCellReuseIdentifier: CommonTableViewCell.ID)
         

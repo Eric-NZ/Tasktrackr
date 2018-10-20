@@ -27,7 +27,8 @@ extension DatabaseService {
                 task.setValue(locationTuple.longitude, forKey: "longitude")
                 task.setValue(taskState.rawValue, forKey: "state")
                 // image
-                //
+                task.images.removeAll()
+                task.images.append(objectsIn: convertImagesToDatas(images: images))
             }
         } else {
             task.workers.append(objectsIn: workers)
@@ -40,7 +41,7 @@ extension DatabaseService {
             task.latitude = locationTuple.latitude
             task.longitude = locationTuple.longitude
             // images
-            //
+            saveImages(to: task, images: images)
             // progress
             task.state = taskState.rawValue
             
@@ -48,5 +49,27 @@ extension DatabaseService {
                 realm.add(task, update: false)
             }
         }
+    }
+
+    private func saveImages(to task: Task, images: [UIImage]) {
+        let numberOfImages = images.count
+        for n in 0..<numberOfImages {
+            // background thread
+            DispatchQueue.global().sync {
+                if let data: Data = images[n].jpegData(compressionQuality: 0.5) {
+                    task.images.append(data)
+                }
+            }
+        }
+    }
+    
+    private func convertImagesToDatas(images: [UIImage]) -> [Data] {
+        var datas: [Data] = []
+        for n in 0..<images.count {
+            if let data = images[n].jpegData(compressionQuality: 0.5) {
+                datas.append(data)
+            }
+        }
+        return datas
     }
 }
