@@ -11,10 +11,18 @@ import UIKit
 class ImageCollectionCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var deleteButton: UIButton!
+    
+    static let ID = "ImageCollectionCell"
+    // callback closure
+    var onDeleteTapped: ((_ cell: UICollectionViewCell) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+    }
+    
+    @IBAction func onDeleteTapped(_ sender: UIButton) {
+        onDeleteTapped?(self)
     }
     
     public func setImage(image: UIImage?) {

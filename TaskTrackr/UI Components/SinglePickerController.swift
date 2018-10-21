@@ -60,7 +60,7 @@ extension SinglePickerController {
         setSelection(on: indexPath)
         selectionFinished(selection: indexPath)
         if navigationController != nil {
-//            navigationController!.popViewController(animated: true)
+            navigationController!.popViewController(animated: true)
         }
     }
 }

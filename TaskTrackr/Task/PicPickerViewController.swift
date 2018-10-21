@@ -13,30 +13,31 @@ protocol PicturePickerDelegate {
 }
 
 class PicPickerViewController: UIViewController {
-    @IBOutlet weak var imageCollectionView: UICollectionView!
+    @IBOutlet weak var imageCollectionView: ImageCollectionView!
     var delegate: PicturePickerDelegate?
     var images: [UIImage] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imageCollectionView.dataSource = self
-        imageCollectionView.delegate = self
         
         // NOTE: register collection view cell: instead of using class, use Nib, or the sub views will be nil!
-        imageCollectionView.register(UINib(nibName: "ImageCollectionCell", bundle: nil), forCellWithReuseIdentifier: "ImageCollectionCell")
-        
+        imageCollectionView.register(UINib(nibName: "ImageCollectionCell", bundle: nil), forCellWithReuseIdentifier: ImageCollectionCell.ID)
+        // set default image on imageCollectionView
+        imageCollectionView.setDefaultImage(image: UIImage(named: "no-image"))
+        // set image removability
+        imageCollectionView.setImageRemovability(removable: true)
+        // set datasource
+        imageCollectionView.dataSource = self
+        imageCollectionView.imageCollectionViewDelegate = self
         // configure bar items
         configureNavItems()
-        
-        // configure CollectionView FlowLayout
-        configureFlowLayout()
     
     }
     
     func configureNavItems() {
         // image creator button
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "addImage_barItem"), for: UIControl.State.normal)
+        button.setImage(UIImage(named: "camera"), for: UIControl.State.normal)
         let addImageButton = UIBarButtonItem(customView: button)
         button.addTarget(self, action: #selector(onAddPhotoTouched), for: UIControl.Event.touchUpInside)
         // done button
@@ -103,18 +104,16 @@ class PicPickerViewController: UIViewController {
         picturePicker.delegate = self
     }
     
-    func configureFlowLayout() {
-        if let layout = imageCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            let inset: CGFloat = 5
-            layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
-            layout.itemSize = CGSize(width: (imageCollectionView.frame.size.width - inset * 4) / 2,
-                                     height: (imageCollectionView.frame.size.height - inset * 4) / 4)
-        }
-    }
-    
 }
 
-extension PicPickerViewController: UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension PicPickerViewController: UICollectionViewDataSource, UICollectionViewDelegate,
+UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageCollectionViewDelegate {
+    // MARK: - ImageCollectionViewDelegate
+    func onReceiveDeleteRequest(indexPath: IndexPath) {
+        images.remove(at: indexPath.item)
+        imageCollectionView.reloadData()
+    }
+    
     // MARK: - UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
@@ -124,14 +123,8 @@ extension PicPickerViewController: UICollectionViewDataSource, UICollectionViewD
         let cell = imageCollectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionCell", for: indexPath) as? ImageCollectionCell
 
         cell?.setImage(image: images[indexPath.item])
-        
+        cell?.titleLabel.text = String(format: "%d", indexPath.item)
         return cell!
-    }
-    
-    // MARK: - UICollectionViewDelegate
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let str = String(format: "%d touched", indexPath.item)
-        print(str)
     }
     
     // MARK: - UIImagePickerControllerDelegate

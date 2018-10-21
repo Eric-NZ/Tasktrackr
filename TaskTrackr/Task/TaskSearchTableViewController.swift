@@ -9,48 +9,48 @@
 import UIKit
 
 class TaskSearchTableViewController: UITableViewController {
-    
-    @IBOutlet weak var addButton: UIBarButtonItem!
-    let allTaskArray: [String] = ["task1", "task2", "task3", "task4", "task5", "task6", "task11", "task12", "task13", "task14", "task15", "task16"]
+    var selectedTask : Task?
+    let tasks: [Task] = DatabaseService.shared.getObjectArray(objectType: Task.self) as! [Task]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.register(UINib(nibName: TrackedTaskCell.ID, bundle: nil), forCellReuseIdentifier: TrackedTaskCell.ID)
+        tableView.dataSource = self
     }
-    
-    @IBAction func addPressed(_ sender: UIBarButtonItem) {
-        // popover customer option menu
-        popoverOptionMenu()
-    }
-    
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.none
-    }
-    
-    
-    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.none
-    }
-    
-    // MARK: - Table view data source
+}
 
+// MARK: - Table view data source & delegate
+extension TaskSearchTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AllTaskCell")
-        
-        cell?.textLabel?.text = allTaskArray[indexPath.row]
-        
-        return cell!
-        
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return allTaskArray.count
+        if let cell = tableView.dequeueReusableCell(withIdentifier: TrackedTaskCell.ID) {
+            cell.textLabel?.text = tasks[indexPath.row].taskTitle
+            cell.detailTextLabel?.text = tasks[indexPath.row].taskDesc
+            return cell
+        } else {
+            return UITableViewCell(style: .default, reuseIdentifier: TrackedTaskCell.ID)
+        }
         
     }
     
-    func popoverOptionMenu() {
-
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tasks.count
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        // store selected Task
+        selectedTask = tasks[indexPath.row]
+        // create segue
+        if let taskDetail = Static.getInstance(with: "TaskDetailViewController") as? TaskDetailViewController {
+            let segue = UIStoryboardSegue(identifier: "OpenTaskDetail", source: self, destination: taskDetail) {
+                taskDetail.task = self.selectedTask
+                self.navigationController?.pushViewController(taskDetail, animated: true)
+            }
+            segue.perform()
+        }
     }
 }

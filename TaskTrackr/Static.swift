@@ -71,7 +71,7 @@ struct Static {
     /*
      static: Get Instance of UIViewController using storyboard identifier.
      */
-    static func getInstance(with indentifier: String) -> UIViewController {
+    static func getInstance(with indentifier: String) -> UIViewController? {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: indentifier)
     }
@@ -88,5 +88,27 @@ struct Static {
         }
     }
 
+}
+
+// Device Info
+struct DeviceInfo {
+    struct Orientation {
+        // indicate current device is in the LandScape orientation
+        static var isLandscape: Bool {
+            get {
+                return UIDevice.current.orientation.isValidInterfaceOrientation
+                    ? UIDevice.current.orientation.isLandscape
+                    : UIApplication.shared.statusBarOrientation.isLandscape
+            }
+        }
+        // indicate current device is in the Portrait orientation
+        static var isPortrait: Bool {
+            get {
+                return UIDevice.current.orientation.isValidInterfaceOrientation
+                    ? UIDevice.current.orientation.isPortrait
+                    : UIApplication.shared.statusBarOrientation.isPortrait
+            }
+        }
+    }
 }
 

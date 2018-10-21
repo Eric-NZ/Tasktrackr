@@ -23,5 +23,3 @@ class ModelTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 }
-
-

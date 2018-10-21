@@ -50,15 +50,13 @@ extension DatabaseService {
             }
         }
     }
-
+    
     private func saveImages(to task: Task, images: [UIImage]) {
         let numberOfImages = images.count
         for n in 0..<numberOfImages {
             // background thread
-            DispatchQueue.global().sync {
-                if let data: Data = images[n].jpegData(compressionQuality: 0.5) {
-                    task.images.append(data)
-                }
+            if let data: Data = images[n].jpegData(compressionQuality: 0.5) {
+                task.images.append(data)
             }
         }
     }

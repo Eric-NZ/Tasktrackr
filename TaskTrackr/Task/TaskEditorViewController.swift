@@ -52,7 +52,7 @@ class TaskEditorViewController: FormViewController {
         former.deselect(animated: animated)
     }
     
-    // MARK: onDonePressed
+    // MARK: -- onDonePressed
     @objc func onDonePressed() {
         // verify input
         guard verifyInput() else {return}
