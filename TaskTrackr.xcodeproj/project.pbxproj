@@ -27,6 +27,8 @@
 		219065B32158D272004D96AC /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219065B22158D272004D96AC /* UITableViewCell.swift */; };
 		2195F4BA2159DEFA00309990 /* ProductPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2195F4B92159DEFA00309990 /* ProductPickerViewController.swift */; };
 		219D4CAE217D2EEC007CB3CE /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219D4CAD217D2EEC007CB3CE /* Comment.swift */; };
+		219D4CB1217D36C5007CB3CE /* TimeLineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219D4CAF217D36C5007CB3CE /* TimeLineCell.swift */; };
+		219D4CB2217D36C5007CB3CE /* TimeLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 219D4CB0217D36C5007CB3CE /* TimeLineCell.xib */; };
 		21A265E92140781200671F6C /* ProductsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265E82140781200671F6C /* ProductsTableViewController.swift */; };
 		21A265EB2140782E00671F6C /* ToolsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265EA2140782E00671F6C /* ToolsTableViewController.swift */; };
 		21A265ED2140787100671F6C /* SitesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265EC2140787100671F6C /* SitesTableViewController.swift */; };
@@ -92,6 +94,8 @@
 		219065B22158D272004D96AC /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		2195F4B92159DEFA00309990 /* ProductPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPickerViewController.swift; sourceTree = "<group>"; };
 		219D4CAD217D2EEC007CB3CE /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		219D4CAF217D36C5007CB3CE /* TimeLineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineCell.swift; sourceTree = "<group>"; };
+		219D4CB0217D36C5007CB3CE /* TimeLineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeLineCell.xib; sourceTree = "<group>"; };
 		21A265E82140781200671F6C /* ProductsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewController.swift; sourceTree = "<group>"; };
 		21A265EA2140782E00671F6C /* ToolsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableViewController.swift; sourceTree = "<group>"; };
 		21A265EC2140787100671F6C /* SitesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SitesTableViewController.swift; sourceTree = "<group>"; };
@@ -218,6 +222,8 @@
 		21BBD23E217AF5B5006EB159 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				219D4CAF217D36C5007CB3CE /* TimeLineCell.swift */,
+				219D4CB0217D36C5007CB3CE /* TimeLineCell.xib */,
 				21D83F402174443900B15AE4 /* ImageCollectionCell.swift */,
 				21D83F412174443900B15AE4 /* ImageCollectionCell.xib */,
 				21BBD242217AF6EE006EB159 /* TrackedTaskCell.swift */,
@@ -400,6 +406,7 @@
 				21EA13AF213622C900C5CB34 /* LaunchScreen.storyboard in Resources */,
 				213DA71B2153A0F500D0C7AF /* ModelTableViewCell.xib in Resources */,
 				21F7A8CF214E263A00A01AB5 /* TagControlTableViewCell.xib in Resources */,
+				219D4CB2217D36C5007CB3CE /* TimeLineCell.xib in Resources */,
 				21EA13A7213622C800C5CB34 /* Main.storyboard in Resources */,
 				21D83F4521745A6400B15AE4 /* Assets.xcassets in Resources */,
 				21D83F432174443A00B15AE4 /* ImageCollectionCell.xib in Resources */,
@@ -492,6 +499,7 @@
 				2125E6AE214E4AF0002FE54B /* UIColor.swift in Sources */,
 				219D4CAE217D2EEC007CB3CE /* Comment.swift in Sources */,
 				21BBD247217B0DD1006EB159 /* TaskDetailViewController.swift in Sources */,
+				219D4CB1217D36C5007CB3CE /* TimeLineCell.swift in Sources */,
 				2135DD89215F437E004AAC96 /* Task.swift in Sources */,
 				2154D34B2176B8A600D9D4E5 /* ServicePickerViewController.swift in Sources */,
 				21A265E92140781200671F6C /* ProductsTableViewController.swift in Sources */,

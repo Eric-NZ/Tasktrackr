@@ -66,15 +66,15 @@ class TaskEditorViewController: FormViewController {
     }
     
     func verifyInput() -> Bool {
-        // title
+        // title: optional
         if taskTitle.isEmpty {
             print("taskTitle.isEmpty")
-            return false
+//            return false
         }
-        // desc
+        // desc: optional
         if desc.isEmpty {
             print("")
-            return false
+//            return false
         }
         // service
         if service == nil {
