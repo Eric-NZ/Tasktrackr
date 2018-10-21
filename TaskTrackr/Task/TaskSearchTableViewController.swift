@@ -7,16 +7,25 @@
 //
 
 import UIKit
+import RealmSwift
 
 class TaskSearchTableViewController: UITableViewController {
     var selectedTask : Task?
-    let tasks: [Task] = DatabaseService.shared.getObjectArray(objectType: Task.self) as! [Task]
+    let realm = DatabaseService.shared.getRealm()
+    let tasks: Results<Task>
+    var notificationToken: NotificationToken?
+    
+    required init?(coder aDecoder: NSCoder) {
+        tasks = realm.objects(Task.self).sorted(byKeyPath: "timestamp", ascending: false)
+        
+        super.init(coder: aDecoder)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.register(UINib(nibName: TrackedTaskCell.ID, bundle: nil), forCellReuseIdentifier: TrackedTaskCell.ID)
         tableView.dataSource = self
+        notificationToken = DatabaseService.shared.addNotificationHandle(objects: tasks, tableView: self.tableView)
     }
 }
 

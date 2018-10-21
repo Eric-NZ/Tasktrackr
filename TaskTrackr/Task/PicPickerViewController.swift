@@ -123,7 +123,7 @@ UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageCollection
         let cell = imageCollectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionCell", for: indexPath) as? ImageCollectionCell
 
         cell?.setImage(image: images[indexPath.item])
-        cell?.titleLabel.text = String(format: "%d", indexPath.item)
+//        cell?.titleLabel.text = String(format: "%d", indexPath.item)
         return cell!
     }
     

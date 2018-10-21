@@ -51,6 +51,8 @@ class Task: Object {
             state = newValue.rawValue
         }
     }
+    // workers and managers can add comments at any state of a task
+    var comments = List<Comment>()
     
     // Primary Key
     override static func primaryKey() -> String {

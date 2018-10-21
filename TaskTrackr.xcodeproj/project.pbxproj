@@ -26,6 +26,7 @@
 		219065B12158BD87004D96AC /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219065B02158BD87004D96AC /* UIImage.swift */; };
 		219065B32158D272004D96AC /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219065B22158D272004D96AC /* UITableViewCell.swift */; };
 		2195F4BA2159DEFA00309990 /* ProductPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2195F4B92159DEFA00309990 /* ProductPickerViewController.swift */; };
+		219D4CAE217D2EEC007CB3CE /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219D4CAD217D2EEC007CB3CE /* Comment.swift */; };
 		21A265E92140781200671F6C /* ProductsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265E82140781200671F6C /* ProductsTableViewController.swift */; };
 		21A265EB2140782E00671F6C /* ToolsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265EA2140782E00671F6C /* ToolsTableViewController.swift */; };
 		21A265ED2140787100671F6C /* SitesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265EC2140787100671F6C /* SitesTableViewController.swift */; };
@@ -90,6 +91,7 @@
 		219065B02158BD87004D96AC /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		219065B22158D272004D96AC /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		2195F4B92159DEFA00309990 /* ProductPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPickerViewController.swift; sourceTree = "<group>"; };
+		219D4CAD217D2EEC007CB3CE /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		21A265E82140781200671F6C /* ProductsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewController.swift; sourceTree = "<group>"; };
 		21A265EA2140782E00671F6C /* ToolsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableViewController.swift; sourceTree = "<group>"; };
 		21A265EC2140787100671F6C /* SitesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SitesTableViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				21BBC78D213E69440006B5B4 /* Site.swift */,
 				21BBC78F213E6BB00006B5B4 /* Service.swift */,
 				2135DD88215F437E004AAC96 /* Task.swift */,
+				219D4CAD217D2EEC007CB3CE /* Comment.swift */,
 				2135DD8A215F45EB004AAC96 /* DataModel.swift */,
 			);
 			path = Model;
@@ -487,6 +490,7 @@
 				21DF277E214E0A6800BB2799 /* TagTableViewCell.swift in Sources */,
 				2135DD81215F40CF004AAC96 /* ViewModel.swift in Sources */,
 				2125E6AE214E4AF0002FE54B /* UIColor.swift in Sources */,
+				219D4CAE217D2EEC007CB3CE /* Comment.swift in Sources */,
 				21BBD247217B0DD1006EB159 /* TaskDetailViewController.swift in Sources */,
 				2135DD89215F437E004AAC96 /* Task.swift in Sources */,
 				2154D34B2176B8A600D9D4E5 /* ServicePickerViewController.swift in Sources */,

@@ -18,10 +18,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="256" height="256"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wqx-Of-dTI">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wqx-Of-dTI">
                         <rect key="frame" x="0.0" y="0.0" width="256" height="256"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9FW-xJ-C0d">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="751" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9FW-xJ-C0d">
                         <rect key="frame" x="0.0" y="256" width="256" height="0.0"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -40,10 +40,10 @@
                 <constraint firstItem="9FW-xJ-C0d" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="2yF-oX-eVG"/>
                 <constraint firstItem="9FW-xJ-C0d" firstAttribute="top" secondItem="Wqx-Of-dTI" secondAttribute="bottom" id="8Uu-eM-bwh"/>
                 <constraint firstAttribute="bottom" secondItem="9FW-xJ-C0d" secondAttribute="bottom" id="9oP-Jr-vsB"/>
+                <constraint firstAttribute="bottom" secondItem="edh-pk-UKz" secondAttribute="bottom" constant="10" id="QEI-qQ-LDF"/>
                 <constraint firstAttribute="trailing" secondItem="9FW-xJ-C0d" secondAttribute="trailing" id="XnV-fn-6qq"/>
                 <constraint firstAttribute="trailing" secondItem="Wqx-Of-dTI" secondAttribute="trailing" id="cf7-vy-xMh"/>
                 <constraint firstItem="Wqx-Of-dTI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="taz-Bk-jLB"/>
-                <constraint firstItem="9FW-xJ-C0d" firstAttribute="top" secondItem="edh-pk-UKz" secondAttribute="bottom" constant="10" id="vtk-Dv-PGt"/>
                 <constraint firstAttribute="trailing" secondItem="edh-pk-UKz" secondAttribute="trailing" constant="10" id="xTu-iW-0BI"/>
                 <constraint firstItem="Wqx-Of-dTI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="zUd-F5-lt9"/>
             </constraints>
