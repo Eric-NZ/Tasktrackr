@@ -12,11 +12,11 @@ class Task: Object {
     
     // task states
     enum TaskState: Int {
-        case created            // task has just been created, not yet assigned
-        case pending            // task has been assigned but waiting for process
-        case processing         // task has been processing
-        case finished           // task has been finished :)
-        case failed             // task is failed :(
+        case created            // 0 - task has just been created, not yet assigned
+        case pending            // 1 - task has been assigned but waiting for process
+        case processing         // 2 - task has been processing
+        case finished           // 3 - task has been finished :)
+        case failed             // 4 - task is failed :(
     }
     
     // task id
