@@ -28,7 +28,7 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate {
         super.viewDidLoad()
         
 //        addNotificationHandle()
-        notificationToken = DatabaseService.shared.addNotificationHandle(objects: workers, tableView: self.tableView)
+        notificationToken = DatabaseService.shared.addNotificationHandleForRows(objects: workers, tableView: self.tableView)
     }
     
     // MARK: - ManageItemDelegate

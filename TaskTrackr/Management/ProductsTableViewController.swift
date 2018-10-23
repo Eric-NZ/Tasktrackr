@@ -28,7 +28,7 @@ class ProductsTableViewController: UITableViewController, ManageItemDelegate {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        notificationToken = DatabaseService.shared.addNotificationHandle(objects: products, tableView: self.tableView)
+        notificationToken = DatabaseService.shared.addNotificationHandleForRows(objects: products, tableView: self.tableView)
     }
     
     func removeProduct(product: Product) {

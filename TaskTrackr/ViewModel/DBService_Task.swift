@@ -9,6 +9,11 @@ import Foundation
 import RealmSwift
 
 extension DatabaseService {
+    // get Results of Task
+    public func getResultsOfTask() -> Results<Task> {
+        return getRealm().objects(Task.self).sorted(byKeyPath: "timestamp", ascending: false)
+    }
+    
     // add (or update) a task object
     public func addTask(add task: Task, _ title: String, _ desc: String, service: Service, workers: [Worker], dueData: Date,
                         locationTuple: (address: String, latitude: Double, longitude: Double),

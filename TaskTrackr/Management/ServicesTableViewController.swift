@@ -26,7 +26,7 @@ class ServicesTableViewController: UITableViewController, ManageItemDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        notificationToken = DatabaseService.shared.addNotificationHandle(objects: services, tableView: self.tableView)
+        notificationToken = DatabaseService.shared.addNotificationHandleForRows(objects: services, tableView: self.tableView)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -12,21 +12,17 @@ import RealmSwift
 class TaskTrackingViewController: UIViewController {
     @IBOutlet weak var tableView: TimelineTableView!
     var notificationToken: NotificationToken?
-    let realm = DatabaseService.shared.getRealm()
-    var tasks: Results<Task>
-    
-    required init?(coder aDecoder: NSCoder) {
-        tasks = realm.objects(Task.self).sorted(byKeyPath: "timestamp", ascending: false)
-        
-        super.init(coder: aDecoder)
-    }
+    var tasks = DatabaseService.shared.getResultsOfTask()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        notificationToken = DatabaseService.shared.addNotificationHandle(objects: tasks, tableView: self.tableView)
+        notificationToken = DatabaseService.shared.addNotificationHandleForSections(objects: tasks, tableView: self.tableView)
         tableView.dataSource = self
+    }
+    
+    deinit {
+        notificationToken?.invalidate()
     }
 
     @IBAction func addPressed(_ sender: UIBarButtonItem) {

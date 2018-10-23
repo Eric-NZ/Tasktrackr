@@ -25,7 +25,7 @@ class TaskSearchTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.register(UINib(nibName: TrackedTaskCell.ID, bundle: nil), forCellReuseIdentifier: TrackedTaskCell.ID)
         tableView.dataSource = self
-        notificationToken = DatabaseService.shared.addNotificationHandle(objects: tasks, tableView: self.tableView)
+        notificationToken = DatabaseService.shared.addNotificationHandleForRows(objects: tasks, tableView: self.tableView)
     }
 }
 

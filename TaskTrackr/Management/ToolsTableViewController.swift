@@ -20,7 +20,7 @@ class ToolsTableViewController: UITableViewController, ManageItemDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        notificationToken = DatabaseService.shared.addNotificationHandle(objects: tools, tableView: self.tableView)
+        notificationToken = DatabaseService.shared.addNotificationHandleForRows(objects: tools, tableView: self.tableView)
     }
     
     required init?(coder aDecoder: NSCoder) {

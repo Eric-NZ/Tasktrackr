@@ -56,9 +56,37 @@ class DatabaseService {
         }
     }
     
-    /** Once data changed, controller will be notified.
+    /** Once data for sections changed, controller will be notified.
      */
-    func addNotificationHandle<T>(objects: Results<T>, tableView: UITableView?) -> NotificationToken {
+    func addNotificationHandleForSections<T>(objects: Results<T>, tableView: UITableView?) -> NotificationToken {
+        let notificationToken = objects.observe { (changes) in
+            switch changes {
+            case .initial:
+                tableView!.reloadData()
+            case .update(_, deletions: let deletions, insertions: let insertions, modifications: let modifications):
+                tableView!.beginUpdates()
+                // update sections
+                tableView!.insertSections(IndexSet(insertions.map({
+                    return $0
+                })), with: .automatic)
+                tableView!.deleteSections(IndexSet(deletions.map({
+                    return $0
+                })), with: .automatic)
+                tableView!.reloadSections(IndexSet(modifications.map({
+                    return $0
+                })), with: .automatic)
+                tableView!.endUpdates()
+            case .error(let error):
+                fatalError("\(error)")
+            }
+        }
+        return notificationToken
+    }
+    
+    /** Once data for rows changed, controller will be notified.
+     // But: how to do when changing sections?
+     */
+    func addNotificationHandleForRows<T>(objects: Results<T>, tableView: UITableView?) -> NotificationToken {
         
         let notificationToken = objects.observe { (changes) in
             switch changes {
@@ -68,6 +96,7 @@ class DatabaseService {
             case .update(_, let deletions, let insertions, let modifications):
                 // Query results have changed, so apply them to the UITableView
                 tableView!.beginUpdates()
+                // update rows
                 tableView!.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
                                       with: .automatic)
                 tableView!.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
@@ -95,9 +124,7 @@ class DatabaseService {
         let realm = getRealm()
         return realm.objects(objectType).resultToArray(ofType: objectType)
     }
-    
-    
-    
+
     // remove a single object
     public func removeObject(toRemove: Object) {
         let realm = getRealm()
