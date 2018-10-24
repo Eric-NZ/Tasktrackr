@@ -151,7 +151,7 @@ class TaskEditorViewController: FormViewController {
             $0.textField.textColor = .formerSubColor()
             $0.textField.font = .boldSystemFont(ofSize: 14)
             }.configure {
-                $0.placeholder = "e.g. "
+                $0.placeholder = "(Optional)"
                 $0.text = taskTitle
             }.onTextChanged { (text) in
                 self.taskTitle = text
@@ -163,7 +163,7 @@ class TaskEditorViewController: FormViewController {
             $0.textView.textColor = .formerSubColor()
             $0.textView.font = .systemFont(ofSize: 15)
             }.configure {
-                $0.placeholder = "Add Task Introduction"
+                $0.placeholder = "(Optional)"
                 $0.text = desc
             }.onTextChanged { (text) in
                 // save Task desc
@@ -183,7 +183,7 @@ class TaskEditorViewController: FormViewController {
             } as? LabelRowFormer<FormLabelCell>
         // MARK: Select Due Date of Task
         dueDatePicker = InlineDatePickerRowFormer<FormInlineDatePickerCell>() {
-            $0.titleLabel.text = "📆 Select Due Date"
+            $0.titleLabel.text = "📆 Select Deadline"
             $0.titleLabel.textColor = .formerColor()
             $0.titleLabel.font = .boldSystemFont(ofSize: 16)
             $0.displayLabel.textColor = .formerSubColor()

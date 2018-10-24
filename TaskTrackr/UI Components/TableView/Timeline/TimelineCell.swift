@@ -8,6 +8,10 @@
 
 import UIKit
 
+struct TimelineCellData {
+    
+}
+
 class TimelineCell: UITableViewCell {
     
     static let ID = "TimelineCell"

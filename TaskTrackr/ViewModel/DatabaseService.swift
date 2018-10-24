@@ -57,13 +57,19 @@ class DatabaseService {
     }
     
     /** Once data for sections changed, controller will be notified.
+     // This function includes callback
      */
-    func addNotificationHandleForSections<T>(objects: Results<T>, tableView: UITableView?) -> NotificationToken {
+    func addNotificationHandleForSections<T>(objects: Results<T>, tableView: UITableView?, callback: (()->Void)?) -> NotificationToken {
         let notificationToken = objects.observe { (changes) in
             switch changes {
             case .initial:
                 tableView!.reloadData()
             case .update(_, deletions: let deletions, insertions: let insertions, modifications: let modifications):
+                // before beginUpdates, invoke call back to inform client view controller
+                if let callback = callback {
+                    callback()
+                }
+                
                 tableView!.beginUpdates()
                 // update sections
                 tableView!.insertSections(IndexSet(insertions.map({

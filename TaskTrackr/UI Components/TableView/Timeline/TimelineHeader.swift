@@ -8,20 +8,20 @@
 
 import UIKit
 
-struct HeaderData {
+// HeadData with abstract elements instead of specific items.
+struct TimelineHeaderData {
     var title: String = ""
-    var postDesc: String = ""
-    var manager: String = ""
-    var workders: String = ""
-    var address: String = ""
-    var dateString: String = ""
+    var subTitle: String = ""
+    var bulletFirst: String = ""
+    var bulletSecond: String = ""
+    var bulletThird: String = ""
     var image: UIImage = UIImage(named: "no-image")!
 }
 
 class TimelineHeader: UITableViewHeaderFooterView {
     static let ID = "TimelineHeader"
     var containerView: TimelineHeaderContainer!
-    private var headerData: HeaderData? {
+    private var headerData: TimelineHeaderData? {
         didSet {
             updateHeaderView()
         }
@@ -38,7 +38,7 @@ class TimelineHeader: UITableViewHeaderFooterView {
         super.init(coder: aDecoder)
     }
     
-    public func setHeaderData(headerData: HeaderData?) {
+    public func setHeaderData(headerData: TimelineHeaderData?) {
         if let headerData = headerData {
             self.headerData = headerData
         }
@@ -69,10 +69,10 @@ extension TimelineHeader {
     private func updateHeaderView() {
         if let headerData = self.headerData {
             containerView.titleLabel.text = headerData.title
-            containerView.postDescLabel.text = headerData.postDesc
-            containerView.workerLabel.text = headerData.workders
-            containerView.addressLabel.text = headerData.address
-            containerView.dateLabel.text = headerData.dateString
+            containerView.postDescLabel.text = headerData.subTitle
+            containerView.workerLabel.text = headerData.bulletFirst
+            containerView.addressLabel.text = headerData.bulletSecond
+            containerView.dateLabel.text = headerData.bulletThird
             containerView.imageView.image = headerData.image
         }
     }

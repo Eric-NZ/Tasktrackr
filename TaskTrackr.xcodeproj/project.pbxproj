@@ -18,6 +18,8 @@
 		2135DD81215F40CF004AAC96 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2135DD80215F40CF004AAC96 /* ViewModel.swift */; };
 		2135DD89215F437E004AAC96 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2135DD88215F437E004AAC96 /* Task.swift */; };
 		2135DD8B215F45EB004AAC96 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2135DD8A215F45EB004AAC96 /* DataModel.swift */; };
+		213608A021800DE3008DCF14 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136089F21800DE3008DCF14 /* Timeline.swift */; };
+		213608A221800E0E008DCF14 /* TimelinePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213608A121800E0E008DCF14 /* TimelinePoint.swift */; };
 		213DA7122153A03E00D0C7AF /* SimpleCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213DA7102153A03E00D0C7AF /* SimpleCells.swift */; };
 		213DA7132153A03E00D0C7AF /* CommonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213DA7112153A03E00D0C7AF /* CommonTableViewCell.xib */; };
 		213DA71B2153A0F500D0C7AF /* ModelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213DA7192153A0F500D0C7AF /* ModelTableViewCell.xib */; };
@@ -89,6 +91,8 @@
 		2135DD80215F40CF004AAC96 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		2135DD88215F437E004AAC96 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		2135DD8A215F45EB004AAC96 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		2136089F21800DE3008DCF14 /* Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
+		213608A121800E0E008DCF14 /* TimelinePoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelinePoint.swift; sourceTree = "<group>"; };
 		213DA7102153A03E00D0C7AF /* SimpleCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCells.swift; sourceTree = "<group>"; };
 		213DA7112153A03E00D0C7AF /* CommonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonTableViewCell.xib; sourceTree = "<group>"; };
 		213DA7192153A0F500D0C7AF /* ModelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModelTableViewCell.xib; sourceTree = "<group>"; };
@@ -206,6 +210,21 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		213608A321800EA2008DCF14 /* Timeline */ = {
+			isa = PBXGroup;
+			children = (
+				212A34E9217E847900D829B4 /* TimelineTableView.swift */,
+				219D4CBF217DA0F9007CB3CE /* TimelineHeader.swift */,
+				219D4CAF217D36C5007CB3CE /* TimelineCell.swift */,
+				219D4CB0217D36C5007CB3CE /* TimelineCell.xib */,
+				2136089F21800DE3008DCF14 /* Timeline.swift */,
+				213608A121800E0E008DCF14 /* TimelinePoint.swift */,
+				219D4CBD217D97D9007CB3CE /* TimelineHeaderContainer.swift */,
+				219D4CBB217D961A007CB3CE /* TimelineHeaderContainer.xib */,
+			);
+			path = Timeline;
+			sourceTree = "<group>";
+		};
 		213DA70F2153A00A00D0C7AF /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,12 +249,7 @@
 		219D4CB7217D4E7C007CB3CE /* TableView */ = {
 			isa = PBXGroup;
 			children = (
-				212A34E9217E847900D829B4 /* TimelineTableView.swift */,
-				219D4CBF217DA0F9007CB3CE /* TimelineHeader.swift */,
-				219D4CAF217D36C5007CB3CE /* TimelineCell.swift */,
-				219D4CB0217D36C5007CB3CE /* TimelineCell.xib */,
-				219D4CBD217D97D9007CB3CE /* TimelineHeaderContainer.swift */,
-				219D4CBB217D961A007CB3CE /* TimelineHeaderContainer.xib */,
+				213608A321800EA2008DCF14 /* Timeline */,
 				2154D34C2176BA0C00D9D4E5 /* ExpandableSelectorController.swift */,
 				211632242176E777005B3DBC /* ExpandableTableViewHeader.swift */,
 				21BBD242217AF6EE006EB159 /* TrackedTaskCell.swift */,
@@ -512,6 +526,7 @@
 				21A265EB2140782E00671F6C /* ToolsTableViewController.swift in Sources */,
 				219D4CC0217DA0F9007CB3CE /* TimelineHeader.swift in Sources */,
 				21BBD238217A84DD006EB159 /* DBService_Tool.swift in Sources */,
+				213608A021800DE3008DCF14 /* Timeline.swift in Sources */,
 				21163227217721EA005B3DBC /* WorkerPickerViewController.swift in Sources */,
 				21BBD23A217A8AE6006EB159 /* SearchResultTable.swift in Sources */,
 				21C4B34A216B5E8C00913ADB /* String.swift in Sources */,
@@ -526,6 +541,7 @@
 				21BBD234217A8488006EB159 /* DBService_Service.swift in Sources */,
 				21DF277E214E0A6800BB2799 /* TagTableViewCell.swift in Sources */,
 				2135DD81215F40CF004AAC96 /* ViewModel.swift in Sources */,
+				213608A221800E0E008DCF14 /* TimelinePoint.swift in Sources */,
 				2125E6AE214E4AF0002FE54B /* UIColor.swift in Sources */,
 				219D4CAE217D2EEC007CB3CE /* Comment.swift in Sources */,
 				21BBD247217B0DD1006EB159 /* TaskDetailViewController.swift in Sources */,
