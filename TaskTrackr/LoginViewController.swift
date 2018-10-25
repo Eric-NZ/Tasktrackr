@@ -43,8 +43,6 @@ class LoginViewController: UIViewController, LFLoginControllerDelegate {
             if let _ = user {
                 // User is logged in
                 Static.currentUser = user
-                // display a Toast
-                Static.showToast(toastText: "Login successful!")
                 // forward to home controller
                 self.presentHomeController()
                 

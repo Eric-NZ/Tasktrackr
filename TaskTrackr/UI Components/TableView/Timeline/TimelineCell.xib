@@ -19,22 +19,22 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="D5x-qN-kQK" userLabel="illustrateImageView">
-                        <rect key="frame" x="150" y="11" width="16" height="16"/>
+                        <rect key="frame" x="160" y="11" width="16" height="16"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="D5x-qN-kQK" secondAttribute="height" multiplier="1:1" id="NeD-er-ZdJ" userLabel="aspect = 1:1"/>
                             <constraint firstAttribute="width" constant="16" id="ejt-Wg-XG4"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pW1-3O-dcl" userLabel="illustrateLabel">
-                        <rect key="frame" x="174" y="12" width="31" height="14.5"/>
+                        <rect key="frame" x="184" y="12" width="31" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="timeLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dU0-Jf-mfT">
-                        <rect key="frame" x="8" y="11" width="110" height="16"/>
+                        <rect key="frame" x="8" y="11" width="120" height="16"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="110" id="24Y-EX-XuF"/>
+                            <constraint firstAttribute="width" constant="120" id="24Y-EX-XuF"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

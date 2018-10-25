@@ -84,7 +84,8 @@ extension DatabaseService {
         guard let task = task else {return nil}
 
         let lastState = task.state
-        if lastState == newState!.rawValue {        // if task state wasn't changed, nothing to do with it.
+        // if task state which is not a new task, wasn't changed, nothing to do with it.
+        if lastState == newState!.rawValue, lastState != Task.TaskState.created.rawValue {
             return newState
         }
         let realm = getRealm()

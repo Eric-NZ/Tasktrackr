@@ -210,7 +210,6 @@ class ItemEditorController: FormViewController {
     // save Service form
     func saveServiceForm() -> Bool {
         guard !serviceTitle.isEmpty else {
-            Static.showToast(toastText: "Please provide an Service Title.")
             return false
         }
         
@@ -269,7 +268,6 @@ class ItemEditorController: FormViewController {
     
     func saveWorkerForm() -> Bool {
         guard !firstName.isEmpty else {
-            Static.showToast(toastText: "Please at least provide the first name.")
             return false
         }
         if currentWorker == nil {
@@ -363,7 +361,6 @@ class ItemEditorController: FormViewController {
     // save Product form
     func saveProductForm() -> Bool {
         guard !productName.isEmpty else {
-            Static.showToast(toastText: "Please provide a product name.")
             return false
         }
         
@@ -434,7 +431,6 @@ class ItemEditorController: FormViewController {
     // save Tool form
     func saveToolForm() -> Bool {
         guard !toolName.isEmpty else {
-            Static.showToast(toastText: "Please enter a tool name.")
             return false
         }
         
