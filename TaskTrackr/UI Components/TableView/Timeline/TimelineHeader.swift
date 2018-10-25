@@ -9,7 +9,7 @@
 import UIKit
 
 // HeadData with abstract elements instead of specific items.
-struct TimelineHeaderData {
+struct SectionData {
     var title: String = ""
     var subTitle: String = ""
     var bulletFirst: String = ""
@@ -21,7 +21,7 @@ struct TimelineHeaderData {
 class TimelineHeader: UITableViewHeaderFooterView {
     static let ID = "TimelineHeader"
     var containerView: TimelineHeaderContainer!
-    private var headerData: TimelineHeaderData? {
+    private var headerData: SectionData? {
         didSet {
             updateHeaderView()
         }
@@ -38,7 +38,7 @@ class TimelineHeader: UITableViewHeaderFooterView {
         super.init(coder: aDecoder)
     }
     
-    public func setHeaderData(headerData: TimelineHeaderData?) {
+    public func setHeaderData(headerData: SectionData?) {
         if let headerData = headerData {
             self.headerData = headerData
         }

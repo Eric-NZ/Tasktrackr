@@ -51,6 +51,8 @@ class Task: Object {
             state = newValue.rawValue
         }
     }
+    // state change
+    var stateChanges = List<TaskStateChange>()
     // workers and managers can add comments at any state of a task
     var comments = List<Comment>()
     
@@ -58,4 +60,18 @@ class Task: Object {
     override static func primaryKey() -> String {
         return "taskId"
     }
+}
+
+class TaskStateChange: Object {
+    var taskState: Task.TaskState {
+        get {
+            return Task.TaskState(rawValue: currentState)!
+        }
+        set {
+            currentState = newValue.rawValue
+        }
+    }
+    @objc dynamic var changeTime: Date = Date()
+    @objc dynamic var lastState = Task.TaskState.created.rawValue
+    @objc dynamic var currentState = Task.TaskState.created.rawValue
 }

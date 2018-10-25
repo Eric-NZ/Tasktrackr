@@ -30,7 +30,8 @@ extension DatabaseService {
                 task.setValue(locationTuple.address, forKey: "address")
                 task.setValue(locationTuple.latitude, forKey: "latitude")
                 task.setValue(locationTuple.longitude, forKey: "longitude")
-                task.setValue(taskState.rawValue, forKey: "state")
+                // save task state
+                changeTaskState(for: task, to: taskState)
                 // image
                 task.images.removeAll()
                 task.images.append(objectsIn: convertImagesToDatas(images: images))
@@ -47,8 +48,9 @@ extension DatabaseService {
             task.longitude = locationTuple.longitude
             // images
             saveImages(to: task, images: images)
-            // progress
-            task.state = taskState.rawValue
+            // change task state
+            // append first state change to change list for new task
+            changeTaskState(for: task, to: Task.TaskState(rawValue: task.state))
             
             try! realm.write {
                 realm.add(task, update: false)
@@ -74,5 +76,29 @@ extension DatabaseService {
             }
         }
         return datas
+    }
+    
+    // change task state
+    @discardableResult
+    public func changeTaskState(for task: Task?, to newState: Task.TaskState?) -> Task.TaskState? {
+        guard let task = task else {return nil}
+
+        let lastState = task.state
+        if lastState == newState!.rawValue {        // if task state wasn't changed, nothing to do with it.
+            return newState
+        }
+        let realm = getRealm()
+        // update state to task
+        let taskChange = TaskStateChange()
+        taskChange.lastState = lastState
+        taskChange.currentState = newState!.rawValue
+        
+        try! realm.write {
+            task.setValue(newState?.rawValue, forKey: "state")
+            // append state change to change list
+            task.stateChanges.append(taskChange)
+        }
+        
+        return Task.TaskState(rawValue: lastState)
     }
 }

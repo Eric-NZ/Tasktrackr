@@ -9,8 +9,6 @@
 import UIKit
 
 class TimelineTableView: UITableView {
-    var timelineHeaders: [TimelineHeaderData] = []
-    var timelineCells: [[TimelineCellData]] = []
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -22,39 +20,34 @@ class TimelineTableView: UITableView {
         delegate = self
     }
     
-    // callback
-    public var dataForHeaderInSection: ((_ section: Int) -> (TimelineHeaderData))?
-    
-    public func addTimeline(with timelineHeaderData: TimelineHeaderData?) {
-        if let headerData = timelineHeaderData {
-            self.timelineHeaders.append(headerData)
-        }
-    }
-    
-    public func removeTimeline(at index: Int) {
-        self.timelineHeaders.remove(at: index)
-    }
-    
-    public func removeAllTimeline() {
-        self.timelineHeaders.removeAll()
-    }
-
+    // MARK: - callbacks for data source
+    public var numberOfHeaders: (()-> Int)?
+    public var dataForHeaderInSection: ((_ section: Int) -> SectionData)?
+    public var numberOfRowsInSection: ((_ section: Int) -> Int)?
+    public var dataForRowAtIndexPath: ((_ indexPath: IndexPath) -> RowData)?
 }
 
 // MARK: - UITableViewDataSource
 extension TimelineTableView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return timelineHeaders.count
+        return self.numberOfHeaders?() ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return self.numberOfRowsInSection?(section) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: TimelineHeader.ID, for: indexPath)
-        //
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: TimelineCell.ID, for: indexPath) as? TimelineCell {
+            if let data = self.dataForRowAtIndexPath?(indexPath) {
+                cell.illustrateImageView.image = data.illustrateImage
+                cell.illustrateLabel.text = data.illustrateTitle
+                cell.timeLabel.text = data.timeText
+            }
+            return cell
+        } else {
+            return TimelineCell(style: .default, reuseIdentifier: TimelineCell.ID)
+        }
     }
 }
 
@@ -63,7 +56,9 @@ extension TimelineTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: TimelineHeader.ID) as? TimelineHeader ?? TimelineHeader(reuseIdentifier: TimelineHeader.ID)
         // assign HeaderData to TimelineHeader.HeaderData to update the header view
-        header.setHeaderData(headerData: timelineHeaders[section])
+        if let data = dataForHeaderInSection?(section) {
+            header.setHeaderData(headerData: data)
+        }
         
         return header
     }

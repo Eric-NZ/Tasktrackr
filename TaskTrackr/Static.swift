@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Toaster
 import RealmSwift
 
 struct Static {
@@ -63,10 +62,6 @@ struct Static {
     static let userLocationDegree = (-36.848461, 174.763336)    // Auckland
     // 400KM
     static let regionSpan = (400000.00, 400000.00)
-    
-    static func showToast(toastText: String) {
-        Toast(text: toastText, delay: 0, duration: Delay.short).show()
-    }
     
     /*
      static: Get Instance of UIViewController using storyboard identifier.

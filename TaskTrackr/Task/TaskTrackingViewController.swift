@@ -10,39 +10,34 @@ import UIKit
 import RealmSwift
 
 class TaskTrackingViewController: UIViewController {
+    
     @IBOutlet weak var tableView: TimelineTableView!
-    var notificationToken: NotificationToken?
+    var taskNotification: NotificationToken?
+    var notificationPool: [NotificationToken] = []
     var tasks: Results<Task>
+    // timeString, StateString, image
+    let rowDataPool: [(String, UIImage)] = [("Created", UIImage(named: "created")!),
+                                            ("Pending", UIImage(named: "pending")!),
+                                            ("Processing", UIImage(named: "processing")!),
+                                            ("Finished", UIImage(named: "finished")!),
+                                            ("Failed", UIImage(named: "failed")!)]
     
     required init?(coder aDecoder: NSCoder) {
         tasks = DatabaseService.shared.getResultsOfTask()
-        
         super.init(coder: aDecoder)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTimelineSections()
-        notificationToken = DatabaseService.shared.addNotificationHandleForSections(objects: tasks,
-                                                                                                tableView: self.tableView,
-                                                                                                callback: taskDataChanged)
-    }
-    
-    func taskDataChanged() {
-        setupTimelineSections()
-    }
-    
-    func setupTimelineSections() {
-        // reload
-        tableView.removeAllTimeline()
-        let numberOfTasks = tasks.count
-        for section in 0..<numberOfTasks {
-            tableView.addTimeline(with: wrapHeaderData(for: section))
-        }
+        
+        taskNotification = DatabaseService.shared.addNotificationHandleForSections(objects: tasks, tableView: self.tableView, callback: nil)
+        
+        // init callbacks
+        setupCallbackHandle()
     }
     
     deinit {
-        notificationToken?.invalidate()
+        taskNotification?.invalidate()
     }
 
     @IBAction func addPressed(_ sender: UIBarButtonItem) {
@@ -54,13 +49,34 @@ class TaskTrackingViewController: UIViewController {
         // if nil, means it should be a new task
         editor.currentTask = nil
     }
+}
+
+// MARK: - Implement callbacks
+extension TaskTrackingViewController {
+    func setupCallbackHandle() {
+        tableView.numberOfHeaders = {
+            return self.tasks.count
+        }
+        
+        tableView.dataForHeaderInSection = {(section) in
+            return self.wrapHeaderData(for: section) ?? SectionData()
+        }
+        
+        tableView.numberOfRowsInSection = {(section) in
+            return self.tasks[section].stateChanges.count
+        }
+        
+        tableView.dataForRowAtIndexPath = {(indexPath) in
+            return self.wrapRowDataForIndexPath(indexPath: indexPath) ?? RowData()
+        }
+    }
     
-    func wrapHeaderData(for section: Int) -> TimelineHeaderData? {
+    private func wrapHeaderData(for section: Int) -> SectionData? {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
         
         let task = self.tasks[section]
-        var headerData = TimelineHeaderData()
+        var headerData = SectionData()
         // title
         headerData.title = task.taskTitle
         // desc
@@ -90,5 +106,46 @@ class TaskTrackingViewController: UIViewController {
         }
         
         return headerData
+    }
+    
+    private func wrapRowDataForIndexPath(indexPath: IndexPath) -> RowData? {
+        let task = self.tasks[indexPath.section]
+        
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        
+        // assign rowData values occording to the current task state
+        var rowData = RowData()
+        let taskChanges = task.stateChanges
+        let taskState = taskChanges[indexPath.row].taskState
+        
+        rowData.illustrateImage = rowDataPool[indexPath.row].1
+        rowData.illustrateTitle = rowDataPool[indexPath.row].0
+        rowData.timeText = formatter.string(from: taskChanges[indexPath.row].changeTime)
+        
+        switch taskState {
+        case .created:
+            rowData.illustrateImage = rowDataPool[0].1
+            rowData.illustrateTitle = rowDataPool[0].0
+        case .pending:
+            rowData.illustrateImage = rowDataPool[1].1
+            rowData.illustrateTitle = rowDataPool[1].0
+        case .processing:
+            rowData.illustrateImage = rowDataPool[2].1
+            rowData.illustrateTitle = rowDataPool[2].0
+            break
+        case .finished:
+            rowData.illustrateImage = rowDataPool[3].1
+            rowData.illustrateTitle = rowDataPool[3].0
+            break
+        case .failed:
+            rowData.illustrateImage = rowDataPool[4].1
+            rowData.illustrateTitle = rowDataPool[4].0
+            break
+        }
+        rowData.timeText = formatter.string(from: taskChanges[indexPath.row].changeTime)
+        
+        return rowData
     }
 }

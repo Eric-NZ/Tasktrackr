@@ -69,7 +69,7 @@ class DatabaseService {
                 if let callback = callback {
                     callback()
                 }
-                
+                // begin updates
                 tableView!.beginUpdates()
                 // update sections
                 tableView!.insertSections(IndexSet(insertions.map({
