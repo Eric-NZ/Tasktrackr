@@ -8,21 +8,15 @@
 
 import UIKit
 
-struct RowData {
-    // illustrateImage
-    var illustrateImage: UIImage?
-    // illustrateTitle
-    var illustrateTitle: String = ""
-    // time text
-    var timeText: String = ""
-}
-
 class TimelineCell: UITableViewCell {
     @IBOutlet weak var illustrateImageView: UIImageView!
     @IBOutlet weak var illustrateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var buttonStackView: UIStackView!
     
     static let ID = "TimelineCell"
+    
+    private var buttons: [UIButton] = []
     
     private var timelinePoint = TimelinePoint() {
         didSet {
@@ -37,10 +31,12 @@ class TimelineCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+    
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        
     }
     
     override func draw(_ rect: CGRect) {
@@ -62,5 +58,4 @@ class TimelineCell: UITableViewCell {
         
         timelinePoint.draw(view: self.contentView)
     }
-    
 }

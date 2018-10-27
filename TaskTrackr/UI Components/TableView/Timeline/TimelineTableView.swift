@@ -13,7 +13,7 @@ class TimelineTableView: UITableView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        // register reusable cell identifier
+        // register a nib for the reusable cell identifier
         register(UINib(nibName: TimelineCell.ID, bundle: nil), forCellReuseIdentifier: TimelineCell.ID)
         
         dataSource = self
@@ -24,7 +24,7 @@ class TimelineTableView: UITableView {
     public var numberOfHeaders: (()-> Int)?
     public var dataForHeaderInSection: ((_ section: Int) -> SectionData)?
     public var numberOfRowsInSection: ((_ section: Int) -> Int)?
-    public var dataForRowAtIndexPath: ((_ indexPath: IndexPath) -> RowData)?
+    public var cellDataForRowAtIndexPath: ((_ indexPath: IndexPath) -> RowData)?
 }
 
 // MARK: - UITableViewDataSource
@@ -39,7 +39,7 @@ extension TimelineTableView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: TimelineCell.ID, for: indexPath) as? TimelineCell {
-            if let data = self.dataForRowAtIndexPath?(indexPath) {
+            if let data = self.cellDataForRowAtIndexPath?(indexPath) {
                 cell.illustrateImageView.image = data.illustrateImage
                 cell.illustrateLabel.text = data.illustrateTitle
                 cell.timeLabel.text = data.timeText

@@ -9,6 +9,20 @@
 import UIKit
 import RealmSwift
 
+typealias AttribuiteTuple = (target: Any?, image: UIImage?, callback: ()->Void?)
+
+struct RowData {
+    // illustrateImage
+    var illustrateImage: UIImage?
+    // illustrateTitle
+    var illustrateTitle: String = ""
+    // time text
+    var timeText: String = ""
+    // button attributes for cell
+    
+    var buttonAttributes: [AttribuiteTuple] = []
+}
+
 class TaskTrackingViewController: UIViewController {
     
     @IBOutlet weak var tableView: TimelineTableView!
@@ -16,7 +30,7 @@ class TaskTrackingViewController: UIViewController {
     var notificationPool: [NotificationToken] = []
     var tasks: Results<Task>
     // timeString, StateString, image
-    let rowDataPool: [(String, UIImage)] = [("Created", UIImage(named: "created")!),
+    let stateTimelineAtRow: [(String, UIImage)] = [("Created", UIImage(named: "created")!),
                                             ("Pending", UIImage(named: "pending")!),
                                             ("Processing", UIImage(named: "processing")!),
                                             ("Finished", UIImage(named: "finished")!),
@@ -66,7 +80,7 @@ extension TaskTrackingViewController {
             return self.tasks[section].stateChanges.count
         }
         
-        tableView.dataForRowAtIndexPath = {(indexPath) in
+        tableView.cellDataForRowAtIndexPath = {(indexPath) in
             return self.wrapRowDataForIndexPath(indexPath: indexPath) ?? RowData()
         }
     }
@@ -110,41 +124,33 @@ extension TaskTrackingViewController {
     
     private func wrapRowDataForIndexPath(indexPath: IndexPath) -> RowData? {
         let task = self.tasks[indexPath.section]
-        
+        // Configure timeline
+        let taskChanges = task.stateChanges
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
-        
-        // assign rowData values occording to the current task state
         var rowData = RowData()
-        let taskChanges = task.stateChanges
-        let taskState = taskChanges[indexPath.row].taskState
-        
-        rowData.illustrateImage = rowDataPool[indexPath.row].1
-        rowData.illustrateTitle = rowDataPool[indexPath.row].0
+        rowData.illustrateImage = stateTimelineAtRow[indexPath.row].1
+        rowData.illustrateTitle = stateTimelineAtRow[indexPath.row].0
         rowData.timeText = formatter.string(from: taskChanges[indexPath.row].changeTime)
         
-        switch taskState {
-        case .created:
-            rowData.illustrateImage = rowDataPool[0].1
-            rowData.illustrateTitle = rowDataPool[0].0
-        case .pending:
-            rowData.illustrateImage = rowDataPool[1].1
-            rowData.illustrateTitle = rowDataPool[1].0
-        case .processing:
-            rowData.illustrateImage = rowDataPool[2].1
-            rowData.illustrateTitle = rowDataPool[2].0
-            break
-        case .finished:
-            rowData.illustrateImage = rowDataPool[3].1
-            rowData.illustrateTitle = rowDataPool[3].0
-            break
-        case .failed:
-            rowData.illustrateImage = rowDataPool[4].1
-            rowData.illustrateTitle = rowDataPool[4].0
-            break
+        // determin button attributes by checking what state is on current row, as well as the current state of the task
+        rowData.buttonAttributes.removeAll()
+        var attributes = [AttribuiteTuple]()
+        if indexPath.row == taskChanges.count - 1 {      // current row is the end of the section
+            // configure the buttons
+            attributes.append((self, UIImage(named: "next"), { () -> Void? in
+                print("next")
+            }))
+            attributes.append((self, UIImage(named: "edit"), { () -> Void? in
+                print("edit")
+            }))
+            attributes.append((self, UIImage(named: "trash"), { () -> Void? in
+                print("trash")
+            }))
+            
+            rowData.buttonAttributes = attributes
         }
-        rowData.timeText = formatter.string(from: taskChanges[indexPath.row].changeTime)
         
         return rowData
     }
