@@ -17,7 +17,7 @@ extension DatabaseService {
     // add (or update) a task object
     public func addTask(add task: Task, _ title: String, _ desc: String, service: Service, workers: [Worker], dueData: Date,
                         locationTuple: (address: String, latitude: Double, longitude: Double),
-                        images: [UIImage], taskState: Task.TaskState, update: Bool) {
+                        images: [UIImage], taskState: TaskLog.TaskState, update: Bool) {
         let realm = getRealm()
         if update {
             try! realm.write {
@@ -31,7 +31,7 @@ extension DatabaseService {
                 task.setValue(locationTuple.latitude, forKey: "latitude")
                 task.setValue(locationTuple.longitude, forKey: "longitude")
                 // save task state
-                changeTaskState(for: task, to: taskState)
+                addTaskStateLog(for: task, to: taskState)
                 // image
                 task.images.removeAll()
                 task.images.append(objectsIn: convertImagesToDatas(images: images))
@@ -48,9 +48,8 @@ extension DatabaseService {
             task.longitude = locationTuple.longitude
             // images
             saveImages(to: task, images: images)
-            // change task state
-            // append first state change to change list for new task
-            changeTaskState(for: task, to: Task.TaskState(rawValue: task.state))
+            // add state log
+            addTaskStateLog(for: task, to: taskState)
             
             try! realm.write {
                 realm.add(task, update: false)
@@ -80,26 +79,29 @@ extension DatabaseService {
     
     // change task state
     @discardableResult
-    public func changeTaskState(for task: Task?, to newState: Task.TaskState?) -> Task.TaskState? {
+    public func addTaskStateLog(for task: Task?, to newState: TaskLog.TaskState?) -> TaskLog.TaskState? {
         guard let task = task else {return nil}
-
-        let lastState = task.state
-        // if task state which is not a new task, wasn't changed, nothing to do with it.
-        if lastState == newState!.rawValue, lastState != Task.TaskState.created.rawValue {
-            return newState
+        
+        let logs = task.stateLogs
+        // if there are no logs in the list, means the task is a new task just created, then append a new log from -1 to 0
+        let numberOfLogs = logs.count
+        let log = TaskLog()
+        if numberOfLogs == 0 {
+            log.fromState = -1
+            log.taskState = .created
+            log.timestamp = Date()
+        } else {
+            log.fromState = task.stateLogs[numberOfLogs - 1].taskState.rawValue
+            log.taskState = newState!
+            log.timestamp = Date()
         }
+        
         let realm = getRealm()
-        // update state to task
-        let taskChange = TaskStateChange()
-        taskChange.lastState = lastState
-        taskChange.currentState = newState!.rawValue
-        
+        // append state change to change list
         try! realm.write {
-            task.setValue(newState?.rawValue, forKey: "state")
-            // append state change to change list
-            task.stateChanges.append(taskChange)
+            task.stateLogs.append(log)
         }
         
-        return Task.TaskState(rawValue: lastState)
+        return TaskLog.TaskState(rawValue: log.fromState)
     }
 }

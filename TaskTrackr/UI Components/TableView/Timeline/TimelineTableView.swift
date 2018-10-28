@@ -24,7 +24,7 @@ class TimelineTableView: UITableView {
     public var numberOfHeaders: (()-> Int)?
     public var dataForHeaderInSection: ((_ section: Int) -> SectionData)?
     public var numberOfRowsInSection: ((_ section: Int) -> Int)?
-    public var cellDataForRowAtIndexPath: ((_ indexPath: IndexPath) -> RowData)?
+    public var cellDataForRowAtIndexPath: ((_ indexPath: IndexPath) -> CellData)?
 }
 
 // MARK: - UITableViewDataSource
@@ -40,14 +40,26 @@ extension TimelineTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: TimelineCell.ID, for: indexPath) as? TimelineCell {
             if let data = self.cellDataForRowAtIndexPath?(indexPath) {
-                cell.illustrateImageView.image = data.illustrateImage
-                cell.illustrateLabel.text = data.illustrateTitle
                 cell.timeLabel.text = data.timeText
+                cell.illustrateLabel.text = data.illustrateTitle
+                cell.illustrateImageView.image = data.illustrateImage
+                var buttons: [UIButton] = []
+                for attribute in data.buttonAttributes {
+                    let button = UIButton(type: .custom)
+                    button.setImage(attribute.image, for: .normal)
+                    button.addTarget(self, action: #selector(buttonHandlerRouter(_:)), for: .touchUpInside)
+                    buttons.append(button)
+                }
+                cell.setupCellButtons(buttons: buttons)
             }
             return cell
         } else {
             return TimelineCell(style: .default, reuseIdentifier: TimelineCell.ID)
         }
+    }
+    
+    @objc func buttonHandlerRouter(_ sender: UIButton ) {
+        
     }
 }
 

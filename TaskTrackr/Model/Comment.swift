@@ -11,5 +11,4 @@ import RealmSwift
 class Comment: Object {
     var content: String = ""
     var author: Worker?
-    var atState: Task.TaskState?
 }

@@ -9,9 +9,9 @@
 import UIKit
 import RealmSwift
 
-typealias AttribuiteTuple = (target: Any?, image: UIImage?, callback: ()->Void?)
+typealias ButtonAttributeTuple = (target: Any?, image: UIImage?, callback: ()->Void?)
 
-struct RowData {
+struct CellData {
     // illustrateImage
     var illustrateImage: UIImage?
     // illustrateTitle
@@ -19,8 +19,7 @@ struct RowData {
     // time text
     var timeText: String = ""
     // button attributes for cell
-    
-    var buttonAttributes: [AttribuiteTuple] = []
+    var buttonAttributes: [ButtonAttributeTuple] = []
 }
 
 class TaskTrackingViewController: UIViewController {
@@ -29,12 +28,6 @@ class TaskTrackingViewController: UIViewController {
     var taskNotification: NotificationToken?
     var notificationPool: [NotificationToken] = []
     var tasks: Results<Task>
-    // timeString, StateString, image
-    let stateTimelineAtRow: [(String, UIImage)] = [("Created", UIImage(named: "created")!),
-                                            ("Pending", UIImage(named: "pending")!),
-                                            ("Processing", UIImage(named: "processing")!),
-                                            ("Finished", UIImage(named: "finished")!),
-                                            ("Failed", UIImage(named: "failed")!)]
     
     required init?(coder aDecoder: NSCoder) {
         tasks = DatabaseService.shared.getResultsOfTask()
@@ -47,7 +40,7 @@ class TaskTrackingViewController: UIViewController {
         taskNotification = DatabaseService.shared.addNotificationHandleForSections(objects: tasks, tableView: self.tableView, callback: nil)
         
         // init callbacks
-        setupCallbackHandle()
+        setupTableViewDataSource()
     }
     
     deinit {
@@ -67,25 +60,25 @@ class TaskTrackingViewController: UIViewController {
 
 // MARK: - Implement callbacks
 extension TaskTrackingViewController {
-    func setupCallbackHandle() {
+    func setupTableViewDataSource() {
         tableView.numberOfHeaders = {
             return self.tasks.count
         }
         
         tableView.dataForHeaderInSection = {(section) in
-            return self.wrapHeaderData(for: section) ?? SectionData()
+            return self.dataForHeaderInSection(in: section) ?? SectionData()
         }
         
         tableView.numberOfRowsInSection = {(section) in
-            return self.tasks[section].stateChanges.count
+            return self.tasks[section].stateLogs.count
         }
         
         tableView.cellDataForRowAtIndexPath = {(indexPath) in
-            return self.wrapRowDataForIndexPath(indexPath: indexPath) ?? RowData()
+            return self.cellDataForRowAtIndexPath(indexPath: indexPath) ?? CellData()
         }
     }
     
-    private func wrapHeaderData(for section: Int) -> SectionData? {
+    private func dataForHeaderInSection(in section: Int) -> SectionData? {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
         
@@ -122,36 +115,80 @@ extension TaskTrackingViewController {
         return headerData
     }
     
-    private func wrapRowDataForIndexPath(indexPath: IndexPath) -> RowData? {
+    private func cellDataForRowAtIndexPath(indexPath: IndexPath) -> CellData? {
         let task = self.tasks[indexPath.section]
-        // Configure timeline
-        let taskChanges = task.stateChanges
+        let stateLog = task.stateLogs[indexPath.row]
+        var cellData = CellData()
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
-        var rowData = RowData()
-        rowData.illustrateImage = stateTimelineAtRow[indexPath.row].1
-        rowData.illustrateTitle = stateTimelineAtRow[indexPath.row].0
-        rowData.timeText = formatter.string(from: taskChanges[indexPath.row].changeTime)
         
-        // determin button attributes by checking what state is on current row, as well as the current state of the task
-        rowData.buttonAttributes.removeAll()
-        var attributes = [AttribuiteTuple]()
-        if indexPath.row == taskChanges.count - 1 {      // current row is the end of the section
-            // configure the buttons
-            attributes.append((self, UIImage(named: "next"), { () -> Void? in
-                print("next")
-            }))
-            attributes.append((self, UIImage(named: "edit"), { () -> Void? in
-                print("edit")
-            }))
-            attributes.append((self, UIImage(named: "trash"), { () -> Void? in
-                print("trash")
-            }))
+        // the buttons are only available where it is the last row
+        let ifButtonNeeded: Bool = indexPath.row == task.stateLogs.count - 1
+        
+        switch stateLog.taskState {
+        case .created:
+            cellData.timeText = formatter.string(from: stateLog.timestamp)
+            cellData.illustrateTitle = "Created"
+            cellData.illustrateImage = UIImage(named: "created")
             
-            rowData.buttonAttributes = attributes
+            cellData.buttonAttributes = ifButtonNeeded ? [ButtonAttributeTuple(self, UIImage(named: "next"), {()->Void in
+                
+            }),
+                                                          ButtonAttributeTuple(self, UIImage(named: "edit"), {()->Void in
+                                                            
+                                                          }),
+                                                          ButtonAttributeTuple(self, UIImage(named: "trash"), {()->Void in
+                                                            
+                                                          }),
+                                                          ButtonAttributeTuple(self, UIImage(named: "info"), {()->Void in
+                                                            
+                                                          })] : []
+        case .pending:
+            cellData.timeText = formatter.string(from: stateLog.timestamp)
+            cellData.illustrateTitle = "Pending"
+            cellData.illustrateImage = UIImage(named: "pending")
+            cellData.buttonAttributes = ifButtonNeeded ? [ButtonAttributeTuple(self, UIImage(named: "comment"), {()->Void in
+                
+            }),
+                                                          ButtonAttributeTuple(self, UIImage(named: "info"), {()->Void in
+                                                            
+                                                          })] : []
+        case .processing:
+            cellData.timeText = formatter.string(from: stateLog.timestamp)
+            cellData.illustrateTitle = "Processing"
+            cellData.illustrateImage = UIImage(named: "processing")
+            cellData.buttonAttributes = ifButtonNeeded ? [ButtonAttributeTuple(self, UIImage(named: "comment"), {()->Void in
+                
+            }),
+                                                          ButtonAttributeTuple(self, UIImage(named: "info"), {()->Void in
+                                                            
+                                                          })] : []
+        case .finished:
+            cellData.timeText = formatter.string(from: stateLog.timestamp)
+            cellData.illustrateTitle = "Finished"
+            cellData.illustrateImage = UIImage(named: "finished")
+            cellData.buttonAttributes = ifButtonNeeded ? [ButtonAttributeTuple(self, UIImage(named: "archive"), {()->Void in
+                
+            }),
+                                                          ButtonAttributeTuple(self, UIImage(named: "info"), {()->Void in
+                                                            
+                                                          })] : []
+        case .failed:
+            cellData.timeText = formatter.string(from: stateLog.timestamp)
+            cellData.illustrateTitle = "Failed"
+            cellData.illustrateImage = UIImage(named: "failed")
+            cellData.buttonAttributes = ifButtonNeeded ? [ButtonAttributeTuple(self, UIImage(named: "archive"), {()->Void in
+                
+            }),
+                                                          ButtonAttributeTuple(self, UIImage(named: "trash"), {()->Void in
+                                                            
+                                                          }),
+                                                          ButtonAttributeTuple(self, UIImage(named: "info"), {()->Void in
+                                                            
+                                                          })] : []
         }
         
-        return rowData
+        return cellData
     }
 }

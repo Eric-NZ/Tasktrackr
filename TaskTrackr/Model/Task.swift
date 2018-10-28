@@ -9,16 +9,6 @@
 import RealmSwift
 
 class Task: Object {
-    
-    // task states
-    enum TaskState: Int {
-        case created            // 0 - task has just been created, not yet assigned
-        case pending            // 1 - task has been assigned but waiting for process
-        case processing         // 2 - task has been processing
-        case finished           // 3 - task has been finished :)
-        case failed             // 4 - task is failed :(
-    }
-    
     // task id
     @objc dynamic var taskId: String = UUID().uuidString
     // timestamp
@@ -41,18 +31,8 @@ class Task: Object {
     @objc dynamic var longitude: Double = 0
     // images
     var images = List<Data>()
-    // task state (4.failed / 3.finished / 2.processing / 1.pending / 0.created)
-    @objc dynamic var state = TaskState.created.rawValue
-    var taskState: TaskState {
-        get {
-            return TaskState(rawValue: state)!
-        }
-        set {
-            state = newValue.rawValue
-        }
-    }
-    // state change
-    var stateChanges = List<TaskStateChange>()
+    // state loggin
+    var stateLogs = List<TaskLog>()
     // workers and managers can add comments at any state of a task
     var comments = List<Comment>()
     
@@ -60,18 +40,4 @@ class Task: Object {
     override static func primaryKey() -> String {
         return "taskId"
     }
-}
-
-class TaskStateChange: Object {
-    var taskState: Task.TaskState {
-        get {
-            return Task.TaskState(rawValue: currentState)!
-        }
-        set {
-            currentState = newValue.rawValue
-        }
-    }
-    @objc dynamic var changeTime: Date = Date()
-    @objc dynamic var lastState = Task.TaskState.created.rawValue
-    @objc dynamic var currentState = Task.TaskState.created.rawValue
 }

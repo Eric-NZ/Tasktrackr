@@ -76,6 +76,8 @@
 		21EA13C121364FF200C5CB34 /* TaskTrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EA13C021364FF200C5CB34 /* TaskTrackingViewController.swift */; };
 		21EA13C32136505200C5CB34 /* TaskSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EA13C22136505200C5CB34 /* TaskSearchTableViewController.swift */; };
 		21F7A8CF214E263A00A01AB5 /* TagControlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21F7A8CD214E263A00A01AB5 /* TagControlTableViewCell.xib */; };
+		21FF19782184F464000164DE /* TaskLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FF19772184F464000164DE /* TaskLog.swift */; };
+		21FF197A2184F501000164DE /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FF19792184F501000164DE /* ProductModel.swift */; };
 		B7F2E06E71D2CEECD93433CC /* Pods_TaskTrackr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A6487C605C9341862DA23B1 /* Pods_TaskTrackr.framework */; };
 /* End PBXBuildFile section */
 
@@ -151,6 +153,8 @@
 		21EA13C021364FF200C5CB34 /* TaskTrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTrackingViewController.swift; sourceTree = "<group>"; };
 		21EA13C22136505200C5CB34 /* TaskSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSearchTableViewController.swift; sourceTree = "<group>"; };
 		21F7A8CD214E263A00A01AB5 /* TagControlTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagControlTableViewCell.xib; sourceTree = "<group>"; };
+		21FF19772184F464000164DE /* TaskLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskLog.swift; sourceTree = "<group>"; };
+		21FF19792184F501000164DE /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 		9A6487C605C9341862DA23B1 /* Pods_TaskTrackr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaskTrackr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7D12C04F2B5A29FEE2D4BD5 /* Pods-TaskTrackr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskTrackr.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaskTrackr/Pods-TaskTrackr.release.xcconfig"; sourceTree = "<group>"; };
 		D66AE966DB494017D1AA2BB8 /* Pods-TaskTrackr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaskTrackr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaskTrackr/Pods-TaskTrackr.debug.xcconfig"; sourceTree = "<group>"; };
@@ -184,19 +188,21 @@
 		210C04D3213CAF9C00576564 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				21BBC78B213E681D0006B5B4 /* Worker.swift */,
+				21BBC78F213E6BB00006B5B4 /* Service.swift */,
 				21BBC787213E63F00006B5B4 /* Tool.swift */,
 				21BBC789213E65890006B5B4 /* Product.swift */,
-				21BBC78B213E681D0006B5B4 /* Worker.swift */,
-				21BBC78D213E69440006B5B4 /* Site.swift */,
-				21BBC78F213E6BB00006B5B4 /* Service.swift */,
+				21FF19792184F501000164DE /* ProductModel.swift */,
 				2135DD88215F437E004AAC96 /* Task.swift */,
+				21FF19772184F464000164DE /* TaskLog.swift */,
 				219D4CAD217D2EEC007CB3CE /* Comment.swift */,
 				2135DD8A215F45EB004AAC96 /* DataModel.swift */,
+				21BBC78D213E69440006B5B4 /* Site.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		2135DD85215F424E004AAC96 /* ViewModel */ = {
+		2135DD85215F424E004AAC96 /* DatabaseCenter */ = {
 			isa = PBXGroup;
 			children = (
 				210C04D1213CAF7E00576564 /* DatabaseService.swift */,
@@ -207,7 +213,7 @@
 				21BBD237217A84DD006EB159 /* DBService_Tool.swift */,
 				2135DD80215F40CF004AAC96 /* ViewModel.swift */,
 			);
-			path = ViewModel;
+			path = DatabaseCenter;
 			sourceTree = "<group>";
 		};
 		213608A321800EA2008DCF14 /* Timeline */ = {
@@ -271,13 +277,6 @@
 				21D498FE2179A3DD0004FFDA /* SinglePickerController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		21BBD23B217AB720006EB159 /* Storage */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Storage;
 			sourceTree = "<group>";
 		};
 		21BBD241217AF668006EB159 /* Other */ = {
@@ -352,8 +351,7 @@
 				21D8D654213F969D0092AEBB /* Management */,
 				210620212141239B00BA2050 /* Extensions */,
 				213DA70F2153A00A00D0C7AF /* UI Components */,
-				2135DD85215F424E004AAC96 /* ViewModel */,
-				21BBD23B217AB720006EB159 /* Storage */,
+				2135DD85215F424E004AAC96 /* DatabaseCenter */,
 				210C04D3213CAF9C00576564 /* Model */,
 			);
 			path = TaskTrackr;
@@ -533,6 +531,7 @@
 				21E7176A21708F8000FA177C /* LocationSelectViewController.swift in Sources */,
 				21D8D65B213FE30D0092AEBB /* PageRouterViewController.swift in Sources */,
 				21BBD234217A8488006EB159 /* DBService_Service.swift in Sources */,
+				21FF19782184F464000164DE /* TaskLog.swift in Sources */,
 				21DF277E214E0A6800BB2799 /* TagTableViewCell.swift in Sources */,
 				2135DD81215F40CF004AAC96 /* ViewModel.swift in Sources */,
 				213608A221800E0E008DCF14 /* TimelinePoint.swift in Sources */,
@@ -564,6 +563,7 @@
 				21D83F422174443A00B15AE4 /* ImageCollectionCell.swift in Sources */,
 				21BBC786213E5A330006B5B4 /* Static.swift in Sources */,
 				2135DD8B215F45EB004AAC96 /* DataModel.swift in Sources */,
+				21FF197A2184F501000164DE /* ProductModel.swift in Sources */,
 				219D4CBE217D97D9007CB3CE /* TimelineHeaderContainer.swift in Sources */,
 				21EA13C32136505200C5CB34 /* TaskSearchTableViewController.swift in Sources */,
 				216D69AE2172FAD400E7CDE1 /* PicPickerViewController.swift in Sources */,

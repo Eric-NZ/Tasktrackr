@@ -21,7 +21,7 @@ class TaskEditorViewController: FormViewController {
     var locationTuple: (address: String, latitude: Double, longitude: Double)?
     var dueDate: Date?
     var images: [UIImage] = []
-    var taskState: Task.TaskState = Task.TaskState.created
+    var taskState: TaskLog.TaskState = TaskLog.TaskState.created
     enum Selector {
         case service
         case workers

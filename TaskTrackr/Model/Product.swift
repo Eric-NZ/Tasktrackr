@@ -8,18 +8,6 @@
 
 import RealmSwift
 
-class ProductModel: Object {
-    
-    @objc dynamic var modelId: String = UUID().uuidString
-    @objc dynamic var modelName: String?
-    @objc dynamic var product: Product?
-    
-    override static func primaryKey() -> String? {
-        return "modelId"
-    }
-    
-}
-
 class Product: Object {
     
     // Auto Id
