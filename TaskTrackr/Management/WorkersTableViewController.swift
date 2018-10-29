@@ -95,7 +95,7 @@ class WorkersTableViewController: UITableViewController, ManageItemDelegate {
         Remove Worker Item
      */
     func removeWorker(worker: Worker) {
-        DatabaseService.shared.removeObject(toRemove: worker)
+        DatabaseService.shared.removeObject(object: worker)
     }
 
     func openWorkerForm(sender: Any?) {

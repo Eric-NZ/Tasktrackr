@@ -120,65 +120,86 @@ extension TaskTrackingViewController {
             cellData.illustrateImage = UIImage(named: "created")
             
             cellData.buttonAttributes = ifButtonNeeded ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "next"), {()->Void in
+                // callback closure
+                let state: TaskLog.TaskState = .pending
+                self.changeTaskState(for: task, nextState: state)
+            }), CellData.ButtonAttributeTuple(1, self, UIImage(named: "edit"), {()->Void in
+                // callback closure
                 
-            }),
-                                                          CellData.ButtonAttributeTuple(1, self, UIImage(named: "edit"), {()->Void in
-                                                            
-                                                          }),
-                                                          CellData.ButtonAttributeTuple(2, self, UIImage(named: "trash"), {()->Void in
-                                                            
-                                                          }),
-                                                          CellData.ButtonAttributeTuple(3, self, UIImage(named: "info"), {()->Void in
-                                                            
-                                                          })] : []
+            }), CellData.ButtonAttributeTuple(2, self, UIImage(named: "trash"), {()->Void in
+                // callback closure
+                self.removeTask(task: task)
+            }), CellData.ButtonAttributeTuple(3, self, UIImage(named: "info"), {()->Void in
+                // callback closure
+                
+            })] : []
         case .pending:
             cellData.timeText = formatter.string(from: stateLog.timestamp)
             cellData.illustrateTitle = "Pending"
             cellData.illustrateImage = UIImage(named: "pending")
             cellData.buttonAttributes = ifButtonNeeded ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "comment"), {()->Void in
+                // callback closure
                 
-            }),
-                                                          CellData.ButtonAttributeTuple(1, self, UIImage(named: "info"), {()->Void in
-                                                            
-                                                          })] : []
+            }), CellData.ButtonAttributeTuple(1, self, UIImage(named: "info"), {()->Void in
+                // callback closure
+                
+            }), CellData.ButtonAttributeTuple(2, self, UIImage(named: "cancel"), {()->Void in
+                // callback closure: back to previous state with offset - 1
+                self.backToPreviousState(for: task, offset: 1)
+            })] : []
         case .processing:
             cellData.timeText = formatter.string(from: stateLog.timestamp)
             cellData.illustrateTitle = "Processing"
             cellData.illustrateImage = UIImage(named: "processing")
             cellData.buttonAttributes = ifButtonNeeded ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "comment"), {()->Void in
+                // callback closure
                 
-            }),
-                                                          CellData.ButtonAttributeTuple(1, self, UIImage(named: "info"), {()->Void in
-                                                            
-                                                          })] : []
+            }), CellData.ButtonAttributeTuple(1, self, UIImage(named: "info"), {()->Void in
+                // callback closure
+                
+            })] : []
         case .finished:
             cellData.timeText = formatter.string(from: stateLog.timestamp)
             cellData.illustrateTitle = "Finished"
             cellData.illustrateImage = UIImage(named: "finished")
             cellData.buttonAttributes = ifButtonNeeded ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "check"), {()->Void in
+                // callback closure
                 
-            }),
-                                                          CellData.ButtonAttributeTuple(1, self, UIImage(named: "backward"), {()->Void in
-                                                            
-                                                          }),
-                                                          CellData.ButtonAttributeTuple(2, self, UIImage(named: "info"), {()->Void in
-                                                            
-                                                          })] : []
+            }), CellData.ButtonAttributeTuple(1, self, UIImage(named: "backward"), {()->Void in
+                // callback closure
+                self.backToPreviousState(for: task, offset: 2)
+            }), CellData.ButtonAttributeTuple(2, self, UIImage(named: "info"), {()->Void in
+                // callback closure
+                
+            })] : []
         case .failed:
             cellData.timeText = formatter.string(from: stateLog.timestamp)
             cellData.illustrateTitle = "Failed"
             cellData.illustrateImage = UIImage(named: "failed")
             cellData.buttonAttributes = ifButtonNeeded ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "archive"), {()->Void in
+                // callback closure
                 
-            }),
-                                                          CellData.ButtonAttributeTuple(1, self, UIImage(named: "trash"), {()->Void in
-                                                            
-                                                          }),
-                                                          CellData.ButtonAttributeTuple(2, self, UIImage(named: "info"), {()->Void in
-                                                            
-                                                          })] : []
+            }), CellData.ButtonAttributeTuple(1, self, UIImage(named: "trash"), {()->Void in
+                // callback closure
+                self.removeTask(task: task)
+            }), CellData.ButtonAttributeTuple(2, self, UIImage(named: "info"), {()->Void in
+                // callback closure
+                
+            })] : []
         }
         
         return cellData
+    }
+    
+    private func removeTask(task: Task) {
+        DatabaseService.shared.removeObject(object: task)
+    }
+    
+    private func changeTaskState(for task: Task, nextState: TaskLog.TaskState) {
+        DatabaseService.shared.addTaskStateLog(for: task, to: nextState)
+    }
+    
+    private func backToPreviousState(for task: Task, offset: Int) {
+        DatabaseService.shared.backToPreviousState(for: task, offset: offset)
     }
 }

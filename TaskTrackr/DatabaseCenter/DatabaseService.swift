@@ -132,10 +132,10 @@ class DatabaseService {
     }
 
     // remove a single object
-    public func removeObject(toRemove: Object) {
+    public func removeObject(object: Object) {
         let realm = getRealm()
         try! realm.write {
-            realm.delete(toRemove)
+            realm.delete(object)
         }
     }
     

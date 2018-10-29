@@ -35,7 +35,7 @@ class ProductsTableViewController: UITableViewController, ManageItemDelegate {
         // to remove a product, remove models belong to the product first
         let precidate = NSPredicate(format: "product==%@", product.self)
         DatabaseService.shared.removeObjects(objectType: ProductModel.self, with: precidate)
-        DatabaseService.shared.removeObject(toRemove: product)
+        DatabaseService.shared.removeObject(object: product)
     }
     
     func openProductForm(sender: Any?) {

@@ -104,4 +104,41 @@ extension DatabaseService {
         
         return TaskLog.TaskState(rawValue: log.fromState)
     }
+    
+    // back to previous state
+    public func backToPreviousState(for task: Task?, offset: Int) {
+        guard let task = task else { return }
+        
+        let numberOfDeletion = offset > 1 ? offset : 1
+        
+        for _ in 0..<numberOfDeletion {
+            removeOneTaskStateLog(for: task, nil)
+        }
+    }
+    
+    // if the index no designated, remove the last log
+    public func removeOneTaskStateLog(for task: Task?, _ index: Int?) {
+        guard let task = task else { return }
+        
+        let realm = getRealm()
+        let logs = task.stateLogs
+        try! realm.write {
+            if let index = index {
+                logs.remove(at: index)
+            } else {
+                logs.removeLast()
+            }
+        }
+    }
+    
+    // remove all state logs belong to designated task
+    public func removeAllTaskStateLog(for task: Task?) {
+        guard let task = task else { return }
+        
+        let realm = getRealm()
+        let logs = task.stateLogs
+        try! realm.write {
+            logs.removeAll()
+        }
+    }
 }

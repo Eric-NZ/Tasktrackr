@@ -81,7 +81,7 @@ class ServicesTableViewController: UITableViewController, ManageItemDelegate {
     
     // remove entire service
     func removeService(service: Service ) {
-        DatabaseService.shared.removeObject(toRemove: service)
+        DatabaseService.shared.removeObject(object: service)
     }
     
 }
