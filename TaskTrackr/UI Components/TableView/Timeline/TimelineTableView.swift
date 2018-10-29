@@ -39,35 +39,21 @@ extension TimelineTableView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: TimelineCell.ID, for: indexPath) as? TimelineCell {
+            // set cell data
             if let data = self.cellDataForRowAtIndexPath?(indexPath) {
-                cell.timeLabel.text = data.timeText
-                cell.illustrateLabel.text = data.illustrateTitle
-                cell.illustrateImageView.image = data.illustrateImage
-                var buttons: [UIButton] = []
-                for attribute in data.buttonAttributes {
-                    let button = UIButton(type: .custom)
-                    button.setImage(attribute.image, for: .normal)
-                    button.addTarget(self, action: #selector(buttonHandlerRouter(_:)), for: .touchUpInside)
-                    buttons.append(button)
-                }
-                cell.setupCellButtons(buttons: buttons)
+                cell.setCellData(cellData: data)
             }
             return cell
         } else {
             return TimelineCell(style: .default, reuseIdentifier: TimelineCell.ID)
         }
     }
-    
-    @objc func buttonHandlerRouter(_ sender: UIButton ) {
-        
-    }
 }
-
 // MARK: - UITableViewDelegate
 extension TimelineTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: TimelineHeader.ID) as? TimelineHeader ?? TimelineHeader(reuseIdentifier: TimelineHeader.ID)
-        // assign HeaderData to TimelineHeader.HeaderData to update the header view
+        // set header data
         if let data = dataForHeaderInSection?(section) {
             header.setHeaderData(headerData: data)
         }

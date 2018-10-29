@@ -19,14 +19,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="D5x-qN-kQK" userLabel="illustrateImageView">
-                        <rect key="frame" x="160" y="11" width="16" height="16"/>
+                        <rect key="frame" x="144" y="11" width="16" height="16"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="D5x-qN-kQK" secondAttribute="height" multiplier="1:1" id="NeD-er-ZdJ" userLabel="aspect = 1:1"/>
                             <constraint firstAttribute="width" constant="16" id="ejt-Wg-XG4"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pW1-3O-dcl" userLabel="illustrateLabel">
-                        <rect key="frame" x="184" y="11.5" width="31" height="15"/>
+                        <rect key="frame" x="168" y="11.5" width="31" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -40,10 +40,10 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="88" placeholderIntrinsicHeight="16" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="mKX-kQ-tsk">
-                        <rect key="frame" x="305" y="104" width="88" height="16"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="88" placeholderIntrinsicHeight="16" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="mKX-kQ-tsk">
+                        <rect key="frame" x="305" y="96" width="88" height="24"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="16" id="h8d-D9-Bbp"/>
+                            <constraint firstAttribute="height" constant="24" id="h8d-D9-Bbp"/>
                         </constraints>
                     </stackView>
                 </subviews>
@@ -53,7 +53,7 @@
                     <constraint firstItem="D5x-qN-kQK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Chb-b4-a1a"/>
                     <constraint firstItem="D5x-qN-kQK" firstAttribute="centerY" secondItem="pW1-3O-dcl" secondAttribute="centerY" id="Py3-7e-Ora"/>
                     <constraint firstItem="dU0-Jf-mfT" firstAttribute="centerY" secondItem="pW1-3O-dcl" secondAttribute="centerY" id="Qi4-v2-pYB"/>
-                    <constraint firstItem="D5x-qN-kQK" firstAttribute="leading" secondItem="dU0-Jf-mfT" secondAttribute="trailing" constant="32" id="Zdv-Tb-LWJ"/>
+                    <constraint firstItem="D5x-qN-kQK" firstAttribute="leading" secondItem="dU0-Jf-mfT" secondAttribute="trailing" constant="16" id="Zdv-Tb-LWJ"/>
                     <constraint firstItem="dU0-Jf-mfT" firstAttribute="bottom" secondItem="D5x-qN-kQK" secondAttribute="bottom" id="aqz-wI-k8v"/>
                 </constraints>
             </tableViewCellContentView>

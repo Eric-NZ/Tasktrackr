@@ -9,19 +9,6 @@
 import UIKit
 import RealmSwift
 
-typealias ButtonAttributeTuple = (target: Any?, image: UIImage?, callback: ()->Void?)
-
-struct CellData {
-    // illustrateImage
-    var illustrateImage: UIImage?
-    // illustrateTitle
-    var illustrateTitle: String = ""
-    // time text
-    var timeText: String = ""
-    // button attributes for cell
-    var buttonAttributes: [ButtonAttributeTuple] = []
-}
-
 class TaskTrackingViewController: UIViewController {
     
     @IBOutlet weak var tableView: TimelineTableView!
@@ -132,59 +119,62 @@ extension TaskTrackingViewController {
             cellData.illustrateTitle = "Created"
             cellData.illustrateImage = UIImage(named: "created")
             
-            cellData.buttonAttributes = ifButtonNeeded ? [ButtonAttributeTuple(self, UIImage(named: "next"), {()->Void in
+            cellData.buttonAttributes = ifButtonNeeded ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "next"), {()->Void in
                 
             }),
-                                                          ButtonAttributeTuple(self, UIImage(named: "edit"), {()->Void in
+                                                          CellData.ButtonAttributeTuple(1, self, UIImage(named: "edit"), {()->Void in
                                                             
                                                           }),
-                                                          ButtonAttributeTuple(self, UIImage(named: "trash"), {()->Void in
+                                                          CellData.ButtonAttributeTuple(2, self, UIImage(named: "trash"), {()->Void in
                                                             
                                                           }),
-                                                          ButtonAttributeTuple(self, UIImage(named: "info"), {()->Void in
+                                                          CellData.ButtonAttributeTuple(3, self, UIImage(named: "info"), {()->Void in
                                                             
                                                           })] : []
         case .pending:
             cellData.timeText = formatter.string(from: stateLog.timestamp)
             cellData.illustrateTitle = "Pending"
             cellData.illustrateImage = UIImage(named: "pending")
-            cellData.buttonAttributes = ifButtonNeeded ? [ButtonAttributeTuple(self, UIImage(named: "comment"), {()->Void in
+            cellData.buttonAttributes = ifButtonNeeded ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "comment"), {()->Void in
                 
             }),
-                                                          ButtonAttributeTuple(self, UIImage(named: "info"), {()->Void in
+                                                          CellData.ButtonAttributeTuple(1, self, UIImage(named: "info"), {()->Void in
                                                             
                                                           })] : []
         case .processing:
             cellData.timeText = formatter.string(from: stateLog.timestamp)
             cellData.illustrateTitle = "Processing"
             cellData.illustrateImage = UIImage(named: "processing")
-            cellData.buttonAttributes = ifButtonNeeded ? [ButtonAttributeTuple(self, UIImage(named: "comment"), {()->Void in
+            cellData.buttonAttributes = ifButtonNeeded ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "comment"), {()->Void in
                 
             }),
-                                                          ButtonAttributeTuple(self, UIImage(named: "info"), {()->Void in
+                                                          CellData.ButtonAttributeTuple(1, self, UIImage(named: "info"), {()->Void in
                                                             
                                                           })] : []
         case .finished:
             cellData.timeText = formatter.string(from: stateLog.timestamp)
             cellData.illustrateTitle = "Finished"
             cellData.illustrateImage = UIImage(named: "finished")
-            cellData.buttonAttributes = ifButtonNeeded ? [ButtonAttributeTuple(self, UIImage(named: "archive"), {()->Void in
+            cellData.buttonAttributes = ifButtonNeeded ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "check"), {()->Void in
                 
             }),
-                                                          ButtonAttributeTuple(self, UIImage(named: "info"), {()->Void in
+                                                          CellData.ButtonAttributeTuple(1, self, UIImage(named: "backward"), {()->Void in
+                                                            
+                                                          }),
+                                                          CellData.ButtonAttributeTuple(2, self, UIImage(named: "info"), {()->Void in
                                                             
                                                           })] : []
         case .failed:
             cellData.timeText = formatter.string(from: stateLog.timestamp)
             cellData.illustrateTitle = "Failed"
             cellData.illustrateImage = UIImage(named: "failed")
-            cellData.buttonAttributes = ifButtonNeeded ? [ButtonAttributeTuple(self, UIImage(named: "archive"), {()->Void in
+            cellData.buttonAttributes = ifButtonNeeded ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "archive"), {()->Void in
                 
             }),
-                                                          ButtonAttributeTuple(self, UIImage(named: "trash"), {()->Void in
+                                                          CellData.ButtonAttributeTuple(1, self, UIImage(named: "trash"), {()->Void in
                                                             
                                                           }),
-                                                          ButtonAttributeTuple(self, UIImage(named: "info"), {()->Void in
+                                                          CellData.ButtonAttributeTuple(2, self, UIImage(named: "info"), {()->Void in
                                                             
                                                           })] : []
         }
