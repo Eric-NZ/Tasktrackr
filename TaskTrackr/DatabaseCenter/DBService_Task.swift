@@ -15,8 +15,8 @@ extension DatabaseService {
     }
     
     // add (or update) a task object
-    public func addTask(add task: Task, _ title: String, _ desc: String, service: Service, workers: [Worker], dueData: Date,
-                        locationTuple: (address: String, latitude: Double, longitude: Double),
+    public func addTask(add task: Task, _ title: String, _ desc: String, service: Service, workers: [Worker], deadline: Date,
+                        locationTuple: LocationTuple,
                         images: [UIImage], taskState: TaskLog.TaskState, update: Bool) {
         let realm = getRealm()
         if update {
@@ -26,12 +26,10 @@ extension DatabaseService {
                 task.setValue(service, forKey: "service")
                 task.setValue(title, forKey: "taskTitle")
                 task.setValue(desc, forKey: "taskDesc")
-                task.setValue(dueData, forKey: "dueDate")
+                task.setValue(deadline, forKey: "dueDate")
                 task.setValue(locationTuple.address, forKey: "address")
                 task.setValue(locationTuple.latitude, forKey: "latitude")
                 task.setValue(locationTuple.longitude, forKey: "longitude")
-                // save task state
-                addTaskStateLog(for: task, to: taskState)
                 // image
                 task.images.removeAll()
                 task.images.append(objectsIn: convertImagesToDatas(images: images))
@@ -41,7 +39,7 @@ extension DatabaseService {
             task.service = service
             task.taskTitle = title
             task.taskDesc = desc
-            task.dueDate = dueData
+            task.dueDate = deadline
             // location
             task.address = locationTuple.address
             task.latitude = locationTuple.latitude

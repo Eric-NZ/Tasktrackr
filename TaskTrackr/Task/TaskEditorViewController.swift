@@ -16,9 +16,8 @@ class TaskEditorViewController: FormViewController {
     var taskTitle: String = ""
     var desc: String = ""
     var service: Service?
-    var workers: [Worker] = []
     var selectedWorkers: [Worker] = []
-    var locationTuple: (address: String, latitude: Double, longitude: Double)?
+    var locationTuple: LocationTuple?
     var dueDate: Date?
     var images: [UIImage] = []
     var taskState: TaskLog.TaskState = TaskLog.TaskState.created
@@ -45,6 +44,13 @@ class TaskEditorViewController: FormViewController {
         extractCurrentTask()
         // build editor form
         buildEditor()
+        // update menu subTitle for selectors
+        if currentTask != nil {
+            updateSelectorSubText(on: .service, currentTask!.service?.serviceTitle)
+            updateSelectorSubText(on: .workers, currentTask!.workers.count)
+            updateSelectorSubText(on: .pictures, currentTask!.images.count)
+            updateSelectorSubText(on: .location, currentTask!.address)
+        }
     }
     
     // reset select state
@@ -110,11 +116,16 @@ class TaskEditorViewController: FormViewController {
     
     // extract properties from currentTask object
     func extractCurrentTask() {
-        if currentTask != nil {
-            taskTitle = currentTask!.taskTitle
-            desc = currentTask!.taskDesc
-            service = currentTask?.service
-            locationTuple = (currentTask?.address, currentTask?.latitude, currentTask?.longitude) as? (address: String, latitude: Double, longitude: Double)
+        if let task = currentTask {
+            taskTitle = task.taskTitle
+            desc = task.taskDesc
+            service = task.service
+            locationTuple = LocationTuple(task.address, task.latitude, task.longitude)
+            dueDate = task.dueDate
+            selectedWorkers = DatabaseService.shared.workerListToArray(from: task.workers)
+            for data in task.images {
+                images.append(UIImage(data: data)!)
+            }
         }
     }
     
@@ -151,7 +162,7 @@ class TaskEditorViewController: FormViewController {
             $0.textField.textColor = .formerSubColor()
             $0.textField.font = .boldSystemFont(ofSize: 14)
             }.configure {
-                $0.placeholder = "(Optional)"
+                $0.placeholder = "e.g. Install Kitchen Sink"
                 $0.text = taskTitle
             }.onTextChanged { (text) in
                 self.taskTitle = text
@@ -192,6 +203,9 @@ class TaskEditorViewController: FormViewController {
                 $0.datePicker.datePickerMode = .date
             }.configure {
                 $0.displayEditingColor = .formerHighlightedSubColor()
+                if let date = self.dueDate {
+                    $0.date = date
+                }
             }.onDateChanged({
                 self.dueDate = $0
             }).displayTextFromDate(String.mediumDateNoTime)
@@ -216,9 +230,9 @@ class TaskEditorViewController: FormViewController {
     func saveTask() {
         if currentTask == nil {
             currentTask = Task()
-            DatabaseService.shared.addTask(add: self.currentTask!, self.taskTitle, self.desc, service: self.service!, workers: self.selectedWorkers, dueData: self.dueDate!, locationTuple: self.locationTuple!, images: self.images, taskState: self.taskState, update: false)
+            DatabaseService.shared.addTask(add: self.currentTask!, self.taskTitle, self.desc, service: self.service!, workers: self.selectedWorkers, deadline: self.dueDate!, locationTuple: self.locationTuple!, images: self.images, taskState: self.taskState, update: false)
         } else {
-            DatabaseService.shared.addTask(add: self.currentTask!, self.taskTitle, self.desc, service: self.service!, workers: self.selectedWorkers, dueData: self.dueDate!, locationTuple: self.locationTuple!, images: self.images, taskState: self.taskState, update: true)
+            DatabaseService.shared.addTask(add: self.currentTask!, self.taskTitle, self.desc, service: self.service!, workers: self.selectedWorkers, deadline: self.dueDate!, locationTuple: self.locationTuple!, images: self.images, taskState: self.taskState, update: true)
         }
     }
 }
@@ -288,7 +302,7 @@ extension TaskEditorViewController: LocationSelectorDelegate, PicturePickerDeleg
 WorkerPickerDelegate, ServicePickerDelegate {
     
     // LocationSelectorDelegate
-    func onLocationReady(location: (address: String, latitude: Double, longitude: Double)) {
+    func onLocationReady(location: LocationTuple) {
         // update local property: locationTuple
         locationTuple = location
         // update location selector menu

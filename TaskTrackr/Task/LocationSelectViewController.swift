@@ -10,8 +10,10 @@ import UIKit
 import MapKit
 
 protocol LocationSelectorDelegate {
-    func onLocationReady(location: (address: String, latitude: Double, longitude: Double))
+    func onLocationReady(location: LocationTuple)
 }
+
+typealias LocationTuple = (address: String, latitude: Double, longitude: Double)
 
 class LocationSelectViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var mapView: MKMapView!
@@ -20,7 +22,7 @@ class LocationSelectViewController: UIViewController, UISearchBarDelegate {
     var currentMapItem: MKMapItem?
     var delegate: LocationSelectorDelegate?
     // using this Tuple to communicate with other controllers
-    var locationTuple: (address: String, latitude: Double, longitude: Double)?
+    var locationTuple: LocationTuple?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -174,7 +176,7 @@ extension LocationSelectViewController: SearchResultTableDelegate {
     }
     
     // zoom to location with a pin
-    func zoomToLocation(location: (address: String, latitude: Double, longitude: Double)) {
+    func zoomToLocation(location: LocationTuple) {
         let coodinate2D = CLLocationCoordinate2DMake(location.latitude, location.longitude)
         // remove existing annotations
         let annotations = mapView.annotations

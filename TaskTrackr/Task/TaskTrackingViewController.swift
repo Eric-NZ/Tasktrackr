@@ -35,13 +35,13 @@ class TaskTrackingViewController: UIViewController {
     }
 
     @IBAction func addPressed(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: Static.segue_openTaskEditor, sender: self)
+        performSegue(withIdentifier: Static.segue_openTaskEditor, sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let editor = segue.destination as! TaskEditorViewController
         // if nil, means it should be a new task
-        editor.currentTask = nil
+        editor.currentTask = sender == nil ? nil : tasks[0]
     }
 }
 
@@ -123,8 +123,9 @@ extension TaskTrackingViewController {
                 // callback closure
                 let state: TaskLog.TaskState = .pending
                 self.changeTaskState(for: task, nextState: state)
-            }), CellData.ButtonAttributeTuple(1, self, UIImage(named: "edit"), {()->Void in
+            }), CellData.ButtonAttributeTuple(1, self, UIImage(named: "edit"), { [weak self] in
                 // callback closure
+                self?.performSegue(withIdentifier: Static.segue_openTaskEditor, sender: self)
                 
             }), CellData.ButtonAttributeTuple(2, self, UIImage(named: "trash"), {()->Void in
                 // callback closure
