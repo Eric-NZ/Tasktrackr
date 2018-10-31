@@ -37,4 +37,22 @@ extension DatabaseService {
             }
         }
     }
+    
+    public func convertProductsInServiceToTuplesByGroup(service: Service?) ->[(product: Product, models: [ProductModel])] {
+        guard let service = service else { return [] }
+        let modelsInService = service.models
+        var tuples: [(product: Product, models: [ProductModel])] = []
+        for model in modelsInService {
+            let product = model.product
+            if tuples.contains(where: {
+                return $0.product == product!
+            }) {
+                let productIndex = tuples.count - 1
+                tuples[productIndex].models.append(model)
+            } else {
+                tuples.append((product: product!, models: [model]))
+            }
+        }
+        return tuples
+    }
 }

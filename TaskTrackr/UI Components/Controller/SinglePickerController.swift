@@ -58,9 +58,9 @@ extension SinglePickerController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         setSelection(on: indexPath)
-        selectionFinished(selection: indexPath)
         if navigationController != nil {
-            navigationController!.popViewController(animated: true)
+            navigationController!.popViewController(animated: false)
         }
+        selectionFinished(selection: indexPath)
     }
 }

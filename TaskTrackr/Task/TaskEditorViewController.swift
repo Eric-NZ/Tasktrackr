@@ -29,6 +29,8 @@ class TaskEditorViewController: FormViewController {
     }
     
     // for UI:
+    var titleField: TextFieldRowFormer<FormTextFieldCell>?
+    var descField: TextViewRowFormer<FormTextViewCell>?
     var locationSelector: LabelRowFormer<FormLabelCell>?
     var pictureSelector: LabelRowFormer<FormLabelCell>?
     var workerSelector: LabelRowFormer<FormLabelCell>?
@@ -45,11 +47,11 @@ class TaskEditorViewController: FormViewController {
         // build editor form
         buildEditor()
         // update menu subTitle for selectors
-        if currentTask != nil {
-            updateSelectorSubText(on: .service, currentTask!.service?.serviceTitle)
-            updateSelectorSubText(on: .workers, currentTask!.workers.count)
-            updateSelectorSubText(on: .pictures, currentTask!.images.count)
-            updateSelectorSubText(on: .location, currentTask!.address)
+        if let task = currentTask {
+            updateSelectorSubText(on: .service, task.service!.serviceTitle)
+            updateSelectorSubText(on: .workers, task.workers.count)
+            updateSelectorSubText(on: .pictures, task.images.count)
+            updateSelectorSubText(on: .location, task.address)
         }
     }
     
@@ -112,6 +114,8 @@ class TaskEditorViewController: FormViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(onDonePressed))
         // set back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: nil)
+        // set view title
+        self.title = currentTask == nil ? "New Task" : "Edit Task"
     }
     
     // extract properties from currentTask object
@@ -156,19 +160,19 @@ class TaskEditorViewController: FormViewController {
         
         // necessary elements: 1.title, 2.desc, 3.service, 4.designated workers, 5.due date, 6.location, 7.ref images
         // MARK: Enter Title
-        let titleField = TextFieldRowFormer<FormTextFieldCell>() {
+        titleField = TextFieldRowFormer<FormTextFieldCell>() {
             $0.titleLabel.text = "Task Title"
             $0.titleLabel.font = .boldSystemFont(ofSize: 16)
             $0.textField.textColor = .formerSubColor()
             $0.textField.font = .boldSystemFont(ofSize: 14)
             }.configure {
-                $0.placeholder = "e.g. Install Kitchen Sink"
+                $0.placeholder = "(Optional)"
                 $0.text = taskTitle
             }.onTextChanged { (text) in
                 self.taskTitle = text
         }
         // MARK: Enter Desc
-        let descField = TextViewRowFormer<FormTextViewCell>() {
+        descField = TextViewRowFormer<FormTextViewCell>() {
             $0.titleLabel.text = "Description"
             $0.titleLabel.font = .boldSystemFont(ofSize: 16)
             $0.textView.textColor = .formerSubColor()
@@ -219,7 +223,7 @@ class TaskEditorViewController: FormViewController {
             // perform segue here:
             self?.performSegue(withIdentifier: Static.segue_openPicturePicker, sender: self)
             } as? LabelRowFormer<FormLabelCell>
-        let sectionBasic = SectionFormer(rowFormer: titleField, descField).set(headerViewFormer: createHeader("Basic Task Info"))
+        let sectionBasic = SectionFormer(rowFormer: titleField!, descField!).set(headerViewFormer: createHeader("Basic Task Info"))
         let sectionSelectors = SectionFormer(rowFormer: serviceSelector!, workerSelector!)
         let sectionLocationSelector = SectionFormer(rowFormer: locationSelector!)
         let sectionUploadPicture = SectionFormer(rowFormer: pictureSelector!)
@@ -247,6 +251,7 @@ extension TaskEditorViewController {
             workerPicker.workerPickerDelegate = self
         case Static.segue_openServicePicker:
             let servicePicker = segue.destination as! ServicePickerViewController
+            servicePicker.title = "Select Service"
             servicePicker.service = self.service
             servicePicker.servicePickerDelegate = self
             break
@@ -331,5 +336,44 @@ WorkerPickerDelegate, ServicePickerDelegate {
     func selectionDidFinish(service: Service) {
         self.service = service
         updateSelectorSubText(on: .service, service.serviceTitle)
+        // set the title same as service title
+        titleField?.text = service.serviceTitle!
+        titleField?.update()
+        taskTitle = (titleField?.text)!
+        // set the desc displying the product list and tool list
+        if let nav = navigationController {
+            let numberControl = NumberControlListController()
+            var dataList = [ItemData]()
+            for model in service.models {
+                var itemData = ItemData()
+                itemData.itemName = model.modelName!
+                itemData.numberOfItem = 0
+                dataList.append(itemData)
+            }
+            // convert model list to required data structure
+            let tuples = DatabaseService.shared.convertProductsInServiceToTuplesByGroup(service: self.service)
+            let dataTuples = tuples.map({(product: Product, models: [ProductModel]) -> DataTuple in
+                return (category: product.productName!, items: models.map({ (model) -> ItemData in
+                    return ItemData(model.modelName, 0)
+                }))
+            })
+            numberControl.dataTuples = dataTuples
+            // set delegate
+            numberControl.quantityControlDelegate = self
+            // show
+            nav.pushViewController(numberControl, animated: false)
+        }
+    }
+}
+
+extension TaskEditorViewController: NumberControlDelegate {
+    func numberListGetReady(dataList: [ItemData]) {
+        var desc: String = "According to the selected service, following Products are required for this task: \n"
+        for data in dataList {
+            desc.append(contentsOf: String(format: "%@: %d\n", data.itemName, data.numberOfItem))
+        }
+        self.desc = desc
+        descField?.text = desc
+        descField?.update()
     }
 }
