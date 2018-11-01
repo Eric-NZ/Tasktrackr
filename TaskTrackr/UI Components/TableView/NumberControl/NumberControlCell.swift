@@ -14,6 +14,9 @@ class NumberControlCell: UITableViewCell {
     @IBOutlet weak var numberControl: UIStepper!
     
     static let ID = "NumberControlCell"
+    // store indexPath which this cell is used for
+    var indexPath: IndexPath?
+    var numberInCellChanged: ((IndexPath, Int)->Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -32,7 +35,12 @@ class NumberControlCell: UITableViewCell {
     }
     
     @objc func onNumberChanged(_ sender: UIStepper) {
-        numberField.text = Int(sender.value).description
+        let number = Int(sender.value)
+        numberField.text = number.description
+        // "Notify" client view controller
+        if let indexPath = self.indexPath {
+            self.numberInCellChanged?(indexPath, number)
+        }
     }
     
     override func prepareForReuse() {

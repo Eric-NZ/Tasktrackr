@@ -63,6 +63,7 @@
 		21C2D49C217B29630097B095 /* ImageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C2D49B217B29630097B095 /* ImageCollectionView.swift */; };
 		21C4B346216B3D6900913ADB /* TaskEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C4B345216B3D6900913ADB /* TaskEditorViewController.swift */; };
 		21C4B34A216B5E8C00913ADB /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C4B349216B5E8C00913ADB /* String.swift */; };
+		21CDA4B9218AA094008EA287 /* ProductConsumption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CDA4B8218AA094008EA287 /* ProductConsumption.swift */; };
 		21D498FF2179A3DD0004FFDA /* SinglePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D498FE2179A3DD0004FFDA /* SinglePickerController.swift */; };
 		21D83F422174443A00B15AE4 /* ImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D83F402174443900B15AE4 /* ImageCollectionCell.swift */; };
 		21D83F432174443A00B15AE4 /* ImageCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21D83F412174443900B15AE4 /* ImageCollectionCell.xib */; };
@@ -143,6 +144,7 @@
 		21C2D49B217B29630097B095 /* ImageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionView.swift; sourceTree = "<group>"; };
 		21C4B345216B3D6900913ADB /* TaskEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditorViewController.swift; sourceTree = "<group>"; };
 		21C4B349216B5E8C00913ADB /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		21CDA4B8218AA094008EA287 /* ProductConsumption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductConsumption.swift; sourceTree = "<group>"; };
 		21D498FE2179A3DD0004FFDA /* SinglePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePickerController.swift; sourceTree = "<group>"; };
 		21D83F402174443900B15AE4 /* ImageCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionCell.swift; sourceTree = "<group>"; };
 		21D83F412174443900B15AE4 /* ImageCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionCell.xib; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				21BBC787213E63F00006B5B4 /* Tool.swift */,
 				21BBC789213E65890006B5B4 /* Product.swift */,
 				21FF19792184F501000164DE /* ProductModel.swift */,
+				21CDA4B8218AA094008EA287 /* ProductConsumption.swift */,
 				2135DD88215F437E004AAC96 /* Task.swift */,
 				21FF19772184F464000164DE /* TaskLog.swift */,
 				219D4CAD217D2EEC007CB3CE /* Comment.swift */,
@@ -264,8 +267,6 @@
 		216172832186FF750071F6E0 /* NumberControl */ = {
 			isa = PBXGroup;
 			children = (
-				21BB80842189663300A8B770 /* ExpandableTableHeader.swift */,
-				21BB80832189663300A8B770 /* HoExpandableTableView.swift */,
 				21617288218709390071F6E0 /* NumberControlListController.swift */,
 				21617284218702510071F6E0 /* NumberControlCell.swift */,
 				21617285218702510071F6E0 /* NumberControlCell.xib */,
@@ -286,6 +287,8 @@
 		219D4CB7217D4E7C007CB3CE /* TableView */ = {
 			isa = PBXGroup;
 			children = (
+				21BB80842189663300A8B770 /* ExpandableTableHeader.swift */,
+				21BB80832189663300A8B770 /* HoExpandableTableView.swift */,
 				216172832186FF750071F6E0 /* NumberControl */,
 				216172822186FE990071F6E0 /* ExpandableSelector */,
 				213608A321800EA2008DCF14 /* Timeline */,
@@ -593,6 +596,7 @@
 				21D8D658213F97170092AEBB /* WorkersTableViewController.swift in Sources */,
 				21EA13A2213622C800C5CB34 /* AppDelegate.swift in Sources */,
 				21BBD232217A8472006EB159 /* DBService_Product.swift in Sources */,
+				21CDA4B9218AA094008EA287 /* ProductConsumption.swift in Sources */,
 				21BBD230217A8371006EB159 /* DBService_Task.swift in Sources */,
 				2132ABFC2177EC1B003F720B /* ToolPickerViewController.swift in Sources */,
 				21C4B346216B3D6900913ADB /* TaskEditorViewController.swift in Sources */,

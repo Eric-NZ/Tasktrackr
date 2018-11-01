@@ -16,6 +16,7 @@ class TaskEditorViewController: FormViewController {
     var taskTitle: String = ""
     var desc: String = ""
     var service: Service?
+    var productConsumptions: [ProductConsumption]?
     var selectedWorkers: [Worker] = []
     var locationTuple: LocationTuple?
     var dueDate: Date?
@@ -130,6 +131,10 @@ class TaskEditorViewController: FormViewController {
             for data in task.images {
                 images.append(UIImage(data: data)!)
             }
+            // product consumption
+            var consumes: [ProductConsumption] = []
+            consumes.append(contentsOf: task.productConsumptions)
+            self.productConsumptions = consumes
         }
     }
     
@@ -354,26 +359,47 @@ WorkerPickerDelegate, ServicePickerDelegate {
             let tuples = DatabaseService.shared.convertProductsInServiceToTuplesByGroup(service: self.service)
             let dataTuples = tuples.map({(product: Product, models: [ProductModel]) -> DataTuple in
                 return (category: product.productName!, items: models.map({ (model) -> ItemData in
-                    return ItemData(model.modelName, 0)
+                    var number = 0
+                    if let _ = self.productConsumptions?.contains(where: { (consumption) -> Bool in
+                        if consumption.productModel == model {
+                            number = consumption.consumedNumber
+                            return true
+                        }
+                        return false
+                    }) {}
+                    return ItemData(model.modelName, number)
                 }))
             })
+            // deliver datatuples
             numberControl.dataTuples = dataTuples
-            // set delegate
-            numberControl.quantityControlDelegate = self
+            // set handler when value in datatuples get ready
+            numberControl.dataTuplesGetReady = {(tuples) in
+                // extract the tuples received as product consumption list
+                var items: [ItemData] = []
+                for tuple in tuples {
+                    for item in tuple.items {
+                        items.append(item)
+                    }
+                }
+                var consumptions: [ProductConsumption] = []
+                let numberOfItems = items.count
+                for i in 0..<numberOfItems {
+                    if service.models[i].modelName == items[i].itemName {
+                        let consume = ProductConsumption()
+                        consume.productModel = service.models[i]
+                        consume.consumedNumber = items[i].numberOfItem
+                        consume.alreadyConsumed = false
+                        consume.timestamp = Date()
+                        consumptions.append(consume)
+                    } else {
+                        print("Incorrect product model")
+                    }
+                }
+                self.productConsumptions = consumptions
+            }
             // show
             nav.pushViewController(numberControl, animated: false)
         }
     }
 }
 
-extension TaskEditorViewController: NumberControlDelegate {
-    func numberListGetReady(dataList: [ItemData]) {
-        var desc: String = "According to the selected service, following Products are required for this task: \n"
-        for data in dataList {
-            desc.append(contentsOf: String(format: "%@: %d\n", data.itemName, data.numberOfItem))
-        }
-        self.desc = desc
-        descField?.text = desc
-        descField?.update()
-    }
-}

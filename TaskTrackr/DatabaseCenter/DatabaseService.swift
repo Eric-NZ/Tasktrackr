@@ -118,8 +118,8 @@ class DatabaseService {
         return notificationToken
     }
     
-    public func objectListToArray(from list: List<Object>) -> [Object] {
-        var array: [Object] = []
+    public func objectListToArray<T>(from list: List<T>) -> [T] {
+        var array: [T] = []
         array.append(contentsOf: list)
         
         return array

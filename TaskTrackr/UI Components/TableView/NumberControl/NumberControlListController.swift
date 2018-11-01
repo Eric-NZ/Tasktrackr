@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol NumberControlDelegate {
-    func numberListGetReady(dataList: [ItemData])
-}
-
 struct ItemData {
     var itemName: String = ""
     var numberOfItem: Int = 0
@@ -29,7 +25,7 @@ typealias DataTuple = (category: String, items: [ItemData])
 class NumberControlListController: UIViewController {
     var tableView: HoExpandableTableView!
     var dataTuples: [DataTuple] = []
-    var quantityControlDelegate: NumberControlDelegate?
+    var dataTuplesGetReady: (([DataTuple])->Void)?
     
     override func loadView() {
         super.loadView()
@@ -43,8 +39,8 @@ class NumberControlListController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        self.dataTuplesGetReady?(dataTuples)
     }
-    
     
     private func setupTableView() {
         tableView = HoExpandableTableView(style: .plain)
@@ -73,6 +69,11 @@ class NumberControlListController: UIViewController {
             if let cell = self.tableView.dequeueReusableCell(withIdentifier: "NumberControlCell", for: indexPath) as? NumberControlCell {
                 cell.nameLabel.text = itemData.itemName
                 cell.numberField.text = (Int(itemData.numberOfItem)).description
+                cell.indexPath = indexPath
+                // set callback handler - NOTE: this indexPath is not the equal to the above ones
+                cell.numberInCellChanged = {(notifiedIndexPath, number) in
+                    self.valueInCellChanged(indexPath: notifiedIndexPath, value: number)
+                }
                 return cell
             } else {
                 return NumberControlCell(style: .default, reuseIdentifier: "NumberControlCell")
@@ -82,6 +83,10 @@ class NumberControlListController: UIViewController {
         tableView?.titleForHeaderInSection = {(section) in
             return self.dataTuples[section].category
         }
+    }
+    
+    private func valueInCellChanged(indexPath: IndexPath, value: Int) {
+        self.dataTuples[indexPath.section].items[indexPath.row].numberOfItem = value
     }
     
     private func autoLayout() {

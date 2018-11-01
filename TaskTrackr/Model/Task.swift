@@ -19,6 +19,8 @@ class Task: Object {
     @objc dynamic var taskDesc: String = ""
     // service
     @objc dynamic var service: Service?
+    // product consumption
+    var productConsumptions = List<ProductConsumption>()
     // designate workers
     var workers = List<Worker>()
     // due date
