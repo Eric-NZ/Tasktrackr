@@ -239,9 +239,9 @@ class TaskEditorViewController: FormViewController {
     func saveTask() {
         if currentTask == nil {
             currentTask = Task()
-            DatabaseService.shared.addTask(add: self.currentTask!, self.taskTitle, self.desc, service: self.service!, workers: self.selectedWorkers, deadline: self.dueDate!, locationTuple: self.locationTuple!, images: self.images, taskState: self.taskState, update: false)
+            DatabaseService.shared.addTask(add: self.currentTask!, self.taskTitle, self.desc, service: self.service!, workers: self.selectedWorkers, deadline: self.dueDate!, locationTuple: self.locationTuple!, productConsumptions: self.productConsumptions, images: self.images, taskState: self.taskState, update: false)
         } else {
-            DatabaseService.shared.addTask(add: self.currentTask!, self.taskTitle, self.desc, service: self.service!, workers: self.selectedWorkers, deadline: self.dueDate!, locationTuple: self.locationTuple!, images: self.images, taskState: self.taskState, update: true)
+            DatabaseService.shared.addTask(add: self.currentTask!, self.taskTitle, self.desc, service: self.service!, workers: self.selectedWorkers, deadline: self.dueDate!, locationTuple: self.locationTuple!, productConsumptions: self.productConsumptions, images: self.images, taskState: self.taskState, update: true)
         }
     }
 }
@@ -402,4 +402,3 @@ WorkerPickerDelegate, ServicePickerDelegate {
         }
     }
 }
-

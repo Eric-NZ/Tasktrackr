@@ -17,6 +17,7 @@ extension DatabaseService {
     // add (or update) a task object
     public func addTask(add task: Task, _ title: String, _ desc: String, service: Service, workers: [Worker], deadline: Date,
                         locationTuple: LocationTuple,
+                        productConsumptions: [ProductConsumption]?,
                         images: [UIImage], taskState: TaskLog.TaskState, update: Bool) {
         let realm = getRealm()
         if update {
@@ -30,6 +31,9 @@ extension DatabaseService {
                 task.setValue(locationTuple.address, forKey: "address")
                 task.setValue(locationTuple.latitude, forKey: "latitude")
                 task.setValue(locationTuple.longitude, forKey: "longitude")
+                // product consumption
+                task.productConsumptions.removeAll()
+                task.productConsumptions.append(objectsIn: productConsumptions ?? [])
                 // image
                 task.images.removeAll()
                 task.images.append(objectsIn: convertImagesToDatas(images: images))
@@ -44,6 +48,8 @@ extension DatabaseService {
             task.address = locationTuple.address
             task.latitude = locationTuple.latitude
             task.longitude = locationTuple.longitude
+            // product consumption
+            task.productConsumptions.append(objectsIn: productConsumptions ?? [])
             // images
             saveImages(to: task, images: images)
             // add state log
