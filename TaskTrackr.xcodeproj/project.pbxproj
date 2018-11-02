@@ -12,6 +12,10 @@
 		211632252176E777005B3DBC /* ExpandableTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211632242176E777005B3DBC /* ExpandableTableViewHeader.swift */; };
 		21163227217721EA005B3DBC /* WorkerPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21163226217721EA005B3DBC /* WorkerPickerViewController.swift */; };
 		2122019E21436D3000EE8A06 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2122019D21436D3000EE8A06 /* LoginViewController.swift */; };
+		212353BB218BD6410058C22F /* ProductEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212353BA218BD6410058C22F /* ProductEditor.swift */; };
+		212353BF218BD7330058C22F /* ToolEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212353BE218BD7330058C22F /* ToolEditor.swift */; };
+		212353C1218BD8330058C22F /* ServiceEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212353C0218BD8330058C22F /* ServiceEditor.swift */; };
+		212353C3218BD8730058C22F /* WorkerEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212353C2218BD8730058C22F /* WorkerEditor.swift */; };
 		2125E6AE214E4AF0002FE54B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6AD214E4AF0002FE54B /* UIColor.swift */; };
 		212A34EA217E847900D829B4 /* TimelineTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212A34E9217E847900D829B4 /* TimelineTableView.swift */; };
 		2132ABFC2177EC1B003F720B /* ToolPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132ABFB2177EC1B003F720B /* ToolPickerViewController.swift */; };
@@ -93,6 +97,10 @@
 		211632242176E777005B3DBC /* ExpandableTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableTableViewHeader.swift; sourceTree = "<group>"; };
 		21163226217721EA005B3DBC /* WorkerPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerPickerViewController.swift; sourceTree = "<group>"; };
 		2122019D21436D3000EE8A06 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		212353BA218BD6410058C22F /* ProductEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductEditor.swift; sourceTree = "<group>"; };
+		212353BE218BD7330058C22F /* ToolEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolEditor.swift; sourceTree = "<group>"; };
+		212353C0218BD8330058C22F /* ServiceEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceEditor.swift; sourceTree = "<group>"; };
+		212353C2218BD8730058C22F /* WorkerEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerEditor.swift; sourceTree = "<group>"; };
 		2125E6AD214E4AF0002FE54B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		212A34E9217E847900D829B4 /* TimelineTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTableView.swift; sourceTree = "<group>"; };
 		2132ABFB2177EC1B003F720B /* ToolPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolPickerViewController.swift; sourceTree = "<group>"; };
@@ -213,6 +221,18 @@
 				21BBC78D213E69440006B5B4 /* Site.swift */,
 			);
 			path = DataModel;
+			sourceTree = "<group>";
+		};
+		212353B9218BD6130058C22F /* ItemEditor */ = {
+			isa = PBXGroup;
+			children = (
+				21A67483214220020012B555 /* ItemEditorController.swift */,
+				212353BA218BD6410058C22F /* ProductEditor.swift */,
+				212353BE218BD7330058C22F /* ToolEditor.swift */,
+				212353C0218BD8330058C22F /* ServiceEditor.swift */,
+				212353C2218BD8730058C22F /* WorkerEditor.swift */,
+			);
+			path = ItemEditor;
 			sourceTree = "<group>";
 		};
 		2135DD85215F424E004AAC96 /* DatabaseCenter */ = {
@@ -339,9 +359,9 @@
 		21D8D654213F969D0092AEBB /* Management */ = {
 			isa = PBXGroup;
 			children = (
+				212353B9218BD6130058C22F /* ItemEditor */,
 				2195F4B92159DEFA00309990 /* ProductPickerViewController.swift */,
 				2132ABFB2177EC1B003F720B /* ToolPickerViewController.swift */,
-				21A67483214220020012B555 /* ItemEditorController.swift */,
 				21D8D65A213FE30D0092AEBB /* PageRouterViewController.swift */,
 				21D8D655213F96E00092AEBB /* ServicesTableViewController.swift */,
 				21D8D657213F97170092AEBB /* WorkersTableViewController.swift */,
@@ -547,6 +567,7 @@
 			files = (
 				2195F4BA2159DEFA00309990 /* ProductPickerViewController.swift in Sources */,
 				21BBD236217A84BF006EB159 /* DBService_Worker.swift in Sources */,
+				212353C3218BD8730058C22F /* WorkerEditor.swift in Sources */,
 				21A67484214220020012B555 /* ItemEditorController.swift in Sources */,
 				210C04D2213CAF7E00576564 /* DatabaseService.swift in Sources */,
 				21C2D49C217B29630097B095 /* ImageCollectionView.swift in Sources */,
@@ -554,8 +575,10 @@
 				219D4CC0217DA0F9007CB3CE /* TimelineHeader.swift in Sources */,
 				21BBD238217A84DD006EB159 /* DBService_Tool.swift in Sources */,
 				213608A021800DE3008DCF14 /* Timeline.swift in Sources */,
+				212353BB218BD6410058C22F /* ProductEditor.swift in Sources */,
 				21163227217721EA005B3DBC /* WorkerPickerViewController.swift in Sources */,
 				21BB80862189663300A8B770 /* ExpandableTableHeader.swift in Sources */,
+				212353C1218BD8330058C22F /* ServiceEditor.swift in Sources */,
 				21BB80852189663300A8B770 /* HoExpandableTableView.swift in Sources */,
 				21BBD23A217A8AE6006EB159 /* SearchResultTable.swift in Sources */,
 				21C4B34A216B5E8C00913ADB /* String.swift in Sources */,
@@ -600,6 +623,7 @@
 				21BBD230217A8371006EB159 /* DBService_Task.swift in Sources */,
 				2132ABFC2177EC1B003F720B /* ToolPickerViewController.swift in Sources */,
 				21C4B346216B3D6900913ADB /* TaskEditorViewController.swift in Sources */,
+				212353BF218BD7330058C22F /* ToolEditor.swift in Sources */,
 				21D83F422174443A00B15AE4 /* ImageCollectionCell.swift in Sources */,
 				21BBC786213E5A330006B5B4 /* Static.swift in Sources */,
 				2135DD8B215F45EB004AAC96 /* DataModel.swift in Sources */,
