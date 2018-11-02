@@ -197,7 +197,7 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		210C04D3213CAF9C00576564 /* Model */ = {
+		210C04D3213CAF9C00576564 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
 				21BBC78B213E681D0006B5B4 /* Worker.swift */,
@@ -212,7 +212,7 @@
 				2135DD8A215F45EB004AAC96 /* DataModel.swift */,
 				21BBC78D213E69440006B5B4 /* Site.swift */,
 			);
-			path = Model;
+			path = DataModel;
 			sourceTree = "<group>";
 		};
 		2135DD85215F424E004AAC96 /* DatabaseCenter */ = {
@@ -386,7 +386,7 @@
 				210620212141239B00BA2050 /* Extensions */,
 				213DA70F2153A00A00D0C7AF /* UI Components */,
 				2135DD85215F424E004AAC96 /* DatabaseCenter */,
-				210C04D3213CAF9C00576564 /* Model */,
+				210C04D3213CAF9C00576564 /* DataModel */,
 			);
 			path = TaskTrackr;
 			sourceTree = "<group>";
