@@ -19,7 +19,6 @@ class ItemEditorController: FormViewController {
     var currentWorker: Worker?
     var currentProduct: Product?
     var currentTool: Tool?
-    var currentSite: Site?
     
     // for service
     var serviceTitle: String = ""

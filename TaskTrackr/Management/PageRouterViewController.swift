@@ -73,8 +73,7 @@ class PageRouterViewController: UIViewController, PagingViewControllerDelegate, 
         viewControllers = [Static.getInstance(with: Static.page_service),
                            Static.getInstance(with: Static.page_worker),
                            Static.getInstance(with: Static.page_product),
-                           Static.getInstance(with: Static.page_tool),
-                           Static.getInstance(with: Static.page_site)] as! [UIViewController]
+                           Static.getInstance(with: Static.page_tool)] as! [UIViewController]
         
         initPagingViewController()
         pagingViewController.delegate = self

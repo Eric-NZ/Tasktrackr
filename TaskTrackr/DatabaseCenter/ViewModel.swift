@@ -13,6 +13,4 @@ class ViewModel {
     private var workers = [Worker]()
     private var tools = [Tool]()
     private var products = [Product]()
-    private var sites = [Site]()
-    
 }
