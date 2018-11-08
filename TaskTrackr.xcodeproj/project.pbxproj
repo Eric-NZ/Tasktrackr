@@ -221,18 +221,18 @@
 		212353B9218BD6130058C22F /* ItemEditor */ = {
 			isa = PBXGroup;
 			children = (
-				2195F4B92159DEFA00309990 /* ProductPickerViewController.swift */,
-				2132ABFB2177EC1B003F720B /* ToolPickerViewController.swift */,
 				21A67483214220020012B555 /* ItemEditorController.swift */,
 				212353BA218BD6410058C22F /* ProductEditor.swift */,
 				212353BE218BD7330058C22F /* ToolEditor.swift */,
 				212353C0218BD8330058C22F /* ServiceEditor.swift */,
 				212353C2218BD8730058C22F /* WorkerEditor.swift */,
+				2195F4B92159DEFA00309990 /* ProductPickerViewController.swift */,
+				2132ABFB2177EC1B003F720B /* ToolPickerViewController.swift */,
 			);
 			path = ItemEditor;
 			sourceTree = "<group>";
 		};
-		2135DD85215F424E004AAC96 /* DatabaseCenter */ = {
+		2135DD85215F424E004AAC96 /* DataService */ = {
 			isa = PBXGroup;
 			children = (
 				210C04D1213CAF7E00576564 /* DatabaseService.swift */,
@@ -243,7 +243,7 @@
 				21BBD237217A84DD006EB159 /* DBService_Tool.swift */,
 				2135DD80215F40CF004AAC96 /* ViewModel.swift */,
 			);
-			path = DatabaseCenter;
+			path = DataService;
 			sourceTree = "<group>";
 		};
 		213608A321800EA2008DCF14 /* Timeline */ = {
@@ -399,7 +399,7 @@
 				21D8D654213F969D0092AEBB /* Management */,
 				210620212141239B00BA2050 /* Extensions */,
 				213DA70F2153A00A00D0C7AF /* UI Components */,
-				2135DD85215F424E004AAC96 /* DatabaseCenter */,
+				2135DD85215F424E004AAC96 /* DataService */,
 				210C04D3213CAF9C00576564 /* DataModel */,
 			);
 			path = TaskTrackr;
