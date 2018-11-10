@@ -19,10 +19,10 @@ struct Static {
     // **** Replace the AUTH_URL string with the fully qualified versions of
     // **** address of your ROS server, e.g.: "http://127.0.0.1:9080"
     
-    static let MY_INSTANCE_ADDRESS = "tasktrackr.us1a.cloud.realm.io" // <- update this
+    static let MY_INSTANCE_ADDRESS = "allcompleted.us1a.cloud.realm.io" // <- update this
     
     static let AUTH_URL  = URL(string: "https://\(MY_INSTANCE_ADDRESS)")!
-    static let REALM_URL = URL(string: "realms://\(MY_INSTANCE_ADDRESS)/TaskTracker-v1.00")!
+    static let REALM_URL = URL(string: "realms://\(MY_INSTANCE_ADDRESS)/TaskTracker")!
     
     // user status: has signed in?
     static var currentUser: SyncUser?
@@ -79,6 +79,19 @@ struct Static {
         } else {
             return nil
         }
+    }
+    
+    // get a complementary color to this color
+    static func getComplementaryForColor(color: UIColor) -> UIColor {
+        
+        let ciColor = CIColor(color: color)
+        
+        // get the current values and make the difference from white:
+        let compRed: CGFloat = 1.0 - ciColor.red
+        let compGreen: CGFloat = 1.0 - ciColor.green
+        let compBlue: CGFloat = 1.0 - ciColor.blue
+        
+        return UIColor(red: compRed, green: compGreen, blue: compBlue, alpha: 1.0)
     }
 
 }
