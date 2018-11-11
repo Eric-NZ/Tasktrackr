@@ -24,6 +24,7 @@ class UnderlineTextField: UITextField {
         self.borderStyle = .none
         self.tintColor = UIColor.white
         self.autocapitalizationType = .none
+        self.clearButtonMode = .whileEditing
     }
 
     private override init(frame: CGRect) {

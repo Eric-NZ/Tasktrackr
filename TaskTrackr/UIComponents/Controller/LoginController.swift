@@ -9,17 +9,39 @@
 import UIKit
 
 class LoginController: UIViewController {
-    
+    var loginImage: UIImage?
     var loginView: UIView!
     var userNameField: UnderlineTextField!
     var passwordField: UnderlineTextField!
-    var backgroundColor: UIColor = UIColor(red: 153/255, green: 153/255, blue: 153/255, alpha: 1.0)
+    var backgroundColor: UIColor = UIColor(red: 178/255, green: 178/255, blue: 178/255, alpha: 1.0)
+    
+    public init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // set background
+        view.backgroundColor = backgroundColor
+        
+        setupLoginForm()
+    }
     
     private var loginRequest: ((_ userName: String, _ password: String)->Void)?
     
     // handle event that user taps the login button
     public func handleLoginRequest(handler: @escaping ((String, String)->Void)) {
         self.loginRequest = handler
+    }
+    
+    // set login image
+    public func setLoginImage(image: UIImage) {
+        self.loginImage = image
     }
     
     // login error remind with animation
@@ -35,25 +57,26 @@ class LoginController: UIViewController {
             self.passwordField.setBottomBorder(backGroundColor: self.backgroundColor, borderColor: Static.getComplementaryForColor(color: self.backgroundColor))
         }
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // set background
-        view.backgroundColor = backgroundColor
-        
-        setupLoginForm()
-    }
     
     private func setupLoginForm() {
-        /*------------ Login Form -----------------*/
         let biggerSpace: CGFloat = 32
         let smallerSpace: CGFloat = 8
         let mediumSpace: CGFloat = 16
-        let xLoginOrigin: CGFloat = 0
-        let yLoginOrigin: CGFloat = view.bounds.height / 3
-        let loginBounds = CGRect(x: xLoginOrigin, y: yLoginOrigin, width: view.bounds.width - xLoginOrigin, height: view.bounds.height - yLoginOrigin)
-        loginView = UIView(frame: loginBounds)
+        let imageHeight: CGFloat = 200
+        /*---------------Logo------------------*/
+        let imageView: UIImageView = {
+            let imageView = UIImageView(image: loginImage)
+            imageView.contentMode = .scaleAspectFit
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            return imageView
+        }()
+        view.addSubview(imageView)
+        /*------------ Login Form -----------------*/
+        loginView = {
+            let view = UIView()
+            view.translatesAutoresizingMaskIntoConstraints = false
+            return view
+        }()
         view.addSubview(loginView)
         /*------------ username field -----------------*/
         let userIconView = UIImageView(image: UIImage(named: "user"))
@@ -70,6 +93,7 @@ class LoginController: UIViewController {
         /*------------ password field -----------------*/
         let passwordIconView = UIImageView(image: UIImage(named: "password"))
         passwordField = UnderlineTextField()
+        passwordField.isSecureTextEntry = true
         passwordField.placeholder = "Password"
         passwordField.setBottomBorder(backGroundColor: backgroundColor, borderColor: Static.getComplementaryForColor(color: backgroundColor))
         let passwordStackView = UIStackView(arrangedSubviews: [passwordIconView, passwordField])
@@ -110,7 +134,9 @@ class LoginController: UIViewController {
         
         loginView.addSubview(signUpEntryButton)
         /*------------ set up constraints -----------------*/
-        let formViews: [String: UIView] = ["userIconView": userIconView,
+        let formViews: [String: UIView] = ["imageView": imageView,
+                                           "loginView": loginView,
+                                           "userIconView": userIconView,
                                            "userNameField": userNameField,
                                            "userStackView": userStackView,
                                            "passwordIconView": passwordIconView,
@@ -121,13 +147,23 @@ class LoginController: UIViewController {
                                            "signUpEntryButton": signUpEntryButton]
         let metrics: [String: CGFloat] = ["height": 30,
                                           "width": 30,
+                                          "imageHeight": imageHeight,
                                           "biggerSpace": biggerSpace,
                                           "mediumSpace": mediumSpace,
                                           "smallerSpace": smallerSpace]
+        let _ = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[imageView(imageHeight)]-[loginView]-|", options: [], metrics: metrics, views: formViews).map {
+            return $0.isActive = true
+        }
+        let _ = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[imageView]-|", options: [], metrics: metrics, views: formViews).map {
+            return $0.isActive = true
+        }
+        let _ = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[loginView]-|", options: [], metrics: metrics, views: formViews).map {
+            return $0.isActive = true
+        }
         let _ = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[userStackView(height)]", options: [], metrics: metrics, views: formViews).map {
             return $0.isActive = true
         }
-        let _ = NSLayoutConstraint.constraints(withVisualFormat: "H:|-mediumSpace-[userStackView]-biggerSpace-|", options: [], metrics: metrics, views: formViews).map {
+        let _ = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[userStackView]-|", options: [], metrics: metrics, views: formViews).map {
             return $0.isActive = true
         }
         let _ = NSLayoutConstraint.constraints(withVisualFormat: "H:[userIconView(width)]", options: [], metrics: metrics, views: formViews).map {
@@ -136,7 +172,7 @@ class LoginController: UIViewController {
         let _ = NSLayoutConstraint.constraints(withVisualFormat: "V:[userStackView]-mediumSpace-[passwordStackView(height)]", options: [], metrics: metrics, views: formViews).map{
             return $0.isActive = true
         }
-        let _ = NSLayoutConstraint.constraints(withVisualFormat: "H:|-mediumSpace-[passwordStackView]-biggerSpace-|", options: [], metrics: metrics, views: formViews).map{
+        let _ = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[passwordStackView]-|", options: [], metrics: metrics, views: formViews).map{
             return $0.isActive = true
         }
         let _ = NSLayoutConstraint.constraints(withVisualFormat: "H:[passwordIconView(width)]", options: [], metrics: metrics, views: formViews).map{
@@ -145,10 +181,10 @@ class LoginController: UIViewController {
         let _ = NSLayoutConstraint.constraints(withVisualFormat: "V:[passwordStackView]-biggerSpace-[buttonStackView]", options: [], metrics: metrics, views: formViews).map{
             return $0.isActive = true
         }
-        let _ = NSLayoutConstraint.constraints(withVisualFormat: "H:|-biggerSpace-[buttonStackView]-biggerSpace-|", options: [], metrics: metrics, views: formViews).map{
+        let _ = NSLayoutConstraint.constraints(withVisualFormat: "H:|-[buttonStackView]-|", options: [], metrics: metrics, views: formViews).map{
             return $0.isActive = true
         }
-        let _ = NSLayoutConstraint.constraints(withVisualFormat: "V:[signUpEntryButton(height)]-biggerSpace-|", options: [], metrics: metrics, views: formViews).map{
+        let _ = NSLayoutConstraint.constraints(withVisualFormat: "V:[signUpEntryButton(height)]|", options: [], metrics: metrics, views: formViews).map{
             return $0.isActive = true
         }
         let _ = NSLayoutConstraint.constraints(withVisualFormat: "H:|-smallerSpace-[signUpEntryButton]-smallerSpace-|", options: [], metrics: metrics, views: formViews).map{

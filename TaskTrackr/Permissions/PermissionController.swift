@@ -12,6 +12,10 @@ import RealmSwift
 class PermissionController: LoginController {
     
     override func viewDidLoad() {
+        if let image = UIImage(named: "loginImage") {
+            setLoginImage(image: image)
+        }
+        
         super.viewDidLoad()
         
         // set login handler
