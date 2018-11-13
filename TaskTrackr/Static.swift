@@ -24,6 +24,8 @@ struct Static {
     static let AUTH_URL  = URL(string: "https://\(MY_INSTANCE_ADDRESS)")!
     static let REALM_URL = URL(string: "realms://\(MY_INSTANCE_ADDRESS)/TaskTracker")!
     
+    static let permissionController = "PermissionController"
+    
     static let page_service = "ServiceViewController"
     static let page_worker = "WorkerViewController"
     static let page_product = "ProductViewController"

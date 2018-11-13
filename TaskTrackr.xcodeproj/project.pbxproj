@@ -48,6 +48,9 @@
 		21A265EB2140782E00671F6C /* ToolsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265EA2140782E00671F6C /* ToolsTableViewController.swift */; };
 		21A67484214220020012B555 /* ItemEditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A67483214220020012B555 /* ItemEditorController.swift */; };
 		21AA47BE2197D852002C82B2 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA47BD2197D852002C82B2 /* Authentication.swift */; };
+		21ADD8E2219A746900BB5D4C /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21ADD8E1219A746900BB5D4C /* ProfileController.swift */; };
+		21ADD8E4219A83C400BB5D4C /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21ADD8E3219A83C400BB5D4C /* MainTabBarController.swift */; };
+		21ADD8E6219A889300BB5D4C /* SideBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21ADD8E5219A889300BB5D4C /* SideBarController.swift */; };
 		21BB80852189663300A8B770 /* HoExpandableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BB80832189663300A8B770 /* HoExpandableTableView.swift */; };
 		21BB80862189663300A8B770 /* ExpandableTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BB80842189663300A8B770 /* ExpandableTableHeader.swift */; };
 		21BBC786213E5A330006B5B4 /* Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBC785213E5A330006B5B4 /* Static.swift */; };
@@ -135,6 +138,9 @@
 		21A265EA2140782E00671F6C /* ToolsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableViewController.swift; sourceTree = "<group>"; };
 		21A67483214220020012B555 /* ItemEditorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemEditorController.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		21AA47BD2197D852002C82B2 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		21ADD8E1219A746900BB5D4C /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		21ADD8E3219A83C400BB5D4C /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		21ADD8E5219A889300BB5D4C /* SideBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarController.swift; sourceTree = "<group>"; };
 		21BB80832189663300A8B770 /* HoExpandableTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoExpandableTableView.swift; sourceTree = "<group>"; };
 		21BB80842189663300A8B770 /* ExpandableTableHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableTableHeader.swift; sourceTree = "<group>"; };
 		21BBC785213E5A330006B5B4 /* Static.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Static.swift; sourceTree = "<group>"; };
@@ -243,6 +249,7 @@
 		2135DD85215F424E004AAC96 /* DataService */ = {
 			isa = PBXGroup;
 			children = (
+				21AA47BD2197D852002C82B2 /* Authentication.swift */,
 				210C04D1213CAF7E00576564 /* DatabaseService.swift */,
 				21BBD22F217A8371006EB159 /* DBService_Task.swift */,
 				21BBD231217A8472006EB159 /* DBService_Product.swift */,
@@ -339,6 +346,16 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		21ADD8E0219A744400BB5D4C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				21ADD8E1219A746900BB5D4C /* ProfileController.swift */,
+				21ADD8E3219A83C400BB5D4C /* MainTabBarController.swift */,
+				21ADD8E5219A889300BB5D4C /* SideBarController.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		21BBD241217AF668006EB159 /* Other */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,7 +385,6 @@
 			isa = PBXGroup;
 			children = (
 				2122019D21436D3000EE8A06 /* PermissionController.swift */,
-				21AA47BD2197D852002C82B2 /* Authentication.swift */,
 			);
 			path = Permissions;
 			sourceTree = "<group>";
@@ -414,6 +430,7 @@
 				21EA13A8213622C800C5CB34 /* TaskTrackr.xcdatamodeld */,
 				21EA13B0213622C900C5CB34 /* Info.plist */,
 				21BBC785213E5A330006B5B4 /* Static.swift */,
+				21ADD8E0219A744400BB5D4C /* Common */,
 				21C4B347216B3DF200913ADB /* Task */,
 				21D8D654213F969D0092AEBB /* Management */,
 				210620212141239B00BA2050 /* Extensions */,
@@ -579,6 +596,7 @@
 			files = (
 				2195F4BA2159DEFA00309990 /* ProductPickerViewController.swift in Sources */,
 				21BBD236217A84BF006EB159 /* DBService_Worker.swift in Sources */,
+				21ADD8E4219A83C400BB5D4C /* MainTabBarController.swift in Sources */,
 				212353C3218BD8730058C22F /* WorkerEditor.swift in Sources */,
 				21A67484214220020012B555 /* ItemEditorController.swift in Sources */,
 				210C04D2213CAF7E00576564 /* DatabaseService.swift in Sources */,
@@ -589,6 +607,7 @@
 				21BBD238217A84DD006EB159 /* DBService_Tool.swift in Sources */,
 				213608A021800DE3008DCF14 /* Timeline.swift in Sources */,
 				212353BB218BD6410058C22F /* ProductEditor.swift in Sources */,
+				21ADD8E6219A889300BB5D4C /* SideBarController.swift in Sources */,
 				21163227217721EA005B3DBC /* WorkerPickerViewController.swift in Sources */,
 				21BB80862189663300A8B770 /* ExpandableTableHeader.swift in Sources */,
 				212353C1218BD8330058C22F /* ServiceEditor.swift in Sources */,
@@ -599,6 +618,7 @@
 				21617286218702510071F6E0 /* NumberControlCell.swift in Sources */,
 				21BBD23D217AD208006EB159 /* AutoActivityIndicator.swift in Sources */,
 				21BBC790213E6BB00006B5B4 /* Service.swift in Sources */,
+				21ADD8E2219A746900BB5D4C /* ProfileController.swift in Sources */,
 				21D498FF2179A3DD0004FFDA /* SinglePickerController.swift in Sources */,
 				219065B32158D272004D96AC /* UITableViewCell.swift in Sources */,
 				210EF0CE219571A90006E7C2 /* UnderlineTextField.swift in Sources */,

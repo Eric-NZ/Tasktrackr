@@ -31,7 +31,7 @@ class PermissionController: LoginController {
     
     func performLogin(userName: String, password: String) {
         // logout any other users
-        Authentication.shared.logout()
+        Authentication.shared.logout(complection: nil)
         // log in current user
         login(userName: userName, password: password)
     }
@@ -54,6 +54,15 @@ class PermissionController: LoginController {
     }
     
     func presentWorkerEntry() {
+        let mainTab = MainTabBarController()
+        mainTab.setViewControllers([TaskPerformController(), ProfileController()], animated: true)
+        
+        if let appDelegate = UIApplication.shared.delegate {
+            if let window = appDelegate.window {
+                window?.makeKeyAndVisible()
+                window?.rootViewController = mainTab
+            }
+        }
         
     }
 

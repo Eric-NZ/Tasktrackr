@@ -198,7 +198,7 @@
         <!--Permission Controller-->
         <scene sceneID="Dop-BQ-IhD">
             <objects>
-                <viewController id="yTl-hS-PiM" customClass="PermissionController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PermissionController" id="yTl-hS-PiM" customClass="PermissionController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2bc-92-DZz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -213,10 +213,10 @@
             </objects>
             <point key="canvasLocation" x="-1425" y="864"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tab Bar Controller-->
         <scene sceneID="F4j-DH-FOd">
             <objects>
-                <tabBarController storyboardIdentifier="MainBarController" automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="crossDissolve" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NQo-rF-B5h" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainBarController" automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="crossDissolve" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NQo-rF-B5h" customClass="MainTabBarController" customModule="TaskTrackr" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0ef-T3-vOR">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

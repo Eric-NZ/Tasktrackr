@@ -20,10 +20,11 @@ class Authentication {
         case logged_out
     }
     
-    func logout() {
+    func logout(complection: (()->Void)?) {
         for user in SyncUser.all {
-            debugPrint("user: \(user.key) - \(user.value)")
+            debugPrint("user: \(user.key) - \(user.value) is logging out")
             user.value.logOut()
+            complection?()
         }
     }
     
