@@ -21,10 +21,26 @@ class TimelineTableView: UITableView {
     }
     
     // MARK: - callbacks for data source
-    public var numberOfHeaders: (()-> Int)?
-    public var dataForHeaderInSection: ((_ section: Int) -> SectionData)?
-    public var numberOfRowsInSection: ((_ section: Int) -> Int)?
-    public var cellDataForRowAtIndexPath: ((_ indexPath: IndexPath) -> CellData)?
+    private var numberOfHeaders: (()-> Int)?
+    private var dataForHeaderInSection: ((_ section: Int) -> SectionData)?
+    private var numberOfRowsInSection: ((_ section: Int) -> Int)?
+    private var cellDataForRowAtIndexPath: ((_ indexPath: IndexPath) -> CellData)?
+    
+    public func numberOfSections(numberOfHeaders: @escaping (()-> Int)) {
+        self.numberOfHeaders = numberOfHeaders
+    }
+    
+    public func dataForHeader(dataForHeader: @escaping ((_ section: Int) -> SectionData)) {
+        self.dataForHeaderInSection = dataForHeader
+    }
+    
+    public func numberOfRowsInSection(numberOfRows: @escaping ((_ section: Int) -> Int)) {
+        self.numberOfRowsInSection = numberOfRows
+    }
+    
+    public func dataForRowAtIndexPath(data: @escaping ((_ indexPath: IndexPath) -> CellData)) {
+        self.cellDataForRowAtIndexPath = data
+    }
 }
 
 // MARK: - UITableViewDataSource

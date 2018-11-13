@@ -48,20 +48,21 @@ class TaskTrackingViewController: UIViewController {
 // MARK: - Implement callbacks
 extension TaskTrackingViewController {
     func setupTableViewDataSource() {
-        tableView.numberOfHeaders = {
+        
+        tableView.numberOfSections {
             return self.tasks.count
         }
         
-        tableView.dataForHeaderInSection = {(section) in
+        tableView.dataForHeader { (section) -> SectionData in
             return self.dataForHeaderInSection(in: section) ?? SectionData()
         }
         
-        tableView.numberOfRowsInSection = {(section) in
-            return self.tasks[section].stateLogs.count
+        tableView.numberOfRowsInSection {
+            return self.tasks[$0].stateLogs.count
         }
         
-        tableView.cellDataForRowAtIndexPath = {(indexPath) in
-            return self.cellDataForRowAtIndexPath(indexPath: indexPath) ?? CellData()
+        tableView.dataForRowAtIndexPath {
+            return self.cellDataForRowAtIndexPath(indexPath: $0) ?? CellData()
         }
     }
     
