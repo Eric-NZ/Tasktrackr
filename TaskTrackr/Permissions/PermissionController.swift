@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class PermissionController: LoginController {
     
@@ -25,45 +24,37 @@ class PermissionController: LoginController {
     }
     
     func signUp(userName: String, password: String) {
-        let creds = SyncCredentials.usernamePassword(username: userName, password: password, register: true)
-        SyncUser.logIn(with: creds, server: Static.AUTH_URL) { (user, err) in
-            // sign up successfully!
+        Authentication.shared.login(userName: userName, password: password, isRegisger: true) { (result) in
+            // handle register completion
         }
     }
     
     func performLogin(userName: String, password: String) {
         // logout any other users
-        DatabaseService.shared.logout()
+        Authentication.shared.logout()
         // log in current user
         login(userName: userName, password: password)
     }
     
-    func forgotPasswordTapped(email: String) {
-        // No! I've never forgot my password!
-    }
-    
     func login(userName: String, password: String) {
-        
-        let creds = SyncCredentials.usernamePassword(username: userName, password: password, register: false)
-        
-        SyncUser.logIn(with: creds, server: Static.AUTH_URL) { (user, err) in
-            if let _ = user {
-                // User is logged in
-                Static.currentUser = user
-                // forward to home controller
-                self.presentHomeController()
-                
-            } else if let error = err {
-//                fatalError(error.localizedDescription)
-                print(error.localizedDescription)
-                self.loginErrorWarning()
+        Authentication.shared.login(userName: userName, password: password, isRegisger: false) {
+            switch($0) {
+            case .logged_as_manager:
+                self.presentManagerEntry()
+            case .logged_as_worker:
+                self.presentWorkerEntry()
+            case .logged_out:
+                break
             }
         }
-        
     }
     
-    func presentHomeController() {
-        performSegue(withIdentifier: "PresentHomeController", sender: self)
+    func presentManagerEntry() {
+        performSegue(withIdentifier: "PresentManagerEntry", sender: self)
+    }
+    
+    func presentWorkerEntry() {
+        
     }
 
 }

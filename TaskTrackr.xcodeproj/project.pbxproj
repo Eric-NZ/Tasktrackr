@@ -47,6 +47,7 @@
 		21A265E92140781200671F6C /* ProductsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265E82140781200671F6C /* ProductsTableViewController.swift */; };
 		21A265EB2140782E00671F6C /* ToolsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A265EA2140782E00671F6C /* ToolsTableViewController.swift */; };
 		21A67484214220020012B555 /* ItemEditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A67483214220020012B555 /* ItemEditorController.swift */; };
+		21AA47BE2197D852002C82B2 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AA47BD2197D852002C82B2 /* Authentication.swift */; };
 		21BB80852189663300A8B770 /* HoExpandableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BB80832189663300A8B770 /* HoExpandableTableView.swift */; };
 		21BB80862189663300A8B770 /* ExpandableTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BB80842189663300A8B770 /* ExpandableTableHeader.swift */; };
 		21BBC786213E5A330006B5B4 /* Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BBC785213E5A330006B5B4 /* Static.swift */; };
@@ -67,6 +68,7 @@
 		21C2D49C217B29630097B095 /* ImageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C2D49B217B29630097B095 /* ImageCollectionView.swift */; };
 		21C4B346216B3D6900913ADB /* TaskEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C4B345216B3D6900913ADB /* TaskEditorViewController.swift */; };
 		21C4B34A216B5E8C00913ADB /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C4B349216B5E8C00913ADB /* String.swift */; };
+		21CBC8FE219A523F005C8727 /* TaskPerformController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CBC8FD219A523F005C8727 /* TaskPerformController.swift */; };
 		21CDA4B9218AA094008EA287 /* ProductConsumption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CDA4B8218AA094008EA287 /* ProductConsumption.swift */; };
 		21D498FF2179A3DD0004FFDA /* SinglePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D498FE2179A3DD0004FFDA /* SinglePickerController.swift */; };
 		21D83F422174443A00B15AE4 /* ImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D83F402174443900B15AE4 /* ImageCollectionCell.swift */; };
@@ -132,6 +134,7 @@
 		21A265E82140781200671F6C /* ProductsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewController.swift; sourceTree = "<group>"; };
 		21A265EA2140782E00671F6C /* ToolsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableViewController.swift; sourceTree = "<group>"; };
 		21A67483214220020012B555 /* ItemEditorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemEditorController.swift; sourceTree = "<group>"; wrapsLines = 1; };
+		21AA47BD2197D852002C82B2 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		21BB80832189663300A8B770 /* HoExpandableTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoExpandableTableView.swift; sourceTree = "<group>"; };
 		21BB80842189663300A8B770 /* ExpandableTableHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableTableHeader.swift; sourceTree = "<group>"; };
 		21BBC785213E5A330006B5B4 /* Static.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Static.swift; sourceTree = "<group>"; };
@@ -152,6 +155,7 @@
 		21C2D49B217B29630097B095 /* ImageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionView.swift; sourceTree = "<group>"; };
 		21C4B345216B3D6900913ADB /* TaskEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditorViewController.swift; sourceTree = "<group>"; };
 		21C4B349216B5E8C00913ADB /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		21CBC8FD219A523F005C8727 /* TaskPerformController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPerformController.swift; sourceTree = "<group>"; };
 		21CDA4B8218AA094008EA287 /* ProductConsumption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductConsumption.swift; sourceTree = "<group>"; };
 		21D498FE2179A3DD0004FFDA /* SinglePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePickerController.swift; sourceTree = "<group>"; };
 		21D83F402174443900B15AE4 /* ImageCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionCell.swift; sourceTree = "<group>"; };
@@ -347,6 +351,7 @@
 		21C4B347216B3DF200913ADB /* Task */ = {
 			isa = PBXGroup;
 			children = (
+				21CBC8FD219A523F005C8727 /* TaskPerformController.swift */,
 				21EA13C021364FF200C5CB34 /* TaskTrackingViewController.swift */,
 				21BBD246217B0DD1006EB159 /* TaskDetailViewController.swift */,
 				21EA13C22136505200C5CB34 /* TaskSearchTableViewController.swift */,
@@ -363,6 +368,7 @@
 			isa = PBXGroup;
 			children = (
 				2122019D21436D3000EE8A06 /* PermissionController.swift */,
+				21AA47BD2197D852002C82B2 /* Authentication.swift */,
 			);
 			path = Permissions;
 			sourceTree = "<group>";
@@ -579,6 +585,7 @@
 				21C2D49C217B29630097B095 /* ImageCollectionView.swift in Sources */,
 				21A265EB2140782E00671F6C /* ToolsTableViewController.swift in Sources */,
 				219D4CC0217DA0F9007CB3CE /* TimelineHeader.swift in Sources */,
+				21AA47BE2197D852002C82B2 /* Authentication.swift in Sources */,
 				21BBD238217A84DD006EB159 /* DBService_Tool.swift in Sources */,
 				213608A021800DE3008DCF14 /* Timeline.swift in Sources */,
 				212353BB218BD6410058C22F /* ProductEditor.swift in Sources */,
@@ -616,6 +623,7 @@
 				21BBC78A213E65890006B5B4 /* Product.swift in Sources */,
 				213DA7122153A03E00D0C7AF /* SimpleCells.swift in Sources */,
 				2122019E21436D3000EE8A06 /* PermissionController.swift in Sources */,
+				21CBC8FE219A523F005C8727 /* TaskPerformController.swift in Sources */,
 				211632252176E777005B3DBC /* ExpandableTableViewHeader.swift in Sources */,
 				21BBD244217AF6EE006EB159 /* TrackedTaskCell.swift in Sources */,
 				21062025214131CB00BA2050 /* UIView+constraints.swift in Sources */,

@@ -34,26 +34,17 @@ class DatabaseService {
     }
     
     func getRealmConfig() -> Realm.Configuration {
-        let realmConfig = Realm.Configuration(syncConfiguration: SyncConfiguration(user: SyncUser.current!, realmURL: Static.REALM_URL))
+        if let user = SyncUser.current {
+            let realmConfig = Realm.Configuration(syncConfiguration: SyncConfiguration(user: user, realmURL: Static.REALM_URL))
+            return realmConfig
+        }
         
-        return realmConfig
+        return Realm.Configuration.defaultConfiguration
     }
     
     func getRealm() -> Realm {
         let realm = try! Realm(configuration: DatabaseService.shared.getRealmConfig())
-//        let realm = try! Realm()
         return realm
-    }
-    
-    func getCurrentUser() -> SyncUser {
-        return SyncUser.current!
-    }
-    
-    func logout() {
-        for user in SyncUser.all {
-            debugPrint("user: \(user.key) - \(user.value)")
-            user.value.logOut()
-        }
     }
     
     /** Once data for sections changed, controller will be notified.

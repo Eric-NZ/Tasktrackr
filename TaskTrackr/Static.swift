@@ -24,9 +24,6 @@ struct Static {
     static let AUTH_URL  = URL(string: "https://\(MY_INSTANCE_ADDRESS)")!
     static let REALM_URL = URL(string: "realms://\(MY_INSTANCE_ADDRESS)/TaskTracker")!
     
-    // user status: has signed in?
-    static var currentUser: SyncUser?
-    
     static let page_service = "ServiceViewController"
     static let page_worker = "WorkerViewController"
     static let page_product = "ProductViewController"
