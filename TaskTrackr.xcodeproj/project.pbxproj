@@ -21,9 +21,7 @@
 		2125E6AE214E4AF0002FE54B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6AD214E4AF0002FE54B /* UIColor.swift */; };
 		212A34EA217E847900D829B4 /* TimelineTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212A34E9217E847900D829B4 /* TimelineTableView.swift */; };
 		2132ABFC2177EC1B003F720B /* ToolPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2132ABFB2177EC1B003F720B /* ToolPickerViewController.swift */; };
-		2135DD81215F40CF004AAC96 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2135DD80215F40CF004AAC96 /* ViewModel.swift */; };
 		2135DD89215F437E004AAC96 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2135DD88215F437E004AAC96 /* Task.swift */; };
-		2135DD8B215F45EB004AAC96 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2135DD8A215F45EB004AAC96 /* DataModel.swift */; };
 		213608A021800DE3008DCF14 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2136089F21800DE3008DCF14 /* Timeline.swift */; };
 		213608A221800E0E008DCF14 /* TimelinePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213608A121800E0E008DCF14 /* TimelinePoint.swift */; };
 		213DA7122153A03E00D0C7AF /* SimpleCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213DA7102153A03E00D0C7AF /* SimpleCells.swift */; };
@@ -111,9 +109,7 @@
 		2125E6AD214E4AF0002FE54B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		212A34E9217E847900D829B4 /* TimelineTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTableView.swift; sourceTree = "<group>"; };
 		2132ABFB2177EC1B003F720B /* ToolPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolPickerViewController.swift; sourceTree = "<group>"; };
-		2135DD80215F40CF004AAC96 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		2135DD88215F437E004AAC96 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
-		2135DD8A215F45EB004AAC96 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		2136089F21800DE3008DCF14 /* Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
 		213608A121800E0E008DCF14 /* TimelinePoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelinePoint.swift; sourceTree = "<group>"; };
 		213DA7102153A03E00D0C7AF /* SimpleCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCells.swift; sourceTree = "<group>"; };
@@ -227,7 +223,6 @@
 				2135DD88215F437E004AAC96 /* Task.swift */,
 				21FF19772184F464000164DE /* TaskLog.swift */,
 				219D4CAD217D2EEC007CB3CE /* Comment.swift */,
-				2135DD8A215F45EB004AAC96 /* DataModel.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -256,7 +251,6 @@
 				21BBD233217A8488006EB159 /* DBService_Service.swift */,
 				21BBD235217A84BF006EB159 /* DBService_Worker.swift */,
 				21BBD237217A84DD006EB159 /* DBService_Tool.swift */,
-				2135DD80215F40CF004AAC96 /* ViewModel.swift */,
 			);
 			path = DataService;
 			sourceTree = "<group>";
@@ -629,7 +623,6 @@
 				21BBD234217A8488006EB159 /* DBService_Service.swift in Sources */,
 				21FF19782184F464000164DE /* TaskLog.swift in Sources */,
 				21DF277E214E0A6800BB2799 /* TagTableViewCell.swift in Sources */,
-				2135DD81215F40CF004AAC96 /* ViewModel.swift in Sources */,
 				213608A221800E0E008DCF14 /* TimelinePoint.swift in Sources */,
 				2125E6AE214E4AF0002FE54B /* UIColor.swift in Sources */,
 				219D4CAE217D2EEC007CB3CE /* Comment.swift in Sources */,
@@ -661,7 +654,6 @@
 				212353BF218BD7330058C22F /* ToolEditor.swift in Sources */,
 				21D83F422174443A00B15AE4 /* ImageCollectionCell.swift in Sources */,
 				21BBC786213E5A330006B5B4 /* Static.swift in Sources */,
-				2135DD8B215F45EB004AAC96 /* DataModel.swift in Sources */,
 				21FF197A2184F501000164DE /* ProductModel.swift in Sources */,
 				219D4CBE217D97D9007CB3CE /* TimelineHeaderContainer.swift in Sources */,
 				21EA13C32136505200C5CB34 /* TaskSearchTableViewController.swift in Sources */,

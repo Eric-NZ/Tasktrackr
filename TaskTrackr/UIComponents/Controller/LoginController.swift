@@ -32,11 +32,17 @@ class LoginController: UIViewController {
         setupLoginForm()
     }
     
-    private var loginRequest: ((_ userName: String, _ password: String)->Void)?
+    private var logInRequest: ((_ userName: String, _ password: String)->Void)?
+    private var signUpRequest: ((_ userName: String, _ password: String)->Void)?
     
     // handle event that user taps the login button
     public func handleLoginRequest(handler: @escaping ((String, String)->Void)) {
-        self.loginRequest = handler
+        self.logInRequest = handler
+    }
+    
+    // handle Sign Up button tapping event
+    public func handleSignUpRequest(handler: @escaping ((String, String)->Void)) {
+        self.signUpRequest = handler
     }
     
     // set login image
@@ -128,7 +134,7 @@ class LoginController: UIViewController {
                 .font: UIFont.systemFont(ofSize: 16)]))
             button.setAttributedTitle(attributedText, for: .normal)
             button.translatesAutoresizingMaskIntoConstraints = false
-            
+            button.addTarget(self, action: #selector(signUpTapped(_:)), for: .touchUpInside)
             return button
         }()
         
@@ -193,6 +199,10 @@ class LoginController: UIViewController {
     }
     
     @objc func loginTapped(_ sender: UIButton) {
-        loginRequest?(userNameField.text ?? "", passwordField.text ?? "")
+        logInRequest?(userNameField.text ?? "", passwordField.text ?? "")
+    }
+    
+    @objc func signUpTapped(_ sender: UIButton) {
+        signUpRequest?(userNameField.text ?? "", passwordField.text ?? "")
     }
 }

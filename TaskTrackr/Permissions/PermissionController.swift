@@ -18,14 +18,19 @@ class PermissionController: LoginController {
         super.viewDidLoad()
         
         // set login handler
-        handleLoginRequest { (userName, password) in
-            self.performLogin(userName: userName, password: password)
+        handleLoginRequest { (username, password) in
+            self.performLogin(userName: username, password: password)
+        }
+        // set signUp handler
+        handleSignUpRequest { (username, password) in
+            self.signUp(userName: username, password: password)
         }
     }
     
     func signUp(userName: String, password: String) {
-        Authentication.shared.login(userName: userName, password: password, isRegisger: true) { (result) in
+        Authentication.shared.signUp(userName: userName, password: password) {
             // handle register completion
+            
         }
     }
     
@@ -33,11 +38,11 @@ class PermissionController: LoginController {
         // logout any other users
         Authentication.shared.logout(complection: nil)
         // log in current user
-        login(userName: userName, password: password)
+        logIn(userName: userName, password: password)
     }
     
-    func login(userName: String, password: String) {
-        Authentication.shared.login(userName: userName, password: password, isRegisger: false) {
+    func logIn(userName: String, password: String) {
+        Authentication.shared.logIn(userName: userName, password: password) {
             switch($0) {
             case .logged_as_manager:
                 self.presentManagerEntry()

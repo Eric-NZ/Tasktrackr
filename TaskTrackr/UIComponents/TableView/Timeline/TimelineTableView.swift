@@ -9,10 +9,23 @@
 import UIKit
 
 class TimelineTableView: UITableView {
+    private override init(frame: CGRect, style: UITableView.Style) {
+        super.init(frame: frame, style: style)
+    }
+    
+    public convenience init() {
+        self.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .plain)
+        
+        commonInit()
+    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        commonInit()
+    }
+    
+    private func commonInit() {
         // register a nib for the reusable cell identifier
         register(UINib(nibName: TimelineCell.ID, bundle: nil), forCellReuseIdentifier: TimelineCell.ID)
         

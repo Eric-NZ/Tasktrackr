@@ -23,6 +23,7 @@ struct Static {
     
     static let AUTH_URL  = URL(string: "https://\(MY_INSTANCE_ADDRESS)")!
     static let REALM_URL = URL(string: "realms://\(MY_INSTANCE_ADDRESS)/TaskTracker")!
+    static let REALM_PATH = URL(string: "realms://\(MY_INSTANCE_ADDRESS)")!
     
     static let permissionController = "PermissionController"
     

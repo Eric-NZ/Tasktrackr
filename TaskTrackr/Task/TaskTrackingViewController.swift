@@ -13,7 +13,6 @@ class TaskTrackingViewController: UIViewController {
     
     @IBOutlet weak var tableView: TimelineTableView!
     var taskNotification: NotificationToken?
-    var notificationPool: [NotificationToken] = []
     var tasks: Results<Task>
     
     required init?(coder aDecoder: NSCoder) {
@@ -144,7 +143,7 @@ extension TaskTrackingViewController {
                 
             }), CellData.ButtonAttributeTuple(1, self, UIImage(named: "info"), {()->Void in
                 // callback closure
-                
+                self.infoTapped()
             }), CellData.ButtonAttributeTuple(2, self, UIImage(named: "cancel"), {()->Void in
                 // callback closure: back to previous state with offset - 1
                 self.backToPreviousState(for: task, offset: 1)
@@ -203,5 +202,12 @@ extension TaskTrackingViewController {
     
     private func backToPreviousState(for task: Task, offset: Int) {
         DatabaseService.shared.backToPreviousState(for: task, offset: offset)
+    }
+    
+    func infoTapped() {
+        
+        Authentication.shared.signUp(userName: "q", password: "q") {
+            
+        }
     }
 }

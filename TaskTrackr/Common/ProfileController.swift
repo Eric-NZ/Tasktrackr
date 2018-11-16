@@ -22,7 +22,7 @@ class ProfileController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // logout button
         let button = UIButton(type: .system)
         button.setTitle("Sign Out", for: .normal)
