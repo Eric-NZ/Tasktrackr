@@ -15,17 +15,6 @@ class TaskPerformController: UIViewController {
     var myTasks: Results<Task>
     
     init() {
-        let token = "db238877c1e1e83f728f85d8c3b6a341:ab9d0504-4934-416d-969d-4c899e1cc065"
-        if let user = Authentication.shared.currentUser {
-            user.acceptOffer(forToken: token, callback: { (url, error) in
-                print(url)
-                print(error)
-            })
-            user.retrievePermissions { (permisstionResult, error) in
-                print(permisstionResult)
-            }
-        }
-        
         myTasks = DatabaseService.shared.getResultsOfTask()
         super.init(nibName: nil, bundle: nil)
         commonInit()
@@ -43,7 +32,9 @@ class TaskPerformController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        taskNotification = DatabaseService.shared.addNotificationHandleForSections(objects: myTasks, tableView: self.tableView, callback: nil)
+        taskNotification = DatabaseService.shared.addNotificationHandleForSections(objects: myTasks, tableView: self.tableView, callback: {
+            print("I have accessed the realm!!")
+        })
         // setup layout
         setupLayout()
         

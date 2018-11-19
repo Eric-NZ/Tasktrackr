@@ -40,7 +40,7 @@ class TaskTrackingViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let editor = segue.destination as! TaskEditorViewController
         // if nil, means it should be a new task
-        editor.currentTask = sender == nil ? nil : tasks[0]
+        editor.currentTask = sender as? Task
     }
 }
 
@@ -125,7 +125,7 @@ extension TaskTrackingViewController {
                 self.changeTaskState(for: task, nextState: state)
             }), CellData.ButtonAttributeTuple(1, self, UIImage(named: "edit"), { [weak self] in
                 // callback closure
-                self?.performSegue(withIdentifier: Static.segue_openTaskEditor, sender: self)
+                self?.performSegue(withIdentifier: Static.segue_openTaskEditor, sender: task)
                 
             }), CellData.ButtonAttributeTuple(2, self, UIImage(named: "trash"), {()->Void in
                 // callback closure

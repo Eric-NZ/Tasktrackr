@@ -36,6 +36,7 @@ class Authentication {
             if let u = user {
                 loginStatus = u.isAdmin ? .logged_as_manager : .logged_as_worker
                 self.currentUser = user
+                DatabaseService.shared.setRealm(for: u)
                 completion(loginStatus)
             }
         }
@@ -46,6 +47,16 @@ class Authentication {
         SyncUser.logIn(with: cres, server: Static.AUTH_URL) { (user, error) in
             if let u = user {
                 u.logOut()
+                // assign permission of the managed realm to the user
+                let permission = SyncPermission(realmPath: "/TaskTracker", identity: u.identity!, accessLevel: .write)
+                print(permission)
+                self.currentUser!.apply(permission, callback: { (error) in
+                    if let e = error {
+                        print(e)
+                    } else {
+                        // permission successfully applied
+                    }
+                })
             }
             if let e = error {
                 print(e.localizedDescription)

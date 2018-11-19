@@ -25,6 +25,7 @@ extension Results {
 class DatabaseService {
     static var shared = DatabaseService()
     var realmUrl: URL = Static.REALM_URL
+    var realm: Realm?
     
     enum objectType {
         case service, worker, product, tool, site
@@ -34,34 +35,17 @@ class DatabaseService {
         
     }
     
-    func getSyncConfiguration(_ user: SyncUser? = nil, _ realmURL: URL? = nil) -> Realm.Configuration? {
-        
-        let user = user != nil ? user : SyncUser.current
-        let realmURL = realmURL != nil ? realmURL : self.realmUrl
-        
-        let config = user!.configuration(realmURL: realmURL, fullSynchronization: true, enableSSLValidation: true, urlPrefix: nil)
-        return config
+    func getRealm() -> Realm {
+        return self.realm!
     }
     
-    func getRealm(_ user: SyncUser? = nil, _ realmURL: URL? = nil) -> Realm {
-        let realm = try! Realm(configuration: getSyncConfiguration(user, realmURL)!)
-        return realm
-    }
-    
-    // NOTE: only adminstrator can create realms
-    func createRealm(pathName: String, for user: SyncUser?) -> Realm? {
-        if let user = user {
-            let realmPath: URL = Static.REALM_PATH.appendingPathComponent(pathName, isDirectory: false)
-            let config = user.configuration(realmURL: realmPath, fullSynchronization: true, enableSSLValidation: true, urlPrefix: nil)
-            let realm = try! Realm(configuration: config)
-            
-            return realm
-        }
+    func setRealm(for user: SyncUser){
+        var realm: Realm?
+        let configure = user.configuration(realmURL: Static.REALM_URL, fullSynchronization: true, enableSSLValidation: false, urlPrefix: nil)
+        try! realm = Realm(configuration: configure)
         
-        return nil
+        self.realm = realm!
     }
-    
-    
     
     /** Once data for sections changed, controller will be notified.
      // This function includes callback
