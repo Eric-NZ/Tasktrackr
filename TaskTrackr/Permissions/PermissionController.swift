@@ -43,32 +43,33 @@ class PermissionController: LoginController {
     
     func logIn(userName: String, password: String) {
         Authentication.shared.logIn(userName: userName, password: password) {
-            switch($0) {
-            case .logged_as_manager:
-                self.presentManagerEntry()
-            case .logged_as_worker:
-                self.presentWorkerEntry()
-            case .logged_out:
-                break
-            }
+            self.handleLoginResult(loginStatus: $0)
         }
     }
     
-    func presentManagerEntry() {
-        performSegue(withIdentifier: "PresentManagerEntry", sender: self)
-    }
-    
-    func presentWorkerEntry() {
-        let mainTab = MainTabBarController()
-        mainTab.setViewControllers([TaskPerformController(), ProfileController()], animated: true)
+    func handleLoginResult(loginStatus: Authentication.LoginStatus) {
+        var mainTab: UITabBarController?
+        
+        switch loginStatus {
+        case .logged_as_manager:
+            mainTab = (UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Static.mainTabController) as? MainTabBarController)!
+            mainTab?.addChild(ProfileController())
+        case .logged_as_worker:
+            mainTab = MainTabBarController()
+            mainTab?.setViewControllers([TaskPerformController(), ProfileController()], animated: true)
+        default:
+            mainTab = nil
+            // login error warning
+            loginErrorWarning()
+        }
         
         if let appDelegate = UIApplication.shared.delegate {
             if let window = appDelegate.window {
                 window?.makeKeyAndVisible()
-                window?.rootViewController = mainTab
+                if let tab = mainTab {
+                    window?.rootViewController = tab
+                }
             }
         }
-        
     }
-
 }

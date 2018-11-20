@@ -37,8 +37,8 @@ class Authentication {
                 loginStatus = u.isAdmin ? .logged_as_manager : .logged_as_worker
                 self.currentUser = user
                 DatabaseService.shared.setRealm(for: u)
-                completion(loginStatus)
             }
+            completion(loginStatus)
         }
     }
     

@@ -46,7 +46,7 @@ extension ItemEditorController {
         
         // worker role
         let options = ["Worker", "Senior Worker", "Lead Worker", "Expert"]
-        role = currentWorker == nil ? "Worker" : (currentWorker?.role)!
+        role = currentWorker == nil ? options[0] : (currentWorker?.role)!
         let roleRow = createSelectorRow("Role", role, sheetSelectorRowSelected(options: options))
         let sectionRole = SectionFormer(rowFormer: roleRow).set(headerViewFormer: createHeader("Role"))
         
@@ -100,9 +100,17 @@ extension ItemEditorController {
             
             // add new item
             DatabaseService.shared.addObject(for: currentWorker!)
+            
+            // register new account using username and password provided
+            Authentication.shared.signUp(userName: username, password: initialPassword) {
+                
+            }
         } else {
             // update item
             DatabaseService.shared.updateWorker(for: currentWorker!, with: firstName, with: lastName, with: role, with: username, with: initialPassword)
+            
+            // change username/password for worker
+            //
         }
         
         return true

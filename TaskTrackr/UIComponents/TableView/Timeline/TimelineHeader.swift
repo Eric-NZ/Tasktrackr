@@ -12,7 +12,7 @@ import UIKit
 struct SectionData {
     var title: String = ""
     var subTitle: String = ""
-    var bulletFirst: String = ""
+    var bulletFirst: NSAttributedString?
     var bulletSecond: String = ""
     var bulletThird: String = ""
     var image: UIImage = UIImage(named: "no-image")!
@@ -70,7 +70,7 @@ extension TimelineHeader {
         if let headerData = self.headerData {
             containerView.titleLabel.text = headerData.title
             containerView.postDescLabel.text = headerData.subTitle
-            containerView.workerLabel.text = headerData.bulletFirst
+            containerView.workerLabel.attributedText = headerData.bulletFirst
             containerView.addressLabel.text = headerData.bulletSecond
             containerView.dateLabel.text = headerData.bulletThird
             containerView.imageView.image = headerData.image

@@ -32,6 +32,7 @@ struct Static {
     static let page_product = "ProductViewController"
     static let page_tool = "ToolViewController"
     static let pageRouter = "RootPagingViewController"
+    static let mainTabController = "MainBarController"
     
     static let segue_openServiceForm = "OpenServiceForm"
     static let segue_openWorkerForm = "OpenWorkerForm"

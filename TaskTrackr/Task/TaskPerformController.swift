@@ -73,7 +73,7 @@ class TaskPerformController: UIViewController {
             // title
             headerData.title = task.taskTitle
             // desc
-            let postInfo = String(format: "created by %@, on %@", "Manager", formatter.string(from: task.timestamp))
+            let postInfo = String(format: "Created by %@, on %@", "Manager", formatter.string(from: task.timestamp))
             headerData.subTitle = postInfo
             // address
             headerData.bulletSecond = task.address
@@ -81,18 +81,7 @@ class TaskPerformController: UIViewController {
             let dueDateString = formatter.string(from: task.dueDate)
             headerData.bulletThird = String(format: "Deadline: %@", dueDateString)
             // workers
-            var workerString = "Worker: "
-            if task.workers.count == 0 {
-                workerString.append(contentsOf: "No worker designated. ")
-            } else {
-                for worker in task.workers {
-                    workerString.append(contentsOf: worker.firstName!)
-                    workerString.append(contentsOf: "; ")
-                }
-            }
-            // remove last "; "
-            workerString.removeLast(2)
-            headerData.bulletFirst = workerString
+            headerData.bulletFirst = self.buildWorkerAttributedText(workers: task.workers)
             // image
             if task.images.count > 0 {
                 headerData.image = UIImage(data: task.images[0])!
@@ -195,5 +184,28 @@ class TaskPerformController: UIViewController {
             
             return cellData
         }
+    }
+    
+    private func buildWorkerAttributedText(workers: List<Worker>) -> NSAttributedString {
+        let attributedText: NSMutableAttributedString = NSMutableAttributedString()
+        attributedText.append(NSAttributedString(string: "Worker: ", attributes: [:]))
+        
+        // if there are no workers
+        if workers.count == 0 {
+            let warning = "No worker designated. "
+            attributedText.append(NSAttributedString(string: warning, attributes: [.foregroundColor: UIColor.red]))
+        } else {
+            var workerString = ""
+            for worker in workers {
+                workerString.append(contentsOf: worker.firstName!)
+                workerString.append(contentsOf: "; ")
+            }
+            // remove last "; "
+            workerString.removeLast(2)
+            attributedText.append(NSAttributedString(string: workerString, attributes: [.font : UIFont.boldSystemFont(ofSize: 12)]))
+        }
+        
+        
+        return attributedText
     }
 }
