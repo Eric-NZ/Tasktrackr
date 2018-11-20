@@ -93,7 +93,12 @@ struct Static {
         
         return UIColor(red: compRed, green: compGreen, blue: compBlue, alpha: 1.0)
     }
-
+    
+    // Generate random alphanumeric string
+    static func randomString(length: Int) -> String {
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        return String((0...length-1).map{ _ in letters.randomElement()! })
+    }
 }
 
 // Device Info

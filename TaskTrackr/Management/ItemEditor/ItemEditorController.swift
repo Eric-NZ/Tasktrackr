@@ -37,6 +37,8 @@ class ItemEditorController: FormViewController {
     var firstName: String = ""
     var lastName: String = ""
     var role: String = ""
+    var username: String = ""
+    var initialPassword: String = ""
     
     // for tool
     var toolName: String = ""

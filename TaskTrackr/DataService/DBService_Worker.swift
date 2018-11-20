@@ -19,12 +19,19 @@ extension DatabaseService {
     }
     
     // update an existing worker
-    func updateWorker(for worker: Worker, with firstName: String, with lastName: String, with role: String) {
+    func updateWorker(for worker: Worker,
+                      with firstName: String,
+                      with lastName: String,
+                      with role: String,
+                      with username: String,
+                      with password: String) {
         let realm = getRealm()
         try! realm.write {
             worker.setValue(firstName, forKey: "firstName")
             worker.setValue(lastName, forKey: "lastName")
             worker.setValue(role, forKey: "role")
+            worker.setValue(username, forKey: "username")
+            worker.setValue(password, forKey: "initialPassword")
         }
     }
     

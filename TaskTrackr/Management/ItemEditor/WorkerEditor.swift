@@ -46,10 +46,43 @@ extension ItemEditorController {
         
         // worker role
         let options = ["Worker", "Senior Worker", "Lead Worker", "Expert"]
-        role = currentWorker == nil ? "" : (currentWorker?.role)!
+        role = currentWorker == nil ? "Worker" : (currentWorker?.role)!
         let roleRow = createSelectorRow("Role", role, sheetSelectorRowSelected(options: options))
         let sectionRole = SectionFormer(rowFormer: roleRow).set(headerViewFormer: createHeader("Role"))
-        former.append(sectionFormer: sectionBasic, sectionRole)
+        
+        // login account: username
+        let username = TextFieldRowFormer<FormTextFieldCell>() {
+            $0.titleLabel.text = "Username"
+            $0.titleLabel.font = .boldSystemFont(ofSize: 16)
+            $0.textField.textColor = .formerSubColor()
+            $0.textField.font = .boldSystemFont(ofSize: 14)
+            }.configure {
+                $0.placeholder = "Username"
+                $0.text = currentWorker != nil ? currentWorker?.username : ""
+                self.username = $0.text!
+            }.onTextChanged { (text) in
+                // save username
+                self.username = text
+        }
+        
+        // login account: password - randomly generated
+        let initialPassword = TextFieldRowFormer<FormTextFieldCell>() {
+            $0.titleLabel.text = "Password"
+            $0.titleLabel.font = .boldSystemFont(ofSize: 16)
+            $0.textField.textColor = .red
+            $0.textField.font = .boldSystemFont(ofSize: 14)
+            }.configure {
+                $0.placeholder = "Initial Password"
+                $0.text = currentWorker != nil ? currentWorker?.initialPassword : ""
+                self.initialPassword = $0.text!
+            }.onTextChanged { (text) in
+                // save product name
+                self.initialPassword = text
+        }
+        
+        let accountInfo = SectionFormer(rowFormer: username, initialPassword).set(headerViewFormer: createHeader("Account"))
+        
+        former.append(sectionFormer: sectionBasic, sectionRole, accountInfo)
     }
     
     func saveWorkerForm() -> Bool {
@@ -62,12 +95,14 @@ extension ItemEditorController {
             currentWorker?.firstName = firstName
             currentWorker?.lastName = lastName
             currentWorker?.role = role
+            currentWorker?.username = username
+            currentWorker?.initialPassword = initialPassword
             
             // add new item
             DatabaseService.shared.addObject(for: currentWorker!)
         } else {
             // update item
-            DatabaseService.shared.updateWorker(for: currentWorker!, with: firstName, with: lastName, with: role)
+            DatabaseService.shared.updateWorker(for: currentWorker!, with: firstName, with: lastName, with: role, with: username, with: initialPassword)
         }
         
         return true

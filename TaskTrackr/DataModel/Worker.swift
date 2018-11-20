@@ -18,6 +18,9 @@ class Worker: Object {
     @objc dynamic var role: String?
     // Join Date
     @objc dynamic var timestamp: Date = Date()
+    // Account
+    @objc dynamic var username: String = ""
+    @objc dynamic var initialPassword: String = ""
     
     // Primary Key
     override static func primaryKey() -> String {
