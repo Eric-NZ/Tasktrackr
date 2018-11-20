@@ -18,6 +18,9 @@ struct CellData {
     var timeText: String = ""
     // button attributes for cell
     var buttonAttributes: [ButtonAttributeTuple] = []
+    // other attributes
+    var isFirstCell: Bool = false
+    var isFinalCell: Bool = false
 }
 
 class TimelineCell: UITableViewCell {
@@ -56,6 +59,9 @@ class TimelineCell: UITableViewCell {
             button.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint(item: button, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 24).isActive = true
         }
+        
+        timeline.frontColor = data.isFirstCell ? .clear : .black
+        timeline.backColor = data.isFinalCell ? .clear : .black
     }
     
     @objc func buttonEventHandlerRouter(_ sender: UIButton) {
@@ -108,6 +114,7 @@ class TimelineCell: UITableViewCell {
                                   y: timelinePoint.position.y)
         timeline.end = CGPoint(x: timeline.start.x,
                                y: self.bounds.size.height)
+
         timeline.draw(view: self.contentView)
         
         timelinePoint.draw(view: self.contentView)

@@ -118,7 +118,7 @@ extension TaskTrackingViewController {
             cellData.timeText = formatter.string(from: stateLog.timestamp)
             cellData.illustrateTitle = "Created"
             cellData.illustrateImage = UIImage(named: "created")
-            
+            cellData.isFirstCell = true
             cellData.buttonAttributes = ifButtonNeeded ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "next"), {()->Void in
                 // callback closure
                 let state: TaskLog.TaskState = .pending
@@ -163,6 +163,7 @@ extension TaskTrackingViewController {
             cellData.timeText = formatter.string(from: stateLog.timestamp)
             cellData.illustrateTitle = "Finished"
             cellData.illustrateImage = UIImage(named: "finished")
+            cellData.isFinalCell = true
             cellData.buttonAttributes = ifButtonNeeded ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "check"), {()->Void in
                 // callback closure
                 
@@ -177,6 +178,7 @@ extension TaskTrackingViewController {
             cellData.timeText = formatter.string(from: stateLog.timestamp)
             cellData.illustrateTitle = "Failed"
             cellData.illustrateImage = UIImage(named: "failed")
+            cellData.isFinalCell = true
             cellData.buttonAttributes = ifButtonNeeded ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "archive"), {()->Void in
                 // callback closure
                 
