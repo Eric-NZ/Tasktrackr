@@ -31,9 +31,7 @@ class DatabaseService {
         case service, worker, product, tool, site
     }
     
-    init() {
-        
-    }
+    init() {}
     
     func getRealm() -> Realm {
         return self.realm!

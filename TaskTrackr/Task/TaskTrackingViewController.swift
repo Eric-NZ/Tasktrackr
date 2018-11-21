@@ -16,7 +16,7 @@ class TaskTrackingViewController: UIViewController {
     var tasks: Results<Task>
     
     required init?(coder aDecoder: NSCoder) {
-        tasks = DatabaseService.shared.getResultsOfTask()
+        tasks = DatabaseService.shared.getAllTasks()
         super.init(coder: aDecoder)
     }
     

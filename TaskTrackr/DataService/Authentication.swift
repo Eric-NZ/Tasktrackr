@@ -11,7 +11,8 @@ import RealmSwift
 
 class Authentication {
     static var shared = Authentication()
-    var currentUser: SyncUser?
+    var currentSyncUser: SyncUser?
+    var currentUsername: String?
     
     init() {}
     
@@ -35,7 +36,8 @@ class Authentication {
         SyncUser.logIn(with: cres, server: Static.AUTH_URL) { (user, error) in
             if let u = user {
                 loginStatus = u.isAdmin ? .logged_as_manager : .logged_as_worker
-                self.currentUser = user
+                self.currentSyncUser = user
+                self.currentUsername = userName
                 DatabaseService.shared.setRealm(for: u)
             }
             completion(loginStatus)
@@ -50,7 +52,7 @@ class Authentication {
                 // assign permission of the managed realm to the user
                 let permission = SyncPermission(realmPath: "/TaskTracker", identity: u.identity!, accessLevel: .write)
                 print(permission)
-                self.currentUser!.apply(permission, callback: { (error) in
+                self.currentSyncUser!.apply(permission, callback: { (error) in
                     if let e = error {
                         print(e)
                     } else {
@@ -63,24 +65,6 @@ class Authentication {
             }
             
             complection()
-        }
-        
-    func matchWorkerByUserName(userName: String) -> Worker? {
-        let worker = Worker()
-        
-        return worker
-    }
-        
-        func getOrganizationalUserByUserName(userName: String) -> SyncUser? {
-            if let user = SyncUser.current {
-                if user.isAdmin {
-                    return user
-                } else {
-                    
-                }
-            }
-            
-            return nil
         }
     }
 }

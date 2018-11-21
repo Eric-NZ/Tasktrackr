@@ -10,8 +10,44 @@ import RealmSwift
 
 extension DatabaseService {
     // get Results of Task
-    public func getResultsOfTask() -> Results<Task> {
+    public func getTaskResult(with username: String) -> List<Task> {
+        let alltasks = getRealm().objects(Task.self).sorted(byKeyPath: "timestamp", ascending: false)
+        let tasks = alltasks.filter {
+            $0.workers.contains(where: {
+                $0.username == username
+            })
+        }
+        let taskList = List<Task>()
+        for task in tasks {
+            taskList.append(task)
+        }
+        
+        return taskList
+    }
+    
+    public func getAllTasks() -> Results<Task> {
         return getRealm().objects(Task.self).sorted(byKeyPath: "timestamp", ascending: false)
+    }
+    
+    /***
+     Once Results changed, do nothing but invoke the callback funcion only
+     */
+    func addTaskResultsObserverForUser(objects: Results<Task>, tableView: UITableView?, callback: @escaping ((List<Task>)->Void), for user: String) -> NotificationToken {
+        
+        let notificationToken = objects.observe { (changes) in
+            let tasks: [Task] = self.getAllTasks().filter({
+                $0.workers.contains(where: {
+                    $0.username == user
+                })
+            })
+            let taskList = List<Task>()
+            for task in tasks {
+                taskList.append(task)
+            }
+            callback(taskList)
+        }
+        
+        return notificationToken
     }
     
     // add (or update) a task object

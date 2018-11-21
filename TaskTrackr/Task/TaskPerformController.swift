@@ -12,17 +12,18 @@ import RealmSwift
 class TaskPerformController: UIViewController {
     var tableView: TimelineTableView!
     var taskNotification: NotificationToken?
-    var myTasks: Results<Task>
+    var allTasks: Results<Task> = DatabaseService.shared.getAllTasks()
+    var myTasks = List<Task>()
+    let username = Authentication.shared.currentUsername
     
     init() {
-        myTasks = DatabaseService.shared.getResultsOfTask()
         super.init(nibName: nil, bundle: nil)
         commonInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        myTasks = DatabaseService.shared.getResultsOfTask()
         super.init(coder: aDecoder)
+        commonInit()
     }
     
     deinit {
@@ -32,12 +33,13 @@ class TaskPerformController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        taskNotification = DatabaseService.shared.addNotificationHandleForSections(objects: myTasks, tableView: self.tableView, callback: {
-            print("I have accessed the realm!!")
-        })
-        // setup layout
-        setupLayout()
+        taskNotification = DatabaseService.shared.addTaskResultsObserverForUser(objects: allTasks, tableView: tableView, callback: {
+            self.myTasks = $0
+            self.tableView.reloadData()
+        }, for: self.username!)
         
+        // setup auto layout
+        setupLayout()
         // setup data source
         setupDataSource()
     }

@@ -65,9 +65,9 @@ class PermissionController: LoginController {
         
         if let appDelegate = UIApplication.shared.delegate {
             if let window = appDelegate.window {
-                window?.makeKeyAndVisible()
                 if let tab = mainTab {
                     window?.rootViewController = tab
+                    window?.makeKeyAndVisible()
                 }
             }
         }
