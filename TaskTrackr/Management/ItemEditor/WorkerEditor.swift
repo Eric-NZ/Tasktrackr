@@ -102,7 +102,7 @@ extension ItemEditorController {
             DatabaseService.shared.addObject(for: currentWorker!)
             
             // register new account using username and password provided
-            Authentication.shared.signUp(userName: username, password: initialPassword) {
+            AuthenticationService.shared.signUp(userName: username, password: initialPassword) {
                 
             }
         } else {

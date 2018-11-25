@@ -9,8 +9,8 @@
 import Foundation
 import RealmSwift
 
-class Authentication {
-    static var shared = Authentication()
+class AuthenticationService {
+    static var shared = AuthenticationService()
     var currentSyncUser: SyncUser?
     var currentUsername: String?
     

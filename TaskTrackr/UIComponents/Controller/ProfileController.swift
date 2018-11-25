@@ -42,7 +42,7 @@ class ProfileController: UIViewController {
     }
 
     @objc func buttonTapped(_ sender: UIButton) {
-        Authentication.shared.logout {
+        AuthenticationService.shared.logout {
             // back to PermisesionController
             let permissionController = Static.getInstance(with: Static.permissionController)
             if let window = UIApplication.shared.delegate?.window {

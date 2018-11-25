@@ -28,7 +28,7 @@ class PermissionController: LoginController {
     }
     
     func signUp(userName: String, password: String) {
-        Authentication.shared.signUp(userName: userName, password: password) {
+        AuthenticationService.shared.signUp(userName: userName, password: password) {
             // handle register completion
             
         }
@@ -36,18 +36,18 @@ class PermissionController: LoginController {
     
     func performLogin(userName: String, password: String) {
         // logout any other users
-        Authentication.shared.logout(complection: nil)
+        AuthenticationService.shared.logout(complection: nil)
         // log in current user
         logIn(userName: userName, password: password)
     }
     
     func logIn(userName: String, password: String) {
-        Authentication.shared.logIn(userName: userName, password: password) {
+        AuthenticationService.shared.logIn(userName: userName, password: password) {
             self.handleLoginResult(loginStatus: $0)
         }
     }
     
-    func handleLoginResult(loginStatus: Authentication.LoginStatus) {
+    func handleLoginResult(loginStatus: AuthenticationService.LoginStatus) {
         var mainTab: UITabBarController?
         
         switch loginStatus {

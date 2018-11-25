@@ -14,7 +14,7 @@ class TaskPerformController: UIViewController {
     var taskNotification: NotificationToken?
     var allTasks: Results<Task> = DatabaseService.shared.getAllTasks()
     var myTasks = List<Task>()
-    let username = Authentication.shared.currentUsername
+    let username = AuthenticationService.shared.currentUsername
     
     init() {
         super.init(nibName: nil, bundle: nil)
