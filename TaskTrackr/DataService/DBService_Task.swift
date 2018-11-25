@@ -39,6 +39,9 @@ extension DatabaseService {
                 $0.workers.contains(where: {
                     $0.username == user
                 })
+            }).filter({
+                let finalLogIndex = $0.stateLogs.count - 1
+                return $0.stateLogs[finalLogIndex].taskState != .created
             })
             let taskList = List<Task>()
             for task in tasks {

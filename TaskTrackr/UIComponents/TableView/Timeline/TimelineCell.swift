@@ -14,6 +14,8 @@ struct CellData {
     var illustrateImage: UIImage?
     // illustrateTitle
     var illustrateTitle: String = ""
+    var illustrateTitleColor: UIColor?
+    var illustrateTitleBold: Bool = false
     // time text
     var timeText: String = ""
     // button attributes for cell
@@ -46,6 +48,12 @@ class TimelineCell: UITableViewCell {
         // UI
         illustrateImageView.image = data.illustrateImage
         illustrateLabel?.text = data.illustrateTitle
+        if let color = data.illustrateTitleColor {
+            illustrateLabel.textColor = color
+        }
+        if data.illustrateTitleBold {
+            illustrateLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        }
         timeLabel?.text = data.timeText
         
         // UX
@@ -87,6 +95,10 @@ class TimelineCell: UITableViewCell {
             // Because that only remove the view out of arrangement but not removing from the superview.
             view.removeFromSuperview()
         }
+        // reset title label color
+        illustrateLabel.textColor = UIColor.darkGray
+        // reset title label font
+        illustrateLabel.font = UIFont.systemFont(ofSize: 10, weight: .regular)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

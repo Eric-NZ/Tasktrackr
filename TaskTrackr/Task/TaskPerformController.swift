@@ -36,6 +36,10 @@ class TaskPerformController: UIViewController {
         taskNotification = DatabaseService.shared.addTaskResultsObserverForUser(objects: allTasks, tableView: tableView, callback: {
             self.myTasks = $0
             self.tableView.reloadData()
+            
+            // notification
+            
+            
         }, for: self.username!)
         
         // setup auto layout
@@ -95,7 +99,7 @@ class TaskPerformController: UIViewController {
         tableView.numberOfRowsInSection {
             return self.myTasks[$0].stateLogs.count
         }
-        
+        // MARK: - setup cell data
         tableView.dataForRowAtIndexPath {
             let task = self.myTasks[$0.section]
             let stateLog = task.stateLogs[$0.row]
@@ -105,18 +109,19 @@ class TaskPerformController: UIViewController {
             formatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
             
             // the buttons are only available where it is the last row
-            let ifButtonNeeded: Bool = $0.row == task.stateLogs.count - 1
+            let isFinalCell: Bool = $0.row == task.stateLogs.count - 1
+            cellData.illustrateTitleBold = isFinalCell ? true : false
             
             switch stateLog.taskState {
             case .created:
                 cellData.timeText = formatter.string(from: stateLog.timestamp)
                 cellData.illustrateTitle = "Created"
+                cellData.illustrateTitleBold = isFinalCell ? true : false
                 cellData.illustrateImage = UIImage(named: "created")
                 cellData.isFirstCell = true
-                cellData.buttonAttributes = ifButtonNeeded ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "next"), {()->Void in
+                cellData.buttonAttributes = isFinalCell ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "next"), {()->Void in
                     // callback closure
-                    
-                }), CellData.ButtonAttributeTuple(1, self, UIImage(named: "edit"), { [weak self] in
+                }), CellData.ButtonAttributeTuple(1, self, UIImage(named: "edit"), {
                     // callback closure
                     
                     
@@ -131,48 +136,47 @@ class TaskPerformController: UIViewController {
                 cellData.timeText = formatter.string(from: stateLog.timestamp)
                 cellData.illustrateTitle = "Pending"
                 cellData.illustrateImage = UIImage(named: "pending")
-                cellData.buttonAttributes = ifButtonNeeded ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "comment"), {()->Void in
-                    // callback closure
+                cellData.buttonAttributes = isFinalCell ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "go"), {()->Void in
+                    // callback closure: push the task forward to next state with offset + 1
+                    self.changeTaskState(for: task, nextState: .processing)
                     
-                }), CellData.ButtonAttributeTuple(1, self, UIImage(named: "info"), {()->Void in
-                    // callback closure
-                    
-                }), CellData.ButtonAttributeTuple(2, self, UIImage(named: "cancel"), {()->Void in
-                    // callback closure: back to previous state with offset - 1
-                    
-                })] : []
-            case .processing:
-                cellData.timeText = formatter.string(from: stateLog.timestamp)
-                cellData.illustrateTitle = "Processing"
-                cellData.illustrateImage = UIImage(named: "processing")
-                cellData.buttonAttributes = ifButtonNeeded ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "comment"), {()->Void in
-                    // callback closure
-                    
-                }), CellData.ButtonAttributeTuple(1, self, UIImage(named: "info"), {()->Void in
-                    // callback closure
-                    
-                })] : []
-            case .finished:
-                cellData.timeText = formatter.string(from: stateLog.timestamp)
-                cellData.illustrateTitle = "Finished"
-                cellData.illustrateImage = UIImage(named: "finished")
-                cellData.isFinalCell = true
-                cellData.buttonAttributes = ifButtonNeeded ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "check"), {()->Void in
-                    // callback closure
-                    
-                }), CellData.ButtonAttributeTuple(1, self, UIImage(named: "backward"), {()->Void in
+                }), CellData.ButtonAttributeTuple(1, self, UIImage(named: "comment"), {()->Void in
                     // callback closure
                     
                 }), CellData.ButtonAttributeTuple(2, self, UIImage(named: "info"), {()->Void in
                     // callback closure
                     
                 })] : []
+            case .processing:
+                cellData.timeText = formatter.string(from: stateLog.timestamp)
+                cellData.illustrateTitle = "Processing"
+                cellData.illustrateImage = UIImage(named: "processing")
+                cellData.buttonAttributes = isFinalCell ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "done"), {
+                    self.changeTaskState(for: task, nextState: .finished)
+                }), CellData.ButtonAttributeTuple(1, self, UIImage(named: "comment"), {()->Void in
+                    // callback closure
+                    
+                }), CellData.ButtonAttributeTuple(2, self, UIImage(named: "info"), {()->Void in
+                    // callback closure
+                    
+                })] : []
+            case .finished:
+                cellData.timeText = formatter.string(from: stateLog.timestamp)
+                cellData.illustrateTitle = "Finished"
+                cellData.illustrateTitleColor = UIColor.blue
+                cellData.illustrateImage = UIImage(named: "finished")
+                cellData.isFinalCell = true
+                cellData.buttonAttributes = isFinalCell ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "info"), {()->Void in
+                    // callback closure
+                    
+                })] : []
             case .failed:
                 cellData.timeText = formatter.string(from: stateLog.timestamp)
                 cellData.illustrateTitle = "Failed"
+                cellData.illustrateTitleColor = UIColor.red
                 cellData.illustrateImage = UIImage(named: "failed")
                 cellData.isFinalCell = true
-                cellData.buttonAttributes = ifButtonNeeded ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "archive"), {()->Void in
+                cellData.buttonAttributes = isFinalCell ? [CellData.ButtonAttributeTuple(0, self, UIImage(named: "archive"), {()->Void in
                     // callback closure
                     
                 }), CellData.ButtonAttributeTuple(1, self, UIImage(named: "trash"), {()->Void in
@@ -209,5 +213,9 @@ class TaskPerformController: UIViewController {
         
         
         return attributedText
+    }
+    
+    private func changeTaskState(for task: Task, nextState: TaskLog.TaskState) {
+        DatabaseService.shared.addTaskStateLog(for: task, to: nextState)
     }
 }
